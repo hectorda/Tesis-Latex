@@ -1,7 +1,7 @@
 \documentclass[12pt,a4paper]{article}
-\usepackage[spanish]{babel} % español
-\usepackage[utf8]{inputenc} % acentos sin código
-\usepackage[left=3.5cm,right=2cm,top=2.5cm,bottom=2cm,includehead,includefoot]{geometry}  %margenes según pauta de la U
+\usepackage[spanish]{babel} % espanol
+\usepackage[utf8]{inputenc} % acentos sin codigo
+\usepackage[left=3.5cm,right=2cm,top=2.5cm,bottom=2cm,includehead,includefoot]{geometry}  %margenes segun pauta de la U
 \usepackage{setspace}
 \onehalfspacing %interlineado 1.5
 \usepackage{graphicx}
@@ -11,31 +11,33 @@
 \usepackage{amsmath}
 \usepackage{booktabs} %Rules en las tablas
 \usepackage{listings}
-%\usepackage{hyperref}
 \usepackage{xcolor}
-\usepackage{tikz}% para graficar en Latex
-\usetikzlibrary{babel,positioning,calc}
 \usepackage{afterpage}
-\usepackage{float} %Imágenes Donde yo quiera :p
+\usepackage{float}
 \usepackage{subfigure}
 \usepackage{verbatim} %Comentarios con \begin end comment
 \usepackage{csquotes}
 \usepackage{datetime} %Para obtener formato a la fecha
 \usepackage[backend=bibtex,bibencoding=ascii,sorting=none]{biblatex}%packages Bibliografia
 \bibliography{biblio}%se carga el archivo
+
 \usepackage{times} %font times new roman (?)
 
 \newcommand{\grad}{$^{\circ}$}
+
+\let\stdsection\section
+\renewcommand\section{\newpage\stdsection}
+
 
 \newdateformat{fecha}{%Método para obtener el mes y el año
   \monthname[\THEMONTH] \THEYEAR}
 
 
-\pagestyle{headings}%cabeceras de Pagina
+
+\pagestyle{headings}
 
 \begin{document}
 
-%%%%%%%%%%%%%%%%%%%%% INICIO PORTADA     %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \thispagestyle{empty}
 \vspace*{-2cm}
@@ -44,8 +46,8 @@
 \vbox{\hsize = 11cm
 \begin{flushleft}
 {\small{\bf UNIVERSIDAD CAT\'OLICA DEL MAULE}\\
-Facultad de Ciencias de la Ingeniería\\
-Escuela de Ingeniería Civil Informática}
+Facultad de Ciencias de la Ingenier\'ia\\
+Escuela de Ingenier\'ia Civil Inform\'atica}
 \end{flushleft}}
 
 \vbox{\hsize = 7cm
@@ -71,7 +73,7 @@ Mary Carmen Jarur\\
 
 \
 
-\textmd{Tesis para optar al\\ Título Profesional de Ingeniero Civil Informático}
+\textmd{Tesis para optar al\\ T\'itulo Profesional de Ingeniero Civil Inform\'atico}
 
 \vspace{4cm}
 \vfill{{\large {\sc Talca, \fecha\today }}}
@@ -79,6 +81,8 @@ Mary Carmen Jarur\\
 \end{center} 
 
 \pagebreak
+
+
 %%%%%%%%%%%%%%%%%%%%% FIN  PORTADA     %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -142,6 +146,7 @@ NOTA FINAL EXAMEN DE T\'ITULO &&& \\
 \end{center}
 
 
+
 \pagebreak
 
 %%%%%%%%%%%%%%%%%%%%% FIN  PORTADA COMISION   %%%%%%%%%%%%%%%%%%%%%%
@@ -153,8 +158,8 @@ NOTA FINAL EXAMEN DE T\'ITULO &&& \\
 \pagebreak
 
 
-\section{Introducción}
 
+\section{Introducción}
 La comprensión de las dinámicas y patrones de movimiento humano, se facilitan enormemente con el apoyo de tecnologías adecuadas, que permitan medir, registrar y analizar variables cinemáticas. Particularmente, el estudio del movimiento humano (Kinesiología) depende hoy en día de las facilidades tecnológicas que ofrece la electrónica (sensores, microcontroladores, sistema de adquisición de señales) y las ciencias de la computación (procesamiento, análisis y posterior reporte adecuado de  variables cinemáticas y cinéticas).  
 Las soluciones tecnológicas que hoy existen, no solo permiten realizar el seguimiento (‘tracking’) y representación gráfica, sino que además facilitan la representación en tiempo real de las variables de interés, conformando con esto los denominados sistemas de Bio-feedback (retroalimentación de señales biológicas). Aunque existen alternativas adecuadas para estos fines, poseen el inconveniente en lo prohibitivo de su valor comercial {\color{red} y a su vez las soluciones son cerradas, lo que limita}.
 Frente a este desafío, está la posibilidad de integrar tecnología para conseguir soluciones de menores costos, que permitan realizar investigación y al mismo tiempo explorar posibilidades de innovación tecnológica que den paso al desarrollo de tecnología nacional.
@@ -179,11 +184,17 @@ El principal alcance de la propuesta es la posibilidad de contar con una soluci�
 El costo del sistema, respecto a las soluciones de mercado (Biodex- Balance SD), es bajo, lo que le da viabilidad económica al proyecto, permitiendo además dejar el prototipo en operación en el Laboratorio de Biomecánica. 
 
 Desde el punto de vista disciplinar (Ciencias de la Ingeniería), este proyecto materializa trabajos de investigación y colaboración transdisciplinario entre la Facultad de Ingeniería y la Facultad de Salud de la UCM. Además posiciona a los Ingenieros Informáticos como profesionales capaces de adecuarse a diferentes contextos mediante soluciones tecnológicas.
+\subsection{Organizaci\'on de la Tesis}
 
-\subsection{Organización de la Tesis}
+
+
 \section{Estado del Arte}
-\section{Marco Teórico}
- 
+
+
+
+
+\section{Marco Te\'orico}
+
 \subsection{Protocolo de Comunicación $\mathbf{\mathrm{I^2C}}$}
 
 Las principales características del protocolo de Comunicación $\mathrm{I^2C}$ \cite{I2C} son:
@@ -193,7 +204,6 @@ Las principales características del protocolo de Comunicación $\mathrm{I^2C}$ 
 \item Posee un sistema de detección de colisiones lo que permite usar el modo multi-maestro previniendo la corrupción de los datos si dos o mas maestros comienzan a transferir datos de forma simultanea.
 \item Serial, orientado en 8-bit ,transferencias de datos de forma bi-direccional pueden ser realizadas hasta los 100 kbit/s en el modo Estándar, hasta 400 kbit/s en el modo Rápido, hasta 1 Mbit/s en el MOdo Mas Rápido, o hasta 3.4 Mbit/s en el modo de Alta-Velocidad.
 \item En el chip de filtrado se rechazan los picos en la línea de datos del bus de preservar la integridad de datos.
-
 
 \begin{figure}[H]
 	\centering
@@ -325,61 +335,40 @@ A partir de la configuración almacenada en los registros de la IMU,  se deben l
 
  \subsection{Arduino IDE}
   Para la programación en la placa Arduino \cite{ARDUINO} se uso el IDE proporcionado por Arduino.
-  Aquí es donde la programación inicial de la placa Arduino es realizada, en donde se configuran las direcciones de el IMU MPU6050 usadas, junto con la configuración inicial además de los datos desplegados por el puerto serial.
-  En el Loop de ejecución se incluye la opción de configurar a Arduino, mediante la escritura de comandos en el puerto serial, para ajustar las configuraciones de los sensores a gusto del usuario. Existen 4 parámetros a ser configurados Frecuencia de Muestreo, Filtro pasa bajo  y rangos Acelerómetro-Giroscopio, los cuales se exigen de forma obligatoria sean configurados antes de comenzar con la lectura de los registros y despliegue de la información de proveniente de los sensores Acelerómetro y Giroscopio.
-
-  \begin{figure}[H]
-  \centering
-      \includegraphics[scale=0.5]{images/diagramacodigoarduino}
-      \caption{Diagrama Código Arduino}
-      \label{fig:arduinocode}
-  \end{figure}
+  
 
 \subsection{QT Creator}
+	El entorno de desarrollo (IDE) del Framework de C++ Qt  es Qt Creator en donde se incluyen las herramientas para la administación de los ficheros .h y .cpp usados en C++ junto con las opciones de compilación, ejecución y depuración del software.
 
 \section{Desarrollo}
 \subsection{Introducción}
 \textcolor{red}{ Breve descripción de la solución completa, incluir esquemáticos}
 
-A partir de balance y las ideas obtenidas en base a los estudios y resultados entregados por la plataforma de fuerza Kistler 9286b y balance SD se ideó una solución de forma análoga con un software que permita entregar información de manera similar a lo que entregan estos sistemas, para aprovechar los conocimientos de los actuales usuarios para que estos comprendan el software sin demasiado entrenamiento.
+A partir de balance y las ideas obtenidas en base a los estudios y resultados entregados por la plataforma de fuerza Kistler 9286b y balance SD se ideó una solución que opera de forma análoga a los que ya son utilizados en el laboratorio con un software que permita entregar información de manera similar a lo que entregan estos sistemas, para aprovechar los conocimientos de los actuales usuarios con el fin de disminuir la curva de aprendizaje del sistema implementado para que estos comprendan el software sin demasiado entrenamiento y a su vez la transición sea mas satisfactoria para estos.
+
+El sensor inercial será puesto en el sujeto de prueba el cual captura la información del movimiento generado por el sujeto y lo trasmitirá al microcontrolador Arduino por el protocolo I2C en donde se recibe y traduce la información obtenida del sensor y el microcontrolador a su vez enviará mediante el puerto serial las muestras obtenidas, aceleración y velocidad angular en donde el software recibe la información y realiza el procesamiento para obtener el angulo junto con los análisis realizados \textcolor{red}{Agregar mas }
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.3]{images/diagrama_sistema}
+\includegraphics[scale=0.2]{images/diagrama_sistema}
 \caption{Diagrama Sistema}
 \label{fig:diagramasistema}
 \end{figure}
 
-\subsection{Características}
-El software permite configurar la gran mayoría de opciones de tanto velocidades de muestreo, los rangos para la captura de información del movimiento, así como lo que se representaran en pantalla, tamaños de los elementos a graficar, limitar geométricamente el gráfico, entre otros.
-
-Se uso bastante la geometría analítica, para la generación y representación gráfica tanto de los objetivos en las pruebas, como para la intersección del movimiento realizado con cada uno de estos. De igual manera la trigonométrica para limitar el área del movimiento según el radio que sea definido para el examen.
-
-Reportes: Cada uno de los gráficos, los que despliegan las medidas tomadas o los que representan los resultados de el ejercicio, pueden ser almacenados en muestras de cada uno de los gráficos, o también generar una imagen de estos.
-
-Herramientas de Análisis Gráficas: ventanas desplegables acompañadas a un gráfico que permiten de forma interactiva seleccionar partes del gráfico, para analizar intervalos según se estime conveniente y a su vez obtener de este datos como, los valores máximos y mínimos, la media, desviación estándar de los datos, y en el caso del desplazamiento obtener la velocidad media del intervalo analizado.
+\subsection{Configuración de Sensor}
+Usando el IDE de Arduino se realiza la programación inicial del microcontrolador, en donde se configuran las direcciones de el IMU MPU6050 usadas, junto con la configuración inicial además de los datos desplegados por el puerto serial.
+  En el Loop de ejecución se incluye la opción de configurar a Arduino, mediante la escritura de comandos en el puerto serial, para ajustar las configuraciones de los sensores a gusto del usuario ver Figura (\ref{fig:arduinocode}).
 
 \begin{figure}[H]
 \centering
-  \includegraphics[scale=0.3]{images/analisisGraficos}
-  \caption{Ejemplo Herramienta de Análisis}
-  \label{fig:analsisGraficos}
+	\includegraphics[scale=0.4]{images/diagramacodigoarduino}
+	\caption{Diagrama Código Arduino}
+	\label{fig:arduinocode}
 \end{figure}
-
-\begin{figure}[H]
-\centering
-  \includegraphics[scale=0.7]{images/graficoPrincipal}
-  \caption{Gráfico de Prueba}
-  \label{fig:graficoPrincipal}
-\end{figure}
-
-
-\begin{figure}[H]
-\centering
-  \includegraphics[scale=0.7]{images/angKalCom}
-  \caption{Comparativa Angulo Acelerómetro vs Filtro Kalman vs Filtro Complementario}
-  \label{fig:AnguloXvsFiltros}
-\end{figure}
+  
+  Existen 4 parámetros a ser configurados de forma obligatoria Frecuencia de Muestreo, Filtro pasa bajo, rango Acelerómetro y  rango Giroscopio, antes de comenzar con la lectura de las de la información registros.
+Para configurar los 4 parámetros requeridos debe ser recibida una cadena por el puerto serial en donde se analiza e interpretan los valores a utilizar para cada configuración. 
+Una vez se completa la configuración se procede a la lectura de los registros para obtener los valores RAW acelerómetro como giroscopio para finalmente enviar mediante comunicación serial el valor resultante del dato RAW al ser dividido por la sensibilidad según el rango configurado.
 
 
 \subsection{QT C++}
@@ -419,17 +408,55 @@ Luego de realizar la conexión de forma exitosa, se procede a desplegar la infor
 
 
 
+\subsection{Características}
+El software permite configurar la gran mayoría de opciones de tanto velocidades de muestreo, los rangos para la captura de información del movimiento, así como lo que se representaran en pantalla, tamaños de los elementos a graficar, limitar geométricamente el gráfico, entre otros.
+
+Se uso bastante la geometría analítica, para la generación y representación gráfica tanto de los objetivos en las pruebas, como para la intersección del movimiento realizado con cada uno de estos. De igual manera la trigonométrica para limitar el área del movimiento según el radio que sea definido para el examen.
+
+Reportes: Cada uno de los gráficos, los que despliegan las medidas tomadas o los que representan los resultados de el ejercicio, pueden ser almacenados en muestras de cada uno de los gráficos, o también generar una imagen de estos.
+
+Herramientas de Análisis Gráficas: ventanas desplegables acompañadas a un gráfico que permiten de forma interactiva seleccionar partes del gráfico, para analizar intervalos según se estime conveniente y a su vez obtener de este datos como, los valores máximos y mínimos, la media, desviación estándar de los datos, y en el caso del desplazamiento obtener la velocidad media del intervalo analizado.
+
+\begin{figure}[H]
+\centering
+  \includegraphics[scale=0.3]{images/analisisGraficos}
+  \caption{Ejemplo Herramienta de Análisis}
+  \label{fig:analsisGraficos}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+  \includegraphics[scale=0.7]{images/graficoPrincipal}
+  \caption{Gráfico de Prueba}
+  \label{fig:graficoPrincipal}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+  \includegraphics[scale=0.7]{images/angKalCom}
+  \caption{Comparativa Angulo Acelerómetro vs Filtro Kalman vs Filtro Complementario}
+  \label{fig:AnguloXvsFiltros}
+\end{figure}
+
 \subsection{Fusión de Datos Sensores:}
 Para el análisis del balance postural se requiere el cálculo del ángulo y para ello se usara la información proveniente de ambos sensores con el fin de obtener el ángulo lo más refinado posible.
 
-\subsection{Calculo Angulo con Acelerómetro} Si es utilizado acelerómetro este nos entrega el angulo exacto pero al ser producida cualquier variación en la aceleración en cualquiera de sus 3 ejes de medición que no sea producto tan solo de la fuerza gravitacional será interpretada como un cambio de rotación, por lo cual se generan medida erráticas debido a los cambios de aceleración constantes que son generados al girar la IMU.
+\subsection{Cálculo Ángulo con Acelerómetro} Si es utilizado acelerómetro este nos entrega el ángulo exacto pero al ser producida cualquier variación en la aceleración en cualquiera de sus 3 ejes de medición que no sea producto tan solo de la fuerza gravitacional será interpretada como un cambio de rotación, por lo cual se generan medida erráticas debido a los cambios de aceleración constantes que son generados al girar la IMU como se muestra en el ejemplo para el cálculo de los angulos X ver ecuación (\ref{eq:calculoanguloXsensorvertical}) e Y ver ecuación (\ref{eq:calculoanguloYsensorvertical}) usando el sensor en posición vertical.
 
-Aquí Fórmula Para el Calculo del Angulo Usado EULER 3D!!!! 
+\begin{figure}[H]
+\begin{equation}
+anguloX = \tan{\left(\frac{aceleracionX}{\sqrt{aceleracionZ^{2}+aceleracionY^{2}}}\right)}
+\label{eq:calculoanguloXsensorvertical}
+\end{equation}
+\begin{equation}
+anguloY = \tan{\left(\frac{aceleracionZ}{\sqrt{aceleracionX^{2}+aceleracionY^{2}}}\right)}
+\label{eq:calculoanguloYsensorvertical}
+\end{equation}
+\end{figure}
 
 \subsection{Calculo Angulo con Giroscopio} 
 En cambio , si utilizamos el giroscopio a diferencia del acelerómetro, podemos realizar los cálculos del ángulo con mayor precisión pero al no tener una referencia clara del punto de partida de la mediciones, es difícil de interpretar la información y además con el tiempo los datos comienzan a acumular error, a estos errores acumulados se les conoce como drift o deriva.
-
-
 
 \subsection{El Filtro Complementario}
 
@@ -497,6 +524,5 @@ d=\sin(\alpha)
 \thispagestyle{empty}
 \pagebreak
 \newpage
-
 
 \end{document}
