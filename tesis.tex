@@ -82,7 +82,6 @@ Mary Carmen Jarur\\
 
 \pagebreak
 
-
 %%%%%%%%%%%%%%%%%%%%% FIN  PORTADA     %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -146,7 +145,6 @@ NOTA FINAL EXAMEN DE T\'ITULO &&& \\
 \end{center}
 
 
-
 \pagebreak
 
 %%%%%%%%%%%%%%%%%%%%% FIN  PORTADA COMISION   %%%%%%%%%%%%%%%%%%%%%%
@@ -179,7 +177,7 @@ Diseñar e implementar un prototipo de software-hardware basado en un microcontr
 
 El desarrollo del sistema permitirá medir y registrar el comportamiento del centro de masa y su respectiva proyección (centro de presión) durante la posición bípeda quieta, al mismo tiempo que realimentará la señal como mecanismo de evaluación de balance postural e implementación de biofeedback.
 
-El principal alcance de la propuesta es la posibilidad de contar con una solución abierta, que facilita la importación de todos los registros además del procesamiento de las señales recogidas de las evaluación, permitiendo además integrar la solución a otros sistemas.
+El principal alcance de la propuesta es la posibilidad de contar con una solución abierta, que facilita la importación de todos los registros además del procesamiento de las señales recogidas de las evaluaciones, permitiendo además integrar la solución a otros sistemas.
  
 El costo del sistema, respecto a las soluciones de mercado (Biodex- Balance SD), es bajo, lo que le da viabilidad económica al proyecto, permitiendo además dejar el prototipo en operación en el Laboratorio de Biomecánica. 
 
@@ -253,55 +251,6 @@ La Unidad de Medición Inercial MPU6050\cite{MPU6050} posee un Giroscópico y un
 \item \textbf{Resolución: } Consiste en la mínima variación generada en los sensores que a su vez puede ser capturada por estos.
 
 \end{itemize}
-\begin{comment}
-\begin{figure}[H]
-\centering
-  \begin{tikzpicture}[domain=-2:2,scale=0.1]
-    \draw[->] (-2.1,0) -- (2,0) node[right] {$Veces de g$}; %Eje X
-    \foreach \x in {-2,0,2}
-    	\draw (\x cm,1pt) -- (\x cm,-1pt) node[anchor=north] {$\x g$};
-	
-    \draw[->] (0,216) -- (0,2.2) node[above] {$Rango$}; %Eje Y
-	\foreach \y in {-2,0,2}
-	    \draw (1pt,\y cm) -- (-1pt,\y cm) node[anchor=east] {$\y$};
-    
-    \draw[color=green] (-2,-2) -- (2,2);
-    
-  \end{tikzpicture}
-
-\caption{Ejemplo Curva de calibración $\pm 2g$ }
-
-\end{figure}
-
-\begin{comment}
-\begin{figure}[H]
-\centering
-  \begin{tikzpicture}[domain=-2:2,scale=0.2]
-    \draw[->] (-0.2,0) -- (66.000,0) node[right] {$Valor en bits$}; %Eje X
-    \foreach \x in {0,32.768,65.536}
-    	\draw (\x cm,1pt) -- (\x cm,-1pt) node[anchor=north] {$\x$};
-	
-    \draw[->] (0,-16.2) -- (0,16.2) node[above] {$Rango$}; %Eje Y
-	\foreach \y in {-16,0,16}
-	    \draw (1pt,\y cm) -- (-1pt,\y cm) node[anchor=east] {$\y g$};
-    
-    \draw[color=green] (0,-16) -- (65.536,16);
-    
-    
-  \end{tikzpicture}
-
-\caption{Ejemplo Curva de calibración $\pm 16g$ }
-
-\end{figure}
-
-\subsection{Conexión con Arduino}
-\begin{figure}[H]
-  \centering
-  \includegraphics[scale=0.5]{images/conexionarduino}
-  \caption{Diagrama de Conexión IMU 6050 con Arduino}
-  \label{fig:conexionarduino}
-\end{figure}
-\end{comment}
 
 \subsection{Configuración de la IMU}
 Para configurar los parámetros de la IMU la información debe ser configurada en cada uno de los registros internos presentes de esta. El mapa de los registros \cite{MAPREGISTER} proporcionado  en el sitio de InverSense.
@@ -380,7 +329,7 @@ Como punto de partida se consideró crear una interfaz que se comunicara con el 
 Poco a poco se fueron incluyendo más opciones para una visualización mas agradable, junto con la parametrización de todos los elementos mostrados, permitiendo al usuario activar y desactivar opciones según sea el caso.
 
 \textcolor{red}{Mejorar Redacción}
-La comunicación serial se llevó más allá, siendo no solamente en una vía, sino pudiendo enviar parámetros para configurar el Sensor, para configurar principalmente la Frecuencia de Muestreo, el uso del Filtro Pasa Bajo y los Rangos del Acelerómetro-Giroscopio.
+En general la comunicación serial se utilizo no solo para le lectura del puerto, siendo no solamente en una vía, sino pudiendo enviar parámetros para configurar el sensor, para configurar principalmente la Frecuencia de Muestreo, el uso del Filtro Pasa Bajo y los Rangos del Acelerómetro-Giroscopio.
 
 \begin{figure}[H]
 \centering
