@@ -200,7 +200,7 @@ Las principales características del protocolo de Comunicación $\mathrm{I^2C}$ 
 \item Solo dos líneas para la comunicación son necesarias; una línea para la información serial (SDA) y otra para el reloj serial (SCL).
 \item Cada dispositivo conectado al bus es direccionado por software por un ID único y usando relación Esclavo/Maestro todo el tiempo.
 \item Posee un sistema de detección de colisiones lo que permite usar el modo multi-maestro previniendo la corrupción de los datos si dos o mas maestros comienzan a transferir datos de forma simultanea.
-\item Serial, orientado en 8-bit ,transferencias de datos de forma bi-direccional pueden ser realizadas hasta los 100 kbit/s en el modo Estándar, hasta 400 kbit/s en el modo Rápido, hasta 1 Mbit/s en el MOdo Mas Rápido, o hasta 3.4 Mbit/s en el modo de Alta-Velocidad.
+\item Serial, orientado en 8-bit ,transferencias de datos de forma bi-direccional pueden ser realizadas hasta los 100 kbit/s en el modo Estándar, hasta 400 kbit/s en el modo Rápido, hasta 1 Mbit/s en el modo Mas Rápido, o hasta 3.4 Mbit/s en el modo de Alta-Velocidad.
 \item En el chip de filtrado se rechazan los picos en la línea de datos del bus de preservar la integridad de datos.
 
 \begin{figure}[H]
@@ -210,10 +210,15 @@ Las principales características del protocolo de Comunicación $\mathrm{I^2C}$ 
 	\label{fig:diagramaI2C}
 \end{figure}
 \end{itemize}
-\subsection{Sensores}
 
-La Unidad de Medición Inercial MPU6050\cite{MPU6050} posee un Giroscópico y un Acelero-metro de 3 Ejes, el poseer estos 2 sensores de movimiento indica que existen almenos 6 grados de libertad para utilizar al momento de obtener las mediciones.
-
+\subsection{Unidad de Medición Inercial}
+	La Unidad de Medición Inercial (IMU) MPU6050\cite{MPU6050} es un dispositivo capaz de medir la velocidades angulares, fuerza de gravedad mediante al estar compuesto de Giroscópico y  Acelero-metro de 3 Ejes, el hecho de poseer estos 2 sensores de movimiento indica que existen almenos 6 grados de libertad para utilizar al momento de obtener las mediciones provenientes de este.
+ El MPU6050 esta diseñado para realizar seguimiento gracias a que posee un bajo consumo, ser de bajo costo, y cumplir con los requisitos de los teléfonos inteligentes, tabletas y sensores portátiles.
+ La interfaz de comunicación entre el microcontrolador y la IMU es el protocolo I2C, y ademas requiere las 2 líneas de conexión una para el envío de datos (SDA) y otra para el clock (SCL), las cuales varían dependiendo del modelo de microcontrolador, además de la línea de voltaje() y conexión a tierra (GND).
+\\
+	\indent El acelerómetro incluido mide el movimiento lineas respecto a cada uno de sus tres ejes ver Figura (\ref{fig:MPU6050}), es decir la aceleración percibida por el movimiento y esta es expresada en proporción a la fuerza de gravedad (veces de g).
+	\\	
+	\indent El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\ref{fig:MPU6050}), es decir la velocidad angular medida grados/seg.
 \begin{figure}[H]
   \centering
   \includegraphics[scale=0.5]{images/MPU6050}
@@ -240,7 +245,7 @@ La Unidad de Medición Inercial MPU6050\cite{MPU6050} posee un Giroscópico y un
   \end{tabular}
 \end{table}
 
-\item \textbf{Rango: } Posee un rango configurable en los 2 sensores incluidos, tanto acelerómetro como giroscopio, el rango nos indica el dominio sobre el cual son obtenidos los datos, mas concretamente los valores máximos y mínimos que pueden ser obtenidos.
+\item \textbf{Rango:} Posee un rango configurable en los 2 sensores incluidos, tanto acelerómetro como giroscopio, el rango nos indica el dominio sobre el cual son obtenidos los datos, mas concretamente los valores máximos y mínimos que pueden ser obtenidos.
 	
 \item \textbf{Sensibilidad: }La sensibilidad describe la mínima variación medible, es decir la razón de cambio entre una variable entrante y el resultado de la variable saliente.
 
@@ -252,9 +257,9 @@ La Unidad de Medición Inercial MPU6050\cite{MPU6050} posee un Giroscópico y un
 
 \end{itemize}
 
-\subsection{Configuración de la IMU}
-Para configurar los parámetros de la IMU la información debe ser configurada en cada uno de los registros internos presentes de esta. El mapa de los registros \cite{MAPREGISTER} proporcionado  en el sitio de InverSense.
-\newline En la IMU se encuentran mas de 70 registros cada uno de 8 Bit, para la configuración se deben ser usados solo algunos pocos.
+\subsection{Configuración de MPU6050}
+Por defecto el del MPU6050 viene configurada con los parámetros básicos para realizar la captura de informacion, lo cual puede perfectamente ser util segun sea el caso de estudio, pero si se desea que los sensores operen en rangos especificos y/o los datos de los sensores sean obtenidos a frecuencias específicas se debe comprender como llevar a cabo la configuración en cada uno de los registros internos presentes, el mapa de los registros \cite{MAPREGISTER} proporcionado  en el sitio de InverSense es buena guía para entender como se realiza esta labor.
+\newline En el interior del MPU6050 se encuentran mas de 70 registros cada uno de 8 Bit, para la configuraciones listadas a continuación se deben ser usados solo algunos pocos.
 \begin{itemize}
 \item \textbf{Configurar Frecuencia Muestreo:} Para obtener la cantidad de muestras que se obtendrán finalmente ``En Teoría'' se calcula usando la ecuación: 
 
@@ -263,31 +268,55 @@ Para configurar los parámetros de la IMU la información debe ser configurada e
 Sample Rate = \frac{Gyroscope Output Rate}{(1 + SMPLRT\_DIV) }
 \end{equation}
 
-this references the equation \ref{eq:sampleratediv}.
-factores, tales como la velocidad del Puerto Serial pueden influir en el resultado, pero cambiando los datos almacenados en el registro \textbf{SMPRT\_DIV}, con los valores entre 0 y 255, el $Gyroscope Output Rate$ depende directamente del estado del filtro pasa-bajo, en caso de estar desactivado, el valor de $Gyroscope Output Rate$ seria 8Khz, en cambio si esta activado el $Gyroscope Output Rate$ tomaría el valor de 1Khz con lo cual haciendo los cálculos necesarios nos daría la formula teórica de que al tener desactivado el filtro pasa-bajo la frecuencia de muestreo varia entre las 8000 y 31 muestras/seg de forma teórica, al contrario en caso de estar activado el filtro, la fórmula para el calculo de la frecuencia de muestreo fluctuaría entre 1000 y 3.9 muestras/seg, por cada uno de los 6 datos obtenibles.
+En la ecuación (\ref{eq:sampleratediv}) factores, tales como la velocidad del puerto serial pueden influir en el resultado, pero cambiando los datos almacenados en el registro \textbf{SMPRT\_DIV}, con valores entre 0 y 255, el valor de $Gyroscope Output Rate$ depende directamente del estado del filtro pasa-bajo, en caso de estar desactivado, el valor de $Gyroscope Output Rate$ seria 8Khz, en cambio si esta activado el $Gyroscope Output Rate$ tomaría el valor de 1Khz con lo cual haciendo los cálculos necesarios al tener desactivado el filtro pasa-bajo la frecuencia de muestreo variará entre las 8000 y 31 muestras/seg de forma teórica, al contrario en caso de estar activado el filtro, la fórmula para el calculo de la frecuencia de muestreo fluctuaría entre las 1000 y 3.9 muestras/seg, por cada uno de los 6 datos obtenibles.
 
-\item \textbf{Configurar Giroscopio:} El registro GYRO\_CONFIG para cambiar los Rangos de sensibilidad de el Giroscopio. Este registro para ser completado debe ser ingresado en los bits 3 y 4 del registro los valores en Binario 0,1,2,3 para configurar los cuatro rangos disponibles 250\grad/seg, 500\grad/seg, 1000\grad/seg y 2000\grad/seg. respectivamente.
+\item \textbf{Configurar Giroscopio:} El registro GYRO\_CONFIG permite el cambio de los rangos para la obtención de la velocidad angular, con lo cual aumentamos o disminuimos de forma inversa la sensibilidad de el Giroscopio. En el interior de este registro específicamente en los bits 3 y 4 del registro deben ser ingresados los valores en binario de los números 0, 1, 2 o 3 para configurar los cuatro rangos disponibles 250\grad/seg, 500\grad/seg, 1000\grad/seg y 2000\grad/seg. respectivamente.
 
-\item \textbf{Configurar Acelerómetro:} De forma similar para configurar el Acelerómetro, solo que se usa el registro ACCEL\_CONFIG, se ingresan en los bits 3 y 4 del registro los valores en Binario 0,1,2,3 que representarán $\pm 2g$, $\pm 4g$, $\pm 8g$, $\pm 16g$ respectivamente.
+\item \textbf{Configurar Acelerómetro:} La configuración para el el rango del acelormetro se realiza de forma similar, solo que en cambio el utilizado el registro ACCEL\_CONFIG, en donde también en los bits 3 y 4 se deben ingresar los valores en binario de 0, 1, 2 o 3 que representarán $\pm 2g$, $\pm 4g$, $\pm 8g$, $\pm 16g$ respectivamente.
 
 \end{itemize}
 
-\subsection{Obtención de los Datos (IMU)}
-A partir de la configuración almacenada en los registros de la IMU,  se deben leer ciertos registros para la obtención de la información del movimiento registrado por los sensores inerciales:
+\subsection{Obtención de los Giroscopio y Acelerómetro}
+Luego de realizar la configuración de los registros del MPU6050, se deben leer ciertos registros para la obtención de la información del movimiento registrado por los sensores inerciales:
 
 \begin{itemize}
-	\item \textbf{Obtención de la Velocidad Angular:} Para obtener la información proveniente del giroscópico, deben ser leídos 6 registros, $GYRO\_XOUT\_H$, $GYRO\_XOUT\_L$ , $GYRO\_YOUT\_H$, $GYRO\_YOUT\_L$, $GYRO_ZOUT\_H$, y $GYRO\_ZOUT\_L$ por cada eje medible son usados 2 registros de 8 bit, en donde luego de leer ambos registros del cada eje deben ser sumados para obtener el dato completo y ademas usar el complemento a 2, que genera como dato resultante un valor de entre aproximadamente $\pm 2^{15}$, el cual debe ser dividido según la sensibilidad asociada a el rango escogido, para obtener la información física.
+\item \textbf{Obtención de la Velocidad Angular:} Para obtener la variación del ángulo por unidad de tiempo medida por el giroscópico, deben ser leídos 6 registros en donde son usados por cada eje medible 2 registros de 8 bit,
+\begin{itemize}
+	\item Eje X: $GYRO\_XOUT\_H$, $GYRO\_XOUT\_L$.
+	\item Eje Y: $GYRO\_YOUT\_H$, $GYRO\_YOUT\_L$.
+	\item Eje Z: $GYRO\_ZOUT\_H$, $GYRO\_ZOUT\_L$
+\end{itemize}
+Posteriormente de ser leídos ambos registros de cada eje estos deben deben ser sumados usando aritmética binaria en donde el valor obtenido del primer registro leído le es aplicado un corrimiento de 8 bit para luego sumar el segundo obtenido, además se utiliza el complemento a 2 para la obtención de valores negativos, que genera como dato resultante un valor de entre aproximadamente $\pm 2^{15}$, este valor resultante debe ser dividido según la sensibilidad asociada a el rango escogido del giroscopio, para transformar el dato RAW del giroscopio y obtener la información física en (\grad/seg).
 
-\item \textbf{Obtención de la Aceleración:} Para obtener la información del  Acelerómetro al igual que en Giroscopio deben ser leídos los 6 pertenecientes a las mediciones $ACCEL\_XOUT\_H$ , $ACCEL\_XOUT\_L$ , $ACCEL\_YOUT\_H$, $ACCEL\_YOUT\_L$ , $ACCEL\_ZOUT\_H$, y $ACCEL\_ZOUT\_L$, en donde luego de unir los registros y usar el complemento a 2 acorde a cada eje, cada uno de estos valores deben ser dividido según el rango escogido, lo que determina la sensibilidad a usar, para obtener la información física.
+\item \textbf{Obtención de la Aceleración:} Para obtener la información del acelerómetro al igual que en Giroscopio deben ser leídos los 6 pertenecientes a las mediciones:
+\begin{itemize}
+	\item Eje X: $ACCEL\_XOUT\_H$, $ACCEL\_XOUT\_L$.
+	\item Eje Y: $ACCEL\_YOUT\_H$, $ACCEL\_YOUT\_L$.
+	\item Eje Z: $ACCEL\_ZOUT\_H$, $ACCEL\_ZOUT\_L$
+\end{itemize}
+
+Para luego unir los registros y usar el complemento a 2 acorde a cada eje, cada uno de estos valores deben ser dividido según el rango escogido, que determina la sensibilidad a usar para obtener la información física de la aceleración.
 
 \end{itemize}
 
- \subsection{Arduino IDE}
-  Para la programación en la placa Arduino \cite{ARDUINO} se uso el IDE proporcionado por Arduino.
+ \subsection{Arduino}
+ \textcolor{red}{Editar}
+	Arduino\cite{ARDUINO} es una plataforma de hardware de código abierto, basada en una sencilla placa con entradas y salidas, analógicas y digitales, en un entorno de desarrollo que está basado en el lenguaje de programación Processing, donde sus principales características son:
+\begin{itemize}
+	\item \textbf{Barato:} Las placas Arduino son relativamente baratas comparadas con otras plataformas microcontroladoras. La versión menos cara del modulo Arduino puede ser ensamblada a mano, e incluso los módulos de Arduino preensamblados cuestan menos de 50\$.
+	\item \textbf{Multiplataforma:} El software de Arduino se ejecuta en sistemas operativos Windows, Macintosh OSX y GNU/Linux. La mayoría de los sistemas microcontroladores están limitados a Windows.
+\item \textbf{Entorno de programación simple y claro:} El entorno de programación de Arduino es fácil de usar para principiantes, pero suficientemente flexible para que usuarios avanzados puedan aprovecharlo también. Para profesores, está convenientemente basado en el entorno de programación Processing, de manera que estudiantes aprendiendo a programar en ese entorno estarán familiarizados con el aspecto y la imagen de Arduino.
+Código abierto y software extensible: El software Arduino está publicado como herramientas de código abierto, disponible para extensión por programadores experimentados. El lenguaje puede ser expandido mediante librerias C++, y la gente que quiera entender los detalles técnicos pueden hacer el salto desde Arduino a la programación en lenguaje AVR C en el cual está basado. De forma similar, puedes añadir código AVR-C directamente en tus programas Arduino si quieres.
+\item \textbf{Código abierto y hardware extensible:} El Arduino está basado en microcontroladores ATMEGA8 y ATMEGA168 de Atmel. Los planos para los módulos están publicados bajo licencia Creative Commons, por lo que diseñadores experimentados de circuitos pueden hacer su propia versión del módulo, extendiéndolo y mejorándolo. Incluso usuarios relativamente inexpertos pueden construir la versión de la placa del módulo para entender como funciona y ahorrar dinero.
+\end{itemize}
+
   
 
-\subsection{QT Creator}
-	El entorno de desarrollo (IDE) del Framework de C++ Qt  es Qt Creator en donde se incluyen las herramientas para la administación de los ficheros .h y .cpp usados en C++ junto con las opciones de compilación, ejecución y depuración del software.
+\subsection{Framework QT}
+Qt es un Framework basado en C++, tiene disponibilidad multiplataforma- escritorio, móvil y sistemas embebidos
+Posee las bibliotecas bases de C++  junto a librerías y herramientas de desarrollo propias de Qt, en donde se incluye IDE Qt Creator , y herramientas de productividad .
+	El entorno de desarrollo (IDE) del framework de C++ Qt  es Qt Creator en donde se incluyen las herramientas para la administración de los ficheros .h y .cpp usados en C++ junto con las opciones de compilación, ejecución y depuración del software.
+
 
 \section{Desarrollo}
 \subsection{Introducción}
@@ -329,7 +358,7 @@ Como punto de partida se consideró crear una interfaz que se comunicara con el 
 Poco a poco se fueron incluyendo más opciones para una visualización mas agradable, junto con la parametrización de todos los elementos mostrados, permitiendo al usuario activar y desactivar opciones según sea el caso.
 
 \textcolor{red}{Mejorar Redacción}
-En general la comunicación serial se utilizo no solo para le lectura del puerto, siendo no solamente en una vía, sino pudiendo enviar parámetros para configurar el sensor, para configurar principalmente la Frecuencia de Muestreo, el uso del Filtro Pasa Bajo y los Rangos del Acelerómetro-Giroscopio.
+La comunicación serial entre el dispositivo-ordenador no es solamente de emisor-receptor como es generalmente es en entre Arduino y PC, sino que se pueden enviar parámetros para configurar el sensor, para configurar principalmente la Frecuencia de Muestreo, el uso del Filtro Pasa Bajo y los Rangos del Acelerómetro-Giroscopio.
 
 \begin{figure}[H]
 \centering
