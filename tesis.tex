@@ -124,7 +124,7 @@ MARY CARMEN JARUR MUÑOZ&&&\\
 &&&\\
 
 PROFESOR COMISI\'ON&&& \\
-DR. HERNAN MAUREIRA P&&&\\
+DR. HERN\'AN MAUREIRA P&&&\\
 \cline{2-3}
 &&&\\
 
@@ -159,8 +159,11 @@ NOTA FINAL EXAMEN DE T\'ITULO &&& \\
 
 \section{Introducción}
 La comprensión de las dinámicas y patrones de movimiento humano, se facilitan enormemente con el apoyo de tecnologías adecuadas, que permitan medir, registrar y analizar variables cinemáticas. Particularmente, el estudio del movimiento humano (Kinesiología) depende hoy en día de las facilidades tecnológicas que ofrece la electrónica (sensores, microcontroladores, sistema de adquisición de señales) y las ciencias de la computación (procesamiento, análisis y posterior reporte adecuado de  variables cinemáticas y cinéticas).  
-Las soluciones tecnológicas que hoy existen, no solo permiten realizar el seguimiento (‘tracking’) y representación gráfica, sino que además facilitan la representación en tiempo real de las variables de interés, conformando con esto los denominados sistemas de Bio-feedback (retroalimentación de señales biológicas). Aunque existen alternativas adecuadas para estos fines, poseen el inconveniente en lo prohibitivo de su valor comercial {\color{red} y a su vez las soluciones son cerradas, lo que limita}.
-Frente a este desafío, está la posibilidad de integrar tecnología para conseguir soluciones de menores costos, que permitan realizar investigación y al mismo tiempo explorar posibilidades de innovación tecnológica que den paso al desarrollo de tecnología nacional.
+
+Las soluciones tecnológicas que hoy existen, no solo permiten realizar el seguimiento (‘tracking’) y representación gráfica, sino que además facilitan la representación en tiempo real de las variables de interés, conformando con esto los denominados sistemas de Bio-feedback (retroalimentación de señales biológicas). Aunque existen alternativas adecuadas para estos fines, poseen el inconveniente en lo prohibitivo de su valor comercial junto con ser soluciones cerradas tanto en hardware como software, limita las funciones según las características propuestas por fabricante, hace prácticamente imposible la adición de nuevas funcionalidades y el uso para otros fines u obtención de la información capturada por los sensores incorporados.
+
+Frente a este desafío, está la posibilidad de integrar tecnología para conseguir soluciones de menores costos, que permitan realizar investigación y al mismo tiempo explorar posibilidades de innovación tecnológica que den paso al desarrollo de tecnología generadora de impacto no tan sólo en el ámbito nacional probablemente de carácter global.
+
 Particularmente, este proyecto propone desarrollar un sistema de integración hardware-software que permita el registro del comportamiento pendular de la posición bípeda quieta (variables de posición y velocidad angular en el tiempo), habilitando funciones de bio-feedback que permitan replicar evaluaciones de balance postural.
 
 \subsection{Objetivos Generales}
@@ -187,7 +190,7 @@ Desde el punto de vista disciplinar (Ciencias de la Ingeniería), este proyecto 
 
 
 \section{Estado del Arte}
-
+\subsection{Balance}
 
 
 
@@ -211,14 +214,15 @@ Las principales características del protocolo de Comunicación $\mathrm{I^2C}$ 
 \end{figure}
 \end{itemize}
 
-\subsection{Unidad de Medición Inercial}
-	La Unidad de Medición Inercial (IMU) MPU6050\cite{MPU6050} es un dispositivo capaz de medir la velocidades angulares, fuerza de gravedad mediante al estar compuesto de Giroscópico y  Acelero-metro de 3 Ejes, el hecho de poseer estos 2 sensores de movimiento indica que existen almenos 6 grados de libertad para utilizar al momento de obtener las mediciones provenientes de este.
- El MPU6050 esta diseñado para realizar seguimiento gracias a que posee un bajo consumo, ser de bajo costo, y cumplir con los requisitos de los teléfonos inteligentes, tabletas y sensores portátiles.
+\subsection{Sistema microelectromecánico}
+Los Sistemas Microelectromecánicos (MEMS) MPU6050\cite{MPU6050} es un dispositivo capaz de medir la velocidad angular y fuerza de gravedad gracias a estar compuesto por Giroscópico y Acelerómetro ambos de 3 Ejes, el hecho de poseer estos 2 sensores de movimiento indica que existen almenos 6 grados de libertad para utilizar al momento de obtener las mediciones provenientes de este.
+    
+ El MPU6050 esta diseñado para realizar seguimiento (Tracking) gracias a que posee un bajo consumo, es de bajo costo, y cumple con los requisitos de los teléfonos inteligentes, tabletas y sensores portátiles.
  La interfaz de comunicación entre el microcontrolador y la IMU es el protocolo I2C, y ademas requiere las 2 líneas de conexión una para el envío de datos (SDA) y otra para el clock (SCL), las cuales varían dependiendo del modelo de microcontrolador, además de la línea de voltaje() y conexión a tierra (GND).
-\\
-	\indent El acelerómetro incluido mide el movimiento lineas respecto a cada uno de sus tres ejes ver Figura (\ref{fig:MPU6050}), es decir la aceleración percibida por el movimiento y esta es expresada en proporción a la fuerza de gravedad (veces de g).
-	\\	
-	\indent El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\ref{fig:MPU6050}), es decir la velocidad angular medida grados/seg.
+
+El acelerómetro incluido mide el movimiento lineas respecto a cada uno de sus tres ejes ver Figura (\ref{fig:MPU6050}), es decir la aceleración percibida por el movimiento y esta es expresada en proporción a la fuerza de gravedad (veces de g).
+
+El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\ref{fig:MPU6050}), es decir la velocidad angular medida grados/seg.
 \begin{figure}[H]
   \centering
   \includegraphics[scale=0.5]{images/MPU6050}
@@ -232,51 +236,54 @@ Las principales características del protocolo de Comunicación $\mathrm{I^2C}$ 
 
 \begin{table}[H]
   \centering
-  \caption{Datos del Sensor}
+  \label{table:caracteristicassensor}
   \begin{tabular}{|c|c|c|c|}
   \hline
-  \multicolumn{2}{|c|}{Acelerómetro (g)} &\multicolumn{2}{|c|}{Giroscopio (\grad/seg)}   \\
+  \multicolumn{2}{|c|}{Acelerómetro} &\multicolumn{2}{|c|}{Giroscopio}   \\
   \hline
-  Rango        & Sensibilidad   & Rango      & Sensibilidad \\ \hline
-  $\pm 2g$     &  16384 & 250 \grad/seg  & 131      	\\ 
-  $\pm 4g$     &  8192  & 250 \grad/seg  & 65.5      	\\
-  $\pm 8g$     &  4096  & 250 \grad/seg  & 32.8      	\\
-  $\pm 16g$    &  2048  & 250 \grad/seg  & 16.4      	\\ \hline
+  Rango (g)        & Sensibilidad (LSB/g)  & Rango (\grad/seg)     & Sensibilidad (LSB/\grad/seg)\\ \hline
+  $\pm 2$     &  16384 & 250   	& 131      		\\ 
+  $\pm 4$     &  8192  & 500  	& 65.5      	\\
+  $\pm 8$     &  4096  & 1000  	& 32.8       	\\
+  $\pm 16$    &  2048  & 2000   & 16.4      	\\ 
+  \hline
   \end{tabular}
+  \caption{Características de los sensores}
 \end{table}
 
-\item \textbf{Rango:} Posee un rango configurable en los 2 sensores incluidos, tanto acelerómetro como giroscopio, el rango nos indica el dominio sobre el cual son obtenidos los datos, mas concretamente los valores máximos y mínimos que pueden ser obtenidos.
+\item \textbf{Rango:} Posee un rango configurable en los 2 sensores incluidos, tanto acelerómetro como giroscopio, el rango nos indica el dominio sobre el cual son adquiridos los datos, más concretamente los valores máximos y mínimos donde fluctúan los información obtenida.
 	
 \item \textbf{Sensibilidad: }La sensibilidad describe la mínima variación medible, es decir la razón de cambio entre una variable entrante y el resultado de la variable saliente.
 
-\item \textbf{Variables: } Las variables entregadas por el Acelerómetro consiste en la aceleración lineal percibida en cada eje expresada en veces de g, y en el Giroscopio corresponde  a la velocidad angular dada por la variación de los \grad/seg al girar sobre cada eje.
+\item \textbf{Variables:} Las variables entregadas por el Acelerómetro consiste en la aceleración lineal percibida en cada eje expresada en veces de g, y en el Giroscopio corresponde  a la velocidad angular dada por la variación de los \grad/seg al girar sobre cada eje.
 
-\item \textbf{Frecuencia de Muestreo: } La cantidad de datos que se pueden obtener en un intervalo de tiempo.
+\item \textbf{Frecuencia de Muestreo:} La cantidad de datos que se pueden obtener en un intervalo de tiempo.
 
-\item \textbf{Resolución: } Consiste en la mínima variación generada en los sensores que a su vez puede ser capturada por estos.
+\item \textbf{Resolución:} Consiste en la mínima variación generada en los sensores que a su vez puede ser capturada por estos.
 
 \end{itemize}
 
 \subsection{Configuración de MPU6050}
-Por defecto el del MPU6050 viene configurada con los parámetros básicos para realizar la captura de informacion, lo cual puede perfectamente ser util segun sea el caso de estudio, pero si se desea que los sensores operen en rangos especificos y/o los datos de los sensores sean obtenidos a frecuencias específicas se debe comprender como llevar a cabo la configuración en cada uno de los registros internos presentes, el mapa de los registros \cite{MAPREGISTER} proporcionado  en el sitio de InverSense es buena guía para entender como se realiza esta labor.
+Por defecto el MPU6050 viene configurada con los parámetros básicos para realizar la captura de información, lo cual puede perfectamente ser útil según sea el caso de estudio, pero si se desea que los sensores operen en rangos específicos y/o los datos de los sensores sean obtenidos a frecuencias específicas se debe comprender como llevar a cabo la configuración en cada uno de los registros internos presentes, el mapa de los registros \cite{MAPREGISTER} proporcionado  en el sitio de InverSense es buena guía para entender como se realiza esta labor.
 \newline En el interior del MPU6050 se encuentran mas de 70 registros cada uno de 8 Bit, para la configuraciones listadas a continuación se deben ser usados solo algunos pocos.
 \begin{itemize}
-\item \textbf{Configurar Frecuencia Muestreo:} Para obtener la cantidad de muestras que se obtendrán finalmente ``En Teoría'' se calcula usando la ecuación: 
+\item \textbf{Configurar frecuencia muestreo:} Para obtener la cantidad de muestras que se obtendrán finalmente ``En Teoría'' se calcula usando la ecuación: 
 
 \begin{equation} 
 \label{eq:sampleratediv}
 Sample Rate = \frac{Gyroscope Output Rate}{(1 + SMPLRT\_DIV) }
 \end{equation}
 
-En la ecuación (\ref{eq:sampleratediv}) factores, tales como la velocidad del puerto serial pueden influir en el resultado, pero cambiando los datos almacenados en el registro \textbf{SMPRT\_DIV}, con valores entre 0 y 255, el valor de $Gyroscope Output Rate$ depende directamente del estado del filtro pasa-bajo, en caso de estar desactivado, el valor de $Gyroscope Output Rate$ seria 8Khz, en cambio si esta activado el $Gyroscope Output Rate$ tomaría el valor de 1Khz con lo cual haciendo los cálculos necesarios al tener desactivado el filtro pasa-bajo la frecuencia de muestreo variará entre las 8000 y 31 muestras/seg de forma teórica, al contrario en caso de estar activado el filtro, la fórmula para el calculo de la frecuencia de muestreo fluctuaría entre las 1000 y 3.9 muestras/seg, por cada uno de los 6 datos obtenibles.
+En la ecuación (\ref{eq:sampleratediv}) factores, tales como la velocidad del puerto serial pueden influir en el resultado, pero cambiando los datos almacenados en el registro \textbf{SMPRT\_DIV}, con valores entre 0 y 255, el valor de $Gyroscope Output Rate$ depende directamente del estado del filtro pasa-bajo, en caso de estar desactivado, el valor de $Gyroscope Output Rate$ sería 8Khz, en cambio sí está activado el $Gyroscope Output Rate$ tomaría el valor de 1Khz con lo cual haciendo los cálculos necesarios al estar desactivado el filtro pasa-bajo la frecuencia de muestreo variará entre las 8000 y 31 muestras/seg de forma teórica, al contrario en caso de estar activado el filtro, la fórmula para el calculo de la frecuencia de muestreo fluctuaría entre las 1000 y 3.9 muestras/seg, por cada uno de los 6 datos obtenibles.
+
+Nota: Hay que tener en consideración que el valor obtenido para la frecuencia de muestreo es válido principalmente para el giroscopio, ya que para el acelerómetro se maneja con su propia frecuencia de que es siempre de 1Khz por ende si la frecuencia de muestreo es mayor a 1Khz se pueden repetir valores de en la salida del acelerómetro.
 
 \item \textbf{Configurar Giroscopio:} El registro GYRO\_CONFIG permite el cambio de los rangos para la obtención de la velocidad angular, con lo cual aumentamos o disminuimos de forma inversa la sensibilidad de el Giroscopio. En el interior de este registro específicamente en los bits 3 y 4 del registro deben ser ingresados los valores en binario de los números 0, 1, 2 o 3 para configurar los cuatro rangos disponibles 250\grad/seg, 500\grad/seg, 1000\grad/seg y 2000\grad/seg. respectivamente.
 
 \item \textbf{Configurar Acelerómetro:} La configuración para el el rango del acelormetro se realiza de forma similar, solo que en cambio el utilizado el registro ACCEL\_CONFIG, en donde también en los bits 3 y 4 se deben ingresar los valores en binario de 0, 1, 2 o 3 que representarán $\pm 2g$, $\pm 4g$, $\pm 8g$, $\pm 16g$ respectivamente.
-
 \end{itemize}
 
-\subsection{Obtención de los Giroscopio y Acelerómetro}
+\subsection{Obtención mediciones Giroscopio y Acelerómetro}
 Luego de realizar la configuración de los registros del MPU6050, se deben leer ciertos registros para la obtención de la información del movimiento registrado por los sensores inerciales:
 
 \begin{itemize}
@@ -297,11 +304,18 @@ Posteriormente de ser leídos ambos registros de cada eje estos deben deben ser 
 
 Para luego unir los registros y usar el complemento a 2 acorde a cada eje, cada uno de estos valores deben ser dividido según el rango escogido, que determina la sensibilidad a usar para obtener la información física de la aceleración.
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.6]{images/curvacalibracion}
+\label{fig:curvacalibracion}
+\caption{Ejemplo curva calibración $\pm 2g$}
+\end{figure}
+
 \end{itemize}
 
  \subsection{Arduino}
  \textcolor{red}{Editar}
-	Arduino\cite{ARDUINO} es una plataforma de hardware de código abierto, basada en una sencilla placa con entradas y salidas, analógicas y digitales, en un entorno de desarrollo que está basado en el lenguaje de programación Processing, donde sus principales características son:
+	Arduino\cite{ARDUINO} es una plataforma de hardware de código abierto, basada en una sencilla placa con entradas y salidas, analógicas y digitales, con un entorno de desarrollo basado en el lenguaje de programación Processing, donde sus principales características son:
 \begin{itemize}
 	\item \textbf{Barato:} Las placas Arduino son relativamente baratas comparadas con otras plataformas microcontroladoras. La versión menos cara del modulo Arduino puede ser ensamblada a mano, e incluso los módulos de Arduino preensamblados cuestan menos de 50\$.
 	\item \textbf{Multiplataforma:} El software de Arduino se ejecuta en sistemas operativos Windows, Macintosh OSX y GNU/Linux. La mayoría de los sistemas microcontroladores están limitados a Windows.
@@ -310,8 +324,7 @@ Código abierto y software extensible: El software Arduino está publicado como 
 \item \textbf{Código abierto y hardware extensible:} El Arduino está basado en microcontroladores ATMEGA8 y ATMEGA168 de Atmel. Los planos para los módulos están publicados bajo licencia Creative Commons, por lo que diseñadores experimentados de circuitos pueden hacer su propia versión del módulo, extendiéndolo y mejorándolo. Incluso usuarios relativamente inexpertos pueden construir la versión de la placa del módulo para entender como funciona y ahorrar dinero.
 \end{itemize}
 
-  
-
+ 
 \subsection{Framework QT}
 Qt es un Framework basado en C++, tiene disponibilidad multiplataforma- escritorio, móvil y sistemas embebidos
 Posee las bibliotecas bases de C++  junto a librerías y herramientas de desarrollo propias de Qt, en donde se incluye IDE Qt Creator , y herramientas de productividad .
@@ -320,11 +333,12 @@ Posee las bibliotecas bases de C++  junto a librerías y herramientas de desarro
 
 \section{Desarrollo}
 \subsection{Introducción}
-\textcolor{red}{ Breve descripción de la solución completa, incluir esquemáticos}
 
-A partir de balance y las ideas obtenidas en base a los estudios y resultados entregados por la plataforma de fuerza Kistler 9286b y balance SD se ideó una solución que opera de forma análoga a los que ya son utilizados en el laboratorio con un software que permita entregar información de manera similar a lo que entregan estos sistemas, para aprovechar los conocimientos de los actuales usuarios con el fin de disminuir la curva de aprendizaje del sistema implementado para que estos comprendan el software sin demasiado entrenamiento y a su vez la transición sea mas satisfactoria para estos.
+A partir de la noción general que intrínsecamente cada uno posee de un estudio del balance y complementado con las ideas de herramientas o técnicas ya existentes que intentan solventar mediante diversos puntos de vista la problemática.
 
-El sensor inercial será puesto en el sujeto de prueba el cual captura la información del movimiento generado por el sujeto y lo trasmitirá al microcontrolador Arduino por el protocolo I2C en donde se recibe y traduce la información obtenida del sensor y el microcontrolador a su vez enviará mediante el puerto serial las muestras obtenidas, aceleración y velocidad angular en donde el software recibe la información y realiza el procesamiento para obtener el angulo junto con los análisis realizados \textcolor{red}{Agregar mas }
+Los equipamientos existentes en el Laboratorio de Bio-mecánica existentes que sirvieron de base para el desarrollo de la solución Hardware-Software  fueron la plataforma de fuerza Kistler 9286b \cite{KISTLER} y balance SD, utilizando la representación del movimiento del centro de masa/presión se ideó una solución que opera de forma análoga a los dispositivos que ya son utilizados en el laboratorio con un software que permita entregar información de manera similar a lo que entregan estos sistemas, para aprovechar los conocimientos de los usuarios con el fin de disminuir la curva de aprendizaje del sistema implementado para que estos comprendan el software sin demasiado entrenamiento y a su vez la transición sea mas satisfactoria para estos.
+
+En lo referente a Hardware se utilizó un sensor inercial MPU6050, el cual será puesto en el sujeto de prueba en una posición aproximada al centro de masa que este a su vez captura la información del movimiento generado por el sujeto y lo trasmite al microcontrolador Arduino en donde se recibe y traduce la información obtenida del sensor ademas de transmitir al ordenador los datos obtenidos utilizando variables físicas, tanto aceleración y velocidad angular en donde finalmente el software del ordenador recibe la información y realiza el procesamiento para obtener el ángulo, desplazamiento junto con brindar la opción de efectuar análisis específicos de la información utilizando interfaces gráficas sencillas.
 
 \begin{figure}[H]
 \centering
@@ -334,8 +348,8 @@ El sensor inercial será puesto en el sujeto de prueba el cual captura la inform
 \end{figure}
 
 \subsection{Configuración de Sensor}
-Usando el IDE de Arduino se realiza la programación inicial del microcontrolador, en donde se configuran las direcciones de el IMU MPU6050 usadas, junto con la configuración inicial además de los datos desplegados por el puerto serial.
-  En el Loop de ejecución se incluye la opción de configurar a Arduino, mediante la escritura de comandos en el puerto serial, para ajustar las configuraciones de los sensores a gusto del usuario ver Figura (\ref{fig:arduinocode}).
+Uno de los primeros pasos en el desarrollo de la solución consiste en utilizar el IDE de Arduino para realizar la programación inicial del microcontrolador, en donde se debe configurar las direcciones de los registros internos del MPU6050 usados, junto con la configuración inicial, además de definir el formato de envío para desplegar los datos por el puerto serial.
+  En el Loop de ejecución de Arduino se obliga a configurar el MPU6050, mediante la escritura de comandos en el puerto serial, para ajustar las configuraciones de los sensores a conforme las necesidades del usuario ver Figura (\ref{fig:arduinocode}), para dar comienzo a la escritura serial de Arduino hacia PC.
 
 \begin{figure}[H]
 \centering
@@ -346,23 +360,25 @@ Usando el IDE de Arduino se realiza la programación inicial del microcontrolado
   
   Existen 4 parámetros a ser configurados de forma obligatoria Frecuencia de Muestreo, Filtro pasa bajo, rango Acelerómetro y  rango Giroscopio, antes de comenzar con la lectura de las de la información registros.
 Para configurar los 4 parámetros requeridos debe ser recibida una cadena por el puerto serial en donde se analiza e interpretan los valores a utilizar para cada configuración. 
-Una vez se completa la configuración se procede a la lectura de los registros para obtener los valores RAW acelerómetro como giroscopio para finalmente enviar mediante comunicación serial el valor resultante del dato RAW al ser dividido por la sensibilidad según el rango configurado.
+Una vez se completa la configuración se procede a la lectura de los registros para obtener los valores RAW tanto acelerómetro como giroscopio para finalmente enviar mediante comunicación serial el valor resultante expresado en su unidad física correspondiente al ser dividido por la sensibilidad según el rango previamente configurado.
 
 
-\subsection{QT C++}
-Para el desarrollo del software encargado de capturar y procesar la información proveniente de la comunicación serial entre la placa Arduino y el ordenador, se utilizara el Framework QT \cite{QT}, el cual esta basado en C++, por lo que en estabilidad y rendimiento es una de las mejores opciones a tener en consideración.
-El usar un framework como Qt facilita en gran parte la creación de interfaces gráficas, cosa que C++ no trae por defecto, esto posibilita una integración rápida entre la parte lógica y visual del software a desarrollar.
-La metodología usada para el desarrollo fue el método agiliza que al ser una solución de software con requisitos completamente definidos, mas que nada pautas del resultado esperado y ya que el programador pasa a ser es el principal diseñador.
+\subsection{Creación del Software}
+La parte de software que permite al usuario interactuar con el micro-controlador 
+fue implementado en Framework QT(C++)\cite{QT}, al estar basado en C++ en lo que en estabilidad y rendimiento se refiere es una de las mejores opciones a tener en consideración.
 
-Como punto de partida se consideró crear una interfaz que se comunicara con el puerto serial, pudiendo conectarse a este, y obtener la información que se encontrara disponible.
+El software permite la captura y procesamiento de información proveniente de la comunicación serial entre el micro-controlador Arduino y el ordenador,
+El usar un framework como Qt facilita en gran parte la creación de interfaces gráficas, cosa que C++ no trae por defecto, esto posibilita una rápida integración entre la parte lógica y visual del software a desarrollar.
+La metodología usada para el desarrollo fue el método agiliza que al ser una solución de software con requisitos completamente definidos, mas que nada pautas del resultado esperado en donde el programador pasa a ser es el principal diseñador definiendo por si mismo la distribución y comportamiento de las partes del software.
+
+En etapas tempranas del desarrollo se implemento una interfaz que se tan solo se comunicara con el puerto serial, pudiendo conectarse a este, y obtener la información que se encontrara disponible.
 Poco a poco se fueron incluyendo más opciones para una visualización mas agradable, junto con la parametrización de todos los elementos mostrados, permitiendo al usuario activar y desactivar opciones según sea el caso.
 
-\textcolor{red}{Mejorar Redacción}
-La comunicación serial entre el dispositivo-ordenador no es solamente de emisor-receptor como es generalmente es en entre Arduino y PC, sino que se pueden enviar parámetros para configurar el sensor, para configurar principalmente la Frecuencia de Muestreo, el uso del Filtro Pasa Bajo y los Rangos del Acelerómetro-Giroscopio.
+La comunicación serial entre el dispositivo-ordenador no solo es usada para leer los datos en el puerto, también es posible enviar los parámetros para realizar la configuración del sensor, para definir las opciones que consideradas más relevantes tales como: la frecuencia de muestreo, el uso del filtro Pasa-Bajo y los rangos tanto Acelerómetro como Giroscopio, usando una interfaz sencilla ver Figura \ref{fig:ajustessensores}.
 
 \begin{figure}[H]
 \centering
-  \includegraphics[scale=0.6]{images/AjustesSensores}
+  \includegraphics[scale=0.6]{images/ajustesSensores}
   \caption{Ventana Ajustes Sensores}
   \label{fig:ajustessensores}
 \end{figure}
@@ -383,8 +399,6 @@ Luego de realizar la conexión de forma exitosa, se procede a desplegar la infor
   \caption{Gráficos de los sensores}
   \label{fig:Graficosensores}
 \end{figure}
-
-
 
 \subsection{Características}
 El software permite configurar la gran mayoría de opciones de tanto velocidades de muestreo, los rangos para la captura de información del movimiento, así como lo que se representaran en pantalla, tamaños de los elementos a graficar, limitar geométricamente el gráfico, entre otros.
@@ -409,18 +423,7 @@ Herramientas de Análisis Gráficas: ventanas desplegables acompañadas a un gr�
   \label{fig:graficoPrincipal}
 \end{figure}
 
-
-\begin{figure}[H]
-\centering
-  \includegraphics[scale=0.7]{images/angKalCom}
-  \caption{Comparativa Angulo Acelerómetro vs Filtro Kalman vs Filtro Complementario}
-  \label{fig:AnguloXvsFiltros}
-\end{figure}
-
-\subsection{Fusión de Datos Sensores:}
-Para el análisis del balance postural se requiere el cálculo del ángulo y para ello se usara la información proveniente de ambos sensores con el fin de obtener el ángulo lo más refinado posible.
-
-\subsection{Cálculo Ángulo con Acelerómetro} Si es utilizado acelerómetro este nos entrega el ángulo exacto pero al ser producida cualquier variación en la aceleración en cualquiera de sus 3 ejes de medición que no sea producto tan solo de la fuerza gravitacional será interpretada como un cambio de rotación, por lo cual se generan medida erráticas debido a los cambios de aceleración constantes que son generados al girar la IMU como se muestra en el ejemplo para el cálculo de los angulos X ver ecuación (\ref{eq:calculoanguloXsensorvertical}) e Y ver ecuación (\ref{eq:calculoanguloYsensorvertical}) usando el sensor en posición vertical.
+\subsection{Cálculo ángulo con Acelerómetro} Si es utilizado acelerómetro este nos entrega el ángulo exacto pero al ser producida cualquier variación en la aceleración en cualquiera de sus 3 ejes de medición que no sea producto tan solo de la fuerza gravitacional será interpretada como un cambio de rotación, por lo cual se generan medida erráticas debido a los cambios de aceleración constantes que son generados al girar la IMU como se muestra en el ejemplo para el cálculo de los angulos X ver ecuación (\ref{eq:calculoanguloXsensorvertical}) e Y ver ecuación (\ref{eq:calculoanguloYsensorvertical}) usando el sensor en posición vertical.
 
 \begin{figure}[H]
 \begin{equation}
@@ -433,10 +436,16 @@ anguloY = \tan{\left(\frac{aceleracionZ}{\sqrt{aceleracionX^{2}+aceleracionY^{2}
 \end{equation}
 \end{figure}
 
-\subsection{Calculo Angulo con Giroscopio} 
-En cambio , si utilizamos el giroscopio a diferencia del acelerómetro, podemos realizar los cálculos del ángulo con mayor precisión pero al no tener una referencia clara del punto de partida de la mediciones, es difícil de interpretar la información y además con el tiempo los datos comienzan a acumular error, a estos errores acumulados se les conoce como drift o deriva.
+\subsection{Cálculo ángulo con Giroscopio} 
+En cambio, si utilizamos sólo el giroscopio a diferencia del acelerómetro, podemos realizar los cálculos del ángulo con mayor precisión pero al no tener una referencia clara del origen de la mediciones, es difícil de contrastar la información con el movimiento de un sujeto y dificulta enormemente la  interpretación esta información, además con el tiempo los datos capturados comienzan a acumular un pequeño error, a estos errores acumulados se les conoce como drift o deriva.
 
-\subsection{El Filtro Complementario}
+
+\subsection{Fusión de Datos Sensores:}
+Es un método para integrar señales provenientes de múltiples fuentes. Permite extraer información de varias fuentes diferentes para integrarlos en una sola señal o información.
+
+Para el análisis del balance postural se requiere el cálculo del ángulo y para ello se usara la información proveniente de ambos sensores con el fin de obtener el ángulo lo más refinado posible, con este fin se estudio e implementaron 2 filtros que permiten una correcta integración de los datos de aceleradamente con velocidad angular.
+
+\subsubsection{El Filtro Complementario}
 
 En síntesis tenemos un acelerómetro que entrega ángulos con referencia en la posición del sensor, pero muy susceptible a la variación de cambios de aceleración del IMU y en cambio el giroscopio nos permite calcular el angulo de manera exacta, pero si tener una clara referencia de la posición donde esta el sensor. 
 
@@ -472,10 +481,21 @@ En donde cada uno de las variables representa lo siguiente:
 \item \textbf{Coeficientes:}  0.98 y 0.02 pueden ser personalizados para aumentar o disminuir la contribución de cada sensor, pero se debe tener en consideración que la suma de ambos debe ser 1.
 \end{itemize}
 
-\subsection{Filtro de Kalman}
+\subsubsection{Filtro de Kalman}
 
-\subsection{Calculo de la proyección del Ángulo}
- Usando el principio que la posición bípeda-quieta puede ser representada como un péndulo invertido, por lo tanto es aplicable la trigonometría para la obtención del desplazamiento proyección generada a partir de una variación en el ángulo, esta variación angular es directamente proporcional a el desplazamiento en el eje horizontal, seria de una forma simple, tomando la distancia a la que fue puesta el sensor como la hipotenusa de un triángulo rectángulo, como se muestra en la Figura (\ref{fig:proyeccion}), al aplicar la función $\sin$ del ángulo obtenido en grados mediante el uso filtro Complementario, junto con ponderar el valor obtenido por la altura $h$ en la que fue ubicado el dispositivo (hipotenusa del triángulo) , obtendríamos la distancia $d$ en la cual su unidad de medida es la misma usada para describir la altura $h$.
+
+\subsubsection{Comparativa Filtros}
+
+\begin{figure}[H]
+\centering
+  \includegraphics[scale=0.7]{images/angKalCom}
+  \caption{Comparativa Angulo Acelerómetro vs Filtro Kalman vs Filtro Complementario}
+  \label{fig:AnguloXvsFiltros}
+\end{figure}
+
+
+\subsection{Cálculo proyección del Ángulo}
+ Basándonos en el principio que la posición bípeda-quieta puede ser representada como un péndulo invertido, por lo tanto considerando la variación del ángulo del movimiento pendular de un sujeto es aplicable la trigonometría para la obtención del desplazamiento proyección generada a partir de una variación en el ángulo, esta variación angular es directamente proporcional a el desplazamiento en el eje horizontal, tomando la altura $h$ a la que fue puesta el sensor equivalentemente a la hipotenusa de un triángulo rectángulo, como se muestra en la Figura (\ref{fig:proyeccion}), al aplicar la función $\sin$ del ángulo en grados obtenido mediante el filtro Complementario, junto con ponderar el valor obtenido por la altura $h$ en la que fue ubicado el dispositivo (hipotenusa del triángulo), obtendríamos la distancia $d$ correspondiente al desplazamiento del centro de masa, en la cual su unidad de medida es la misma usada para describir la altura $h$.
  
  \begin{figure}[H]
 \begin{equation}
@@ -490,6 +510,34 @@ d=\sin(\alpha)
       \caption{Ejemplo calculo proyección Angulo}
       \label{fig:proyeccion}
   \end{figure}
+  
+\subsection{Principales Dificultades}
+\subsubsection{Representación Tiempo Real}
+	La interfaz gráfica es una parte integral de el sistema, pasando a ser la principal fuente de información para la retroalimentación, junto con el lugar donde mayormente interviene el usuario de este tipo de sistemas, por lo tanto el no poder desplegar la información a tiempo, o que esta sea poco fiable es un gran problema. Se planteo inicialmente en graficar cada una de las salidas tanto del acelerómetro como del giroscopio en donde se representarían 6 variables a una velocidad igual a la velocidad de muestreo, lo que en la práctica no resulta demasiado bien. Al representar en gráficos a frecuencias muy altas es decir 100hz o superior, multiplicado por la cantidad de datos que se estén representando, junto con el procesamiento interno para mostrar esos datos, se genera una sobrecarga en la parte gráfica, lo que conlleva a ralentizar el proceso, generando perdidas de información y fidelidad al desplegar la información en tiempo real.
+
+Para dar solución al problema, se implemento la opción de graficar un porcentaje de la información recibida en base a la frecuencia de muestreo seleccionada para la captura de información, con esto se asegura que la representación gráfica en tiempo real no sea un problema.
+
+\subsubsection{Orientación Sensores}
+El sistema para la captura de la información sensorial, junto con la obtención del ángulo debe ser referenciado acordemente, tomando en consideración factores como:
+\begin{itemize}
+
+\item \textbf{Referencia ejes del Sensores:} La obtención de información de aceleración y velocidad angular debe estar correctamente alineada con la referencia presente en los ejes del sensor, junto con la posición respecto al eje de gravedad de la tierra, para la correcta obtención de la información en base al movimiento ejercido por los sensores, y que estos sean descritos por los ejes que correspondan, para su posterior análisis o uso.
+    
+\item \textbf{Posición en el Sujeto:} Junto con la referencia del sensor, se debe tomar en consideración en la posición que el prototipo o sistema final será puesta en el sujeto de estudio, ya que al cambiar la posición, las referencias internas del sensor pasan a cambiar, y con ello la información entregada comenzaría a describir el movimiento desde una perspectiva distinta a la planteada para el estudio.
+\end{itemize}
+
+Para dar solución a este inconveniente se incorporó en el software la opción de describir mediante la interfaz como será puesto el prototipo, usando un indicador de referencia clara, con el fin de no generar problemas para conocer la posición del sensor y facilitar al usuario final la tarea.
+    La configuración de estos genero distintas conjugaciones de los ejes a utilizar tanto para el cálculo del ángulo, como en el uso de la velocidad angular para la aplicación del filtro (en caso de ser utilizado), éstos se configuraron estudiando los ejes que debían ser usados según la orientación junto con el sentido en que varía la información de acelerómetro y giroscopio, para así realizar el cálculo final.
+
+\subsubsection{Data Terminal Ready}
+	Según el tipo de semiconductor del puerto USB de Arduino puede venir por defecto el Pin DTR(Data Terminal Ready) la función Reset de Arduino puede venir activada o desactivada. 
+    La función Reset de Arduino permite al microcontrolador reiniciar las variables internas según las configuraciones encontradas en el Setup del código de programación, para así eliminar cualquier cambio realizado en la ejecución del Loop,lo que es complicación al usar modelos de Arduino que tengan o no esta característica.
+
+Para solucionar este problema se realiza una estandarización activando por Software el Pin DTR para que sin importar el modelo de semiconductor operen todos de forma igual en el software, para así no preocuparse de configuraciones o errores producidos debido a el PIN DTR.
+
+\subsubsection{Latencia en Controlador FTDI}
+Por defecto un controlador en su configuración contenía una Latencia de 10 ms, lo que afecta la captura de información sobre 100hz.
+
 
 \section{Conclusiones y Trabajos Futuros}
 \subsection{Conclusiones}
