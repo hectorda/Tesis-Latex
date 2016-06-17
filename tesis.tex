@@ -197,13 +197,20 @@ Desde el punto de vista disciplinar (Ciencias de la Ingeniería), este proyecto 
 \section{Marco Te\'orico}
 
 \subsection{Protocolo de Comunicación $\mathbf{\mathrm{I^2C}}$}
+Para la comunicación entre el Arduino y los Sensores, y debido a la limitante del tipo de protocolo usados por el MPU6050, se debe utilizar protocolo de comunicación $I^2C$.
+
+El protocolo $I^2C$ fue desarrollado en 1982 por Philips Semiconductors (hoy NXP Semiconductors) para la comunicación interna entre circuitos integrados como por ejemplo juegos de CD y televisiones.
 
 Las principales características del protocolo de Comunicación $\mathrm{I^2C}$ \cite{I2C} son:
 \begin{itemize}
 \item Solo dos líneas para la comunicación son necesarias; una línea para la información serial (SDA) y otra para el reloj serial (SCL).
+
 \item Cada dispositivo conectado al bus es direccionado por software por un ID único y usando relación Esclavo/Maestro todo el tiempo.
-\item Posee un sistema de detección de colisiones lo que permite usar el modo multi-maestro previniendo la corrupción de los datos si dos o mas maestros comienzan a transferir datos de forma simultanea.
-\item Serial, orientado en 8-bit ,transferencias de datos de forma bi-direccional pueden ser realizadas hasta los 100 kbit/s en el modo Estándar, hasta 400 kbit/s en el modo Rápido, hasta 1 Mbit/s en el modo Mas Rápido, o hasta 3.4 Mbit/s en el modo de Alta-Velocidad.
+
+\item Posee un sistema de detección de colisiones lo que permite usar el modo multi-maestro previniendo la corrupción de los datos si dos o mas maestros comienzan a transferir datos de forma simultánea.
+
+\item Orientado a transferencias de datos en 8-bit de forma bi-direccional pueden ser realizadas hasta los 100 kbit/s en el modo Estándar, hasta 400 kbit/s en el modo Rápido, hasta 1 Mbit/s en el modo Mas Rápido, o hasta 3.4 Mbit/s en el modo de Alta-Velocidad.
+
 \item En el chip de filtrado se rechazan los picos en la línea de datos del bus de preservar la integridad de datos.
 
 \begin{figure}[H]
@@ -216,13 +223,15 @@ Las principales características del protocolo de Comunicación $\mathrm{I^2C}$ 
 
 \subsection{Sistema microelectromecánico}
 Los Sistemas Microelectromecánicos (MEMS) MPU6050\cite{MPU6050} es un dispositivo capaz de medir la velocidad angular y fuerza de gravedad gracias a estar compuesto por Giroscópico y Acelerómetro ambos de 3 Ejes, el hecho de poseer estos 2 sensores de movimiento indica que existen almenos 6 grados de libertad para utilizar al momento de obtener las mediciones provenientes de este.
+   
+    La tecnología utilizada MEMS patentada por InverSense, en el caso del giroscopio consiste en masas vibratorias verticalmente alineadas las cuales son usadas para crear un chip de bajo costo.
     
  El MPU6050 esta diseñado para realizar seguimiento (Tracking) gracias a que posee un bajo consumo, es de bajo costo, y cumple con los requisitos de los teléfonos inteligentes, tabletas y sensores portátiles.
  La interfaz de comunicación entre el microcontrolador y la IMU es el protocolo I2C, y ademas requiere las 2 líneas de conexión una para el envío de datos (SDA) y otra para el clock (SCL), las cuales varían dependiendo del modelo de microcontrolador, además de la línea de voltaje() y conexión a tierra (GND).
 
 El acelerómetro incluido mide el movimiento lineas respecto a cada uno de sus tres ejes ver Figura (\ref{fig:MPU6050}), es decir la aceleración percibida por el movimiento y esta es expresada en proporción a la fuerza de gravedad (veces de g).
 
-El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\ref{fig:MPU6050}), es decir la velocidad angular medida grados/seg.
+El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\ref{fig:MPU6050}), es decir la velocidad angular medida \grad/seg.
 \begin{figure}[H]
   \centering
   \includegraphics[scale=0.5]{images/MPU6050}
@@ -251,20 +260,20 @@ El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\r
   \caption{Características de los sensores}
 \end{table}
 
-\item \textbf{Rango:} Posee un rango configurable en los 2 sensores incluidos, tanto acelerómetro como giroscopio, el rango nos indica el dominio sobre el cual son adquiridos los datos, más concretamente los valores máximos y mínimos donde fluctúan los información obtenida.
+\item \textbf{Rango:} Posee un rango configurable en los 2 sensores incluidos, tanto acelerómetro como giroscopio, el rango nos indica el dominio sobre el cual son adquiridos los datos, más concretamente los valores máximos y mínimos donde fluctúan la información obtenida.
 	
-\item \textbf{Sensibilidad: }La sensibilidad describe la mínima variación medible, es decir la razón de cambio entre una variable entrante y el resultado de la variable saliente.
+\item \textbf{Sensibilidad:} La sensibilidad describe la mínima variación medible, es decir la razón de cambio entre una variable entrante y el resultado de la variable saliente.
 
-\item \textbf{Variables:} Las variables entregadas por el Acelerómetro consiste en la aceleración lineal percibida en cada eje expresada en veces de g, y en el Giroscopio corresponde  a la velocidad angular dada por la variación de los \grad/seg al girar sobre cada eje.
+\item \textbf{Variables:} Las variables entregadas por el Acelerómetro consiste en la aceleración lineal percibida en cada eje expresada en veces de g, y en el Giroscopio corresponde  a la velocidad angular dada por la variación de los grados en un instante de tiempo al girar sobre cada eje.
 
-\item \textbf{Frecuencia de Muestreo:} La cantidad de datos que se pueden obtener en un intervalo de tiempo.
+\item \textbf{Frecuencia de Muestreo:} Nos describe la cantidad de datos que pueden ser obtenidos en un intervalo de tiempo, a su vez nos describe la diferencia de tiempo entre cada dato obtenido.
 
-\item \textbf{Resolución:} Consiste en la mínima variación generada en los sensores que a su vez puede ser capturada por estos.
+\item \textbf{Resolución:} Consiste en la mínima variación generada en la variable medida y la cual los sensores son capaces de informar.
 
 \end{itemize}
 
 \subsection{Configuración de MPU6050}
-Por defecto el MPU6050 viene configurada con los parámetros básicos para realizar la captura de información, lo cual puede perfectamente ser útil según sea el caso de estudio, pero si se desea que los sensores operen en rangos específicos y/o los datos de los sensores sean obtenidos a frecuencias específicas se debe comprender como llevar a cabo la configuración en cada uno de los registros internos presentes, el mapa de los registros \cite{MAPREGISTER} proporcionado  en el sitio de InverSense es buena guía para entender como se realiza esta labor.
+Por defecto el MPU6050 viene configurada con los parámetros básicos para realizar la captura de información, lo cual puede perfectamente ser útil según sea el caso de estudio, pero si se desea que los sensores operen en rangos específicos y/o los datos capturados por de los sensores sean obtenidos a frecuencias específicas se debe comprender como llevar a cabo la configuración en cada uno de los registros internos presentes, el mapa de los registros \cite{MAPREGISTER} proporcionado  en el sitio de InverSense es buena guía para entender como se realiza esta labor.
 \newline En el interior del MPU6050 se encuentran mas de 70 registros cada uno de 8 Bit, para la configuraciones listadas a continuación se deben ser usados solo algunos pocos.
 \begin{itemize}
 \item \textbf{Configurar frecuencia muestreo:} Para obtener la cantidad de muestras que se obtendrán finalmente ``En Teoría'' se calcula usando la ecuación: 
