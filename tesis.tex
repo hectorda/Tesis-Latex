@@ -222,7 +222,7 @@ Las principales características del protocolo de Comunicación $\mathrm{I^2C}$ 
 \end{itemize}
 
 \subsection{Sistema microelectromecánico}
-Los Sistemas Microelectromecánicos (MEMS) MPU6050\cite{MPU6050} es un dispositivo capaz de medir la velocidad angular y fuerza de gravedad gracias a estar compuesto por Giroscópico y Acelerómetro ambos de 3 Ejes, el hecho de poseer estos 2 sensores de movimiento indica que existen almenos 6 grados de libertad para utilizar al momento de obtener las mediciones provenientes de este.
+El MPU6050\cite{MPU6050} es un sistema Microelectromecánico (MEMS), es un dispositivo capaz de medir la velocidad angular y fuerza de gravedad gracias a estar compuesto por Giroscópico y Acelerómetro ambos de 3 Ejes, el hecho de poseer estos 2 sensores de movimiento indica que existen almenos 6 grados de libertad para utilizar al momento de obtener las mediciones provenientes de este.
    
     La tecnología utilizada MEMS patentada por InverSense, en el caso del giroscopio consiste en masas vibratorias verticalmente alineadas las cuales son usadas para crear un chip de bajo costo.
     
@@ -553,7 +553,7 @@ d=\sin(\alpha)
 Para dar solución al problema, se implemento la opción de graficar un porcentaje de la información recibida en base a la frecuencia de muestreo seleccionada para la captura de información, con esto se asegura que la representación gráfica en tiempo real no sea un problema.
 
 \subsubsection{Orientación Sensores}
-El sistema para la captura de la información sensorial, junto con la obtención del ángulo debe ser referenciado acordemente, tomando en consideración factores como:
+Al momento de realizar la captura de información sensorial, junto con la obtención del ángulo de inclinación deben ser consideradas referenciado tales como:
 \begin{itemize}
 
 \item \textbf{Referencia ejes del Sensores:} La obtención de información de aceleración y velocidad angular debe estar correctamente alineada con la referencia presente en los ejes del sensor, junto con la posición respecto al eje de gravedad de la tierra, para la correcta obtención de la información en base al movimiento ejercido por los sensores, y que estos sean descritos por los ejes que correspondan, para su posterior análisis o uso.
@@ -561,8 +561,8 @@ El sistema para la captura de la información sensorial, junto con la obtención
 \item \textbf{Posición en el Sujeto:} Junto con la referencia del sensor, se debe tomar en consideración en la posición que el prototipo o sistema final será puesta en el sujeto de estudio, ya que al cambiar la posición, las referencias internas del sensor pasan a cambiar, y con ello la información entregada comenzaría a describir el movimiento desde una perspectiva distinta a la planteada para el estudio.
 \end{itemize}
 
-Para dar solución a este inconveniente se incorporó en el software la opción de describir mediante la interfaz como será puesto el prototipo, usando un indicador de referencia clara, con el fin de no generar problemas para conocer la posición del sensor y facilitar al usuario final la tarea.
-    La configuración de estos genero distintas conjugaciones de los ejes a utilizar tanto para el cálculo del ángulo, como en el uso de la velocidad angular para la aplicación del filtro (en caso de ser utilizado), éstos se configuraron estudiando los ejes que debían ser usados según la orientación junto con el sentido en que varía la información de acelerómetro y giroscopio, para así realizar el cálculo final.
+Para dar solución a este inconveniente se incorporó en el software la opción de describir mediante la interfaz como será puesto el prototipo al momento de realizar las mediciones, usando un indicador de referencia clara, con el fin de no generar problemas para conocer la posición del sensor y facilitar al usuario final la tarea.
+    Según la orientación del sensor se generan distintas conjugaciones de los ejes a utilizar tanto para el cálculo del ángulo, como en el uso de la velocidad angular para la aplicación del filtro (en caso de ser utilizado), éstos se configuraron estudiando los ejes que debían ser usados según la orientación junto con el sentido en que varía la información de Acelerómetro y giroscopio, para así realizar el cálculo final.
 
 \subsubsection{Data Terminal Ready}
 	Según el tipo de semiconductor del puerto USB de Arduino puede venir por defecto el Pin DTR(Data Terminal Ready) la función Reset de Arduino puede venir activada o desactivada. 
