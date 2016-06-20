@@ -124,12 +124,12 @@ MARY CARMEN JARUR MUÑOZ&&&\\
 &&&\\
 
 PROFESOR COMISI\'ON&&& \\
-DR. HERN\'AN MAUREIRA P&&&\\
+DR. HERN\'AN MAUREIRA PAREJA&&&\\
 \cline{2-3}
 &&&\\
 
 PROFESOR COMISI\'ON&&& \\
-DR. MARCO MORA&&&\\
+DR. MARCO ANTONIO MORA COFRE&&&\\
 \cline{2-3}
 &&&\\
 
@@ -449,7 +449,12 @@ Herramientas de Análisis Gráficas: ventanas desplegables acompañadas a un gr�
   \label{fig:graficoPrincipal}
 \end{figure}
 
-\subsection{Cálculo ángulo con Acelerómetro} Si es utilizado acelerómetro este nos entrega el ángulo exacto pero al ser producida cualquier variación en la aceleración en cualquiera de sus 3 ejes de medición que no sea producto tan solo de la fuerza gravitacional será interpretada como un cambio de rotación, por lo cual se generan medida erráticas debido a los cambios de aceleración constantes que son generados al girar la IMU como se muestra en el ejemplo para el cálculo de los ángulos X ver ecuación (\ref{eq:calculoanguloXsensorvertical}) e Y ver ecuación (\ref{eq:calculoanguloYsensorvertical}) usando el sensor en posición vertical.
+\subsection{Cálculo ángulo} Para efectos de analisis o representación final, a partir de las variaciones de aceleración y velocidad angular detectadas por los sensores existe la opcion de calcular el ángulo, que es un indicador equivalente a la inclinación que ha realizado el sujeto.
+
+Para ello existen distintos métodos usando la información obtenida, tales como:
+
+
+\subsubsection{Cálculo ángulo con acelerómetro} Si es utilizado acelerómetro este nos entrega el ángulo exacto pero al ser producida cualquier variación en la aceleración en cualquiera de sus 3 ejes de medición que no sea producto tan solo de la fuerza gravitacional será interpretada como un cambio de rotación, por lo cual se generan medida erráticas debido a los cambios de aceleración constantes que son generados al girar la IMU como se muestra en el ejemplo para el cálculo de los ángulos X ver ecuación (\ref{eq:calculoanguloXsensorvertical}) e Y ver ecuación (\ref{eq:calculoanguloYsensorvertical}) usando el sensor en posición vertical.
 
 \begin{figure}[H]
 \begin{equation}
@@ -462,14 +467,13 @@ anguloY = \tan{\left(\frac{aceleracionZ}{\sqrt{aceleracionX^{2}+aceleracionY^{2}
 \end{equation}
 \end{figure}
 
-\subsection{Cálculo ángulo con Giroscopio} 
+\subsubsection{Cálculo ángulo con giroscopio} 
 En cambio, si utilizamos sólo el giroscopio a diferencia del acelerómetro, podemos realizar los cálculos del ángulo con mayor precisión pero al no tener una referencia clara del origen de la mediciones, es difícil de contrastar la información con el movimiento de un sujeto y dificulta enormemente la  interpretación esta información, además con el tiempo los datos capturados comienzan a acumular un pequeño error, a estos errores acumulados se les conoce como drift o deriva.
 
+\subsection{Fusión de Datos Sensores}
+La Fusión de Datos es un método para integrar señales provenientes de múltiples fuentes. Permite extraer información de varias fuentes diferentes para integrarlos en una sola señal o información.
 
-\subsection{Fusión de Datos Sensores:}
-Es un método para integrar señales provenientes de múltiples fuentes. Permite extraer información de varias fuentes diferentes para integrarlos en una sola señal o información.
-
-Para el análisis del balance postural se requiere el cálculo del ángulo y para ello se usara la información proveniente de ambos sensores con el fin de obtener el ángulo lo más refinado posible, con este fin se estudio e implementaron 2 filtros que permiten una correcta integración de los datos de aceleradamente con velocidad angular.
+Para el análisis del desplazamiento del centro de masa se requiere el cálculo del ángulo y para ello se usará la información proveniente de ambos sensores con el fin de obtener el ángulo lo más refinado posible, con este fin se estudiaron e implementaron 2 filtros que permiten una correcta integración de los datos de aceleración con velocidad angular.
 
 \subsubsection{El Filtro Complementario}
 
@@ -515,7 +519,20 @@ Su propósito es emplear las mediciones obtenidas en un período de tiempo que a
 EL filtro de Kalman posee flexibilidad para ser utilizado tanto en tiempo continuo o en tiempos discretos. El modelo del filtro permite la flexibilidad para ser utilizado en éstos casos.
 
 La principal diferencia es la notación que utilizada en cada uno de los casos.
-Debido a que en la actualidad la mayoria de las aplicaciones de filtros es realizada en plataformas de tipo digital, y considerando el uso del filtro para la fusión de los sensores en este proyecto.
+Debido a que en la actualidad la mayoría de las aplicaciones de filtros es realizada en plataformas de tipo digital, y considerando el uso del filtro para la fusión de los sensores en este proyecto.
+
+El Filtro consiste en 2 estados Predicción y Actualización.
+
+aSDASD
+ASDASDSA LOREM
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{images/kalman-filter.png} 
+\caption{Diagrama estados Filtro Kalman}
+\label{fig:diagramakalman}
+\end{figure}
+
 
 \subsubsection{Comparativa de Filtros}
 Luego de la integración de los filtros en el Software es posible utilizar el deseado para la prueba, pero se deben tener en consideración las ventajas de usar o no el filtro razón por la cual se realizó una breve comparativa para ver el comportamiento entre el cálculo del ángulo sin utilizar filtros, usando filtro complementario y Kalman para la obtención durante la misma prueba.
@@ -530,7 +547,7 @@ Los resultados demuestran la gran corrección que realizan los filtros frente a 
 \end{figure}
 
 \subsection{Cálculo proyección del Ángulo}
- Basándonos en el principio que la posición bípeda-quieta puede ser representada como un péndulo invertido, por lo tanto considerando la variación angular del movimiento pendular de un sujeto es aplicable la trigonometría para la obtención del desplazamiento proyección generada a partir de una variación en el ángulo, esta variación angular es directamente proporcional a el desplazamiento en el eje horizontal, tomando la altura $h$ a la que fue puesta el sensor equivalentemente a la hipotenusa de un triángulo rectángulo, como se muestra en la Figura (\ref{fig:proyeccion}), al aplicar la función $\sin$ del ángulo en grados obtenido mediante el filtro Complementario, junto con ponderar el valor obtenido por la altura $h$ en la que fue ubicado el dispositivo (hipotenusa del triángulo), obtendríamos la distancia $d$ correspondiente al desplazamiento del centro de masa, en la cual su unidad de medida es la misma usada para describir la altura $h$.
+ Basándonos en que la posición bípeda-quieta puede ser representada como un péndulo invertido, por lo tanto considerando la variación angular del movimiento pendular de un sujeto en las coordenadas antero-posterior y medio-lateral es aplicable la trigonometría para la obtención del desplazamiento, ésta variación angular es directamente proporcional a el desplazamiento en el eje horizontal, tomando la altura $h$ como la distancia desde el suelo hasta donde fue puesto el sensor como el equivalente a la hipotenusa de un triángulo rectángulo, como se muestra en la Figura (\ref{fig:proyeccion}), al aplicar la función $\sin$ del ángulo en grados obtenido mediante el filtro aplicado, junto con ponderar el valor obtenido por la altura $h$ (hipotenusa del triángulo), obtendríamos la distancia $d$ correspondiente al desplazamiento del centro de masa estimado, en la cual su unidad de medida es la misma usada para describir la altura $h$ en general centímetros.
  
  \begin{figure}[H]
 \begin{equation}
@@ -558,11 +575,11 @@ Al momento de realizar la captura de información sensorial, junto con la obtenc
 
 \item \textbf{Referencia ejes del Sensores:} La obtención de información de aceleración y velocidad angular debe estar correctamente alineada con la referencia presente en los ejes del sensor, junto con la posición respecto al eje de gravedad de la tierra, para la correcta obtención de la información en base al movimiento ejercido por los sensores, y que estos sean descritos por los ejes que correspondan, para su posterior análisis o uso.
     
-\item \textbf{Posición en el Sujeto:} Junto con la referencia del sensor, se debe tomar en consideración en la posición que el prototipo o sistema final será puesta en el sujeto de estudio, ya que al cambiar la posición, las referencias internas del sensor pasan a cambiar, y con ello la información entregada comenzaría a describir el movimiento desde una perspectiva distinta a la planteada para el estudio.
+\item \textbf{Posición en el Sujeto:} Junto con la referencia del sensor, se debe tomar en consideración en la posición que el prototipo o sistema final será puesta en el sujeto de estudio, ya que al cambiar la posición, las referencias internas del sensor dependen directamente de la posición, sino todo lo resultante va a cambiar, y con ello la información entregada comenzaría a describir el movimiento desde una perspectiva distinta a la planteada para los cálculos y estudio posterior.
 \end{itemize}
 
 Para dar solución a este inconveniente se incorporó en el software la opción de describir mediante la interfaz como será puesto el prototipo al momento de realizar las mediciones, usando un indicador de referencia clara, con el fin de no generar problemas para conocer la posición del sensor y facilitar al usuario final la tarea.
-    Según la orientación del sensor se generan distintas conjugaciones de los ejes a utilizar tanto para el cálculo del ángulo, como en el uso de la velocidad angular para la aplicación del filtro (en caso de ser utilizado), éstos se configuraron estudiando los ejes que debían ser usados según la orientación junto con el sentido en que varía la información de Acelerómetro y giroscopio, para así realizar el cálculo final.
+Según la orientación del sensor se generan distintas conjugaciones de los ejes a utilizar tanto para el cálculo del ángulo, como en el uso de la velocidad angular para la aplicación del filtro (en caso de ser utilizado), éstos se configuraron estudiando los ejes que debían ser usados según la orientación junto con el sentido en que varía la información de Acelerómetro y giroscopio, para así realizar el cálculo final.
 
 \subsubsection{Data Terminal Ready}
 	Según el tipo de semiconductor del puerto USB de Arduino puede venir por defecto el Pin DTR(Data Terminal Ready) la función Reset de Arduino puede venir activada o desactivada. 
@@ -573,7 +590,7 @@ Para solucionar este problema se realiza una estandarización activando por Soft
 \subsubsection{Latencia en Controlador FTDI}
 Por defecto el controlador del puerto USB FTDI para el Sistema Operativo Windows, en su configuración contenía una Latencia de 10 ms pre-configurada, lo que afecta considerablemente la captura de información sobre 100hz. El principal inconveniente que genero este error es la detección propia de éste, ya que al ser un error completamente aislado de los elementos que comúnmente son manipulados Arduino y Software, y a su vez es relativo a un modelo concreto de controlador de sistema y a su vez sistema operativo lo cual era de partida complejo de percibir y/o predecir.
 	
-La solución fue configurar directamente en el registro de Windows (regedit) en la direccion asociada al controlador el parámetro de latencia deseado, lo más bajo posible.
+La solución fue a partir de la información de configuracion FTDI\cite{FTDI} para configurar directamente  en el registro de Windows (regedit) en la dirección asociada al controlador el parámetro de latencia deseado, para que éste sea lo más bajo posible.
 
 
 \section{Conclusiones y Trabajos Futuros}
