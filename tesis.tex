@@ -221,17 +221,18 @@ Las principales características del protocolo de Comunicación $\mathrm{I^2C}$ 
 \end{figure}
 \end{itemize}
 
-\subsection{Sistema microelectromecánico}
-El MPU6050\cite{MPU6050} es un sistema Microelectromecánico (MEMS), es un dispositivo capaz de medir la velocidad angular y fuerza de gravedad gracias a estar compuesto por Giroscópico y Acelerómetro ambos de 3 Ejes, el hecho de poseer estos 2 sensores de movimiento indica que existen almenos 6 grados de libertad para utilizar al momento de obtener las mediciones provenientes de este.
+\subsection{Sistema microelectromecánico (MPU6050)}
+El MPU6050\cite{MPU6050} es un sistema Microelectromecánico (MEMS), es un dispositivo capaz de medir la velocidad angular y fuerza de gravedad gracias a estar compuesto por Giroscópico y Acelerómetro ambos de 3 Ejes, el hecho de poseer estos 2 sensores de movimiento indica que existen almenos 6 grados de libertad para utilizar al momento de obtener las mediciones provenientes de éste.
    
     La tecnología utilizada MEMS patentada por InverSense, en el caso del giroscopio consiste en masas vibratorias verticalmente alineadas las cuales son usadas para crear un chip de bajo costo.
     
  El MPU6050 esta diseñado para realizar seguimiento (Tracking) gracias a que posee un bajo consumo, es de bajo costo, y cumple con los requisitos de los teléfonos inteligentes, tabletas y sensores portátiles.
- La interfaz de comunicación entre el microcontrolador y la IMU es el protocolo I2C, y ademas requiere las 2 líneas de conexión una para el envío de datos (SDA) y otra para el clock (SCL), las cuales varían dependiendo del modelo de microcontrolador, además de la línea de voltaje() y conexión a tierra (GND).
+ La transmisión de datos con el microcontrolador es realizada únicamente mediante el protocolo I2C, el cual requiere de 2 líneas de conexión una para el envío de datos (SDA) y otra para el clock (SCL), las cuales varían dependiendo del modelo de microcontrolador, junto con la alimentación que consiste en la línea de voltaje(VCC) y conexión a tierra (GND).
 
-El acelerómetro incluido mide el movimiento lineas respecto a cada uno de sus tres ejes ver Figura (\ref{fig:MPU6050}), es decir la aceleración percibida por el movimiento y esta es expresada en proporción a la fuerza de gravedad (veces de g).
+El acelerómetro incluido mide el movimiento linear respecto a cada uno de sus tres ejes ver Figura (\ref{fig:MPU6050}), es decir la aceleración percibida por el movimiento y esta es expresada en proporción a la fuerza de gravedad (veces de g).
 
-El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\ref{fig:MPU6050}), es decir la velocidad angular medida \grad/seg.
+El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\ref{fig:MPU6050}), es decir la velocidad angular expresada en \grad/seg.
+
 \begin{figure}[H]
   \centering
   \includegraphics[scale=0.5]{images/MPU6050}
@@ -239,7 +240,7 @@ El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\r
   \label{fig:MPU6050}
 \end{figure}
 
-\subsection{Características Técnicas}
+\subsubsection{Características Técnicas}
 
 \begin{itemize}
 
@@ -272,7 +273,7 @@ El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\r
 
 \end{itemize}
 
-\subsection{Configuración de MPU6050}
+\subsubsection{Configuración de MPU6050}
 Por defecto el MPU6050 viene configurada con los parámetros básicos para realizar la captura de información, lo cual puede perfectamente ser útil según sea el caso de estudio, pero si se desea que los sensores operen en rangos específicos y/o los datos capturados por de los sensores sean obtenidos a frecuencias específicas se debe comprender como llevar a cabo la configuración en cada uno de los registros internos presentes, el mapa de los registros \cite{MAPREGISTER} proporcionado  en el sitio de InverSense es buena guía para entender como se realiza esta labor.
 \newline En el interior del MPU6050 se encuentran mas de 70 registros cada uno de 8 Bit, para la configuraciones listadas a continuación se deben ser usados solo algunos pocos.
 \begin{itemize}
@@ -292,7 +293,7 @@ Nota: Hay que tener en consideración que el valor obtenido para la frecuencia d
 \item \textbf{Configurar Acelerómetro:} La configuración para el el rango del acelormetro se realiza de forma similar, solo que en cambio el utilizado el registro ACCEL\_CONFIG, en donde también en los bits 3 y 4 se deben ingresar los valores en binario de 0, 1, 2 o 3 que representarán $\pm 2g$, $\pm 4g$, $\pm 8g$, $\pm 16g$ respectivamente.
 \end{itemize}
 
-\subsection{Obtención mediciones Giroscopio y Acelerómetro}
+\subsubsection{Obtención mediciones Giroscopio y Acelerómetro}
 Luego de realizar la configuración de los registros del MPU6050, se deben leer ciertos registros para la obtención de la información del movimiento registrado por los sensores inerciales:
 
 \begin{itemize}
@@ -329,13 +330,13 @@ Para luego unir los registros y usar el complemento a 2 acorde a cada eje, cada 
 	\item \textbf{Barato:} Las placas Arduino son relativamente baratas comparadas con otras plataformas microcontroladoras. La versión menos cara del modulo Arduino puede ser ensamblada a mano, e incluso los módulos de Arduino preensamblados cuestan menos de 50\$.
 	\item \textbf{Multiplataforma:} El software de Arduino se ejecuta en sistemas operativos Windows, Macintosh OSX y GNU/Linux. La mayoría de los sistemas microcontroladores están limitados a Windows.
 \item \textbf{Entorno de programación simple y claro:} El entorno de programación de Arduino es fácil de usar para principiantes, pero suficientemente flexible para que usuarios avanzados puedan aprovecharlo también. Para profesores, está convenientemente basado en el entorno de programación Processing, de manera que estudiantes aprendiendo a programar en ese entorno estarán familiarizados con el aspecto y la imagen de Arduino.
-Código abierto y software extensible: El software Arduino está publicado como herramientas de código abierto, disponible para extensión por programadores experimentados. El lenguaje puede ser expandido mediante librerias C++, y la gente que quiera entender los detalles técnicos pueden hacer el salto desde Arduino a la programación en lenguaje AVR C en el cual está basado. De forma similar, puedes añadir código AVR-C directamente en tus programas Arduino si quieres.
+Código abierto y software extensible: El software Arduino está publicado como herramientas de código abierto, disponible para extensión por programadores experimentados. El lenguaje puede ser expandido mediante librerías C++, y la gente que quiera entender los detalles técnicos pueden hacer el salto desde Arduino a la programación en lenguaje AVR C en el cual está basado. De forma similar, puedes añadir código AVR-C directamente en tus programas Arduino si quieres.
 \item \textbf{Código abierto y hardware extensible:} El Arduino está basado en microcontroladores ATMEGA8 y ATMEGA168 de Atmel. Los planos para los módulos están publicados bajo licencia Creative Commons, por lo que diseñadores experimentados de circuitos pueden hacer su propia versión del módulo, extendiéndolo y mejorándolo. Incluso usuarios relativamente inexpertos pueden construir la versión de la placa del módulo para entender como funciona y ahorrar dinero.
 \end{itemize}
 
  
 \subsection{Framework QT}
-Qt es un Framework basado en C++, tiene disponibilidad multiplataforma- escritorio, móvil y sistemas embebidos
+Qt es un Framework basado en C++, tiene disponibilidad multiplataforma- escritorio, móvil y sistemas embebidos.
 Posee las bibliotecas bases de C++  junto a librerías y herramientas de desarrollo propias de Qt, en donde se incluye IDE Qt Creator , y herramientas de productividad .
 	El entorno de desarrollo (IDE) del framework de C++ Qt  es Qt Creator en donde se incluyen las herramientas para la administración de los ficheros .h y .cpp usados en C++ junto con las opciones de compilación, ejecución y depuración del software.
 
@@ -345,9 +346,9 @@ Posee las bibliotecas bases de C++  junto a librerías y herramientas de desarro
 
 A partir de la noción general que intrínsecamente cada uno posee de un estudio del balance y complementado con las ideas de herramientas o técnicas ya existentes que intentan solventar mediante diversos puntos de vista la problemática.
 
-Los equipamientos existentes en el Laboratorio de Bio-mecánica existentes que sirvieron de base para el desarrollo de la solución Hardware-Software  fueron la plataforma de fuerza Kistler 9286b \cite{KISTLER} y balance SD, utilizando la representación del movimiento del centro de masa/presión se ideó una solución que opera de forma análoga a los dispositivos que ya son utilizados en el laboratorio con un software que permita entregar información de manera similar a lo que entregan estos sistemas, para aprovechar los conocimientos de los usuarios con el fin de disminuir la curva de aprendizaje del sistema implementado para que estos comprendan el software sin demasiado entrenamiento y a su vez la transición sea mas satisfactoria para estos.
+Usando de referencia principalemente los equipamientos disponibles en el Laboratorio de Bio-mecánica que sirvieron de base para el desarrollo de la solución Hardware-Software fueron la plataforma de fuerza Kistler 9286b \cite{KISTLER} y balance SD, que en ambos casos dan una representación del movimiento del centro de masa/presión y utilizando la representación entregada se ideó una solución que opera de forma análoga a los dispositivos que ya son utilizados en el laboratorio con un software que permita entregar información de manera similar a lo que entregan estos sistemas, para aprovechar los conocimientos de los usuarios con el fin de disminuir la curva de aprendizaje del sistema implementado para que estos comprendan el software sin demasiado entrenamiento y a su vez la transición sea mas satisfactoria para estos.
 
-En lo referente a Hardware se utilizó un sensor inercial MPU6050, el cual será puesto en el sujeto de prueba en una posición aproximada al centro de masa que este a su vez captura la información del movimiento generado por el sujeto y lo trasmite al microcontrolador Arduino en donde se recibe y traduce la información obtenida del sensor ademas de transmitir al ordenador los datos obtenidos utilizando variables físicas, tanto aceleración y velocidad angular en donde finalmente el software del ordenador recibe la información y realiza el procesamiento para obtener el ángulo, desplazamiento junto con brindar la opción de efectuar análisis específicos de la información utilizando interfaces gráficas sencillas.
+En lo referente a Hardware se utilizó un sensor inercial MPU6050, el cual será puesto en el sujeto de prueba en una posición aproximada al centro de masa que éste a su vez captura la información del movimiento generado por el sujeto y lo trasmite al microcontrolador Arduino en donde se recibe y traduce la información obtenida del sensor ademas de transmitir al ordenador los datos obtenidos utilizando variables físicas, tanto aceleración y velocidad angular en donde finalmente el software del ordenador recibe la información y realiza el procesamiento para obtener el ángulo y desplazamiento junto con brindar la opción de efectuar análisis específicos de la información utilizando interfaces gráficas sencillas.
 
 \begin{figure}[H]
 \centering
@@ -356,7 +357,7 @@ En lo referente a Hardware se utilizó un sensor inercial MPU6050, el cual será
 \label{fig:diagramasistema}
 \end{figure}
 
-\subsection{Configuración de Sensor}
+\subsection{Programación en Arduino}
 Uno de los primeros pasos en el desarrollo de la solución consiste en utilizar el IDE de Arduino para realizar la programación inicial del microcontrolador, en donde se debe configurar las direcciones de los registros internos del MPU6050 usados, junto con la configuración inicial, además de definir el formato de envío para desplegar los datos por el puerto serial.
   En el Loop de ejecución de Arduino se obliga a configurar el MPU6050, mediante la escritura de comandos en el puerto serial, para ajustar las configuraciones de los sensores a conforme las necesidades del usuario ver Figura (\ref{fig:arduinocode}), para dar comienzo a la escritura serial de Arduino hacia PC.
 
