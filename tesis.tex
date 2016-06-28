@@ -1,5 +1,5 @@
 \documentclass[12pt,a4paper]{article}
-\usepackage[spanish]{babel} % espanol
+\usepackage[spanish,es-tabla]{babel} % espanol
 \usepackage[utf8]{inputenc} % acentos sin codigo
 \usepackage[left=3.5cm,right=2cm,top=2.5cm,bottom=2cm,includehead,includefoot]{geometry}  %margenes segun pauta de la U
 \usepackage{setspace}
@@ -24,10 +24,6 @@
 \usepackage{times} %font times new roman (?)
 
 \newcommand{\grad}{$^{\circ}$}
-
-\let\stdsection\section
-\renewcommand\section{\newpage\stdsection}
-
 
 \newdateformat{fecha}{%Método para obtener el mes y el año
   \monthname[\THEMONTH] \THEYEAR}
@@ -149,8 +145,14 @@ NOTA FINAL EXAMEN DE T\'ITULO &&& \\
 
 
 \tableofcontents %Indice de Contenidos
+\listoffigures
+\listoftables
+
 \thispagestyle{empty}
 \pagebreak
+
+\let\stdsection\section
+\renewcommand\section{\newpage\stdsection}
 
 
 
@@ -188,7 +190,10 @@ Desde el punto de vista disciplinar (Ciencias de la Ingeniería), este proyecto 
 
 \section{Estado del Arte}
 \subsection{Balance}
+El control del equilibrio es complejo e implica el mantenimiento de posturas, lo que facilita el movimiento y recuperar el equilibrio. Control de balance consiste en controlar el centro de masa del cuerpo  por su entre los límites de estabilidad. Evaluaciones clínicas del equilibrio pueden ayudar a evaluar el riesgo de caídas y / o determinar las causas de los trastornos del equilibrio subyacente. La mayoría de las escalas de valoración del equilibrio funcional evalúan el riesgo de caída y la necesidad de r...(line truncated)...
 
+Un tercio a la mitad de la población mayor de 65 años notifica algunos problemas con el balance o
+deambulación. Los pacientes con trastornos neurológicos o musculoesqueléticos son aún más propensos a tener problemas de equilibrio que afectan a su movilidad. La complejidad del control del equilibrio resultados en muchos tipos diferentes de problemas de equilibrio que necesitan la evaluación clínica sistemática para un tratamiento eficaz.
 
 
 \section{Marco Te\'orico}
