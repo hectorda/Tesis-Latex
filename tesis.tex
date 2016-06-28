@@ -482,7 +482,7 @@ Para el análisis del desplazamiento del centro de masa se requiere el cálculo 
 
 En síntesis tenemos un acelerómetro que entrega ángulos con referencia en la posición del sensor, pero muy susceptible a la variación de cambios de aceleración del IMU y en cambio el giroscopio nos permite calcular el angulo de manera exacta, pero si tener una clara referencia de la posición donde esta el sensor. 
 
-Para unificar la información proveniente de ambos sensores existe un filtro , que nació principalmente de la práctica, conocido como el Filtro Complementario.
+Para unificar la información proveniente de ambos sensores existe un filtro , que nació principalmente de la práctica, conocido como el Filtro Complementario \cite[Capítulo 3, p.~44]{TesisUSM}.
 El filtro requiere un ángulo de punto de partida y para esto se utiliza el acelerómetro para recoger el ángulo inicial, ya que, al poseer la referencia de la gravedad, se puede tener obtener una mejor estimación para comenzar a realizar las iteraciones del filtro.
 \newline
 El Filtro complementario es ampliamente usado en unidades inerciales y sistemas de visión. Este filtro es en si es un filtro de Kalman de estado estacionario para una cierta clase de problemas de filtrado.
@@ -515,9 +515,9 @@ En donde cada uno de las variables representa lo siguiente:
 \end{itemize}
 
 \subsubsection{Filtro de Kalman discreto}
-El filtro de Kalman es un estimador lineal, insesgado y óptimo del estado de un proceso. En él se ha impuesto la condición de que el proceso a ser estimado es regido por una dinámica lineal y que el ruido que lo perturba es blanco y gaussiano. Aún cuando la condición del comportamiento probabilístico gaussiano del ruido se omite, el filtro de Kalman sigue siendo el mejor filtro recursivo lineal (error de menor varianza ) e insesgado.
+El filtro de Kalman \cite{KALMANDF} es un estimador lineal, insesgado y óptimo del estado de un proceso. En él se ha impuesto la condición de que el proceso a ser estimado es regido por una dinámica lineal y que el ruido que lo perturba es blanco y gaussiano. Aún cuando la condición del comportamiento probabilístico gaussiano del ruido se omite, el filtro de Kalman sigue siendo el mejor filtro recursivo lineal (error de menor varianza ) e insesgado.
 
-Su propósito es emplear las mediciones obtenidas en un período de tiempo que a su vez son afectadas por variaciones  aleatorias (ruido) junto con el conocimiento del comportamiento del sistema, para producir estimaciones que tiendan a estar más cerca del valor real del proceso en cuestión. Todas las mediciones y cálculos basados en modelos son aproximaciones en cierto grado, datos ruidosos provenientes de los sensores. 
+Su propósito es emplear las mediciones obtenidas en un período de tiempo que a su vez son afectadas por variaciones  aleatorias (ruido) junto con el conocimiento del comportamiento del sistema, para producir estimaciones que tiendan a estar más cerca del valor real del proceso en cuestión. Todas las mediciones y cálculos basados en modelos son aproximaciones en cierto grado, datos ruidosos provenientes de los sensores \cite[Capítulo 3, p.~45]{TesisUSM}. 
 
 EL filtro de Kalman posee flexibilidad para ser utilizado tanto en tiempo continuo o en tiempos discretos. El modelo del filtro permite la flexibilidad para ser utilizado en éstos casos.
 
@@ -606,7 +606,7 @@ La solución fue a partir de la información de configuracion FTDI\cite{FTDI} pa
 
 \section{Bibliografía}
 
-\printbibliography[heading=none]%Imprimir las referencias
+\printbibliography
 
 \thispagestyle{empty}
 \pagebreak
