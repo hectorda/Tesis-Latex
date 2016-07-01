@@ -21,8 +21,18 @@
 \usepackage[backend=biber,style=alphabetic]{biblatex}%packages Bibliografia
 \addbibresource{biblio.bib}%se carga el archivo
 \usepackage{times} %font times new roman (?)
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=false, %set true if you want colored links
+	linktoc=all,     %set to all if you want both sections and subsections linked
+	linkcolor=blue,  %choose some color if you want links to stand out
+	pdfborder={0 0 0},
+}
+
 
 \newcommand{\grad}{$^{\circ}$}
+
+\newcommand{\nombreTesis}{\textsc{sistema de evaluación y bio-feedback para Balance postural}}
 
 \newdateformat{fecha}{%Método para obtener el mes y el año
 	\monthname[\THEMONTH] \THEYEAR}
@@ -35,10 +45,9 @@
 		\field[uppercase,strwidth=1,strside=left]{labelname}
 	}
 	\labelelement{
-		\field[strwidth=2,strside=right]{year}
+		\field{year}
 	}
 }
-
 
 
 \pagestyle{headings}
@@ -66,7 +75,7 @@
 			\vspace{5.5cm}
 			
 			\begin{center}
-				{\Large {\bf NOMBRE DE LA TESIS LOREM IPSUM DOLOR SIR AMET, CONSECTETUR ADIPISCING ELIT}}
+				{\Large {\bf \nombreTesis}}
 				
 				\
 				
@@ -111,7 +120,7 @@
 			\vspace{1cm}
 			
 			\begin{center}
-				\bf  {NOMBRE DE LA TESIS LOREM IPSUM DOLOR SIR AMET, CONSECTETUR ADIPISCING ELIT}
+				\bf{ \nombreTesis}
 				
 				\
 				
@@ -202,10 +211,15 @@
 			
 			
 			\section{Estado del Arte}
-			\subsection{Balance}
-			El control del equilibrio es complejo e implica el mantenimiento de posturas \cite{mancini}, lo que facilita el movimiento y recuperar el equilibrio. Control de balance consiste en controlar el centro de masa del cuerpo  por su entre los límites de estabilidad. Evaluaciones clínicas del equilibrio pueden ayudar a evaluar el riesgo de caídas y / o determinar las causas de los trastornos del equilibrio subyacente. La mayoría de las escalas de valoración del equilibrio funcional evalúan el riesgo de caída y la necesidad de r...(line truncated)...
+			\subsection{Estudio del Balance usando Sensores Inerciales}
+			El control del equilibrio es complejo e implica el mantenimiento de posturas \cite{mancini_relevance_2010}, lo que facilita el movimiento y recuperar el equilibrio. Control de balance consiste en controlar el centro de masa del cuerpo  por su entre los límites de estabilidad. Evaluaciones clínicas del equilibrio pueden ayudar a evaluar el riesgo de caídas y / o determinar las causas de los trastornos del equilibrio subyacente. 
+			La mayoría de las escalas de valoración del equilibrio funcional evaluar caída
+			el riesgo y la necesidad de rehabilitación equilibrio, pero no diferenciar los tipos de déficits de la balanza . Un enfoque de sistema para la evaluación clínica equilibrio puede diferenciar diferentes tipos de trastornos del equilibrio y un enfoque fisiológico puede determinar los mecanismos subyacentes sensoriomotoras contribuye a equilibrar trastornos. Las medidas objetivas de equilibrio valiéndose de medios informáticos y sensores inerciales portátiles pueden traer más sensible, específico y sensible a las pruebas de equilibrio Práctica clinica.
 			Un tercio a la mitad de la población mayor de 65 años notifica algunos problemas con el balance o
 			deambulación. Los pacientes con trastornos neurológicos o musculoesqueléticos son aún más propensos a tener problemas de equilibrio que afectan a su movilidad. La complejidad del control del equilibrio resultados en muchos tipos diferentes de problemas de equilibrio que necesitan la evaluación clínica sistemática para un tratamiento eficaz.
+			
+			Clinical stabilometry standardization\cite{scoppa_clinical_2013}
+			
 			
 			
 			\section{Marco Te\'orico}
@@ -388,12 +402,12 @@
 			
 			\begin{figure}[H]
 				\centering
-				\includegraphics[scale=0.4]{images/diagramacodigoarduino}
+				\includegraphics[scale=0.5]{images/diagramacodigoarduino}
 				\caption{Diagrama Código Arduino}
 				\label{fig:arduinocode}
 			\end{figure}
 			
-			Existen 4 parámetros a ser configurados de forma obligatoria Frecuencia de Muestreo, Filtro pasa bajo, rango Acelerómetro y  rango Giroscopio, antes de comenzar con la lectura de las de la información registros.
+			Existen 4 parámetros a ser configurados de forma obligatoria Frecuencia de Muestreo, Filtro pasa bajo, rango Acelerómetro y rango Giroscopio, antes de comenzar con la lectura de las de la información registros.
 			Para configurar los 4 parámetros requeridos debe ser recibida una cadena por el puerto serial en donde se analiza e interpretan los valores a utilizar para cada configuración. 
 			Una vez se completa la configuración se procede a la lectura de los registros para obtener los valores RAW tanto acelerómetro como giroscopio para finalmente enviar mediante comunicación serial el valor resultante expresado en su unidad física correspondiente al ser dividido por la sensibilidad según el rango previamente configurado.
 			
