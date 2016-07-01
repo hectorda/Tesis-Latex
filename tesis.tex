@@ -222,7 +222,7 @@
 			
 			
 			
-			\section{Marco Te\'orico}
+			\section{Marco Teórico}
 			
 			\subsection{Protocolo de Comunicación $\mathbf{\mathrm{I^2C}}$}
 			Para la comunicación entre el Arduino y los Sensores, y debido a la limitante del tipo de protocolo usados por el MPU6050, se debe utilizar protocolo de comunicación $I^2C$.
@@ -249,15 +249,21 @@
 				\end{figure}
 			\end{itemize}
 			
-			\subsection{Sistema Coordenado}
-			Toda la información obtenida debe estar asociado segun un sistema especficio de coordenadas, que sirva de referencia clara para la interpretacion de la información.
+			\subsection{Sistemas Coordenados}
+			Toda la información obtenida debe estar asociado según un sistema específico de coordenadas, que sirva de referencia clara para la interpretación y comprensión de la información.
 			
-			Para ello se tomaron en consideracion los principalentes sistemas a utilizar para referencias de sistemas coordenasdos durante el desarrollo:
+			Para ello fueron considerados los principales sistemas utilizados para referenciar los ejes coordenados según los distintas situaciones:
 			\begin{itemize}
-				\item \textbf{Plano Terrestre:} El eje Z es el eje paralelo a la fuerza de gravedad, los ejes X e Y son son ortogonales a éste.
-				\item \textbf{Ejes del sensor:}
-				\item \textbf{Plano Sagital:} Antero-Posterior y Medio-Lateral
 				
+				\item \textbf{Plano Sagital:} Se toma de referencia el cuerpo humano trazando línea una  vertical de referencia que teóricamente cruza el cuerpo por la parte media y central, a modo de plomada imaginaria, esta línea ayuda en la distinción de miembros o elementos en el «lado izquierdo» o «lado derecho», pero por ejemplo, en el caso del cuerpo humano, también es aplicable para determinar qué está «delante» o «detrás». El movimiento en sentido izquierdo o derecho (Medio-Lateral) y a su vez se referirá al movimiento adelante o atrás (Antero-Posterior).
+					\begin{figure}[H]
+						\centering
+						\includegraphics[width=0.4\textwidth]{images/sagital}
+						\caption{Ejemplo Plano Sagital}
+						\label{fig:sagital}
+					\end{figure}
+				
+				\item \textbf{Ejes del sensor:} Los ejes contenidos en el sensor son expresados en coordenadas X,Y,Z, en donde según la orientación del sensor cualquiera de sus ejes puede ser paralelo a la gravedad de la tierra, que apunta hacia el centro de esta.
 			\end{itemize}
 			
 			\subsection{Sistema microelectromecánico (MPU6050)}
@@ -337,20 +343,37 @@
 			
 			\begin{itemize}
 				\item \textbf{Obtención de la Velocidad Angular:} Para obtener la variación del ángulo por unidad de tiempo medida por el giroscópico, deben ser leídos 6 registros en donde son usados por cada eje medible 2 registros de 8 bit,
-				\begin{itemize}
-					\item Eje X: $GYRO\_XOUT\_H$, $GYRO\_XOUT\_L$.
-					\item Eje Y: $GYRO\_YOUT\_H$, $GYRO\_YOUT\_L$.
-					\item Eje Z: $GYRO\_ZOUT\_H$, $GYRO\_ZOUT\_L$
-				\end{itemize}
+				
+				\begin{table}[H]
+					\centering
+					\label{table:registrosgyro}
+					\begin{tabular}{|l|l|c|l|c|}
+						\hline
+						\textbf{Eje} & \textbf{Registro} & \textbf{Dirección (Hex)} & \textbf{Registro} & \textbf{Dirección (Hex)} \\ \hline
+						X            & GYRO\_XOUT\_H     & 0x43                     & GYRO\_XOUT\_L     & 0x44                     \\ \hline
+						Y            & GYRO\_YOUT\_H     & 0x45                     & GYRO\_YOUT\_L     & 0x46                     \\ \hline
+						Z            & GYRO\_ZOUT\_H     & 0x47                     & GYRO\_ZOUT\_L     & 0x48                     \\ \hline
+					\end{tabular}
+					\caption{Registros mediciones Giroscopio}					
+				\end{table}
+				
 				Posteriormente de ser leídos ambos registros de cada eje estos deben deben ser sumados usando aritmética binaria en donde el valor obtenido del primer registro leído le es aplicado un corrimiento de 8 bit para luego sumar el segundo obtenido, además se utiliza el complemento a 2 para la obtención de valores negativos, que genera como dato resultante un valor de entre aproximadamente $\pm 2^{15}$, este valor resultante debe ser dividido según la sensibilidad asociada a el rango escogido del giroscopio, para transformar el dato RAW del giroscopio y obtener la información física en (\grad/seg).
 				
 				\item \textbf{Obtención de la Aceleración:} Para obtener la información del acelerómetro al igual que en Giroscopio deben ser leídos los 6 pertenecientes a las mediciones:
-				\begin{itemize}
-					\item Eje X: $ACCEL\_XOUT\_H$, $ACCEL\_XOUT\_L$.
-					\item Eje Y: $ACCEL\_YOUT\_H$, $ACCEL\_YOUT\_L$.
-					\item Eje Z: $ACCEL\_ZOUT\_H$, $ACCEL\_ZOUT\_L$
-				\end{itemize}
-				
+
+				\begin{table}[H]
+					\centering
+					\label{table:registrosaccel}
+					\begin{tabular}{|l|l|c|l|c|}
+						\hline
+						\textbf{Eje} & \textbf{Registro} & \textbf{Dirección (Hex)} & \textbf{Registro} & \textbf{Dirección (Hex)} \\ \hline
+						X            & ACCEL\_XOUT\_H     & 0x3B                     & ACCEL\_XOUT\_L     & 0x3C                     \\ \hline
+						Y            & ACCEL\_YOUT\_H     & 0x3D                     & ACCEL\_YOUT\_L     & 0x3E                     \\ \hline
+						Z            & ACCEL\_ZOUT\_H     & 0x3F                     & ACCEL\_ZOUT\_L     & 0x40                     \\ \hline
+					\end{tabular}
+					\caption{Registros mediciones Acelerómetro}					
+				\end{table}				
+								
 				Para luego unir los registros y usar el complemento a 2 acorde a cada eje, cada uno de estos valores deben ser dividido según el rango escogido, que determina la sensibilidad a usar para obtener la información física de la aceleración.
 				
 				\begin{figure}[H]
@@ -391,7 +414,7 @@
 			
 			\begin{figure}[H]
 				\centering
-				\includegraphics[scale=0.2]{images/diagrama_sistema}
+				\includegraphics[scale=0.15]{images/diagrama_sistema}
 				\caption{Diagrama Sistema}
 				\label{fig:diagramasistema}
 			\end{figure}
@@ -466,7 +489,7 @@
 				\item El sistema debe permitir análisis usando los gráficos y mostrando los cambios (recortes o ajustes) en tiempo real.
 			\end{itemize}
 			
-			\subsection{Características}
+			\subsection{Resumen de Características}
 			El software permite configurar la gran mayoría de opciones de tanto velocidades de muestreo, los rangos para la captura de información del movimiento, así como lo que se representaran en pantalla, tamaños de los elementos a graficar, limitar geométricamente el gráfico, entre otros.
 			
 			Se uso bastante la geometría analítica, para la generación y representación gráfica tanto de los objetivos en las pruebas, como para la intersección del movimiento realizado con cada uno de estos. De igual manera la trigonométrica para limitar el área del movimiento según el radio que sea definido para el examen.
@@ -489,12 +512,12 @@
 				\label{fig:graficoPrincipal}
 			\end{figure}
 			
-			\subsection{Cálculo ángulo} Para efectos de analisis o representación final, a partir de las variaciones de aceleración y velocidad angular detectadas por los sensores existe la opcion de calcular el ángulo, que es un indicador equivalente a la inclinación que ha realizado el sujeto.
+			\subsection{Cálculo Ángulo} Para efectos de análisis o representación final, a partir de las variaciones de aceleración y velocidad angular detectadas por los sensores existe la opción de calcular el ángulo, que es un indicador equivalente a la inclinación que ha realizado el sujeto.
 			
 			Para ello existen distintos métodos usando la información obtenida, tales como:
 			
 			
-			\subsubsection{Cálculo ángulo con acelerómetro} Si es utilizado acelerómetro este nos entrega el ángulo exacto pero al ser producida cualquier variación en la aceleración en cualquiera de sus 3 ejes de medición que no sea producto tan solo de la fuerza gravitacional será interpretada como un cambio de rotación, por lo cual se generan medida erráticas debido a los cambios de aceleración constantes que son generados al girar la IMU como se muestra en el ejemplo para el cálculo de los ángulos X ver ecuación (\ref{eq:calculoanguloXsensorvertical}) e Y ver ecuación (\ref{eq:calculoanguloYsensorvertical}) usando el sensor en posición vertical.
+			\subsubsection{Cálculo Ángulo con Acelerómetro} Si es utilizado acelerómetro este nos entrega el ángulo exacto pero al ser producida cualquier variación en la aceleración en cualquiera de sus 3 ejes de medición que no sea producto tan solo de la fuerza gravitacional será interpretada como un cambio de rotación, por lo cual se generan medida erráticas debido a los cambios de aceleración constantes que son generados al girar la IMU como se muestra en el ejemplo para el cálculo de los ángulos X ver ecuación (\ref{eq:calculoanguloXsensorvertical}) e Y ver ecuación (\ref{eq:calculoanguloYsensorvertical}) usando el sensor en posición vertical.
 			
 			\begin{figure}[H]
 				\begin{equation}
@@ -605,9 +628,11 @@
 			
 			\subsection{Cálculo del Recorrido Curvo}
 			
+			\subsection{Comparación Cálculo Recorrido Curvo vs Proyección}
 			
+			\subsection{Tests}
 			
-			\subsection{Principales Dificultades}
+			\subsection{Principales Desafíos}
 			\subsubsection{Representación Tiempo Real}
 			La interfaz gráfica es una parte integral de el sistema, pasando a ser la principal fuente de información para la retroalimentación, junto con el lugar donde mayormente interviene el usuario de este tipo de sistemas, por lo tanto el no poder desplegar la información a tiempo, o que esta sea poco fiable es un gran problema. Se planteo inicialmente en graficar cada una de las salidas tanto del acelerómetro como del giroscopio en donde se representarían 6 variables a una velocidad igual a la velocidad de muestreo, lo que en la práctica no resulta demasiado bien. Al representar en gráficos a frecuencias muy altas es decir 100hz o superior, multiplicado por la cantidad de datos que se estén representando, junto con el procesamiento interno para mostrar esos datos, se genera una sobrecarga en la parte gráfica, lo que conlleva a ralentizar el proceso, generando perdidas de información y fidelidad al desplegar la información en tiempo real.
 			
