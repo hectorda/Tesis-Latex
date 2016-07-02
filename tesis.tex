@@ -616,15 +616,8 @@ Los resultados demuestran la gran corrección que realizan los filtros frente a 
 Basándonos en que la posición bípeda-quieta puede ser representada como un péndulo invertido, por lo tanto considerando la variación angular del movimiento pendular de un sujeto en las coordenadas antero-posterior y medio-lateral es aplicable la trigonometría para la obtención del desplazamiento.
 Para el cálculo del desplazamiento usando la variación angular se consideraron los siguientes métodos. 
 
-\subsubsection{Cálculo proyección del Ángulo}
+\subsubsection{Cálculo Proyección del Ángulo}
 Para obtener la distancia proyectada en el eje horizontal, usando trigonometría tomando la altura $h$ como la distancia desde el suelo hasta donde fue puesto el sensor como el equivalente a la hipotenusa de un triángulo rectángulo, como se muestra en la Figura (\ref{fig:proyeccion}), al aplicar la función $\sin$ del ángulo en grados obtenido mediante el filtro aplicado, junto con ponderar el valor obtenido por la altura $h$ (hipotenusa del triángulo), el valor resultante equivale a la distancia $d$ correspondiente al desplazamiento del centro de masa estimado, en la cual su unidad de medida es la misma usada para describir la altura $h$ en general centímetros.
-
-\begin{figure}[H]
-	\begin{equation}
-		\label{eq:proyeccion}
-		d=\sin(\alpha)*h
-	\end{equation}
-\end{figure}
 
 \begin{figure}[H]
 	\centering
@@ -633,30 +626,38 @@ Para obtener la distancia proyectada en el eje horizontal, usando trigonometría
 	\label{fig:proyeccion}
 \end{figure}
 
+\begin{equation}
+	\label{eq:proyeccion}
+	d=\sin(\alpha)*h
+\end{equation}
+
 \subsubsection{Cálculo del Recorrido Curvo}
 	
-	\begin{figure}[H]
-		\begin{equation}
-		\label{eq:recorridocurvo}
-		d=\left(\frac{\alpha*2\pi}{360}\right)*h
-		\end{equation}
-	\end{figure}
-	
-	\begin{figure}[H]
-		\centering
-		\includegraphics[scale=0.5]{images/calculoProyeccion}
-		\caption{Ejemplo cálculo Recorrido Curvo}
-		\label{fig:recorridocurvo}
-	\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{images/calculoRecorridoCurvo}
+	\caption{Ejemplo cálculo Recorrido Curvo}
+	\label{fig:recorridocurvo}
+\end{figure}
+
+
+\begin{equation}
+	\label{eq:recorridocurvo}
+	d=\left(\frac{\alpha*2\pi}{360}\right)*h
+\end{equation}
+
 
 
 
 \subsubsection{Comparación Cálculo Recorrido Curvo vs Proyección}
+Al comparar los métodos anteriormente mencionados para el cálculo del desplazamiento, estos se comportan de forma similar en ángulos pequeños, pero al aumentar el valor del ángulo se comienza a crecer exponencialmente el desplazamiento calculado por el recorrido curvo frente al obtenido por proyección, lo que nos da a concluir que ambos métodos entregan en ángulos pequeños desplazamientos similares, pero al aumentar el ángulo el comportamiento es diferente.
+
+Por lo tanto se debe tener en consideración al momento de escoger con que método se realizará el análisis, ya que con ambos se puede interpretar el desplazamiento.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.7]{images/DiferenciaRec-Pro}
-	\caption{Diferencia distancia Recorrido Curvo - Distancia proyección}
+	\caption{Ejemplo Diferencia distancia Recorrido Curvo - Distancia proyección}
 	\label{fig:diferenciarec-pro}
 \end{figure}
 
