@@ -437,82 +437,7 @@ Para configurar los 4 parámetros requeridos debe ser recibida una cadena por el
 Una vez se completa la configuración se procede a la lectura de los registros para obtener los valores RAW tanto acelerómetro como giroscopio para finalmente enviar mediante comunicación serial el valor resultante expresado en su unidad física correspondiente al ser dividido por la sensibilidad según el rango previamente configurado.
 
 
-\subsection{Creación del Software}
-Un parte importante del sistema es la interfaz que permite al usuario interactuar con el micro-controlador sin conocer mas a fondo su funcionamiento,
-con este proposito fue implementado utilizando en Framework QT(C++)\cite{QT} en su versión Open-Source, al estar basado en C++ en cuanto a estabilidad y rendimiento se refiere es una de las mejores opciones a tener en consideración.
 
-El software permite la captura y procesamiento de información proveniente de la comunicación serial entre el micro-controlador Arduino y el ordenador,
-El usar un framework como Qt facilita en gran parte la creación de interfaces gráficas, capa de funcionalidad que C++ no contiene por defecto, esto posibilita una rápida integración entre la parte lógica y visual del software a desarrollar.
-Debido a el tipo de proyecto a implementar la metodología usada para el desarrollo fue el método ágil, al ser una solución de software con requisitos funcionales poco definidos, más que nada pautas del resultado esperado en donde el programador pasa a ser es el principal diseñador definiendo por sí mismo la distribución y comportamiento de los componentes del software.
-
-En etapas tempranas del desarrollo se implemento una interfaz que se tan solo se comunicara con el puerto serial, pudiendo conectarse a este, y obtener la información que se encontrara disponible.
-Durante el desarrollo se incluyeron más opciones para una visualización mas agradable, junto con la parametrización de todos los elementos mostrados, permitiendo al usuario activar y desactivar opciones según sea el caso.
-
-La comunicación serial entre el dispositivo-ordenador no solo es usada para leer los datos en el puerto, también es posible enviar los parámetros para realizar la configuración del sensor, para definir las opciones que consideradas más relevantes tales como: la frecuencia de muestreo, el uso del filtro Pasa-Bajo y los rangos tanto Acelerómetro como Giroscopio, usando una interfaz sencilla e intuitiva ver Figura (\ref{fig:ajustessensores}).
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.6]{images/ajustesSensores}
-	\caption{Ventana Ajustes Sensores}
-	\label{fig:ajustessensores}
-\end{figure}
-
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.6]{images/mainwindow}
-	\caption{Ventana Principal V0.1}
-	\label{fig:mainwindow}
-\end{figure}
-
-Luego de realizar la conexión de forma exitosa, se procede a desplegar la información obtenida, en forma de gráficos.
-
-\begin{figure}[H]
-	\centering
-	\frame{\includegraphics[scale=0.3]{images/graficosensores}}
-	\caption{Gráficos de los sensores}
-	\label{fig:Graficosensores}
-\end{figure}
-
-\subsection{Requisitos Funcionales}
-\begin{itemize}
-	\item El sistema debe ser capaz de describir mediante el estudio de variables cinemáticas (aceleración y velocidad angular), procesarlas y realizar análisis kinesiologos (desplazamiento del Centro de Masa).
-	\item El sistema debe ser capaz de representar en Tiempo Real el desplazamiento del centro de masa.
-	\item El sistema debe permitir la generación de reportes, con todas las variables estudiadas y analizadas durante la prueba.
-	\item El sistema debe permitir la configuración de los Sensores, ajustar su sensibilidad rango.
-	\item Se debe permitir la configuración de las variables involucradas en cada pruebas a realizar, partiendo por la altura desde la que fue puesta el sensor, la orientación de éste, tiempo de prueba, etc.
-	\item En lo referente a análisis de los gráficos de resultados, debe ser posible calcular estadísticos, como media, desviación estándar y junto con los valores máximos y mínimos.
-\end{itemize} 
-
-\subsection{Requisitos No funcionales}
-\begin{itemize}
-	\item El sistema debe presentar una interfaz clara y sencilla, tanto en el manejo, como para la presentación de resultados.
-	\item El sistema debe tener un nombre representativo.
-	\item El sistema debe permitir análisis usando los gráficos y mostrando los cambios (recortes o ajustes) en tiempo real.
-\end{itemize}
-
-\subsection{Resumen de Características}
-El software permite configurar la gran mayoría de opciones de tanto velocidades de muestreo, los rangos para la captura de información del movimiento, así como lo que se representaran en pantalla, tamaños de los elementos a graficar, limitar geométricamente el gráfico, entre otros.
-
-Se uso bastante la geometría analítica, para la generación y representación gráfica tanto de los objetivos en las pruebas, como para la intersección del movimiento realizado con cada uno de estos. De igual manera la trigonométrica para limitar el área del movimiento según el radio que sea definido para el examen.
-
-Reportes: Cada uno de los gráficos, los que despliegan las medidas tomadas o los que representan los resultados de el ejercicio, pueden ser almacenados en muestras de cada uno de los gráficos, o también generar una imagen de estos.
-
-Herramientas de Análisis Gráficas: ventanas desplegables acompañadas a un gráfico que permiten de forma interactiva seleccionar partes del gráfico, para analizar intervalos según se estime conveniente y a su vez obtener de este datos como, los valores máximos y mínimos, la media, desviación estándar de los datos, y en el caso del desplazamiento obtener la velocidad media del intervalo analizado.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.3]{images/analisisGraficos}
-	\caption{Ejemplo Herramienta de Análisis}
-	\label{fig:analsisGraficos}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.7]{images/graficoPrincipal}
-	\caption{Gráfico de Prueba}
-	\label{fig:graficoPrincipal}
-\end{figure}
 
 \subsection{Cálculo Ángulo} 
 Para efectos de análisis o representación final, a partir de las variaciones de aceleración y velocidad angular detectadas por los sensores existe la opción de calcular el ángulo, que es un indicador equivalente a la inclinación que ha realizado el sujeto.
@@ -520,7 +445,7 @@ Para efectos de análisis o representación final, a partir de las variaciones d
 Para ello existen distintos métodos usando la información obtenida, tales como:
 
 
-\subsubsection{Cálculo Ángulo con Acelerómetro} Si es utilizado acelerómetro este nos entrega el ángulo exacto pero al ser producida cualquier variación en la aceleración en cualquiera de sus 3 ejes de medición que no sea producto tan solo de la fuerza gravitacional será interpretada como un cambio de rotación, por lo cual se generan medida erráticas debido a los cambios de aceleración constantes que son generados al girar la IMU como se muestra en el ejemplo para el cálculo de los ángulos X ver ecuación (\ref{eq:calculoanguloXsensorvertical}) e Y ver ecuación (\ref{eq:calculoanguloYsensorvertical}) usando el sensor en posición vertical.
+\subsubsection{Cálculo Ángulo con Acelerómetro} Si es utilizado acelerómetro este nos entrega el ángulo exacto pero al ser producida cualquier variación en la aceleración en cualquiera de sus 3 ejes de medición que no sea producto tan solo de la fuerza gravitacional será interpretada como un cambio de rotación, por lo cual se generan medida erráticas debido a los cambios de aceleración constantes que son generados al girar la IMU como se muestra en el ejemplo para el cálculo de los ángulos X ver ecuación (\ref{eq:calculoanguloXsensorvertical}) e Y ver ecuación (\ref{eq:calculoanguloYsensorvertical}) usando el sensor en posición vertical con la referencia hacia atrás.
 
 \begin{figure}[H]
 	\begin{equation}
@@ -618,7 +543,7 @@ Basándonos en que la posición bípeda-quieta puede ser representada como un p�
 Para el cálculo del desplazamiento usando la variación angular se consideraron los siguientes métodos. 
 
 \subsubsection{Cálculo Proyección del Ángulo}
-Para obtener la distancia proyectada en el eje horizontal, usando trigonometría tomando la altura $h$ como la distancia desde el suelo hasta donde fue puesto el sensor como el equivalente a la hipotenusa de un triángulo rectángulo, como se muestra en la Figura (\ref{fig:proyeccion}), se puede calcular usando la Ecuación (\ref{eq:proyeccion}), aplicando la función $\sin$ del ángulo en grados obtenido mediante el filtro aplicado, junto con ponderar el valor obtenido por la altura $h$ (hipotenusa del triángulo), el valor resultante equivale a la distancia $d$ correspondiente al desplazamiento del centro de masa estimado, en la cual su unidad de medida es la misma usada para describir la altura $h$ en general centímetros.
+Para obtener la distancia proyectada en el eje horizontal, usando trigonometría tomando la altura $h$ como la distancia desde el suelo hasta donde fue puesto el sensor como el equivalente a la hipotenusa de un triángulo rectángulo, como se muestra en la Figura (\ref{fig:proyeccion}), se puede calcular usando la Ecuación (\ref{eq:proyeccion}), aplicando la función $\sin$ del ángulo $\alpha$ en grados obtenido mediante el filtro aplicado, junto con ponderar el valor obtenido por la altura $h$ (hipotenusa del triángulo), el valor resultante equivale a la distancia $d$ correspondiente al desplazamiento del centro de masa estimado, en la cual su unidad de medida es la misma usada para describir la altura $h$ en general centímetros.
 
 \begin{figure}[H]
 	\centering
@@ -633,9 +558,11 @@ Para obtener la distancia proyectada en el eje horizontal, usando trigonometría
 \end{equation}
 
 
-
 \subsubsection{Cálculo del Recorrido Curvo}
-La longitud del arco generado por el ángulo puede ser considerado un tipo de desplazamiento, 
+La longitud del arco generado por el ángulo puede ser considerado un tipo de desplazamiento, por ello existe la opción de estudiarlo.
+
+Calculando la longitud del arco formado desde donde comienza la medición hasta el angulo $\alpha$ ver Figura (\ref{fig:recorridocurvo}) en grados a radianes y ponderando el valor obtenido por la altura $h$, tal como se muestra en la Ecuación (\ref{eq:recorridocurvo}).
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.5]{images/calculoRecorridoCurvo}
@@ -650,7 +577,7 @@ La longitud del arco generado por el ángulo puede ser considerado un tipo de de
 
 
 \subsubsection{Comparación Cálculo Recorrido Curvo vs Proyección}
-Al comparar los métodos anteriormente mencionados para el cálculo del desplazamiento, estos se comportan de forma similar en ángulos pequeños, pero al aumentar el valor del ángulo se comienza a crecer exponencialmente el desplazamiento calculado por el recorrido curvo frente al obtenido por proyección, lo que nos da a concluir que ambos métodos entregan en ángulos pequeños desplazamientos similares, pero al aumentar el ángulo el comportamiento es diferente.
+Al comparar los métodos anteriormente mencionados para el cálculo del desplazamiento, estos se comportan de forma similar en ángulos pequeños, pero al aumentar el valor del ángulo se comienza diferenciar de forma exponencialmente el desplazamiento calculado por el recorrido curvo frente al obtenido por proyección, lo que nos da a concluir que ambos métodos entregan en ángulos pequeños desplazamientos similares, pero al aumentar el ángulo se comportan diferente.
 
 Por lo tanto se debe tener en consideración al momento de escoger con que método se realizará el calculo, ya que con ambos se puede interpretar el desplazamiento.
 
@@ -660,6 +587,127 @@ Por lo tanto se debe tener en consideración al momento de escoger con que méto
 	\caption{Ejemplo Diferencia distancia Recorrido Curvo - Distancia proyección}
 	\label{fig:diferenciarec-pro}
 \end{figure}
+
+
+\subsection{Requisitos Funcionales}
+\begin{itemize}
+	\item El sistema debe ser capaz de describir mediante el estudio de variables cinemáticas (aceleración y velocidad angular), procesarlas y realizar análisis kinesiologos (desplazamiento del Centro de Masa).
+	\item El sistema debe ser capaz de representar en Tiempo Real el desplazamiento del centro de masa.
+	\item El sistema debe permitir la generación de reportes, con todas las variables estudiadas y analizadas durante la prueba.
+	\item El sistema debe permitir la configuración de los Sensores, ajustar su sensibilidad rango.
+	\item Se debe permitir la configuración de las variables involucradas en cada pruebas a realizar, partiendo por la altura desde la que fue puesta el sensor, la orientación de éste, tiempo de prueba, etc.
+	\item En lo referente a análisis de los gráficos de resultados, debe ser posible calcular estadísticos, como media, desviación estándar y junto con los valores máximos y mínimos.
+\end{itemize} 
+
+\subsection{Requisitos No funcionales}
+\begin{itemize}
+	\item El sistema debe presentar una interfaz clara y sencilla, tanto en el manejo, como para la presentación de resultados.
+	\item El sistema debe tener un nombre representativo.
+	\item El sistema debe permitir análisis usando los gráficos y mostrando los cambios (recortes o ajustes) en tiempo real.
+\end{itemize}
+
+\subsection{Resumen de Características}
+\begin{itemize}
+	\item \textbf{Configurable:} El software permite configurar la gran mayoría de opciones tanto velocidades de muestreo, Puerto Serial a utilizar, los rangos para la captura de información del movimiento, así como cantidad de datos que se representaran en pantalla, tamaños de los elementos a graficar, tiempos de prueba, limitar geométricamente el gráfico, entre otros.
+	\item \textbf{Geometría Analítica} Se uso bastante la geometría analítica, para la generación y representación gráfica tanto de los objetivos en las pruebas, como para la intersección del movimiento realizado con cada uno de estos. De igual manera se utiliza la trigonometría para limitar el área del movimiento según el radio que sea definido para el examen.
+	\item \textbf{Reportes:} Cada uno de los gráficos, los que despliegan las medidas tomadas o los que representan los resultados de el ejercicio, pueden ser almacenados en muestras de cada uno de los gráficos, o también generar una imagen de estos.
+	\item \textbf{Herramientas de Análisis Gráficas:} Ventanas desplegables acompañadas a un gráfico que permiten de forma interactiva seleccionar partes del gráfico, para analizar intervalos según se estime conveniente y a su vez obtener de este datos como, los valores máximos y mínimos, la media, desviación estándar de los datos, y en el caso del desplazamiento obtener la velocidad media del intervalo analizado.
+\end{itemize}
+
+
+\subsection{Codificación del Software}
+Un parte importante del sistema es la interfaz que permite al usuario interactuar con el micro-controlador sin conocer mas a fondo su funcionamiento,
+con este proposito fue implementado utilizando en Framework QT(C++)\cite{QT} en su versión Open-Source, al estar basado en C++ en cuanto a estabilidad y rendimiento se refiere es una de las mejores opciones a tener en consideración.
+
+El software permite la captura y procesamiento de información proveniente de la comunicación serial entre el micro-controlador Arduino y el ordenador,
+El usar un framework como Qt facilita en gran parte la creación de interfaces gráficas, capa de funcionalidad que C++ no contiene por defecto, esto posibilita una rápida integración entre la parte lógica y visual del software a desarrollar.
+Debido a el tipo de proyecto a implementar la metodología usada para el desarrollo fue el método ágil, al ser una solución de software con requisitos funcionales poco definidos, más que nada pautas del resultado esperado en donde el programador pasa a ser es el principal diseñador definiendo por sí mismo la distribución y comportamiento de los componentes del software.
+
+En etapas tempranas del desarrollo se implemento una interfaz que se tan solo se comunicara con el puerto serial, pudiendo conectarse a este, y obtener la información que se encontrara disponible.
+Durante el desarrollo se incluyeron más opciones para una visualización mas agradable, junto con la parametrización de todos los elementos mostrados, permitiendo al usuario activar y desactivar opciones según sea el caso.
+
+La comunicación serial entre el dispositivo-ordenador no solo es usada para leer los datos en el puerto, también es posible enviar los parámetros para realizar la configuración del sensor, para definir las opciones que consideradas más relevantes tales como: la frecuencia de muestreo, el uso del filtro Pasa-Bajo y los rangos tanto Acelerómetro como Giroscopio, usando una interfaz sencilla e intuitiva ver Figura (\ref{fig:ajustessensores}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{images/ajustesSensores}
+	\caption{Ventana Ajustes Sensores}
+	\label{fig:ajustessensores}
+\end{figure}
+
+Al momento de iniciar la aplicación si es que son detectados dispositivos en el puerto Serial se lanza la interfaz principal ver Figura (\ref{fig:mainwindow}), en donde se elige un paciente y la prueba a realizar.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{images/mainwindow}
+	\caption{Ventana Principal}
+	\label{fig:mainwindow}
+\end{figure}
+
+Luego de seleccionada la prueba, según el tipo de prueba se permite configurar ciertos elementos, la interfaz fue pensada en ajustar la mayor cantidad de opciones sin sobrecargar demasiado ver Figura (\ref{fig:configurarPrueba}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{images/configurarPrueba}
+	\caption{Ventana Configuración Prueba}
+	\label{fig:configurarPrueba}
+\end{figure}
+
+De entre los elementos configurables existen los siguientes
+
+\begin{itemize}
+	\item \textbf{Orientación Sensores:} Es una de las principales configuraciones a tener en consideración, debido a que define como esta siendo situado el equipo, y a su vez como será analizada la información.
+	Existen 2 categorías de orientación:
+	\begin{itemize}
+		\item \textbf{Horizontal:} En donde se puede definir si la referencia esta hacia adelante, atrás, izquierda o derecha, si esta orientación es seleccionada el cable siempre esta conectado en la parte inferior del dispositivo.
+		\item \textbf{Vertical:} Solo fueron considerados 2 modos, ya que de por si la orientación horizontal es poco práctica para los estudios del balance.
+		Los modos disponibles son con la referencia arriba o abajo, considerando que el cable siempre sale hacia la derecha del dispositivo.
+	\end{itemize}
+	\item \textbf{Ajustes Objetivos:} En el gráfico principal se pueden desplegar objetivos para ser seguidos.
+	\begin{itemize}
+		\item \textbf{Cantidad de Objetivos:} Permite definir cuantos objetivos van a ser dibujados en pantalla, se debe tener en consideración los radios tanto de los objetivos, como del gráfico circular donde serán puestos, dado que si la cantidad de objetivos no es posible de dibujar, serán agregados la cantidad máxima posible sin que se intersecten.
+		\item \textbf{Generar en orden Aleatorio:} Los objetivos pueden ser puestos en posiciones al azar dentro del gráfico o seguir una trayectoria circular.
+		\item \textbf{Marcables en orden:} Define como se interacciona con los objetivos, si esta esta opción activada los objetivos parpadearán según el orden que fueron agregados permitiendo marcar solo uno, sino no parpadearán indicando que es posible marcar cualquier objetivo.
+		\item \textbf{Detener prueba al marcar todos:} Como su nombre lo indica es definido si al pasar por todos los objetivos es finalizada la prueba o continua.
+	\end{itemize}
+	
+	\item \textbf{Ajustes Finales} Son los ajustes referentes a si contara con un tiempo especifico para la prueba, a  y la opción de  para la representación.
+	\begin{itemize}
+		\item \textbf{Altura dispositivo:} La altura donde esta puesto el dispositivo, que servirá para los cálculos de desplazamientos realizados.
+		\item \textbf{Limitar el borde al gráfico:} Permite que la curva dibujada sobre el gráfico pueda salir o no del Radio Exterior de este.
+		\item \textbf{Tiempo Prueba:} La cantidad de segundos que durará la prueba, o si esta se realizará de tiempo infinito.
+	\end{itemize}
+\end{itemize}
+
+Nota: Algunos ajustes pueden interferir en el funcionamiento de otros, por ejemplo si es seleccionada la opción de Detener al marcar todos, pese a que el tiempo sea infinito la prueba terminará si se cumple la condición.
+
+
+Luego de realizar la configuración y presionando el botón Iniciar Prueba, se procede a desplegar la información obtenida, en forma de gráficos.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{images/graficoPrincipal}
+	\caption{Gráfico de Prueba}
+	\label{fig:graficoPrincipal}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\frame{\includegraphics[scale=0.3]{images/graficosensores}}
+	\caption{Gráficos de los sensores}
+	\label{fig:Graficosensores}
+\end{figure}
+
+Finalmente para el análisis de la información se dispone de herramientas intuitivas que permiten seleccionar intervalos, para el calculo de estadísticos de la prueba, media, máximos, mínimos, etc. ver Figura (\ref{fig:analsisGraficos}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{images/analisisGraficos}
+	\caption{Ejemplo Herramienta de Análisis}
+	\label{fig:analsisGraficos}
+\end{figure}
+
 
 \subsection{Tests}
 
@@ -675,7 +723,6 @@ Nota: Si la frecuencia de muestreo es menor a los FPS escogidos se enviarán tod
 	\label{eq:divisorFPS}
 	DivisorFPS=(int)\left(\frac{frecuenciaMuestreo}{FPS}\right)
 \end{equation}
-
 
 \subsubsection{Orientación Sensores}
 Al momento de realizar la captura de información sensorial, junto con la obtención del ángulo de inclinación deben ser consideradas referenciado tales como:
