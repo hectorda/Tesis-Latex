@@ -448,7 +448,7 @@ Debido a el tipo de proyecto a implementar la metodología usada para el desarro
 En etapas tempranas del desarrollo se implemento una interfaz que se tan solo se comunicara con el puerto serial, pudiendo conectarse a este, y obtener la información que se encontrara disponible.
 Durante el desarrollo se incluyeron más opciones para una visualización mas agradable, junto con la parametrización de todos los elementos mostrados, permitiendo al usuario activar y desactivar opciones según sea el caso.
 
-La comunicación serial entre el dispositivo-ordenador no solo es usada para leer los datos en el puerto, también es posible enviar los parámetros para realizar la configuración del sensor, para definir las opciones que consideradas más relevantes tales como: la frecuencia de muestreo, el uso del filtro Pasa-Bajo y los rangos tanto Acelerómetro como Giroscopio, usando una interfaz sencilla e intuitiva ver Figura \ref{fig:ajustessensores}.
+La comunicación serial entre el dispositivo-ordenador no solo es usada para leer los datos en el puerto, también es posible enviar los parámetros para realizar la configuración del sensor, para definir las opciones que consideradas más relevantes tales como: la frecuencia de muestreo, el uso del filtro Pasa-Bajo y los rangos tanto Acelerómetro como Giroscopio, usando una interfaz sencilla e intuitiva ver Figura (\ref{fig:ajustessensores}).
 
 \begin{figure}[H]
 	\centering
@@ -514,7 +514,8 @@ Herramientas de Análisis Gráficas: ventanas desplegables acompañadas a un gr�
 	\label{fig:graficoPrincipal}
 \end{figure}
 
-\subsection{Cálculo Ángulo} Para efectos de análisis o representación final, a partir de las variaciones de aceleración y velocidad angular detectadas por los sensores existe la opción de calcular el ángulo, que es un indicador equivalente a la inclinación que ha realizado el sujeto.
+\subsection{Cálculo Ángulo} 
+Para efectos de análisis o representación final, a partir de las variaciones de aceleración y velocidad angular detectadas por los sensores existe la opción de calcular el ángulo, que es un indicador equivalente a la inclinación que ha realizado el sujeto.
 
 Para ello existen distintos métodos usando la información obtenida, tales como:
 
@@ -617,7 +618,7 @@ Basándonos en que la posición bípeda-quieta puede ser representada como un p�
 Para el cálculo del desplazamiento usando la variación angular se consideraron los siguientes métodos. 
 
 \subsubsection{Cálculo Proyección del Ángulo}
-Para obtener la distancia proyectada en el eje horizontal, usando trigonometría tomando la altura $h$ como la distancia desde el suelo hasta donde fue puesto el sensor como el equivalente a la hipotenusa de un triángulo rectángulo, como se muestra en la Figura (\ref{fig:proyeccion}), al aplicar la función $\sin$ del ángulo en grados obtenido mediante el filtro aplicado, junto con ponderar el valor obtenido por la altura $h$ (hipotenusa del triángulo), el valor resultante equivale a la distancia $d$ correspondiente al desplazamiento del centro de masa estimado, en la cual su unidad de medida es la misma usada para describir la altura $h$ en general centímetros.
+Para obtener la distancia proyectada en el eje horizontal, usando trigonometría tomando la altura $h$ como la distancia desde el suelo hasta donde fue puesto el sensor como el equivalente a la hipotenusa de un triángulo rectángulo, como se muestra en la Figura (\ref{fig:proyeccion}), se puede calcular usando la Ecuación (\ref{eq:proyeccion}), aplicando la función $\sin$ del ángulo en grados obtenido mediante el filtro aplicado, junto con ponderar el valor obtenido por la altura $h$ (hipotenusa del triángulo), el valor resultante equivale a la distancia $d$ correspondiente al desplazamiento del centro de masa estimado, en la cual su unidad de medida es la misma usada para describir la altura $h$ en general centímetros.
 
 \begin{figure}[H]
 	\centering
@@ -631,8 +632,10 @@ Para obtener la distancia proyectada en el eje horizontal, usando trigonometría
 	d=\sin(\alpha)*h
 \end{equation}
 
+
+
 \subsubsection{Cálculo del Recorrido Curvo}
-	
+La longitud del arco generado por el ángulo puede ser considerado un tipo de desplazamiento, 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.5]{images/calculoRecorridoCurvo}
@@ -640,23 +643,20 @@ Para obtener la distancia proyectada en el eje horizontal, usando trigonometría
 	\label{fig:recorridocurvo}
 \end{figure}
 
-
 \begin{equation}
 	\label{eq:recorridocurvo}
 	d=\left(\frac{\alpha*2\pi}{360}\right)*h
 \end{equation}
 
 
-
-
 \subsubsection{Comparación Cálculo Recorrido Curvo vs Proyección}
 Al comparar los métodos anteriormente mencionados para el cálculo del desplazamiento, estos se comportan de forma similar en ángulos pequeños, pero al aumentar el valor del ángulo se comienza a crecer exponencialmente el desplazamiento calculado por el recorrido curvo frente al obtenido por proyección, lo que nos da a concluir que ambos métodos entregan en ángulos pequeños desplazamientos similares, pero al aumentar el ángulo el comportamiento es diferente.
 
-Por lo tanto se debe tener en consideración al momento de escoger con que método se realizará el análisis, ya que con ambos se puede interpretar el desplazamiento.
+Por lo tanto se debe tener en consideración al momento de escoger con que método se realizará el calculo, ya que con ambos se puede interpretar el desplazamiento.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.7]{images/DiferenciaRec-Pro}
+	\includegraphics[scale=0.8]{images/DiferenciaRec-Pro}
 	\caption{Ejemplo Diferencia distancia Recorrido Curvo - Distancia proyección}
 	\label{fig:diferenciarec-pro}
 \end{figure}
@@ -665,9 +665,17 @@ Por lo tanto se debe tener en consideración al momento de escoger con que méto
 
 \subsection{Principales Desafíos}
 \subsubsection{Representación Tiempo Real}
-La interfaz gráfica es una parte integral de el sistema, pasando a ser la principal fuente de información para la retroalimentación, junto con el lugar donde mayormente interviene el usuario de este tipo de sistemas, por lo tanto el no poder desplegar la información a tiempo, o que esta sea poco fiable es un gran problema. Se planteo inicialmente en graficar cada una de las salidas tanto del acelerómetro como del giroscopio en donde se representarían 6 variables a una velocidad igual a la velocidad de muestreo, lo que en la práctica no resulta demasiado bien. Al representar en gráficos a frecuencias muy altas es decir 100hz o superior, multiplicado por la cantidad de datos que se estén representando, junto con el procesamiento interno para mostrar esos datos, se genera una sobrecarga en la parte gráfica, lo que conlleva a ralentizar el proceso, generando perdidas de información y fidelidad al desplegar la información en tiempo real.
+La interfaz gráfica es una parte integral de el sistema, pasando a ser la principal fuente de información para la retroalimentación, junto con el lugar donde mayormente interviene el usuario del sistema, entonces el no poder desplegar la información a tiempo, o que esta sea poco representativa es un gran problema. Se planteo inicialmente en graficar cada una de las salidas tanto del acelerómetro como el giroscopio en donde se representarían 6 variables según la frecuencia de muestreo, lo que en la práctica no resulta demasiado bien. Al representar en gráficos a frecuencias muy altas es decir 100hz o superior, multiplicado por la cantidad de datos que se estén representando, junto con el procesamiento interno para mostrar esos datos, se genera una sobrecarga en la parte gráfica, lo que conlleva a ralentizar el proceso, generando perdidas de información y fidelidad al desplegar en tiempo real.
 
-Para dar solución al problema, se implemento la opción de graficar un porcentaje de la información recibida en base a la frecuencia de muestreo seleccionada para la captura de información, con esto se asegura que la representación gráfica en tiempo real no sea un problema.
+Para dar solución al problema, se implemento la opción de graficar un porcentaje de la información recibida en base a la frecuencia de muestreo seleccionada para la captura de información, con esto se asegura que la representación gráfica en tiempo real no sea un problema. Para ello a partir de la frecuencia de muestreo escogida para la prueba se calcula cada cuantas muestras debe ser enviado al gráfico principal, con el fin de no entorpecer la prueba ver Ecuación (\ref{eq:divisorFPS}), después de realizar el cálculo, del total de muestras obtenidas aplicando módulo del $DivisorFPS$, si el resultado del módulo es 0 se envía el dato.
+
+Nota: Si la frecuencia de muestreo es menor a los FPS escogidos se enviarán todas las muestras considerando el resultado de la Ecuación (\ref{eq:divisorFPS}) = 1.
+
+\begin{equation}
+	\label{eq:divisorFPS}
+	DivisorFPS=(int)\left(\frac{frecuenciaMuestreo}{FPS}\right)
+\end{equation}
+
 
 \subsubsection{Orientación Sensores}
 Al momento de realizar la captura de información sensorial, junto con la obtención del ángulo de inclinación deben ser consideradas referenciado tales como:
