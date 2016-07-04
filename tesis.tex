@@ -49,7 +49,6 @@
 	}
 }
 
-
 \pagestyle{headings}
 
 \begin{document}
@@ -207,21 +206,67 @@ El costo del sistema, respecto a las soluciones de mercado (Biodex- Balance SD),
 Desde el punto de vista disciplinar (Ciencias de la Ingeniería), este proyecto materializa trabajos de investigación y colaboración transdisciplinario entre la Facultad de Ingeniería y la Facultad de Salud de la UCM. Además posiciona a los Ingenieros Informáticos como profesionales capaces de adecuarse a diferentes contextos mediante soluciones tecnológicas.
 
 \subsection{Organizaci\'on de la Tesis}
-
+\textcolor{red}{falta}
 
 
 \section{Estado del Arte}
+
+Mas de un tercio de la población mayor de 65 años notifica algunos problemas con el balance o
+deambulación. Los pacientes con trastornos neurológicos o musculoesqueléticos son aún más propensos a tener problemas de equilibrio que afectan a su movilidad. La complejidad del control del equilibrio resultados en muchos tipos diferentes de problemas de equilibrio que necesitan la evaluación clínica sistemática para un tratamiento eficaz.
+
+\subsection{Estandares Estabilometría Clínica}
+La estabilometría corresponde al estudio del Centro de Presión (COP) para determinar deficiencias posturales que perjudican el Balance.
+
+\subsubsection{Mediciones} Existen estándares respecto a las características necesarias para la medición del COP \cite{scoppa_clinical_2013}.
+
+Varias declaraciones sobre la cuestión sigue siendo objeto de debate de la normalización estabilometría fueron acordados por el ISPGR (International Society for Posture and Gait Research).
+Se definió un conjunto de características metrológicas para las plataformas estabilométricas.
+Basándose tanto en la práctica y verificación experimental se acordó que, para obtener una apropiada
+precisión y sensibilidad:
+\begin{itemize}
+	\item El intervalo de adquisición no debe ser inferior a 25s.
+	\item La frecuencia de muestreo debe ser de al menos 50 Hz.
+	\item Estándares Técnicos:
+	\begin{table}[H]
+		\centering
+		\label{table:mediciones}
+		\begin{tabular}{|c|c|}			
+			\hline \textbf{Variable} & \textbf{Valor} 	\\ 
+			\hline Exactitud 	& $>$ 0.1 mm 		\\ 
+			\hline Presición 	& $>$ 0.05 mm 		\\ 
+			\hline Resolución 	& $>$ 0.05 mm 		\\ 
+			\hline Ancho Frecuencia & 0.01–10 Hz	\\ 
+			\hline 			
+		\end{tabular}
+		\caption{Estándares Técnicos Mediciones}
+	\end{table}	  
+\end{itemize}
+
+\subsubsection{Instrumentos} Entre instrumentos de medición utilizados para el estudio del Balance estan incluidos:
+
+\begin{itemize}
+	\item \textbf{Kistler:} Es un Gold Standard  en lo referente a estabilometría\cite{donath_testing_2012}, es una plataforma de fuerza de dimensiones
+	0,4m por 0,6m que consta de cuatro 	transductores piezoeléctricos, situados en las esquinas. Estos transductores son capaces de medir las fuerzas de reacción del suelo en los planos verticales medio-lateral (x) , antero-posterior (y) tal como muestra la Figura (\ref{fig:Kistler}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/Kistler}
+	\caption{Calculo COP Kistler}
+	\label{fig:Kistler}
+\end{figure}
+
+\item \textbf{Balance SD?:} 
+\textcolor{red}{Falta}
+	 
+\end{itemize}
+
+\subsection{IMU's}
+\textcolor{red}{Falta}
+
 \subsection{Estudio del Balance usando Sensores Inerciales}
 El control del equilibrio es complejo e implica el mantenimiento de posturas \cite{mancini_relevance_2010}, lo que facilita el movimiento y recuperar el equilibrio. Control de balance consiste en controlar el centro de masa del cuerpo  por su entre los límites de estabilidad. Evaluaciones clínicas del equilibrio pueden ayudar a evaluar el riesgo de caídas y / o determinar las causas de los trastornos del equilibrio subyacente. 
 La mayoría de las escalas de valoración del equilibrio funcional evaluar caída
 el riesgo y la necesidad de rehabilitación equilibrio, pero no diferenciar los tipos de déficits de la balanza . Un enfoque de sistema para la evaluación clínica equilibrio puede diferenciar diferentes tipos de trastornos del equilibrio y un enfoque fisiológico puede determinar los mecanismos subyacentes sensoriomotoras contribuye a equilibrar trastornos. Las medidas objetivas de equilibrio valiéndose de medios informáticos y sensores inerciales portátiles pueden traer más sensible, específico y sensible a las pruebas de equilibrio Práctica clinica.
-Un tercio a la mitad de la población mayor de 65 años notifica algunos problemas con el balance o
-deambulación. Los pacientes con trastornos neurológicos o musculoesqueléticos son aún más propensos a tener problemas de equilibrio que afectan a su movilidad. La complejidad del control del equilibrio resultados en muchos tipos diferentes de problemas de equilibrio que necesitan la evaluación clínica sistemática para un tratamiento eficaz.
-
-\subsection{Estandarización de Instrumentos}
-\
-Clinical stabilometry standardization\cite{scoppa_clinical_2013}
-
 
 
 \section{Marco Teórico}
@@ -387,14 +432,13 @@ Luego de realizar la configuración de los registros del MPU6050, se deben leer 
 	
 \end{itemize}
 
-\subsection{Arduino}
-\textcolor{red}{Editar}
-Arduino\cite{ARDUINO} es una plataforma de hardware de código abierto, basada en una sencilla placa con entradas y salidas, analógicas y digitales, con un entorno de desarrollo basado en el lenguaje de programación Processing, donde sus principales características son:
+\subsection{Microcontroladores Arduino}
+Arduino\cite{ARDUINO} es una plataforma de hardware de código abierto, basada en una sencilla placa con entradas y salidas, analógicas y digitales, con un entorno de desarrollo basado en el lenguaje de programación C++, donde sus principales características son:
 \begin{itemize}
 	\item \textbf{Barato:} Las placas Arduino son relativamente baratas comparadas con otras plataformas microcontroladoras. La versión menos cara del modulo Arduino puede ser ensamblada a mano, e incluso los módulos de Arduino preensamblados cuestan menos de 50\$.
 	\item \textbf{Multiplataforma:} El software de Arduino se ejecuta en sistemas operativos Windows, Macintosh OSX y GNU/Linux. La mayoría de los sistemas microcontroladores están limitados a Windows.
 	\item \textbf{Entorno de programación simple y claro:} El entorno de programación de Arduino es fácil de usar para principiantes, pero suficientemente flexible para que usuarios avanzados puedan aprovecharlo también. Para profesores, está convenientemente basado en el entorno de programación Processing, de manera que estudiantes aprendiendo a programar en ese entorno estarán familiarizados con el aspecto y la imagen de Arduino.
-	Código abierto y software extensible: El software Arduino está publicado como herramientas de código abierto, disponible para extensión por programadores experimentados. El lenguaje puede ser expandido mediante librerías C++, y la gente que quiera entender los detalles técnicos pueden hacer el salto desde Arduino a la programación en lenguaje AVR C en el cual está basado. De forma similar, puedes añadir código AVR-C directamente en tus programas Arduino si quieres.
+	\item \textbf{Código abierto y software extensible:} El software Arduino está publicado como herramientas de código abierto, disponible para extensión por programadores experimentados. El lenguaje puede ser expandido mediante librerías C++, y la gente que quiera entender los detalles técnicos pueden hacer el salto desde Arduino a la programación en lenguaje AVR C en el cual está basado. De forma similar, puedes añadir código AVR-C directamente en tus programas Arduino si quieres.
 	\item \textbf{Código abierto y hardware extensible:} El Arduino está basado en microcontroladores ATMEGA8 y ATMEGA168 de Atmel. Los planos para los módulos están publicados bajo licencia Creative Commons, por lo que diseñadores experimentados de circuitos pueden hacer su propia versión del módulo, extendiéndolo y mejorándolo. Incluso usuarios relativamente inexpertos pueden construir la versión de la placa del módulo para entender como funciona y ahorrar dinero.
 \end{itemize}
 
@@ -437,24 +481,23 @@ Para configurar los 4 parámetros requeridos debe ser recibida una cadena por el
 Una vez se completa la configuración se procede a la lectura de los registros para obtener los valores RAW tanto acelerómetro como giroscopio para finalmente enviar mediante comunicación serial el valor resultante expresado en su unidad física correspondiente al ser dividido por la sensibilidad según el rango previamente configurado.
 
 
-
-
 \subsection{Cálculo Ángulo} 
 Para efectos de análisis o representación final, a partir de las variaciones de aceleración y velocidad angular detectadas por los sensores existe la opción de calcular el ángulo, que es un indicador equivalente a la inclinación que ha realizado el sujeto.
 
 Para ello existen distintos métodos usando la información obtenida, tales como:
 
 
-\subsubsection{Cálculo Ángulo con Acelerómetro} Si es utilizado acelerómetro este nos entrega el ángulo exacto pero al ser producida cualquier variación en la aceleración en cualquiera de sus 3 ejes de medición que no sea producto tan solo de la fuerza gravitacional será interpretada como un cambio de rotación, por lo cual se generan medida erráticas debido a los cambios de aceleración constantes que son generados al girar la IMU como se muestra en el ejemplo para el cálculo de los ángulos X ver ecuación (\ref{eq:calculoanguloXsensorvertical}) e Y ver ecuación (\ref{eq:calculoanguloYsensorvertical}) usando el sensor en posición vertical con la referencia hacia atrás.
+\subsubsection{Cálculo Ángulo con Acelerómetro} Si es utilizado acelerómetro como inclinómetro este nos entrega el ángulo con gran exactitud pero al ser producida cualquier variación en la aceleración en cualquiera de sus 3 ejes de medición que no sea producto tan solo de la fuerza gravitacional será interpretada como un cambio de aceleración, lo cual genera medida erráticas debido a los cambios de aceleración constantes que son generados al girar/mover la IMU.
+Para los calculos del ángulo como se muestra en el ejemplo para el cálculo de los ángulos Medio-Lateral ver ecuación (\ref{eq:calculoanguloXsensorvertical}) e Antero-Posterior ver ecuación (\ref{eq:calculoanguloYsensorvertical}) usando el sensor en posición vertical con la referencia hacia atrás.
 
 \begin{figure}[H]
 	\begin{equation}
-		anguloX = \tan{\left(\frac{aceleracionX}{\sqrt{aceleracionZ^{2}+aceleracionY^{2}}}\right)}
-		\label{eq:calculoanguloXsensorvertical}
+	anguloML = \tan{\left(\frac{aceleracionX}{\sqrt{aceleracionZ^{2}+aceleracionY^{2}}}\right)}
+	\label{eq:calculoanguloXsensorvertical}
 	\end{equation}
 	\begin{equation}
-		anguloY = \tan{\left(\frac{aceleracionZ}{\sqrt{aceleracionX^{2}+aceleracionY^{2}}}\right)}
-		\label{eq:calculoanguloYsensorvertical}
+	anguloAP = \tan{\left(\frac{aceleracionZ}{\sqrt{aceleracionX^{2}+aceleracionY^{2}}}\right)}
+	\label{eq:calculoanguloYsensorvertical}
 	\end{equation}
 \end{figure}
 
@@ -490,16 +533,16 @@ Esta compuesto por la una unión de dos filtros diferentes:
 Todo lo anterior queda descrito usando la siguiente Ecuación (\ref{eq:ecuacionFiltroComplementario}):
 
 \begin{equation}
-	\label{eq:ecuacionFiltroComplementario}
-	angle = (0.98)*(angle+gyro*dt)+(0.02)*angle\_acc
+\label{eq:ecuacionFiltroComplementario}
+anguloActual = (1-\alpha)*(anguloAnterior+\omega*dt)+(\alpha)*anguloAcelerometro
 \end{equation}
 
 En donde cada uno de las variables representa lo siguiente:
 \begin{itemize}
-	\item \textbf{gyro:} Es el ángulo del Giroscopio que hemos calculado previamente.
-	\item \textbf{angle\_acc:} El ángulo calculado por los datos del Acelerómetro.
-	\item \textbf{dt:} Corresponde a la variación en segundos desde la ultima vez que se aplico el filtro para calcular el angulo.
-	\item \textbf{Coeficientes:}  0.98 y 0.02 pueden ser personalizados para aumentar o disminuir la contribución de cada sensor, pero se debe tener en consideración que la suma de ambos debe ser 1.
+	\item \textit{anguloAcelerometro:} El ángulo calculado mediante la aceleración obtenida por el Acelerómetro.
+	\item $\omega$: Es la velocidad angular obtenida por el Giroscopio que hemos calculado previamente.
+	\item \textit{dt:} Corresponde a la variación en segundos desde la ultima vez que se aplico el filtro para calcular el angulo.
+	\item $\alpha$: Representa la contribución realizada por cada ángulo, Si $\alpha$ es igual 0 el cálculo del ángulo se realiza con el giroscopio en caso contrario $\alpha$ igual a 1 corresponde al ángulo del acelerómetro.
 \end{itemize}
 
 \subsubsection{Filtro de Kalman discreto}
@@ -512,11 +555,10 @@ EL filtro de Kalman posee flexibilidad para ser utilizado tanto en tiempo contin
 La principal diferencia es la notación que utilizada en cada uno de los casos.
 Debido a que en la actualidad la mayoría de las aplicaciones de filtros es realizada en plataformas de tipo digital, y considerando el uso del filtro para la fusión de los sensores en este proyecto.
 
-Filtro usado en Fusion de Datos \cite{mau_how_2005} 
+Filtro usado en Fusión de Datos \cite{mau_how_2005} 
 El Filtro consiste en 2 estados Predicción y Actualización.
 
-aSDASD
-ASDASDSA LOREM
+\textcolor{red}{LOREM IPSUM}
 
 \begin{figure}[H]
 	\centering
