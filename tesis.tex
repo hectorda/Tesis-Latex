@@ -163,13 +163,16 @@
 
 %%%%%%%%%%%%%%%%%%%%% FIN  PORTADA COMISION   %%%%%%%%%%%%%%%%%%%%%%
 
-
+\thispagestyle{empty}
 \tableofcontents %Indice de Contenidos
+\thispagestyle{empty}
 \listoffigures
+\thispagestyle{empty}
 \listoftables
 
 \thispagestyle{empty}
 \pagebreak
+\setcounter{page}{1}
 
 \let\stdsection\section
 \renewcommand\section{\newpage\stdsection}
@@ -805,9 +808,5 @@ La solución fue a partir de la información de configuración FTDI\cite{FTDI} p
 
 \section{Bibliografía}
 \printbibliography[heading=none]
-
-\thispagestyle{empty}
-\pagebreak
-\newpage
 
 \end{document}
