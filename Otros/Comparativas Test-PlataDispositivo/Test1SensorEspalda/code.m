@@ -37,7 +37,7 @@ xlabel("Tiempo (seg)")
 title('Antero-Posterior')
 legend('Plataforma Kirstler','Dispositivo Proyeccion')
 
-figure(2)
+figure(2);
 plot(tiempoPlat,ML_Plat,'r',tiempoDispositivo,ML_Proy+traML,'g');
 ylabel("Desplazamiento COP(centimetros)")
 xlabel("Tiempo (seg)")
@@ -52,8 +52,26 @@ title('Antero-Posterior')
 legend('Plataforma Kirstler','Dispositivo RecorridoCurvo')
 
 figure(4);
-plot(tiempoPlat,ML_Plat,'r',tiempoDispositivo,ML_ReCur+traML,'g')
+plot(tiempoPlat,ML_Plat,'r',tiempoDispositivo,ML_ReCur+traML,'g');
 ylabel("Desplazamiento COP(centimetros)")
 xlabel("Tiempo (seg)")
 title('Medio-Lateral')
 legend('Plataforma Kirstler','Dispositivo RecorridoCurvo')
+
+%----------COMPARACION ENTRE PLATAFORMA Y DISPOSITIVO----------%
+
+pkg load signal
+
+figure(5);
+%plot(tiempoPlat,(AP_Plat-(decimate(AP_Proy,2)+traAP)),'g',tiempoPlat,(AP_Plat-(decimate(AP_ReCur,2)+traAP)),'r');
+plot(tiempoPlat,(AP_Plat-(decimate(AP_Proy,2)+traAP)))
+ylabel("Diferencia Desplazamiento COP(centimetros)")
+xlabel("Tiempo (seg)")
+title('Diferencia desplazamiento Antero Posterior')
+
+figure(6);
+%plot(tiempoPlat,(ML_Plat-(decimate(ML_Proy,2)+traML)),'g',tiempoPlat,(ML_Plat-(decimate(ML_ReCur,2)+traML)),'r');
+plot(tiempoPlat,(ML_Plat-(decimate(ML_Proy,2)+traML)))
+ylabel("Diferencia Desplazamiento COP(centimetros)")
+xlabel("Tiempo (seg)")
+title('Diferencia desplazamiento Medio-Lateral')
