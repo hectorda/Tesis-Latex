@@ -28,7 +28,7 @@ ML_ReCur=DispositivoRecorridoCurvo(inicioTDis:finTDis,4);
 
 %Translaciones AP y ML 
 traAP=0;
-traML=-1.2;
+traML=0;
 
 figure(1)
 plot(tiempoPlat,AP_Plat,'r',tiempoDispositivo,AP_Proy+traAP,'g')
@@ -60,6 +60,7 @@ legend('Plataforma Kirstler','Dispositivo RecorridoCurvo')
 
 %----------COMPARACION ENTRE PLATAFORMA Y DISPOSITIVO----------%
 
+diffPlataforma=sum(abs(diff(AP_Plat)))
 pkg load signal
 
 figure(5);

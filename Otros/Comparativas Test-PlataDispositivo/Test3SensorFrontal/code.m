@@ -27,11 +27,13 @@ AP_ReCur=DispositivoRecorridoCurvo(inicioTDis:finTDis,6);
 ML_ReCur=DispositivoRecorridoCurvo(inicioTDis:finTDis,4);
 
 %Translaciones AP y ML 
-traAP=-44;
-traML=-10;
+traAP=mean(AP_Proy);
+traML=-mean(ML_Proy);
+%traAP=-44;
+%traML=-10;
 
 figure(1)
-plot(tiempoPlat,AP_Plat,'r',tiempoDispositivo,AP_Proy+traAP,'g')
+plot(tiempoPlat,AP_Plat-mean(AP_Plat),'r',tiempoDispositivo,AP_Proy-traAP,'g')
 ylabel("Desplazamiento COP(centimetros)")
 xlabel("Tiempo (seg)")
 title('Antero-Posterior')

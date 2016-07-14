@@ -8,6 +8,8 @@ frecuenciaDispositivo=200;
 muestrasPlataforma=length(Plataforma(:,1));
 muestrasDispositivo=length(DispositivoRecorridoCurvo(:,2));
 
+%tiempoInicioDisp=0;
+%tiempoInicioPlat=0;
 tiempoInicioPlat=5.2;
 tiempoInicioDisp=26.9;
 
