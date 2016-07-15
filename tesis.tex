@@ -214,12 +214,14 @@ Desde el punto de vista disciplinar (Ciencias de la Ingeniería), este proyecto 
 
 \section{Estado del Arte}
 
-Más de un tercio de la población mayor de 65 años notifica algunos problemas con el balance o deambulación. Los pacientes con trastornos neurológicos o musculo-esqueléticos son aún más propensos a tener problemas de equilibrio que afectan a su movilidad. La complejidad del control del equilibrio proviene del resultado  de muchos tipos diferentes de problemas que necesitan la evaluación clínica sistemática para un tratamiento eficaz.
+Más de un tercio de la población mayor de 65 años notifica algunos problemas con el balance o deambulación. Los pacientes con trastornos neurológicos o musculo-esqueléticos son aún más propensos a tener problemas de equilibrio que afectan a su movilidad. La complejidad del control del equilibrio es resultado  de muchos tipos diferentes de problemas que necesitan la evaluación clínica sistemática para un tratamiento eficaz.
 El control del equilibrio es complejo e implica el mantenimiento de posturas \cite{mancini_relevance_2010}, mantener el movimiento y recuperar el equilibrio. El control de balance consiste en controlar el centro de masa del cuerpo entre los límites de estabilidad. Las evaluaciones clínicas del equilibrio pueden ayudar a evaluar el riesgo de caídas y/o determinar las causas de los trastornos del equilibrio subyacente. 
 La mayoría de las escalas de valoración del equilibrio funcional evaluar caída el riesgo y la necesidad de rehabilitación equilibrio, pero no diferenciar los tipos de déficits de la balanza . Un enfoque de sistema para la evaluación clínica equilibrio puede diferenciar diferentes tipos de trastornos del equilibrio y un enfoque fisiológico puede determinar los mecanismos subyacentes sensoriomotoras contribuye a equilibrar trastornos. Las medidas objetivas de equilibrio valiéndose de medios informáticos y sensores inerciales portátiles pueden traer más precisión, exactitud y sensibilidad que las pruebas de equilibrio clínicas.
 
+\textcolor{red}{Agregas mas referencias y algo relacionado con mi solucion}
 
-\subsection{Estandares Estabilometría Clínica}
+
+\subsection{Estándares Estabilometría Clínica}
 La estabilometría corresponde al estudio del Centro de Presión (COP) para determinar deficiencias posturales que perjudican el Balance.
 
 \subsubsection{Mediciones} Existen estándares respecto a las características necesarias para la medición del COP \cite{scoppa_clinical_2013}.
@@ -268,17 +270,17 @@ Basándose tanto en la práctica y verificación experimental se acordó que, pa
 \textcolor{red}{Falta}
 
 \subsection{Estudio del Balance usando Sensores}
-Recientemente, los sensores de movimiento weareable se desarrollaron para la robótica, la industria aeroespacial y en las mediciones biomédicas se han utilizado para medir el control del balance\cite{mancini_relevance_2010}. Estos sensores, con transferencia inalámbrica de datos , tienen el potencial de superar los principales inconvenientes de coste, tam	año y ubicación limitado de las pruebas computarizadas , así como permitir la medición objetiva de la oscilación postural y movimientos durante la ejecución de tareas.
+Recientemente, los sensores de movimiento ``weareables'' se han desarrollado para la robótica, industria aeroespacial y en las mediciones biomédicas se han utilizado para medir el control del balance\cite{mancini_relevance_2010}. Estos sensores, con transferencia inalámbrica de datos , tienen el potencial de superar los principales inconvenientes de coste, tamaño y ubicación limitado de las pruebas computarizadas , así como permitir la medición objetiva de la oscilación postural y movimientos durante la ejecución de tareas.
 
 Desde que se inicio la experimentación de sistemas de biofeedback para el control postural, los sistemas de tipo táctil y audio han recibido mucha menos atención que la retro-alimentación visual.
-Sin embargo, en los últimos años, el interés en sistemas táctiles y de audio para el control de la postura ha sido renovada, en parte debido a los avances en la tecnologías de procesamiento y detección de movimiento en tiempo real junto con las nuevas tendencias en dispositivos portátiles inalambricos que pueden ser ocupados durante todos los días. 
+Sin embargo, en los últimos años, el interés en sistemas táctiles y de audio para el control de la postura ha sido renovada, en parte debido a los avances en la tecnologías de procesamiento y detección de movimiento en tiempo real junto con las nuevas tendencias en dispositivos portátiles inalambricos que pueden ser usados durante todos los días. 
 En 2001, Wall et al. \cite{giansanti_energetic_2009} 
 
 En particular, Chiari et al. mostró, utilizando una plataforma de fuerza, que los sujetos mejoraron el equilibrio aprovechando el ABF (Audio Biofeed-back) y que ésta mejora fue mayor cuanto más grave era el desorden sensorial del sujeto. Otros estudios demostraron cómo este ABF mejora la estabilidad de la postura de los participantes con pérdida vestibular bilateral permitiendo gran cantidad de correcciones posturales.
 
 \textcolor{red}{Falta Referencia!!!}
 
-Los acelerómetros y/o giroscopios han sido exitosamente investigados para el seguimiento de movimiento,  detección de caídas, y para la medición de control de balance sólo recientemente se han utilizado también para la activación dispositivos de biofeedback vibro-táctil o ABF. Hasta ahora los acelerómetros y giroscopios no se han utilizado de forma regular en la investigación de la postura tras del éxito de la propuesta del dispositivo de ABF.
+Los acelerómetros y/o giroscopios han sido exitosamente utilizados \cite{mancini_relevance_2010} para el seguimiento de movimiento,  detección de caídas, y para la medición de control de balance sólo recientemente se han utilizado también para la activación dispositivos de biofeedback vibro-táctil o ABF. Hasta ahora los acelerómetros y giroscopios no se han utilizado de forma regular en la investigación de la postura pese al éxito de la propuesta del dispositivo de ABF.
 
 
 \section{Marco Teórico}
@@ -314,23 +316,27 @@ Toda la información obtenida debe estar asociado según un sistema específico 
 Para ello fueron considerados los principales sistemas utilizados para referenciar los ejes coordenados según los distintas situaciones:
 \begin{itemize}
 	
-	\item \textbf{Plano Sagital:} Se toma de referencia el cuerpo humano trazando línea una  vertical de referencia que teóricamente cruza el cuerpo por la parte media y central, a modo de plomada imaginaria, esta línea ayuda en la distinción de miembros o elementos en el «lado izquierdo» o «lado derecho», pero por ejemplo, en el caso del cuerpo humano, también es aplicable para determinar qué está «delante» o «detrás». El movimiento en sentido izquierdo o derecho (Medio-Lateral) y a su vez se referirá al movimiento adelante o atrás (Antero-Posterior).
-		\begin{figure}[H]
-			\centering
-			\includegraphics[width=0.4\textwidth]{images/sagital}
-			\caption{Ejemplo Plano Sagital}
-			\label{fig:sagital}
-		\end{figure}
-	
+	\item \textbf{Planos anatómicos} 
+		\subitem \textbf{Plano Sagital:}
+		 Se toma de referencia el cuerpo humano trazando línea una  vertical de referencia que teóricamente cruza el cuerpo por la parte media y central, a modo de plomada imaginaria, esta línea ayuda en la distinción de miembros o elementos en el «lado izquierdo» o «lado derecho».
+		 \subitem \textbf{Plano Frontal:} Forma un ángulo recto con los planos sagitales. En un ser humano, el plano medio coronal divide el cuerpo en posición de pie en dos mitades (frontal y dorsal, o anterior y posterior) mediante una línea imaginaria que corta ambos hombros.
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\textwidth]{images/planosAnatomicos}
+		\caption{Planos Anatómicos}
+		\label{fig:sagital}
+	\end{figure}
+
 	\item \textbf{Ejes del sensor:} Los ejes contenidos en el sensor son expresados en coordenadas X, Y ,Z, en donde según la orientación del sensor cualquiera de sus ejes puede ser paralelo a la gravedad de la tierra, que apunta hacia el centro de esta.
 \end{itemize}
 
 \subsection{Sistema microelectromecánico (MPU6050)}
-El MPU6050\cite{MPU6050} es un sistema Microelectromecánico (MEMS), es un dispositivo capaz de medir la velocidad angular y fuerza de gravedad gracias a estar compuesto por Giroscópico y Acelerómetro ambos de 3 Ejes, el hecho de poseer estos 2 sensores de movimiento indica que existen al menos 6 grados de libertad para utilizar al momento de obtener las mediciones provenientes de éste.
+El sistema Microelectromecánico (MEMS) MPU6050\cite{MPU6050}, es un dispositivo capaz de medir la velocidad angular y fuerza de gravedad gracias a estar compuesto por Giroscópico y Acelerómetro ambos de 3 ejes, el hecho de poseer estos 2 sensores de movimiento indica que existen al menos 6 grados de libertad para utilizar al momento de obtener las mediciones provenientes de éste.
 
 La tecnología utilizada MEMS patentada por InverSense, en el caso del giroscopio consiste en masas vibratorias verticalmente alineadas las cuales son usadas para crear un chip de bajo costo.
 
-El MPU6050 está diseñado para realizar seguimiento (Tracking) gracias a que posee un bajo consumo, es de bajo costo, y cumple con los requisitos de los teléfonos inteligentes, tabletas y sensores portátiles.
+El MPU6050 está diseñado para realizar seguimiento (Tracking) gracias a que posee un bajo consumo, es de bajo costo, y cumple con los requisitos de los teléfonos inteligentes, tabletas y sensores portátiles \cite{MPU6050}.
 La transmisión de datos con el microcontrolador es realizada únicamente mediante el protocolo I2C, el cual requiere de 2 líneas de conexión una para el envío de datos (SDA) y otra para el clock (SCL), las cuales varían dependiendo del modelo de microcontrolador, junto con la alimentación que consiste en la línea de voltaje (VCC) y conexión a tierra (GND).
 
 El acelerómetro incluido mide el movimiento lineal respecto a cada uno de sus tres ejes ver Figura (\ref{fig:MPU6050}), es decir la aceleración percibida por el movimiento y esta es expresada en proporción a la fuerza de gravedad (veces de g).
@@ -348,32 +354,49 @@ El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\r
 
 \begin{itemize}
 	
+	\item \textbf{Rango:} Poseen un rango configurable ambos sensores incluidos, tanto acelerómetro como giroscopio, el rango nos indica el dominio sobre el cual son adquiridos los datos, más concretamente los valores máximos y mínimos donde fluctúan la información obtenida.
+	
+	\item \textbf{Sensibilidad:} La sensibilidad describe la mínima variación medible, es decir la razón de cambio entre una variable entrante y el resultado de la variable saliente.
+	
 	\begin{table}[H]
 		\centering
-		\label{table:caracteristicassensor}
+		\label{table:caracteristicasSensor}
 		\begin{tabular}{|c|c|c|c|}
 			\hline
 			\multicolumn{2}{|c|}{Acelerómetro} &\multicolumn{2}{|c|}{Giroscopio}   \\
 			\hline
 			Rango (g)        & Sensibilidad (LSB/g)  & Rango (\grad/seg)     & Sensibilidad (LSB/\grad/seg)\\ \hline
-			$\pm 2$     &  16384 & 250   	& 131      		\\ 
-			$\pm 4$     &  8192  & 500  	& 65.5      	\\
-			$\pm 8$     &  4096  & 1000  	& 32.8       	\\
-			$\pm 16$    &  2048  & 2000   & 16.4      	\\ 
+			$\pm 2$     &  16384 & $\pm 250 $  	& 	131      	\\ 
+			$\pm 4$     &  8192  & $\pm 500 $ 	& 	65.5     	\\
+			$\pm 8$     &  4096  & $\pm 1000$  	& 	32.8       	\\
+			$\pm 16$    &  2048  & $\pm 2000$   & 	16.4      	\\ 
 			\hline
 		\end{tabular}
-		\caption{Características de los sensores}
+		\caption{Características de los sensores LSB: Bit Menos Significativo}
 	\end{table}
-	
-	\item \textbf{Rango:} Posee un rango configurable en los 2 sensores incluidos, tanto acelerómetro como giroscopio, el rango nos indica el dominio sobre el cual son adquiridos los datos, más concretamente los valores máximos y mínimos donde fluctúan la información obtenida.
-	
-	\item \textbf{Sensibilidad:} La sensibilidad describe la mínima variación medible, es decir la razón de cambio entre una variable entrante y el resultado de la variable saliente.
 	
 	\item \textbf{Variables:} Las variables entregadas por el Acelerómetro consiste en la aceleración lineal percibida en cada eje expresada en veces de g, y en el Giroscopio corresponde  a la velocidad angular dada por la variación de los grados en un instante de tiempo al girar sobre cada eje.
 	
 	\item \textbf{Frecuencia de Muestreo:} Nos describe la cantidad de datos que pueden ser obtenidos en un intervalo de tiempo, a su vez nos describe la diferencia de tiempo entre cada dato obtenido.
 	
 	\item \textbf{Resolución:} Consiste en la mínima variación generada en la variable medida y la cual los sensores son capaces de informar.
+	
+		\begin{table}[H]
+			\centering
+			\label{table:resolucionSensor}
+			\begin{tabular}{|c|c|c|c|}
+				\hline
+				\multicolumn{2}{|c|}{Acelerómetro} &\multicolumn{2}{|c|}{Giroscopio}   \\
+				\hline
+				Rango (g)        & Resolución ($\Delta$LSB/g)  & Rango (\grad/seg)     &  Resolución ($\Delta$LSB/(\grad/seg))\\ \hline
+				$\pm 2$     &  $6.10351562e^{-5}$   &$\pm 250 $ 	& 	$7.633587786e^{-3}$ 	\\ 
+				$\pm 4$     &  $1.22070313e^{-4}$  	&$\pm 500 $ 	& 	$1.526717557e^{-2}$    	\\
+				$\pm 8$     &  $2.44140625e^{-4}$ 	& $\pm 1000$  	& 	$3.048780488e^{-2}$		\\
+				$\pm 16$    &  $4.88828125e^{-4}$   & $\pm 2000$    & 	$6.097560976e^{-2}$     \\ 
+				\hline
+			\end{tabular}
+			\caption{Resolución de los sensores}
+		\end{table}
 	
 \end{itemize}
 
@@ -390,7 +413,7 @@ Por defecto el MPU6050 viene configurada con los parámetros básicos para reali
 	
 	En la ecuación (\ref{eq:sampleratediv}) factores, tales como la velocidad del puerto serial pueden influir en el resultado, pero cambiando los datos almacenados en el registro \textbf{SMPRT\_DIV}, con valores entre 0 y 255, el valor de $Gyroscope Output Rate$ depende directamente del estado del filtro pasa-bajo, en caso de estar desactivado, el valor de $Gyroscope Output Rate$ sería 8Khz, en cambio sí está activado el $Gyroscope Output Rate$ tomaría el valor de 1Khz con lo cual haciendo los cálculos necesarios al estar desactivado el filtro pasa-bajo la frecuencia de muestreo variará entre las 8000 y 31 muestras/seg de forma teórica, al contrario en caso de estar activado el filtro, la fórmula para el cálculo de la frecuencia de muestreo fluctuaría entre las 1000 y 3.9 muestras/seg, por cada uno de los 6 datos obtenibles.
 	
-	Nota: Hay que tener en consideración que el valor obtenido para la frecuencia de muestreo es válido principalmente para el giroscopio, ya que para el acelerómetro se maneja con su propia frecuencia de que es siempre de 1Khz por ende si la frecuencia de muestreo es mayor a 1Khz se pueden repetir valores de en la salida del acelerómetro.
+	Nota: Hay que tener en consideración que el valor obtenido para la frecuencia de muestreo es válido principalmente para el giroscopio, ya que para el acelerómetro se maneja con su propia frecuencia de que es siempre de 1Khz por ende si la frecuencia de muestreo es mayor a 1Khz se pueden repetir valores en la salida del acelerómetro.
 	
 	\item \textbf{Configurar Giroscopio:} El registro GYRO\_CONFIG permite el cambio de los rangos para la obtención de la velocidad angular, con lo cual aumentamos o disminuimos de forma inversa la sensibilidad del Giroscopio. En el interior de este registro específicamente en los bits 3 y 4 del registro deben ser ingresados los valores en binario de los números 0, 1, 2 o 3 para configurar los cuatro rangos disponibles 250\grad/seg, 500\grad/seg, 1000\grad/seg y 2000\grad/seg. respectivamente.
 	
@@ -448,7 +471,7 @@ Luego de realizar la configuración de los registros del MPU6050, se deben leer 
 \subsection{Microcontroladores Arduino}
 Arduino\cite{ARDUINO} es una plataforma de hardware de código abierto, basada en una sencilla placa con entradas y salidas, analógicas y digitales, con un entorno de desarrollo basado en el lenguaje de programación C++, donde sus principales características son:
 \begin{itemize}
-	\item \textbf{Barato:} Las placas Arduino son relativamente baratas comparadas con otras plataformas microcontroladoras. La versión menos cara del módulo Arduino puede ser ensamblada a mano, e incluso los módulos de Arduino preensamblados cuestan menos de 50\$.
+	\item \textbf{Bajo Coste:} Las placas Arduino son relativamente de bajo coste comparadas con otras plataformas microcontroladoras Handy Board, Basic Stamp\textregistered. La versión menos cara del módulo Arduino puede ser ensamblada a mano, e incluso los módulos de Arduino preensamblados cuestan menos de 50\$.
 	\item \textbf{Multiplataforma:} El software de Arduino se ejecuta en sistemas operativos Windows, Macintosh OSX y GNU/Linux. La mayoría de los sistemas microcontroladores están limitados a Windows.
 	\item \textbf{Entorno de programación simple y claro:} El entorno de programación de Arduino es fácil de usar para principiantes, pero suficientemente flexible para que usuarios avanzados puedan aprovecharlo también. Para profesores, está convenientemente basado en el entorno de programación Processing, de manera que estudiantes aprendiendo a programar en ese entorno estarán familiarizados con el aspecto y la imagen de Arduino.
 	\item \textbf{Código abierto y software extensible:} El software Arduino está publicado como herramientas de código abierto, disponible para extensión por programadores experimentados. El lenguaje puede ser expandido mediante librerías C++, y la gente que quiera entender los detalles técnicos pueden hacer el salto desde Arduino a la programación en lenguaje AVR C en el cual está basado. De forma similar, puedes añadir código AVR-C directamente en tus programas Arduino si quieres.
@@ -764,6 +787,16 @@ Finalmente para el análisis de la información se dispone de herramientas intui
 
 
 \subsection{Tests}
+Contraste vs Plataforma de Fuerza Kistler
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{images/Antero-PosteriorEspalda}
+	\caption{Prueba Antero-Posterior Dispositivo Espalda}
+	\label{fig:anteroPosteriorEspalda}
+\end{figure}
+
+
+
 
 \subsection{Principales Desafíos}
 \subsubsection{Representación Tiempo Real}
