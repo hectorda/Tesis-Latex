@@ -39,7 +39,7 @@ plot(tiempoPlat,AP_Plat-traAPPlat,'r',tiempoDispositivo,AP_Proy-traAPPro,'g')
 ylabel("Desplazamiento COP(centimetros)")
 xlabel("Tiempo (seg)")
 title('Antero-Posterior')
-legend('Plataforma Kirstler','Dispositivo Proyeccion')
+legend('Plataforma Kirstler','Dispositivo')
 
 figure(2);
 plot(tiempoPlat,ML_Plat-traMLPlat,'r',tiempoDispositivo,ML_Proy-traMLPro,'g');
