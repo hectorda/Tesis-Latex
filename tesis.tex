@@ -481,7 +481,7 @@ Arduino\cite{ARDUINO} es una plataforma de hardware de código abierto, basada e
 
 
 \subsection{Framework QT}
-Qt es un Framework basado en C++, tiene disponibilidad multiplataforma- escritorio, móvil y sistemas embebidos.
+Qt\cite{QT} es un Framework basado en C++, tiene disponibilidad multiplataforma- escritorio, móvil y sistemas embebidos.
 Posee las bibliotecas bases de C++  junto a librerías y herramientas de desarrollo propias de Qt, en donde se incluye IDE Qt Creator, y herramientas de productividad .
 El entorno de desarrollo (IDE) del framework de C++ Qt  es Qt Creator en donde se incluyen las herramientas para la administración de los ficheros .h y .cpp usados en C++ junto con las opciones de compilación, ejecución y depuración del software.
 
@@ -489,11 +489,11 @@ El entorno de desarrollo (IDE) del framework de C++ Qt  es Qt Creator en donde s
 \section{Desarrollo}
 \subsection{Introducción}
 
-A partir de la noción general que intrínsecamente cada uno posee de un estudio del balance y complementado con las ideas de herramientas o técnicas ya existentes que intentan solventar mediante diversos puntos de vista la problemática.
+A partir de la noción general que intrínsecamente cada uno posee acerca de estudio del balance y complementado con las ideas de herramientas o técnicas ya existentes que intentan solventar mediante diversos puntos de vista la problemática.
 
-Usando de referencia principalemente los equipamientos disponibles en el Laboratorio de Bio-mecánica que sirvieron de base para el desarrollo de la solución Hardware-Software fueron la plataforma de fuerza Kistler 9286b \cite{KISTLER} y balance SD, que en ambos casos dan una representación del movimiento del centro de masa/presión y utilizando la representación entregada se ideó una solución que opera de forma análoga a los dispositivos que ya son utilizados en el laboratorio con un software que permita entregar información de manera similar a lo que entregan estos sistemas, para aprovechar los conocimientos de los usuarios con el fin de disminuir la curva de aprendizaje del sistema implementado para que estos comprendan el software sin demasiado entrenamiento y a su vez la transición sea más satisfactoria para estos.
+Usando de referencia principalmente los equipamientos disponibles en el Laboratorio de Bio-mecánica que sirvieron de base para el desarrollo de la solución Hardware-Software fueron la plataforma de fuerza Kistler 9286b \cite{KISTLER} y balance SD, que en ambos casos dan una representación del movimiento del centro de masa/presión y utilizando la representación entregada se ideó una solución que opera de forma análoga a los dispositivos que ya son utilizados en el laboratorio con un software que permita entregar información de manera similar a lo que entregan estos sistemas, para aprovechar los conocimientos de los usuarios con el fin de disminuir la curva de aprendizaje del sistema implementado para que estos comprendan el software sin demasiado entrenamiento y a su vez la transición sea más satisfactoria para estos.
 
-En lo referente a Hardware se utilizó un sensor inercial MPU6050, el cual será puesto en el sujeto de prueba en una posición aproximada al centro de masa que éste a su vez captura la información del movimiento generado por el sujeto y lo trasmite al microcontrolador Arduino en donde se recibe y traduce la información obtenida del sensor además de transmitir al ordenador los datos obtenidos utilizando variables físicas, tanto aceleración y velocidad angular en donde finalmente el software del ordenador recibe la información y realiza el procesamiento para obtener el ángulo y desplazamiento junto con brindar la opción de efectuar análisis específicos de la información utilizando interfaces gráficas sencillas.
+En lo referente a Hardware se utilizó un sensor inercial MPU6050, el cual será puesto en el sujeto de prueba en una posición aproximada al centro de masa (55\% de la Altura) que éste a su vez captura la información del movimiento generado por el sujeto y lo trasmite al microcontrolador Arduino en donde se recibe y traduce la información obtenida del sensor además de transmitir al ordenador los datos obtenidos utilizando variables físicas, tanto aceleración y velocidad angular en donde finalmente el software del ordenador recibe la información y realiza el procesamiento para obtener el ángulo y desplazamiento junto con brindar la opción de efectuar análisis específicos de la información utilizando interfaces gráficas sencillas.
 
 
 \begin{figure}[H]
@@ -617,6 +617,85 @@ Los resultados demuestran la gran corrección que realizan los filtros frente a 
 	\caption{Comparativa Angulo Acelerómetro vs Filtro Kalman vs Filtro Complementario}
 	\label{fig:AnguloXvsFiltros}
 \end{figure}
+
+Los análisis que pueden ser concluidos respecto al cálculo del ángulo en lo representado por la gráfica anterior:
+\begin{itemize}
+	\item \textbf{Cálculo del ángulo sin usar filtros:} la diferencia entre los filtros vs el Cálculo sin el uso de estos, posee gran diferencia, en especial respecto al ruido apreciable que es reducido en gran medida por la incorporación de algún filtro.
+	\item \textbf{Aplicando filtros:} el uso del filtro mejora considerablemente el ruido obtenido, pero a su vez si son comparados ambos filtros disponibles, estos tienen un comportamiento similar, sin entrar mas en estudios acerca de cual es mas óptimo, es criterio del usuario el filtro que aplicará.
+\end{itemize}
+
+\subsection{Implementación de Algoritmos en Software}
+En el software fueron incluidos los 3 algoritmos descritos, para ser usados según el usuario lo requiera, para ello se implemento una interfaz sencilla ver Figura (\ref{fig:selectorFiltros}) en donde configurar tan solo algunos parámetros, los cuales con la configuración por defecto deberían funcionar sin mayores problemas.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9]{images/implementacionFiltros}
+	\caption{Selector de filtros en Software}
+	\label{fig:selectorFiltros}
+\end{figure}
+
+
+\subsubsection{Sin Filtro} El punto de partida para el cálculo del ángulo consiste en la implementación tan solo usando el acelerómetro, ya que este es utilizado como base y a la vez en cada iteración para los cálculos en cada uno de los filtros.
+
+A partir de la fórmula de la tangente, según la orientación escogida son conjugados los ejes leídos directamente de los sensores, con el fin de aplicar la formula en el sentido que corresponda.
+\begin{table}[H]
+\centering
+\label{table:calculoAnguloSinFiltro}
+	\begin{tabular}{|c|c|c|}
+		\hline 
+		\textbf{Orientación} & \textbf{Ángulo Medio-Lateral} & \textbf{Ángulo Antero-Posterior} \\ 
+		\hline 
+		Vertical Atrás & $\tan{\left(\frac{-aceleracionX}{\sqrt{aceleracionZ^{2}+aceleracionY^{2}}}\right)} $ &  $\tan{\left(\frac{aceleracionZ}{\sqrt{aceleracionX^{2}+aceleracionY^{2}}}\right)} $ \\ 
+		\hline 
+		Vertical Frente & $\tan{\left(\frac{aceleracionX}{\sqrt{aceleracionZ^{2}+aceleracionY^{2}}}\right)} $ &  $\tan{\left(\frac{-aceleracionZ}{\sqrt{aceleracionX^{2}+aceleracionY^{2}}}\right)} $ \\ 
+		\hline 
+		Vertical Derecha & $\tan{\left(\frac{-aceleracionZ}{\sqrt{aceleracionX^{2}+aceleracionY^{2}}}\right)} $ &  $\tan{\left(\frac{-aceleracionX}{\sqrt{aceleracionZ^{2}+aceleracionY^{2}}}\right)} $ \\ 
+		\hline 
+		Vertical Izquieda & $\tan{\left(\frac{aceleracionZ}{\sqrt{aceleracionX^{2}+aceleracionY^{2}}}\right)} $ &  $\tan{\left(\frac{aceleracionX}{\sqrt{aceleracionZ^{2}+aceleracionY^{2}}}\right)} $ \\ 
+		\hline 
+		Horizontal Arriba &  $\tan{\left(\frac{aceleracionY}{\sqrt{aceleracionX^{2}+aceleracionZ^{2}}}\right)} $ &  $\tan{\left(\frac{-aceleracionX}{\sqrt{aceleracionY^{2}+aceleracionZ^{2}}}\right)} $ \\ 
+		\hline 
+		Horizontal Abajo & $\tan{\left(\frac{aceleracionY}{\sqrt{aceleracionX^{2}+aceleracionZ^{2}}}\right)} $ &  $\tan{\left(\frac{aceleracionX}{\sqrt{aceleracionY^{2}+aceleracionZ^{2}}}\right)} $ \\ 
+		\hline 
+	\end{tabular}
+	\caption{Tabla cálculo ángulo usando Acelerómetro} 
+\end{table}
+
+\subsubsection{Filtro Complementario}
+A partir de la ecuación del Filtro complementario (\ref{eq:ecuacionFiltroComplementario}), los parámetros necesarios para el cálculo del ángulo usando este filtro, corresponden a los Ángulos Previamente Calculados Usando este mismo filtro y a su vez el Ángulo del acelerómetro que se calcula según la orientación ver Tabla (\ref{table:calculoAnguloSinFiltro}).
+Entonces el parámetro nuevo a considerar es la velocidad angular $\omega$ que debe ser utilizada según la orientación del dispositivo tal como se muestra en la siguiente tabla.
+
+\begin{table}[H]
+	\centering
+	\label{table:calculoAnguloFiltroComplementario}
+	\begin{tabular}{|c|c|c|}
+		\hline 
+		\textbf{Orientación} & \textbf{Ángulo Medio-Lateral} & \textbf{Ángulo Antero-Posterior} \\ 
+		\hline 
+		Vertical Atrás & $\omega= -GiroscopioZ$ &  $\omega= -GiroscopioX$ \\ 
+		\hline 
+		Vertical Frente & $\omega= GiroscopioZ$ &  $\omega= GiroscopioX$ \\
+		\hline 
+		Vertical Derecha & $\omega= GiroscopioX$ &  $\omega= -GiroscopioZ$ \\ 
+		\hline 
+		Vertical Izquieda & $\omega= -GiroscopioX$ &  $\omega= GiroscopioZ$ \\ 
+		\hline 
+		Horizontal Arriba & $\omega= GiroscopioX$ &  $\omega= GiroscopioY$ \\ 
+		\hline 
+		Horizontal Abajo & $\omega= -GiroscopioX$ &  $\omega= GiroscopioY$ \\ 
+		\hline 
+	\end{tabular}
+	\caption{Tabla cálculo ángulo usando Filtro Complementario} 
+\end{table}
+
+Nota: el $dt$ es obtenido a partir de la diferencia entre la muestra actual y la anterior, por ende para el ángulo de inicio es considerado sólo el obtenido por el acelerómetro.
+
+\subsubsection{Filtro Kalman}
+En base a la explicación de como implementarla por Kristian Sloth Lauszus
+\cite{kalmanTKJ}, junto con las librerías en C++ propuestas, la implementación del filtro de Kalman se realiza de manera sencilla, y los parámetros necesarios son exactamente los mismos utilizados por el filtro complementario con distinta nomenclatura, por ende solo serán nombrados, al igual que los casos anteriores es de gran importancia la orientación elegida, utilizando las mismas descritas en las tablas (\ref{table:calculoAnguloSinFiltro}) y (\ref{table:calculoAnguloFiltroComplementario}).
+Debe ser considerado el \textit{nuevoAngulo} entregado mediante el acelerómetro y además la \textit{nuevaVelocidadAngular} obtenida por el giroscopio, junto con la diferencia de tiempo \textit{dt}, que corresponden a exactamente los mismos datos usados por el filtro complementario. 
+
+
 
 \subsection{Cálculo del Desplazamiento}
 Basándonos en que la posición bípeda-quieta puede ser representada como un péndulo invertido, por lo tanto considerando la variación angular del movimiento pendular de un sujeto en las coordenadas antero-posterior y medio-lateral es aplicable la trigonometría para la obtención del desplazamiento.
