@@ -14,7 +14,8 @@
 \usepackage{xcolor}
 \usepackage{afterpage}
 \usepackage{float}
-\usepackage{subfigure}
+\usepackage{subcaption}
+\usepackage{multirow}
 \usepackage{verbatim} %Comentarios con \begin end comment
 \usepackage{csquotes}
 \usepackage{datetime} %Para obtener formato a la fecha
@@ -870,14 +871,101 @@ Con respecto a la comparación entre los paradigmas usados para el análisis del
 
 \subsubsection{Contraste vs Plataforma de Fuerza Kistler}
 
+El mejor método para verificar la fidelidad con la que la representación obtenida mediante el uso de acelerometría junto con los cálculos realizados para obtener la variación del centro de masa, es compararlo frente a un  gold standard en términos de análisis de balance y/o desplazamiento del COM.
+
+Para ello se realizaron diversas pruebas posicionando el dispositivo en el sujeto de prueba, para realizar las mediciones tanto en la plataforma Kistler, como en el dispositivo de BioFeedBack desarrollado para esta Tesis.
+
+El objetivo en las pruebas era medir principalmente la variación Antero-Posterior, ya que en términos de balance es la que mayor variación percibe.
+
+\begin{itemize}
+	\item \textbf{Prueba Dispositivo Espalda} La prueba
+	
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[width=1\linewidth]{images/pruebas/Espalda/Antero-Posterior}
+			\caption{Antero-Posterior}
+			\label{fig:anteroPosteriorEspalda}
+		\end{subfigure}%
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[width=1\linewidth]{images/pruebas/Espalda/Medio-Lateral}
+			\caption{Medio-Lateral}
+			\label{fig:medioLateralEspalda}
+		\end{subfigure}
+		\caption{Prueba Dispositivo Espalda}
+		\label{fig:pruebaEspalda}
+	\end{figure}
+	
+	\item \textbf{Prueba Dispositivo Lateral Izquierdo }
+	
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[width=1\linewidth]{images/pruebas/LateralIzquierdo/Antero-Posterior}
+			\caption{Antero-Posterior}
+			\label{fig:anteroPosteriorLateral}
+		\end{subfigure}%
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[width=1\linewidth]{images/pruebas/LateralIzquierdo/Medio-Lateral}
+			\caption{Medio-Lateral}
+			\label{fig:medioLateralIzquierdo}
+		\end{subfigure}
+		\caption{Prueba Dispositivo Lateral Izquierdo}
+		\label{fig:pruebaLateralIzquierdo}
+	\end{figure}
+	
+	
+	\item \textbf{Prueba Frontal}
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[width=1\linewidth]{images/pruebas/Frontal/Antero-Posterior}
+			\caption{Antero-Posterior}
+			\label{fig:anteroPosterioFrontal}
+		\end{subfigure}%
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[width=1\linewidth]{images/pruebas/Frontal/Medio-Lateral}
+			\caption{Medio-Lateral}
+			\label{fig:medioLateralFrontal}
+		\end{subfigure}
+		\caption{Prueba Dispositivo Frontal Sujeto}
+		\label{fig:pruebaLateralFrontal}
+	\end{figure}
+	
+	
+	\begin{table}
+		\label{table:resultadosPruebas}
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline
+			\multirow{2}{*}{Pruebas} &
+			\multicolumn{2}{c|}{Espalda} &
+			\multicolumn{2}{c|}{Izquierda} &
+			\multicolumn{2}{c|}{Frontal} \\
+			\cline{2-7}
+			& A.P & M.L & A.P  & M.L & A.P & M.L \\
+			\hline
+			Error Medio & 2.1\% & 2.1\% & 2.1\% & 2.1\% & 2.1\% & 2.1\% \\
+			\hline
+			Correlacion & 11.6\% & 11.6\% & 11.6\% & 11.6\% & 11.6\% & 11.6\% \\
+			\hline
+			D3 & 5.5\% & 5.5\% & 5.5\% & 5.5\% & 5.5\% & 5.5\% \\
+			\hline
+		\end{tabular}
+		\caption{Tabla resultados pruebas}
+	\end{table}
+	
+\end{itemize}
 
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=1]{images/Antero-PosteriorEspalda}
-	\caption{Prueba Antero-Posterior Dispositivo Espalda}
-	\label{fig:anteroPosteriorEspalda}
-\end{figure}
+
+
 
 \subsection{Principales Desafíos}
 \subsubsection{Representación Tiempo Real}
