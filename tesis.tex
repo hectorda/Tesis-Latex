@@ -874,11 +874,12 @@ Con respecto a la comparación entre los paradigmas usados para el análisis del
 El mejor método para verificar la fidelidad con la que la representación obtenida mediante el uso de acelerometría junto con los cálculos realizados para obtener la variación del centro de masa, es compararlo frente a un  gold standard en términos de análisis de balance y/o desplazamiento del COM.
 
 Para ello se realizaron diversas pruebas posicionando el dispositivo en el sujeto de prueba, para realizar las mediciones tanto en la plataforma Kistler, como en el dispositivo de BioFeedBack desarrollado para esta Tesis.
-
 El objetivo en las pruebas era medir principalmente la variación Antero-Posterior, ya que en términos de balance es la que mayor variación percibe.
+El paciente tenía una estatura de 1.78 cm, por lo cual el dispositivo en todas las pruebas intento ser ubicado a una altura de 97.6 cm, el aproximado del 55\%, los resultados expuestos en cada prueba fueron sincronizados temporalmente, ya que al iniciar las mediciones en ambos dispositivos existen tiempos de calibración/configuración distintos para cada una.
 
 \begin{itemize}
-	\item \textbf{Prueba Dispositivo Espalda} La prueba
+	\item \textbf{Prueba Dispositivo Espalda:} En la siguiente prueba el dispositivo fue ubicado en la espalda, en zona las vértebras lumbares del sujeto. Se realiza la medición en la Plataforma Kistler y en 
+	
 	
 	\begin{figure}[H]
 		\centering
@@ -897,6 +898,37 @@ El objetivo en las pruebas era medir principalmente la variación Antero-Posteri
 		\caption{Prueba Dispositivo Espalda}
 		\label{fig:pruebaEspalda}
 	\end{figure}
+	
+	Los resultados obtenidos de la prueba se puede apreciar la gran similitud del comportamiento de ambas curvas.
+	
+	\begin{comment}
+		\begin{table}[H]
+			\label{table:resultadosPruebaEspalda}
+			\centering
+			\begin{tabular}{|c|c|c|}
+				\hline
+				  &A.P & M.L \\
+				\hline
+				\shortstack{Coeficiente\\Correlación} & 0.98682 & 0.88232 \\
+				\hline
+				\shortstack{Valor Medio \\ (Diferencia)} & -0.059775 & 0.022444 \\
+				\hline
+				\shortstack{Mínima\\Diferencia (cm)} & 1.3128$e^{-4}$ & 1.9897$e^{-4}$ \\
+				\hline
+				\shortstack{Máxima\\Diferencia (cm)} & 3.1274 & 1.2254 \\
+				\hline
+				\shortstack{Porcentaje\\Semejanza} & 34.633\% & 80.700\% \\
+				\hline
+			\end{tabular}
+			\caption{Tabla resultados pruebas}
+		\end{table}
+
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=1]{images/pruebas/Espalda/diferenciaAntero-Posterior}
+	\end{figure}
+	\end{comment}	
 	
 	\item \textbf{Prueba Dispositivo Lateral Izquierdo }
 	
@@ -939,7 +971,7 @@ El objetivo en las pruebas era medir principalmente la variación Antero-Posteri
 	\end{figure}
 	
 	
-	\begin{table}
+	\begin{table}[H]
 		\label{table:resultadosPruebas}
 		\centering
 		\begin{tabular}{|c|c|c|c|c|c|c|}
@@ -951,11 +983,15 @@ El objetivo en las pruebas era medir principalmente la variación Antero-Posteri
 			\cline{2-7}
 			& A.P & M.L & A.P  & M.L & A.P & M.L \\
 			\hline
-			Error Medio & 2.1\% & 2.1\% & 2.1\% & 2.1\% & 2.1\% & 2.1\% \\
+			\shortstack{Coeficiente\\Correlación} & 0.98682 & 0.88232 & 0.95932 & 0.77737 & 0.95065 & 0.95926 \\
 			\hline
-			Correlacion & 11.6\% & 11.6\% & 11.6\% & 11.6\% & 11.6\% & 11.6\% \\
+			\shortstack{Valor Medio \\ (Diferencia)} & -0.059775 & 0.022444 & 0.29702 & -0.054382 & 0.47144 & 0.11151 \\
 			\hline
-			D3 & 5.5\% & 5.5\% & 5.5\% & 5.5\% & 5.5\% & 5.5\% \\
+			\shortstack{Mínima\\Diferencia (cm)} & 1.3128$e^{-4}$ & 1.9897$e^{-4}$ & 7.4105$e^{-6}$ & 4.4392$e^{-4}$ & 5.1245$e^{-5}$ & 5.8009$e^{-4}$ \\
+			\hline
+			\shortstack{Máxima\\Diferencia (cm)} & 3.1274 & 1.2254 & 5.7394 & 3.7113 & 5.6831 & 5.3845 \\
+			\hline
+			\shortstack{Porcentaje\\Semejanza} & 34.633\% & 80.700\% & 24.598\% & 61.092\% &19.356\% & 32.157\% \\
 			\hline
 		\end{tabular}
 		\caption{Tabla resultados pruebas}
