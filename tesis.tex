@@ -35,6 +35,8 @@
 
 \newcommand{\nombreTesis}{\textsc{sistema de evaluación y bio-feedback para Balance postural}}
 
+\newcommand{\nombreDispositivo}{Dispositivo de BioFeed-Back }
+
 \newdateformat{fecha}{%Método para obtener el mes y el año
 	\monthname[\THEMONTH] \THEYEAR}
 
@@ -869,7 +871,7 @@ Finalmente para el análisis de la información se dispone de herramientas intui
 \subsection{Resultados y Análisis}
 Con respecto a la comparación entre los paradigmas usados para el análisis del desplazamiento del centro de Masa, la utilización de sensores piezo-eléctricos para la presión ejercida por el sujeto, en contraste por el estudiado en esta Tesis, utilizando acelerometría para obtener la variación espacial del centro de masa, los resultados y análisis de las pruebas realizadas son los siguientes:
 
-\subsubsection{Contraste vs Plataforma de Fuerza Kistler}
+\subsubsection{Contraste Dispositivo vs Plataforma de Fuerza Kistler}
 
 El mejor método para verificar la fidelidad con la que la representación obtenida mediante el uso de acelerometría junto con los cálculos realizados para obtener la variación del centro de masa, es compararlo frente a un  gold standard en términos de análisis de balance y/o desplazamiento del COM.
 
@@ -878,8 +880,8 @@ El objetivo en las pruebas era medir principalmente la variación Antero-Posteri
 El paciente tenía una estatura de 1.78 cm, por lo cual el dispositivo en todas las pruebas intento ser ubicado a una altura de 97.6 cm, el aproximado del 55\%, los resultados expuestos en cada prueba fueron sincronizados temporalmente, ya que al iniciar las mediciones en ambos dispositivos existen tiempos de calibración/configuración distintos para cada una.
 
 \begin{itemize}
-	\item \textbf{Prueba Dispositivo Espalda:} En la siguiente prueba el dispositivo fue ubicado en la espalda, en zona las vértebras lumbares del sujeto. Se realiza la medición en la Plataforma Kistler y en 
-	
+	\item \textbf{Prueba Dispositivo Espalda:} En la siguiente prueba el dispositivo fue ubicado en la espalda, en zona las vértebras lumbares del sujeto. Se realiza la medición en la Plataforma Kistler en conjunto con el \nombreDispositivo creado con objetivo de Tesis.
+		
 	
 	\begin{figure}[H]
 		\centering
@@ -895,7 +897,7 @@ El paciente tenía una estatura de 1.78 cm, por lo cual el dispositivo en todas 
 			\caption{Medio-Lateral}
 			\label{fig:medioLateralEspalda}
 		\end{subfigure}
-		\caption{Prueba Dispositivo Espalda}
+		\caption{Prueba \nombreDispositivo ubicado Espalda}
 		\label{fig:pruebaEspalda}
 	\end{figure}
 	
@@ -930,8 +932,9 @@ El paciente tenía una estatura de 1.78 cm, por lo cual el dispositivo en todas 
 	\end{figure}
 	\end{comment}	
 	
-	\item \textbf{Prueba Dispositivo Lateral Izquierdo }
-	
+	\item \textbf{Prueba \nombreDispositivo ubicado Lateral Izquierdo:}
+	Para esta prueba el \nombreDispositivo fue ubicado en el lateral izquierdo del sujeto a altura de la cadera de éste.
+		
 	\begin{figure}[H]
 		\centering
 		\begin{subfigure}{.5\textwidth}
@@ -946,9 +949,12 @@ El paciente tenía una estatura de 1.78 cm, por lo cual el dispositivo en todas 
 			\caption{Medio-Lateral}
 			\label{fig:medioLateralIzquierdo}
 		\end{subfigure}
-		\caption{Prueba Dispositivo Lateral Izquierdo}
+		\caption{Prueba \nombreDispositivo ubicado Lateral Izquierdo}
 		\label{fig:pruebaLateralIzquierdo}
 	\end{figure}
+	
+	Los resultados obtenidos inicialmente se encontraban desplazados, es decir, las curvas no coincidían, pero al centrar los datos, las curvas del desplazamiento coinciden en gran porcentaje en cuanto a la tendencia, altos y bajos.
+	Esta traslación se debe principalmente a que el dispositivo fue instalado en una distancia mas lejana al centro de masa de sujeto, pero pese a esa distancia extra es posible analizar el comportamiento del desplazamiento de éste.
 	
 	
 	\item \textbf{Prueba Frontal}
@@ -966,7 +972,7 @@ El paciente tenía una estatura de 1.78 cm, por lo cual el dispositivo en todas 
 			\caption{Medio-Lateral}
 			\label{fig:medioLateralFrontal}
 		\end{subfigure}
-		\caption{Prueba Dispositivo Frontal Sujeto}
+		\caption{Prueba \nombreDispositivo ubicado Frontal Sujeto}
 		\label{fig:pruebaLateralFrontal}
 	\end{figure}
 	
