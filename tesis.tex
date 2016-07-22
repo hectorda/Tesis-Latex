@@ -489,6 +489,57 @@ Posee las bibliotecas bases de C++  junto a librerías y herramientas de desarro
 El entorno de desarrollo (IDE) del framework de C++ Qt  es Qt Creator en donde se incluyen las herramientas para la administración de los ficheros .h y .cpp usados en C++ junto con las opciones de compilación, ejecución y depuración del software.
 
 
+\subsection{Filtro Complementario}
+El Filtro complementario es ampliamente usado en unidades inerciales y sistemas de visión. Este filtro es en sí es un filtro de Kalman de estado estacionario para una cierta clase de problemas de filtrado \cite{TesisUSM}.
+
+Está compuesto por la una unión de dos filtros diferentes:
+\begin{itemize}
+	\item \textbf{Filtro Pasa-Bajo:} Se usa para eliminar las frecuencias altas del acelerómetro, por lo cual dejamos pasar bajo ciertas frecuencias, para eliminar el ruido detectado por el cambio de aceleración (vibración principalmente) en los ejes del acelerómetro.
+	\item \textbf{Filtro Pasa-Alto:} Se aplica en las mediciones obtenidas por el giroscopio, para eliminar el drift acumulado en el tiempo, dejando pasar solo las de una frecuencia más alta.
+	\end{itemize}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.5]{images/FiltroComplementario}
+		\caption{Diagrama Filtro Complementario}
+		\label{fig:diagramafiltrocomplementario}
+		\end{figure}
+		
+		Todo lo anterior queda descrito usando la siguiente Ecuación (\ref{eq:ecuacionFiltroComplementario}):
+		
+		\begin{equation}
+		\label{eq:ecuacionFiltroComplementario}
+		anguloActual = (1-\alpha)*(anguloAnterior+\omega*dt)+(\alpha)*anguloAcelerometro
+		\end{equation}
+		
+		En donde cada uno de las variables representa lo siguiente:
+		\begin{itemize}
+			\item \textit{anguloAcelerometro:} El ángulo calculado mediante la aceleración obtenida por el Acelerómetro.
+			\item $\omega$: Es la velocidad angular obtenida por el Giroscopio que hemos calculado previamente.
+			\item \textit{dt:} Corresponde a la variación en segundos desde la última vez que se aplicó el filtro para calcular el ángulo.
+			\item $\alpha$: Representa la contribución realizada por cada ángulo, Si $\alpha$ es igual 0 el cálculo del ángulo se realiza con el giroscopio en caso contrario $\alpha$ igual a 1 corresponde al ángulo del acelerómetro.
+			\end{itemize}
+
+\subsubsection{Filtro de Kalman discreto}
+El filtro de Kalman es un estimador lineal, insesgado y óptimo del estado de un proceso. En él se ha impuesto la condición de que el proceso a ser estimado es regido por una dinámica lineal y que el ruido que lo perturba es blanco y gaussiano. Aun cuando la condición del comportamiento probabilístico gaussiano del ruido se omite, el filtro de Kalman sigue siendo el mejor filtro recursivo lineal (error de menor varianza) e insesgado.
+
+Su propósito es emplear las mediciones obtenidas en un período de tiempo que a su vez son afectadas por variaciones  aleatorias (ruido) junto con el conocimiento del comportamiento del sistema, para producir estimaciones que tiendan a estar más cerca del valor real del proceso en cuestión. Todas las mediciones y cálculos basados en modelos son aproximaciones en cierto grado, datos ruidosos provenientes de los sensores \cite[Capítulo 3, p.~45]{TesisUSM}. 
+
+EL filtro de Kalman posee flexibilidad para ser utilizado tanto en tiempo continuo o en tiempos discretos. El modelo del filtro permite la flexibilidad para ser utilizado en éstos casos.
+
+La principal diferencia es la notación que utilizada en cada uno de los casos.
+Debido a que en la actualidad la mayoría de las aplicaciones de filtros es realizada en plataformas de tipo digital, y considerando el uso del filtro para la fusión de los sensores en este proyecto.
+
+Filtro usado en Fusión de Datos \cite{mau_how_2005} 
+El Filtro consiste en 2 estados Predicción y Actualización.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{images/kalman-filter.png} 
+	\caption{Diagrama estados Filtro Kalman}
+	\label{fig:diagramakalman}
+\end{figure}
+
 \section{Desarrollo}
 \subsection{Introducción}
 
@@ -554,60 +605,12 @@ Para el análisis del desplazamiento del centro de masa se requiere el cálculo 
 
 En síntesis tenemos un acelerómetro que entrega ángulos con referencia en la posición del sensor, pero muy susceptible a la variación de cambios de aceleración del IMU y en cambio el giroscopio nos permite calcular el ángulo de manera exacta, pero si tener una clara referencia de la posición donde está el sensor. 
 
-Para unificar la información proveniente de ambos sensores existe un filtro, que nació principalmente de la práctica, conocido como el Filtro Complementario \cite[Capítulo 3, p.~44]{TesisUSM}.
-El filtro requiere un ángulo de punto de partida y para esto se utiliza el acelerómetro para recoger el ángulo inicial, ya que, al poseer la referencia de la gravedad, se puede tener obtener una mejor estimación para comenzar a realizar las iteraciones del filtro.
-\newline
-El Filtro complementario es ampliamente usado en unidades inerciales y sistemas de visión. Este filtro es en sí es un filtro de Kalman de estado estacionario para una cierta clase de problemas de filtrado.
-Está compuesto por la una unión de dos filtros diferentes:
-\begin{itemize}
-	\item \textbf{Filtro Pasa-Bajo:} Se usa para eliminar las frecuencias altas del acelerómetro, por lo cual dejamos pasar bajo ciertas frecuencias, para eliminar el ruido detectado por el cambio de aceleración (vibración principalmente) en los ejes del acelerómetro.
-	\item \textbf{Filtro Pasa-Alto:} Se aplica en las mediciones obtenidas por el giroscopio, para eliminar el drift acumulado en el tiempo, dejando pasar solo las de una frecuencia más alta.
-\end{itemize}
+Para unificar la información proveniente de ambos sensores existe un filtro, que nació principalmente de la práctica, conocido como el Filtro Complementario \cite{TesisUSM}.
+El filtro requiere un ángulo de punto de partida y para esto se utiliza el acelerómetro para recoger el ángulo inicial, ya que, al poseer la referencia de la gravedad, es obtenida una mejor estimación inicial para las posteriores iteraciones del filtro.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.5]{images/FiltroComplementario}
-	\caption{Diagrama Filtro Complementario}
-	\label{fig:diagramafiltrocomplementario}
-\end{figure}
+\subsubsection{Filtro de Kalman}
 
-Todo lo anterior queda descrito usando la siguiente Ecuación (\ref{eq:ecuacionFiltroComplementario}):
-
-\begin{equation}
-\label{eq:ecuacionFiltroComplementario}
-anguloActual = (1-\alpha)*(anguloAnterior+\omega*dt)+(\alpha)*anguloAcelerometro
-\end{equation}
-
-En donde cada uno de las variables representa lo siguiente:
-\begin{itemize}
-	\item \textit{anguloAcelerometro:} El ángulo calculado mediante la aceleración obtenida por el Acelerómetro.
-	\item $\omega$: Es la velocidad angular obtenida por el Giroscopio que hemos calculado previamente.
-	\item \textit{dt:} Corresponde a la variación en segundos desde la última vez que se aplicó el filtro para calcular el ángulo.
-	\item $\alpha$: Representa la contribución realizada por cada ángulo, Si $\alpha$ es igual 0 el cálculo del ángulo se realiza con el giroscopio en caso contrario $\alpha$ igual a 1 corresponde al ángulo del acelerómetro.
-\end{itemize}
-
-\subsubsection{Filtro de Kalman discreto}
-El filtro de Kalman es un estimador lineal, insesgado y óptimo del estado de un proceso. En él se ha impuesto la condición de que el proceso a ser estimado es regido por una dinámica lineal y que el ruido que lo perturba es blanco y gaussiano. Aun cuando la condición del comportamiento probabilístico gaussiano del ruido se omite, el filtro de Kalman sigue siendo el mejor filtro recursivo lineal (error de menor varianza) e insesgado.
-
-Su propósito es emplear las mediciones obtenidas en un período de tiempo que a su vez son afectadas por variaciones  aleatorias (ruido) junto con el conocimiento del comportamiento del sistema, para producir estimaciones que tiendan a estar más cerca del valor real del proceso en cuestión. Todas las mediciones y cálculos basados en modelos son aproximaciones en cierto grado, datos ruidosos provenientes de los sensores \cite[Capítulo 3, p.~45]{TesisUSM}. 
-
-EL filtro de Kalman posee flexibilidad para ser utilizado tanto en tiempo continuo o en tiempos discretos. El modelo del filtro permite la flexibilidad para ser utilizado en éstos casos.
-
-La principal diferencia es la notación que utilizada en cada uno de los casos.
-Debido a que en la actualidad la mayoría de las aplicaciones de filtros es realizada en plataformas de tipo digital, y considerando el uso del filtro para la fusión de los sensores en este proyecto.
-
-Filtro usado en Fusión de Datos \cite{mau_how_2005} 
-El Filtro consiste en 2 estados Predicción y Actualización.
-
-\textcolor{red}{LOREM IPSUM}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.5]{images/kalman-filter.png} 
-	\caption{Diagrama estados Filtro Kalman}
-	\label{fig:diagramakalman}
-\end{figure}
-
+A partir de la información proveniente del Proceso
 
 \subsubsection{Comparativa de Filtros}
 Luego de la integración de los filtros en el Software es posible utilizar el deseado para la prueba, pero se deben tener en consideración las ventajas de usar o no el filtro razón por la cual se realizó una breve comparativa para ver el comportamiento entre el cálculo del ángulo sin utilizar filtros, usando filtro complementario y Kalman para la obtención durante la misma prueba.
@@ -1010,7 +1013,7 @@ El paciente tenía una estatura de 1.78 cm, por lo cual el dispositivo en todas 
 
 
 \subsection{Principales Desafíos}
-\subsubsection{Representación Tiempo Real}
+\subsubsection{Representación en Tiempo Real}
 La interfaz gráfica es una parte integral del sistema, pasando a ser la principal fuente de información para la retroalimentación, junto con el lugar donde mayormente interviene el usuario del sistema, entonces el no poder desplegar la información a tiempo, o que esta sea poco representativa es un gran problema. Se planteó inicialmente en graficar cada una de las salidas tanto del acelerómetro como el giroscopio en donde se representarían 6 variables según la frecuencia de muestreo, lo que en la práctica no resulta demasiado bien. Al representar en gráficos a frecuencias muy altas es decir 100hz o superior, multiplicado por la cantidad de datos que se estén representando, junto con el procesamiento interno para mostrar esos datos, se genera una sobrecarga en la parte gráfica, lo que conlleva a ralentizar el proceso, generando pérdidas de información y fidelidad al desplegar en tiempo real.
 
 Para dar solución al problema, se implementó la opción de graficar un porcentaje de la información recibida en base a la frecuencia de muestreo seleccionada para la captura de información, con esto se asegura que la representación gráfica en tiempo real no sea un problema. Para ello a partir de la frecuencia de muestreo escogida para la prueba se calcula cada cuantas muestras debe ser enviado al gráfico principal, con el fin de no entorpecer la prueba ver Ecuación (\ref{eq:divisorFPS}), después de realizar el cálculo, del total de muestras obtenidas aplicando módulo del $DivisorFPS$, si el resultado del módulo es 0 se envía el dato.
