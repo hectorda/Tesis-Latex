@@ -1,6 +1,6 @@
 close all
 clear all
-angulo=0:1.1:25; % en grados
+angulo=0:10:90; % en grados
 radio=100; % en cm y representa la altura del centro de masa
 displaz=radio*sin(angulo*pi/180); % desplazamiento en el plano , proyeccion
 displazR=2*pi*radio*angulo/360; % desplazamiento sobre la curva 

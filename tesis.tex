@@ -52,6 +52,8 @@
 	}
 }
 
+\DeclareCaptionLabelFormat{andtable}{#1~#2  \&  \tablename~\thetable}
+
 \pagestyle{headings}
 
 \begin{document}
@@ -216,13 +218,10 @@ Desde el punto de vista disciplinar (Ciencias de la Ingeniería), este proyecto 
 
 
 \section{Estado del Arte}
+Más de un tercio de la población mayor de 65 años presenta algunos problemas con el balance o deambulación. Los pacientes con trastornos neurológicos o musculo-esqueléticos son aún más propensos a tener problemas de equilibrio que afectan a su movilidad. La complejidad del control del equilibrio es resultado  de muchos tipos de problemas diferentes con evaluaciones clínicas sistemática específicas para prescribir un tratamiento eficaz.
+El control del equilibrio es complejo e implica el mantenimiento de posturas \cite{mancini_relevance_2010}, mantener el movimiento y recuperar el equilibrio. El control de balance consiste en controlar el centro de masa del cuerpo entre los límites de estabilidad. Las evaluaciones clínicas del equilibrio pueden ayudar a evaluar el riesgo de caídas y/o determinar las causas de los trastornos del equilibrio subyacente.
 
-Más de un tercio de la población mayor de 65 años notifica algunos problemas con el balance o deambulación. Los pacientes con trastornos neurológicos o musculo-esqueléticos son aún más propensos a tener problemas de equilibrio que afectan a su movilidad. La complejidad del control del equilibrio es resultado  de muchos tipos diferentes de problemas que necesitan la evaluación clínica sistemática para un tratamiento eficaz.
-El control del equilibrio es complejo e implica el mantenimiento de posturas \cite{mancini_relevance_2010}, mantener el movimiento y recuperar el equilibrio. El control de balance consiste en controlar el centro de masa del cuerpo entre los límites de estabilidad. Las evaluaciones clínicas del equilibrio pueden ayudar a evaluar el riesgo de caídas y/o determinar las causas de los trastornos del equilibrio subyacente. 
-La mayoría de las escalas de valoración del equilibrio funcional evaluar caída el riesgo y la necesidad de rehabilitación equilibrio, pero no diferenciar los tipos de déficits de la balanza . Un enfoque de sistema para la evaluación clínica equilibrio puede diferenciar diferentes tipos de trastornos del equilibrio y un enfoque fisiológico puede determinar los mecanismos subyacentes sensoriomotoras contribuye a equilibrar trastornos. Las medidas objetivas de equilibrio valiéndose de medios informáticos y sensores inerciales portátiles pueden traer más precisión, exactitud y sensibilidad que las pruebas de equilibrio clínicas.
-
-\textcolor{red}{Agregas mas referencias y algo relacionado con mi solucion}
-
+La mayoría de las escalas de valoración del equilibrio funcional evalúan el riesgo de caída y la necesidad de rehabilitación, pero no es diferenciado cada uno de los tipos de déficits del balance. Un enfoque de sistema para la evaluación clínica puede diferenciar diferentes tipos de trastornos del equilibrio y un enfoque fisiológico puede determinar los mecanismos subyacentes sensoriomotoras asociados al trastorno del equilibrio. Las medidas objetivas de equilibrio valiéndose de medios informáticos y sensores inerciales portátiles pueden traer más precisión, exactitud y sensibilidad que las pruebas de equilibrio clínicas.
 
 \subsection{Estándares Estabilometría Clínica}
 La estabilometría corresponde al estudio del Centro de Presión (COP) para determinar deficiencias posturales que perjudican el Balance.
@@ -251,7 +250,7 @@ Basándose tanto en la práctica y verificación experimental se acordó que, pa
 	\end{table}	  
 \end{itemize}
 
-\subsubsection{Instrumentos} Entre instrumentos de medición utilizados para el estudio del Balance estan incluidos:
+\subsubsection{Instrumentos} Entre instrumentos de medición utilizados para el estudio del Balance están incluidos:
 
 \begin{itemize}
 	\item \textbf{Kistler:} Es un Gold Standard  en lo referente a estabilometría\cite{donath_testing_2012}, es una plataforma de fuerza de dimensiones
@@ -259,18 +258,14 @@ Basándose tanto en la práctica y verificación experimental se acordó que, pa
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{images/Kistler}
+	\includegraphics[width=0.65\linewidth]{images/Kistler}
 	\caption{Calculo COP Kistler}
 	\label{fig:Kistler}
 \end{figure}
 
-\item \textbf{Balance SD?:} 
-\textcolor{red}{Falta}
-	 
+\item \textbf{Balance SD:} Un instrumento desarrollado por Biodex \cite{Biodex} utilizado para la medicina física, especialmente para cualquiera que desee mejorar su equilibrio, aumentar la agilidad, desarrollar el tono muscular y tratar una amplia variedad de patologías asociadas a la perdida de balance.
+Es un equipo que cuenta con biofeed-back principalmente visual, pero en nuevas versiones incluye soporte para biofeed-back vibratorio.
 \end{itemize}
-
-\subsection{IMU's}
-\textcolor{red}{Falta}
 
 \subsection{Estudio del Balance usando Sensores}
 Recientemente, los sensores de movimiento ``weareables'' se han desarrollado para la robótica, industria aeroespacial y en las mediciones biomédicas se han utilizado para medir el control del balance\cite{mancini_relevance_2010}. Estos sensores, con transferencia inalámbrica de datos , tienen el potencial de superar los principales inconvenientes de coste, tamaño y ubicación limitado de las pruebas computarizadas , así como permitir la medición objetiva de la oscilación postural y movimientos durante la ejecución de tareas.
@@ -279,11 +274,11 @@ Desde que se inicio la experimentación de sistemas de biofeedback para el contr
 Sin embargo, en los últimos años, el interés en sistemas táctiles y de audio para el control de la postura ha sido renovada, en parte debido a los avances en la tecnologías de procesamiento y detección de movimiento en tiempo real junto con las nuevas tendencias en dispositivos portátiles inalambricos que pueden ser usados durante todos los días. 
 En 2001, Wall et al. \cite{giansanti_energetic_2009} 
 
-En particular, Chiari et al. mostró, utilizando una plataforma de fuerza, que los sujetos mejoraron el equilibrio aprovechando el ABF (Audio Biofeed-back) y que ésta mejora fue mayor cuanto más grave era el desorden sensorial del sujeto. Otros estudios demostraron cómo este ABF mejora la estabilidad de la postura de los participantes con pérdida vestibular bilateral permitiendo gran cantidad de correcciones posturales.
+En particular, Chiari et al. mostró, utilizando una plataforma de fuerza, que los sujetos mejoraron el equilibrio aprovechando el ABF (Audio Biofeed-back) y que ésta mejora fue mayor cuanto más grave era el desorden sensorial del sujeto. Otros estudios demostraron cómo este ABF \cite{giansanti_energetic_2009} mejora la estabilidad de la postura de los participantes con pérdida vestibular bilateral permitiendo gran cantidad de correcciones posturales.
 
-\textcolor{red}{Falta Referencia!!!}
+Los acelerómetros y/o giroscopios han sido exitosamente utilizados \cite{mancini_relevance_2010} para el seguimiento de movimiento,  detección de caídas, y para la medición de control de balance sólo recientemente se han utilizado también para la activación dispositivos de Biofeed-back vibro-táctil o ABF. Además en el ámbito de dispositivos ``Weareables" se han usado para medir los movimientos tanto de pierna, brazo y torso mientras las personas realizan pruebas clínicas o ir haciendo sus actividades diarias \cite{mancini_relevance_2010}. Por ejemplo, análisis de la marcha.
+Los sistemas han sido diseñados utilizando acelerómetros en un cinturón de cadera o giroscopios en las piernas.
 
-Los acelerómetros y/o giroscopios han sido exitosamente utilizados \cite{mancini_relevance_2010} para el seguimiento de movimiento,  detección de caídas, y para la medición de control de balance sólo recientemente se han utilizado también para la activación dispositivos de biofeedback vibro-táctil o ABF. Hasta ahora los acelerómetros y giroscopios no se han utilizado de forma regular en la investigación de la postura pese al éxito de la propuesta del dispositivo de ABF.
 
 
 \section{Marco Teórico}
@@ -520,7 +515,7 @@ Está compuesto por la una unión de dos filtros diferentes:
 			\item $\alpha$: Representa la contribución realizada por cada ángulo, Si $\alpha$ es igual 0 el cálculo del ángulo se realiza con el giroscopio en caso contrario $\alpha$ igual a 1 corresponde al ángulo del acelerómetro.
 			\end{itemize}
 
-\subsubsection{Filtro de Kalman discreto}
+\subsection{Filtro de Kalman discreto}
 El filtro de Kalman es un estimador lineal, insesgado y óptimo del estado de un proceso. En él se ha impuesto la condición de que el proceso a ser estimado es regido por una dinámica lineal y que el ruido que lo perturba es blanco y gaussiano. Aun cuando la condición del comportamiento probabilístico gaussiano del ruido se omite, el filtro de Kalman sigue siendo el mejor filtro recursivo lineal (error de menor varianza) e insesgado.
 
 Su propósito es emplear las mediciones obtenidas en un período de tiempo que a su vez son afectadas por variaciones  aleatorias (ruido) junto con el conocimiento del comportamiento del sistema, para producir estimaciones que tiendan a estar más cerca del valor real del proceso en cuestión. Todas las mediciones y cálculos basados en modelos son aproximaciones en cierto grado, datos ruidosos provenientes de los sensores \cite[Capítulo 3, p.~45]{TesisUSM}. 
@@ -612,22 +607,10 @@ El filtro requiere un ángulo de punto de partida y para esto se utiliza el acel
 
 A partir de la información proveniente del Proceso
 
-\subsubsection{Comparativa de Filtros}
-Luego de la integración de los filtros en el Software es posible utilizar el deseado para la prueba, pero se deben tener en consideración las ventajas de usar o no el filtro razón por la cual se realizó una breve comparativa para ver el comportamiento entre el cálculo del ángulo sin utilizar filtros, usando filtro complementario y Kalman para la obtención durante la misma prueba.
-Los resultados demuestran la gran corrección que realizan los filtros frente a el cálculo sin estos ver Figura (\ref{fig:AnguloXvsFiltros}).
-
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.7]{images/angKalCom}
-	\caption{Comparativa Angulo Acelerómetro vs Filtro Kalman vs Filtro Complementario}
-	\label{fig:AnguloXvsFiltros}
-\end{figure}
-
 Los análisis que pueden ser concluidos respecto al cálculo del ángulo en lo representado por la gráfica anterior:
 \begin{itemize}
-	\item \textbf{Cálculo del ángulo sin usar filtros:} la diferencia entre los filtros vs el Cálculo sin el uso de estos, posee gran diferencia, en especial respecto al ruido apreciable que es reducido en gran medida por la incorporación de algún filtro.
-	\item \textbf{Aplicando filtros:} el uso del filtro mejora considerablemente el ruido obtenido, pero a su vez si son comparados ambos filtros disponibles, estos tienen un comportamiento similar, sin entrar mas en estudios acerca de cual es mas óptimo, es criterio del usuario el filtro que aplicará.
+	\item \textbf{Cálculo del ángulo sin usar filtros:} la diferencia entre los filtros vs el Cálculo sin el uso de estos es significativa, en especial respecto al ruido apreciable que es reducido en gran medida por la incorporación de algún filtro.
+	\item \textbf{Aplicando filtros:} el uso del filtro mejora considerablemente el ruido obtenido, pero a su vez si son comparados ambos filtros disponibles, estos tienen un comportamiento similar, sin entrar en estudios complejos acerca de cual es mas óptimo, es completamente a criterio del usuario el filtro que aplicará.
 \end{itemize}
 
 \subsection{Implementación de Algoritmos en Software}
@@ -701,6 +684,17 @@ En base a la explicación de como implementarla por Kristian Sloth Lauszus
 \cite{kalmanTKJ}, junto con las librerías en C++ propuestas, la implementación del filtro de Kalman se realiza de manera sencilla, y los parámetros necesarios son exactamente los mismos utilizados por el filtro complementario con distinta nomenclatura, por ende solo serán nombrados, al igual que los casos anteriores es de gran importancia la orientación elegida, utilizando las mismas descritas en las tablas (\ref{table:calculoAnguloSinFiltro}) y (\ref{table:calculoAnguloFiltroComplementario}).
 Debe ser considerado el \textit{nuevoAngulo} entregado mediante el acelerómetro y además la \textit{nuevaVelocidadAngular} obtenida por el giroscopio, junto con la diferencia de tiempo \textit{dt}, que corresponden a exactamente los mismos datos usados por el filtro complementario. 
 
+\subsection{Comparativa de Filtros}
+Luego de la integración de los filtros en el Software es posible utilizar el deseado para la prueba, pero se deben tener en consideración las ventajas de usar o no el filtro razón por la cual se realizó una breve comparativa para ver el comportamiento entre el cálculo del ángulo sin utilizar filtros, usando filtro complementario y Kalman para la obtención durante la misma prueba.
+Los resultados demuestran la gran corrección que realizan los filtros frente a el cálculo sin estos ver Figura (\ref{fig:AnguloXvsFiltros}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{images/angKalCom}
+	\caption{Comparativa Angulo Acelerómetro vs Filtro Kalman vs Filtro Complementario}
+	\label{fig:AnguloXvsFiltros}
+\end{figure}
+
 
 
 \subsection{Cálculo del Desplazamiento}
@@ -740,18 +734,54 @@ Calculando la longitud del arco formado desde donde comienza la medición hasta 
 	d=\left(\frac{\alpha*2\pi}{360}\right)*h
 \end{equation}
 
-\subsubsection{Comparación Cálculo Recorrido Curvo vs Proyección}
-Al comparar los métodos anteriormente mencionados para el cálculo del desplazamiento, estos se comportan de forma similar en ángulos pequeños, pero al aumentar el valor del ángulo se comienza diferenciar de forma exponencialmente el desplazamiento calculado por el recorrido curvo frente al obtenido por proyección, lo que nos da a concluir que ambos métodos entregan en ángulos pequeños desplazamientos similares, pero al aumentar el ángulo se comportan diferente.
+\subsection{Comparación métodos Cálculo Desplazamiento}
+Para comparar la aproximación que generan ambos métodos fueron analizados utilizando una altura de 100 centímetros.
 
-Por lo tanto se debe tener en consideración al momento de escoger con que método se realizará el cálculo, ya que con ambos se puede interpretar el desplazamiento.
+A continuación se presenta una tabla \ref{table:comparacionDesplazamiento} con valores de ejemplo para comparar el comportamiento de las dos fórmulas para el cálculo del desplazamiento, y además un gráfico\ref{fig:comparacionDesplazamiento} para comparar la diferencia entre ellos y ver el comportamiento.
 
 \begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.8]{images/DiferenciaRec-Pro}
-	\caption{Ejemplo Diferencia distancia Recorrido Curvo - Distancia proyección}
-	\label{fig:diferenciarec-pro}
+	\begin{subfigure}{.5\textwidth}
+		\scalebox{0.75}{
+			\begin{tabular}{|c|c|c|c|}
+				\hline 
+				\textbf{Angulo} & \textbf{Recorrido Curvo} & \textbf{Proyección} & \textbf{Diferencia}\\ 
+				\hline 
+				0 & 0.00000 & 0.00000 & 0.00000 \\
+				\hline 
+				10 & 17.45329 & 17.36482 & 0.08847 \\ 
+				\hline 
+				20 & 34.90659 & 34.20201 & 0.70457 \\ 
+				\hline 
+				30 & 52.35988 &50.00000 & 2.35988 \\ 
+				\hline 
+				40 & 69.81317 & 64.27876 & 5.53441 \\ 
+				\hline 
+				50 & 87.26646 & 76.60444 & 10.66202 \\ 
+				\hline 
+				60 & 104.71976 & 86.60254 & 18.11721 \\ 
+				\hline 
+				70 & 122.17305 & 93.96926 & 28.20379\\ 
+				\hline 
+				80 & 139.62634 & 98.48078 & 41.14556 \\ 
+				\hline 
+				90 & 157.07963 & 100.00000 & 57.07963 \\ 
+				\hline
+				\label{table:comparacionDesplazamiento}
+			\end{tabular}
+		}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\includegraphics[width=.9\linewidth]{images/DiferenciaRec-Pro}
+		\label{fig:comparacionDesplazamiento}
+	\end{subfigure}%
+		\captionlistentry[table]{Comparación Recorrido Curvo - Proyección}
+		\captionsetup{labelformat=andtable}
+		\caption{Comparación Recorrido Curvo - Proyección}
 \end{figure}
 
+Al comparar los métodos anteriormente mencionados para el cálculo del desplazamiento Recorrido Curvo y Proyección, estos se comportan de forma similar en ángulos pequeños, pero a medida que el valor del ángulo comienza a incrementar la diferencia generar una curva exponencial el desplazamiento, debido a que la distancia calculada mediante el recorrido curvo es mayor frente a la obtenido por proyección, lo que nos da a concluir que ambos métodos entregan en ángulos pequeños desplazamientos similares, pero al aumentar el ángulo se comportan diferente.
+
+Por lo tanto se debe tener en consideración al momento de escoger con que método se realizará el cálculo, ya que con ambos se puede interpretar el desplazamiento, pero a su vez debido a los límites del balance que en general su dominio consiste en tan solo ángulos pequeños ($\pm 3$\grad), con cual según los análisis expuestos anteriormente.
 
 \subsection{Requisitos Funcionales}
 \begin{itemize}
@@ -1050,6 +1080,7 @@ La solución fue a partir de la información de configuración FTDI\cite{FTDI} p
 
 \section{Conclusiones y Trabajos Futuros}
 \subsection{Conclusiones}
+
 \subsection{Trabajos Futuros}
 
 \section{Bibliografía}
