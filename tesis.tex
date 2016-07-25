@@ -591,29 +591,8 @@ Para los cálculos del ángulo como se muestra en el ejemplo para el cálculo de
 \subsubsection{Cálculo ángulo con giroscopio} 
 En cambio, si utilizamos sólo el giroscopio a diferencia del acelerómetro, podemos realizar los cálculos del ángulo con mayor precisión pero al no tener una referencia clara del origen de la mediciones, es difícil de contrastar la información con el movimiento de un sujeto y dificulta enormemente la  interpretación esta información, además con el tiempo los datos capturados comienzan a acumular un pequeño error, a estos errores acumulados se les conoce como drift o deriva.
 
-\subsection{Fusión de Datos Sensores}
-La Fusión de Datos es un método para integrar señales provenientes de múltiples fuentes. Permite extraer información de varias fuentes diferentes para integrarlos en una sola señal o información.
-
-Para el análisis del desplazamiento del centro de masa se requiere el cálculo del ángulo y para ello se usará la información proveniente de ambos sensores con el fin de obtener el ángulo lo más refinado posible, con este fin se estudiaron e implementaron 2 filtros que permiten una correcta integración de los datos de aceleración con velocidad angular.
-
-\subsubsection{El Filtro Complementario}
-
-En síntesis tenemos un acelerómetro que entrega ángulos con referencia en la posición del sensor, pero muy susceptible a la variación de cambios de aceleración del IMU y en cambio el giroscopio nos permite calcular el ángulo de manera exacta, pero si tener una clara referencia de la posición donde está el sensor. 
-
-Para unificar la información proveniente de ambos sensores existe un filtro, que nació principalmente de la práctica, conocido como el Filtro Complementario \cite{TesisUSM}.
-El filtro requiere un ángulo de punto de partida y para esto se utiliza el acelerómetro para recoger el ángulo inicial, ya que, al poseer la referencia de la gravedad, es obtenida una mejor estimación inicial para las posteriores iteraciones del filtro.
-
-\subsubsection{Filtro de Kalman}
-
-A partir de la información proveniente del Proceso
-
-Los análisis que pueden ser concluidos respecto al cálculo del ángulo en lo representado por la gráfica anterior:
-\begin{itemize}
-	\item \textbf{Cálculo del ángulo sin usar filtros:} la diferencia entre los filtros vs el Cálculo sin el uso de estos es significativa, en especial respecto al ruido apreciable que es reducido en gran medida por la incorporación de algún filtro.
-	\item \textbf{Aplicando filtros:} el uso del filtro mejora considerablemente el ruido obtenido, pero a su vez si son comparados ambos filtros disponibles, estos tienen un comportamiento similar, sin entrar en estudios complejos acerca de cual es mas óptimo, es completamente a criterio del usuario el filtro que aplicará.
-\end{itemize}
-
-\subsection{Implementación de Algoritmos en Software}
+\newpage
+\subsection{Métodos implementados para obtención del Ángulo}
 En el software fueron incluidos los 3 algoritmos descritos, para ser usados según el usuario lo requiera, para ello se implemento una interfaz sencilla ver Figura (\ref{fig:selectorFiltros}) en donde configurar tan solo algunos parámetros, los cuales con la configuración por defecto deberían funcionar sin mayores problemas.
 
 \begin{figure}[H]
@@ -628,8 +607,7 @@ En el software fueron incluidos los 3 algoritmos descritos, para ser usados seg�
 
 A partir de la fórmula de la tangente, según la orientación escogida son conjugados los ejes leídos directamente de los sensores, con el fin de aplicar la formula en el sentido que corresponda.
 \begin{table}[H]
-\centering
-\label{table:calculoAnguloSinFiltro}
+	\centering
 	\begin{tabular}{|c|c|c|}
 		\hline 
 		\textbf{Orientación} & \textbf{Ángulo Medio-Lateral} & \textbf{Ángulo Antero-Posterior} \\ 
@@ -647,16 +625,28 @@ A partir de la fórmula de la tangente, según la orientación escogida son conj
 		Horizontal Abajo & $\tan{\left(\frac{aceleracionY}{\sqrt{aceleracionX^{2}+aceleracionZ^{2}}}\right)} $ &  $\tan{\left(\frac{aceleracionX}{\sqrt{aceleracionY^{2}+aceleracionZ^{2}}}\right)} $ \\ 
 		\hline 
 	\end{tabular}
-	\caption{Tabla cálculo ángulo usando Acelerómetro} 
+	\caption{Tabla cálculo ángulo usando Acelerómetro}
+	\label{table:calculoAnguloSinFiltro}
 \end{table}
 
+Como el ángulo resultante a partir de sólo acelerómetro, existe la opción de agregar mas información para corregir/mejorar la aproximación.
+
+La Fusión de Datos es un método para integrar señales provenientes de múltiples fuentes. Permite extraer información de varias fuentes diferentes para integrarlos en una sola señal o información.
+
+Para el análisis del desplazamiento del centro de masa se requiere que el ángulo obtenido sea lo en su medida lo mas preciso, para ello se estudiaron e implementaron 2 filtros que permiten una correcta integración de los datos de aceleración lineal con velocidad angular.
+
 \subsubsection{Filtro Complementario}
+Se posee un acelerómetro que entrega ángulos con referencia en la posición del sensor, pero muy susceptible a la variación de cambios de aceleración del éste y en cambio un giroscopio nos permite calcular el ángulo de manera exacta, pero si tener una clara referencia de la posición donde está el sensor. 
+
+Para unificar la información proveniente de ambos sensores existe un filtro, que nació principalmente de la práctica, conocido como el Filtro Complementario \cite{TesisUSM}.
+El filtro requiere un ángulo de punto de partida y para esto se utiliza el acelerómetro para recoger el ángulo inicial, ya que, al poseer la referencia de la gravedad, es obtenida una mejor estimación inicial para las posteriores iteraciones del filtro.
+
+
 A partir de la ecuación del Filtro complementario (\ref{eq:ecuacionFiltroComplementario}), los parámetros necesarios para el cálculo del ángulo usando este filtro, corresponden a los Ángulos Previamente Calculados Usando este mismo filtro y a su vez el Ángulo del acelerómetro que se calcula según la orientación ver Tabla (\ref{table:calculoAnguloSinFiltro}).
 Entonces el parámetro nuevo a considerar es la velocidad angular $\omega$ que debe ser utilizada según la orientación del dispositivo tal como se muestra en la siguiente tabla.
 
 \begin{table}[H]
 	\centering
-	\label{table:calculoAnguloFiltroComplementario}
 	\begin{tabular}{|c|c|c|}
 		\hline 
 		\textbf{Orientación} & \textbf{Ángulo Medio-Lateral} & \textbf{Ángulo Antero-Posterior} \\ 
@@ -675,25 +665,55 @@ Entonces el parámetro nuevo a considerar es la velocidad angular $\omega$ que d
 		\hline 
 	\end{tabular}
 	\caption{Tabla cálculo ángulo usando Filtro Complementario} 
+	\label{table:calculoAnguloFiltroComplementario}
 \end{table}
 
 Nota: el $dt$ es obtenido a partir de la diferencia entre la muestra actual y la anterior, por ende para el ángulo de inicio es considerado sólo el obtenido por el acelerómetro.
 
 \subsubsection{Filtro Kalman}
-En base a la explicación de como implementarla por Kristian Sloth Lauszus
-\cite{kalmanTKJ}, junto con las librerías en C++ propuestas, la implementación del filtro de Kalman se realiza de manera sencilla, y los parámetros necesarios son exactamente los mismos utilizados por el filtro complementario con distinta nomenclatura, por ende solo serán nombrados, al igual que los casos anteriores es de gran importancia la orientación elegida, utilizando las mismas descritas en las tablas (\ref{table:calculoAnguloSinFiltro}) y (\ref{table:calculoAnguloFiltroComplementario}).
-Debe ser considerado el \textit{nuevoAngulo} entregado mediante el acelerómetro y además la \textit{nuevaVelocidadAngular} obtenida por el giroscopio, junto con la diferencia de tiempo \textit{dt}, que corresponden a exactamente los mismos datos usados por el filtro complementario. 
+A partir de la información proveniente de las mediciones del Proceso de captura de información cinemática, se intenta obtener el ángulo, con la premisa que el filtro retornará el mínimo error por las fluctuaciones entrantes del ruido en las mediciones obtenidas.
 
-\subsection{Comparativa de Filtros}
+En base a la explicación de como implementarla por Kristian Sloth Lauszus
+\cite{kalmanTKJ}, junto con las librerías en C++ propuestas, la implementación del filtro de Kalman se realiza de manera sencilla, y los parámetros necesarios son exactamente los mismos utilizados por el filtro complementario con distinta nomenclatura, por ende solo serán nombrados, al igual que los casos anteriores es de gran importancia la orientación elegida, utilizando las mismas descritas en las tablas (\ref{table:calculoAnguloSinFiltro}) y (\ref{table:calculoAnguloFiltroKalman}).
+Debe ser considerado el \textit{nuevoAngulo} entregado mediante el acelerómetro y además la \textit{nuevaVelocidadAngular} obtenida por el giroscopio, junto con la diferencia de tiempo \textit{dt}, que corresponden a exactamente los mismos datos usados por el filtro complementario.
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline 
+		\textbf{Orientación} & \textbf{Ángulo Medio-Lateral} & \textbf{Ángulo Antero-Posterior} \\ 
+		\hline 
+		Vertical Atrás & $\omega= -GiroscopioZ$ &  $\omega= -GiroscopioX$ \\ 
+		\hline 
+		Vertical Frente & $\omega= GiroscopioZ$ &  $\omega= GiroscopioX$ \\
+		\hline 
+		Vertical Derecha & $\omega= GiroscopioX$ &  $\omega= -GiroscopioZ$ \\ 
+		\hline 
+		Vertical Izquieda & $\omega= -GiroscopioX$ &  $\omega= GiroscopioZ$ \\ 
+		\hline 
+		Horizontal Arriba & $\omega= GiroscopioX$ &  $\omega= GiroscopioY$ \\ 
+		\hline 
+		Horizontal Abajo & $\omega= -GiroscopioX$ &  $\omega= GiroscopioY$ \\ 
+		\hline 
+	\end{tabular}
+	\caption{Tabla cálculo ángulo usando Filtro de Kalman} 
+	\label{table:calculoAnguloFiltroKalman}
+\end{table}
+
+\subsubsection{Comparativa de Métodos}
 Luego de la integración de los filtros en el Software es posible utilizar el deseado para la prueba, pero se deben tener en consideración las ventajas de usar o no el filtro razón por la cual se realizó una breve comparativa para ver el comportamiento entre el cálculo del ángulo sin utilizar filtros, usando filtro complementario y Kalman para la obtención durante la misma prueba.
-Los resultados demuestran la gran corrección que realizan los filtros frente a el cálculo sin estos ver Figura (\ref{fig:AnguloXvsFiltros}).
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.7]{images/angKalCom}
+	\includegraphics[scale=0.75]{images/angKalCom}
 	\caption{Comparativa Angulo Acelerómetro vs Filtro Kalman vs Filtro Complementario}
 	\label{fig:AnguloXvsFiltros}
 \end{figure}
+
+Pese a primera vista que la gráfica ver Figura (\ref{fig:AnguloXvsFiltros}) demuestra la gran corrección que realizan los filtros frente a el cálculo sin estos, los análisis que pueden ser concluidos respecto al cálculo del ángulo:
+\begin{itemize}
+	\item \textbf{Cálculo del ángulo sin usar filtros:} la diferencia entre los filtros vs el Cálculo sin el uso de estos es significativa, en especial respecto al ruido apreciable que es reducido en gran medida por la incorporación de algún filtro.
+	\item \textbf{Aplicando filtros:} el uso del filtro mejora considerablemente el ruido obtenido, pero a su vez si son comparados ambos filtros disponibles, estos tienen un comportamiento similar, sin entrar en estudios complejos acerca de cual es mas óptimo, es completamente a criterio del usuario el filtro que aplicará.
+\end{itemize}
 
 
 
@@ -701,12 +721,12 @@ Los resultados demuestran la gran corrección que realizan los filtros frente a 
 Basándonos en que la posición bípeda-quieta puede ser representada como un péndulo invertido, por lo tanto considerando la variación angular del movimiento pendular de un sujeto en las coordenadas antero-posterior y medio-lateral es aplicable la trigonometría para la obtención del desplazamiento.
 Para el cálculo del desplazamiento usando la variación angular se consideraron los siguientes métodos. 
 
-\subsubsection{Cálculo Proyección del Ángulo}
+\subsubsection{Proyección del angulo}
 Para obtener la distancia proyectada en el eje horizontal, usando trigonometría tomando la altura $h$ como la distancia desde el suelo hasta donde fue puesto el sensor como el equivalente a la hipotenusa de un triángulo rectángulo, como se muestra en la Figura (\ref{fig:proyeccion}), se puede calcular usando la Ecuación (\ref{eq:proyeccion}), aplicando la función $\sin$ del ángulo $\alpha$ en grados obtenido mediante el filtro aplicado, junto con ponderar el valor obtenido por la altura $h$ (hipotenusa del triángulo), el valor resultante equivale a la distancia $d$ correspondiente al desplazamiento del centro de masa estimado, en la cual su unidad de medida es la misma usada para describir la altura $h$ en general centímetros.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.5]{images/calculoProyeccion}
+	\includegraphics[scale=0.6]{images/calculoProyeccion}
 	\caption{Ejemplo cálculo Proyección Angulo}
 	\label{fig:proyeccion}
 \end{figure}
@@ -717,14 +737,14 @@ Para obtener la distancia proyectada en el eje horizontal, usando trigonometría
 \end{equation}
 
 
-\subsubsection{Cálculo del Recorrido Curvo}
+\subsubsection{Recorrido curvo del ángulo}
 La longitud del arco generado por el ángulo puede ser considerado un tipo de desplazamiento, por ello existe la opción de estudiarlo.
 
 Calculando la longitud del arco formado desde donde comienza la medición hasta el ángulo $\alpha$ ver Figura (\ref{fig:recorridocurvo}) en grados a radianes y ponderando el valor obtenido por la altura $h$, tal como se muestra en la Ecuación (\ref{eq:recorridocurvo}).
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.5]{images/calculoRecorridoCurvo}
+	\includegraphics[scale=0.6]{images/calculoRecorridoCurvo}
 	\caption{Ejemplo cálculo Recorrido Curvo}
 	\label{fig:recorridocurvo}
 \end{figure}
@@ -734,41 +754,41 @@ Calculando la longitud del arco formado desde donde comienza la medición hasta 
 	d=\left(\frac{\alpha*2\pi}{360}\right)*h
 \end{equation}
 
-\subsection{Comparación métodos Cálculo Desplazamiento}
+\subsubsection{Comparación métodos Cálculo Desplazamiento}
 Para comparar la aproximación que generan ambos métodos fueron analizados utilizando una altura de 100 centímetros.
 
-A continuación se presenta una tabla \ref{table:comparacionDesplazamiento} con valores de ejemplo para comparar el comportamiento de las dos fórmulas para el cálculo del desplazamiento, y además un gráfico\ref{fig:comparacionDesplazamiento} para comparar la diferencia entre ellos y ver el comportamiento.
+A continuación se presenta una tabla con valores de ejemplo para comparar el comportamiento de las dos fórmulas para el cálculo del desplazamiento, y además un gráfico para comparar la diferencia entre ellos y ver el comportamiento.
 
 \begin{figure}[H]
 	\begin{subfigure}{.5\textwidth}
 		\scalebox{0.75}{
-			\begin{tabular}{|c|c|c|c|}
-				\hline 
-				\textbf{Angulo} & \textbf{Recorrido Curvo} & \textbf{Proyección} & \textbf{Diferencia}\\ 
-				\hline 
-				0 & 0.00000 & 0.00000 & 0.00000 \\
-				\hline 
-				10 & 17.45329 & 17.36482 & 0.08847 \\ 
-				\hline 
-				20 & 34.90659 & 34.20201 & 0.70457 \\ 
-				\hline 
-				30 & 52.35988 &50.00000 & 2.35988 \\ 
-				\hline 
-				40 & 69.81317 & 64.27876 & 5.53441 \\ 
-				\hline 
-				50 & 87.26646 & 76.60444 & 10.66202 \\ 
-				\hline 
-				60 & 104.71976 & 86.60254 & 18.11721 \\ 
-				\hline 
-				70 & 122.17305 & 93.96926 & 28.20379\\ 
-				\hline 
-				80 & 139.62634 & 98.48078 & 41.14556 \\ 
-				\hline 
-				90 & 157.07963 & 100.00000 & 57.07963 \\ 
-				\hline
-				\label{table:comparacionDesplazamiento}
-			\end{tabular}
-		}
+		\begin{tabular}{|c|c|c|c|}
+			\hline 
+			\textbf{Angulo} & \textbf{Recorrido Curvo} & \textbf{Proyección} & \textbf{Diferencia}\\ 
+			\hline 
+			0 & 0.00000 & 0.00000 & 0.00000 \\
+			\hline 
+			10 & 17.45329 & 17.36482 & 0.08847 \\ 
+			\hline 
+			20 & 34.90659 & 34.20201 & 0.70457 \\ 
+			\hline 
+			30 & 52.35988 &50.00000 & 2.35988 \\ 
+			\hline 
+			40 & 69.81317 & 64.27876 & 5.53441 \\ 
+			\hline 
+			50 & 87.26646 & 76.60444 & 10.66202 \\ 
+			\hline 
+			60 & 104.71976 & 86.60254 & 18.11721 \\ 
+			\hline 
+			70 & 122.17305 & 93.96926 & 28.20379\\ 
+			\hline 
+			80 & 139.62634 & 98.48078 & 41.14556 \\ 
+			\hline 
+			90 & 157.07963 & 100.00000 & 57.07963 \\ 
+			\hline
+		\end{tabular}
+	}
+		
 	\end{subfigure}
 	\begin{subfigure}{.5\textwidth}
 		\includegraphics[width=.9\linewidth]{images/DiferenciaRec-Pro}
@@ -900,20 +920,47 @@ Finalmente para el análisis de la información se dispone de herramientas intui
 	\label{fig:analsisGraficos}
 \end{figure}
 
-
+\newpage
 \subsection{Resultados y Análisis}
-Con respecto a la comparación entre los paradigmas usados para el análisis del desplazamiento del centro de Masa, la utilización de sensores piezo-eléctricos para la presión ejercida por el sujeto, en contraste por el estudiado en esta Tesis, utilizando acelerometría para obtener la variación espacial del centro de masa, los resultados y análisis de las pruebas realizadas son los siguientes:
+Con respecto a la comparación entre los paradigmas usados para el análisis del desplazamiento del centro de Masa, la utilización de sensores piezo-eléctricos para la presión ejercida por el sujeto, en contraste por el estudiado en esta Tesis, utilizando acelerometría para obtener la variación espacial del centro de masa, los resultados y análisis de las pruebas realizadas serán descritos a continuación.
 
 \subsubsection{Contraste Dispositivo vs Plataforma de Fuerza Kistler}
 
-El mejor método para verificar la fidelidad con la que la representación obtenida mediante el uso de acelerometría junto con los cálculos realizados para obtener la variación del centro de masa, es compararlo frente a un  gold standard en términos de análisis de balance y/o desplazamiento del COM.
+El mejor método para verificar la fidelidad con la que la representación obtenida mediante el uso de acelerometría junto con los cálculos realizados para obtener la variación del centro de masa, es compararlo frente a un Gold Standard en términos de análisis de balance y/o desplazamiento del COM.
 
 Para ello se realizaron diversas pruebas posicionando el dispositivo en el sujeto de prueba, para realizar las mediciones tanto en la plataforma Kistler, como en el dispositivo de BioFeedBack desarrollado para esta Tesis.
 El objetivo en las pruebas era medir principalmente la variación Antero-Posterior, ya que en términos de balance es la que mayor variación percibe.
 El paciente tenía una estatura de 1.78 cm, por lo cual el dispositivo en todas las pruebas intento ser ubicado a una altura de 97.6 cm, el aproximado del 55\%, los resultados expuestos en cada prueba fueron sincronizados temporalmente, ya que al iniciar las mediciones en ambos dispositivos existen tiempos de calibración/configuración distintos para cada una.
 
-\begin{itemize}
-	\item \textbf{Prueba Dispositivo Espalda:} En la siguiente prueba el dispositivo fue ubicado en la espalda, en zona las vértebras lumbares del sujeto. Se realiza la medición en la Plataforma Kistler en conjunto con el \nombreDispositivo creado con objetivo de Tesis.
+\subsubsection{Resumen de Resultados}
+
+\begin{table}[H]
+	\label{table:resultadosPruebas}
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+		\hline
+		\multirow{2}{*}{Pruebas} &
+		\multicolumn{2}{c|}{Espalda} &
+		\multicolumn{2}{c|}{Izquierda} &
+		\multicolumn{2}{c|}{Frontal} \\
+		\cline{2-7}
+		& A.P & M.L & A.P  & M.L & A.P & M.L \\
+		\hline
+		\shortstack{Coeficiente\\Correlación} & 0.98682 & 0.88232 & 0.95932 & 0.77737 & 0.95065 & 0.95926 \\
+		\hline
+		\shortstack{Valor Medio \\ (Diferencia)} & -0.059775 & 0.022444 & 0.29702 & -0.054382 & 0.47144 & 0.11151 \\
+		\hline
+		\shortstack{Mínima\\Diferencia (cm)} & 1.3128$e^{-4}$ & 1.9897$e^{-4}$ & 7.4105$e^{-6}$ & 4.4392$e^{-4}$ & 5.1245$e^{-5}$ & 5.8009$e^{-4}$ \\
+		\hline
+		\shortstack{Máxima\\Diferencia (cm)} & 3.1274 & 1.2254 & 5.7394 & 3.7113 & 5.6831 & 5.3845 \\
+		\hline
+		\shortstack{Porcentaje\\Semejanza} & 34.633\% & 80.700\% & 24.598\% & 61.092\% &19.356\% & 32.157\% \\
+		\hline
+	\end{tabular}
+	\caption{Tabla resultados pruebas}
+\end{table}	
+  
+\subsubsection{Prueba Dispositivo Espalda} En la siguiente prueba el dispositivo fue ubicado en la espalda, en zona las vértebras lumbares del sujeto. Se realiza la medición en la Plataforma Kistler en conjunto con el \nombreDispositivo creado con objetivo de Tesis.
 		
 	
 	\begin{figure}[H]
@@ -965,7 +1012,8 @@ El paciente tenía una estatura de 1.78 cm, por lo cual el dispositivo en todas 
 	\end{figure}
 	\end{comment}	
 	
-	\item \textbf{Prueba \nombreDispositivo ubicado Lateral Izquierdo:}
+\newpage
+\subsubsection{Prueba \nombreDispositivo ubicado Lateral Izquierdo}
 	Para esta prueba el \nombreDispositivo fue ubicado en el lateral izquierdo del sujeto a altura de la cadera de éste.
 		
 	\begin{figure}[H]
@@ -989,8 +1037,12 @@ El paciente tenía una estatura de 1.78 cm, por lo cual el dispositivo en todas 
 	Los resultados obtenidos inicialmente se encontraban desplazados, es decir, las curvas no coincidían, pero al centrar los datos, las curvas del desplazamiento coinciden en gran porcentaje en cuanto a la tendencia, altos y bajos.
 	Esta traslación se debe principalmente a que el dispositivo fue instalado en una distancia mas lejana al centro de masa de sujeto, pero pese a esa distancia extra es posible analizar el comportamiento del desplazamiento de éste.
 	
+\newpage
+\subsubsection{Prueba Frontal}
+El procedimiento fue similar a las anteriores descritas, tan solo que en la mitad de la prueba se comenzo a generar variaciones medio-laterales por el sujeto de pruebas, con el fin de registrar una mayor variación en los registros.
+
+Los resultados obtenidos son los siguientes:
 	
-	\item \textbf{Prueba Frontal}
 	\begin{figure}[H]
 		\centering
 		\begin{subfigure}{.5\textwidth}
@@ -1009,39 +1061,11 @@ El paciente tenía una estatura de 1.78 cm, por lo cual el dispositivo en todas 
 		\label{fig:pruebaLateralFrontal}
 	\end{figure}
 	
-	
-	\begin{table}[H]
-		\label{table:resultadosPruebas}
-		\centering
-		\begin{tabular}{|c|c|c|c|c|c|c|}
-			\hline
-			\multirow{2}{*}{Pruebas} &
-			\multicolumn{2}{c|}{Espalda} &
-			\multicolumn{2}{c|}{Izquierda} &
-			\multicolumn{2}{c|}{Frontal} \\
-			\cline{2-7}
-			& A.P & M.L & A.P  & M.L & A.P & M.L \\
-			\hline
-			\shortstack{Coeficiente\\Correlación} & 0.98682 & 0.88232 & 0.95932 & 0.77737 & 0.95065 & 0.95926 \\
-			\hline
-			\shortstack{Valor Medio \\ (Diferencia)} & -0.059775 & 0.022444 & 0.29702 & -0.054382 & 0.47144 & 0.11151 \\
-			\hline
-			\shortstack{Mínima\\Diferencia (cm)} & 1.3128$e^{-4}$ & 1.9897$e^{-4}$ & 7.4105$e^{-6}$ & 4.4392$e^{-4}$ & 5.1245$e^{-5}$ & 5.8009$e^{-4}$ \\
-			\hline
-			\shortstack{Máxima\\Diferencia (cm)} & 3.1274 & 1.2254 & 5.7394 & 3.7113 & 5.6831 & 5.3845 \\
-			\hline
-			\shortstack{Porcentaje\\Semejanza} & 34.633\% & 80.700\% & 24.598\% & 61.092\% &19.356\% & 32.157\% \\
-			\hline
-		\end{tabular}
-		\caption{Tabla resultados pruebas}
-	\end{table}
-	
-\end{itemize}
+Los datos tanto en el sentido Antero-Posterior, como en el medio lateral sufrieron de translación, con lo cual debieron ser ajustados para realizar una comparación mas directa.
 
 
 
-
-
+\newpage
 \subsection{Principales Desafíos}
 \subsubsection{Representación en Tiempo Real}
 La interfaz gráfica es una parte integral del sistema, pasando a ser la principal fuente de información para la retroalimentación, junto con el lugar donde mayormente interviene el usuario del sistema, entonces el no poder desplegar la información a tiempo, o que esta sea poco representativa es un gran problema. Se planteó inicialmente en graficar cada una de las salidas tanto del acelerómetro como el giroscopio en donde se representarían 6 variables según la frecuencia de muestreo, lo que en la práctica no resulta demasiado bien. Al representar en gráficos a frecuencias muy altas es decir 100hz o superior, multiplicado por la cantidad de datos que se estén representando, junto con el procesamiento interno para mostrar esos datos, se genera una sobrecarga en la parte gráfica, lo que conlleva a ralentizar el proceso, generando pérdidas de información y fidelidad al desplegar en tiempo real.
