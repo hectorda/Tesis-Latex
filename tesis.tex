@@ -329,6 +329,7 @@ Para ello fueron considerados los principales sistemas utilizados para referenci
 	\item \textbf{Ejes del sensor:} Los ejes contenidos en el sensor son expresados en coordenadas X, Y ,Z, en donde según la orientación del sensor cualquiera de sus ejes puede ser paralelo a la gravedad de la tierra, que apunta hacia el centro de esta.
 \end{itemize}
 
+\newpage
 \subsection{Sistema microelectromecánico (MPU6050)}
 El sistema Microelectromecánico (MEMS) MPU6050\cite{MPU6050}, es un dispositivo capaz de medir la velocidad angular y fuerza de gravedad gracias a estar compuesto por Giroscópico y Acelerómetro ambos de 3 ejes, el hecho de poseer estos 2 sensores de movimiento indica que existen al menos 6 grados de libertad para utilizar al momento de obtener las mediciones provenientes de éste.
 
@@ -348,6 +349,7 @@ El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\r
 	\label{fig:MPU6050}
 \end{figure}
 
+\newpage
 \subsubsection{Características Técnicas}
 
 \begin{itemize}
@@ -399,7 +401,7 @@ El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\r
 \end{itemize}
 
 \subsubsection{Configuración de MPU6050}
-Por defecto el MPU6050 viene configurada con los parámetros básicos para realizar la captura de información, lo cual puede perfectamente ser útil según sea el caso de estudio, pero si se desea que los sensores operen en rangos específicos y/o los datos capturados por de los sensores sean obtenidos a frecuencias específicas se debe comprender como llevar a cabo la configuración en cada uno de los registros internos presentes, el mapa de los registros \cite{MAPREGISTER} proporcionado  en el sitio de InverSense es buena guía para entender cómo se realiza esta labor.
+Por defecto el MPU6050 viene configurada con los parámetros básicos para realizar la captura de información, lo cual puede ser perfectamente útil según sea el caso de estudio, pero si se desea que los sensores operen en rangos específicos y/o los datos sean obtenidos a frecuencias específicas se debe comprender como llevar a cabo la configuración en cada uno de los registros internos encargados de cada configuración, el mapa de los registros \cite{MAPREGISTER} proporcionado  en el sitio de InverSense es buena guía para entender cómo se realiza esta labor.
 \newline En el interior del MPU6050 se encuentran más de 70 registros cada uno de 8 Bit, para la configuraciones listadas a continuación se deben ser usados solo algunos pocos.
 \begin{itemize}
 	\item \textbf{Configurar frecuencia muestreo:} Para obtener la cantidad de muestras que se obtendrán finalmente ``En Teoría'' se calcula usando la ecuación: 
@@ -415,7 +417,7 @@ Por defecto el MPU6050 viene configurada con los parámetros básicos para reali
 	
 	\item \textbf{Configurar Giroscopio:} El registro GYRO\_CONFIG permite el cambio de los rangos para la obtención de la velocidad angular, con lo cual aumentamos o disminuimos de forma inversa la sensibilidad del Giroscopio. En el interior de este registro específicamente en los bits 3 y 4 del registro deben ser ingresados los valores en binario de los números 0, 1, 2 o 3 para configurar los cuatro rangos disponibles 250\grad/seg, 500\grad/seg, 1000\grad/seg y 2000\grad/seg. respectivamente.
 	
-	\item \textbf{Configurar Acelerómetro:} La configuración para el rango del acelormetro se realiza de forma similar, solo que en cambio el utilizado el registro ACCEL\_CONFIG, en donde también en los bits 3 y 4 se deben ingresar los valores en binario de 0, 1, 2 o 3 que representarán $\pm 2g$, $\pm 4g$, $\pm 8g$, $\pm 16g$ respectivamente.
+	\item \textbf{Configurar Acelerómetro:} La configuración para el rango del acelerómetro se realiza de forma similar, solo que en cambio es utilizado el registro ACCEL\_CONFIG, en donde también los bits 3 y 4 corresponden a los valores en binario de 0, 1, 2 o 3 que representan $\pm 2g$, $\pm 4g$, $\pm 8g$, $\pm 16g$ respectivamente.
 	
 \end{itemize}
 
@@ -553,18 +555,20 @@ En lo referente a Hardware se utilizó un sensor inercial MPU6050, el cual será
 \end{figure}
 
 \subsection{Programación en Arduino}
-Uno de los primeros pasos en el desarrollo de la solución consiste en utilizar el IDE de Arduino para realizar la programación inicial del microcontrolador, en donde se debe configurar las direcciones de los registros internos del MPU6050 usados, junto con la configuración inicial, además de definir el formato de envío para desplegar los datos por el puerto serial.
-En el Loop de ejecución de Arduino se obliga a configurar el MPU6050, mediante la escritura de comandos en el puerto serial, para ajustar las configuraciones de los sensores a conforme las necesidades del usuario ver Figura (\ref{fig:arduinocode}), para dar comienzo a la escritura serial de Arduino hacia PC.
+Uno de los primeros pasos en el desarrollo de la solución consiste en utilizar el IDE de Arduino para realizar la programación inicial del microcontrolador, en donde se debe configurar las direcciones de los registros internos del MPU6050 usados, junto con la configuración inicial, además de definir el formato de envío para desplegar los datos por el puerto serial, que consta de una línea, con los 6 datos separados por espacio.
+
+En el Loop de ejecución de Arduino es requerida la configuración del MPU6050, mediante la escritura de comandos en el puerto serial, para ajustar las configuraciones de los sensores a conforme las necesidades del usuario ver Figura (\ref{fig:arduinocode}), para dar comienzo a la lectura de los registros y envío de la información sensorial.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.5]{images/diagramacodigoarduino}
+	\includegraphics[scale=0.45]{images/diagramacodigoarduino}
 	\caption{Diagrama Código Arduino}
 	\label{fig:arduinocode}
 \end{figure}
 
 Existen 4 parámetros a ser configurados de forma obligatoria Frecuencia de Muestreo, Filtro pasa bajo, rango Acelerómetro y rango Giroscopio, antes de comenzar con la lectura de las de la información registros.
 Para configurar los 4 parámetros requeridos debe ser recibida una cadena por el puerto serial en donde se analiza e interpretan los valores a utilizar para cada configuración. 
+
 Una vez se completa la configuración se procede a la lectura de los registros para obtener los valores RAW tanto acelerómetro como giroscopio para finalmente enviar mediante comunicación serial el valor resultante expresado en su unidad física correspondiente al ser dividido por la sensibilidad según el rango previamente configurado.
 
 \subsection{Requisitos Funcionales}
