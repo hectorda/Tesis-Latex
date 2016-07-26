@@ -9,14 +9,18 @@ KistlerML=ML_Plat-traMLPlat;
 correlacionAP=corr(DispositivoAP,KistlerAP)
 correlacionML=corr(DispositivoML,KistlerML)
 
-valorMedioDiferenciaAP=mean(KistlerAP-DispositivoAP)
-valorMedioDiferenciaML=mean(KistlerML-DispositivoML)
+rangoAP =  max(KistlerAP)-min(KistlerAP)
+rangoML =  max(KistlerML)-min(KistlerML)
 
-[minDiferenciaAP,indice]=min(abs(KistlerAP-DispositivoAP))
-[minDiferenciaML,indice]=min(abs(KistlerML-DispositivoML))
+DiferenciaAP=KistlerAP-DispositivoAP;
+DiferenciaML=KistlerML-DispositivoML;
 
-[maxDiferenciaAP,indice]=max(abs(KistlerAP-DispositivoAP))
-[maxDiferenciaML,indice]=max(abs(KistlerML-DispositivoML))
+ErrorMedioPorcentualAP=(sum(abs(DiferenciaAP))/length(KistlerAP))*(100/rangoAP)
+ErrorMedioPorcentualML=(sum(abs(DiferenciaML))/length(KistlerML))*(100/rangoML)
 
-procentajeSemejanzaAP=(sum(round((KistlerAP-DispositivoAP))==0)/length(KistlerAP))*100
-procentajeSemejanzaML=(sum(round((KistlerML-DispositivoML))==0)/length(KistlerAP))*100
+minDiferenciaAP=min(abs(DiferenciaAP))*(100/rangoAP)
+minDiferenciaML=min(abs(DiferenciaML))*(100/rangoML)
+
+maxDiferenciaAP=max(abs(DiferenciaAP))*(100/rangoAP)
+maxDiferenciaML=max(abs(DiferenciaML))*(100/rangoML)
+

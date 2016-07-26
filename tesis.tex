@@ -16,6 +16,7 @@
 \usepackage{float}
 \usepackage{subcaption}
 \usepackage{multirow}
+\usepackage{tcolorbox}
 \usepackage{verbatim} %Comentarios con \begin end comment
 \usepackage{csquotes}
 \usepackage{datetime} %Para obtener formato a la fecha
@@ -944,6 +945,34 @@ El paciente tenía una estatura de 1.78 cm, por lo cual el dispositivo en todas 
 
 \subsubsection{Resumen de Resultados}
 
+
+\begin{tcolorbox}[colframe=black,title=Definición de ecuaciones,center title]	
+		
+	\begin{align}
+		\overset{\underline{\textrm{serie temportal}}}{Kistler}:S_{K} &= \left\lbrace \begin{array}{lcl}
+		AP_{K} & : & \scalebox{0.6}{\textrm{Serie temporal Antero-Posterior de Kistler}}\\
+		ML_{K} & : & \scalebox{0.6}{\textrm{Serie temporal Medio-Lateral}}\\
+		\end{array} \right. \label{eq:seriesKistler} \\
+		\overset{\underline{\textrm{serie temportal}}}{Dispositivo}:S_{D} &= \left\lbrace \begin{array}{lcl}
+		AP_{D} & : & \scalebox{0.6}{\textrm{Serie temporal Antero-Posterior \nombreDispositivo}}\\
+		ML_{D} & : & \scalebox{0.6}{\textrm{Serie temporal Medio-Lateral \nombreDispositivo}}
+		\end{array} \right. \label{eq:seriesDisposito}
+	\end{align}
+	
+	En las siguientes definiciones $*$ equivale a Antero-Posterior o Medio Lateral.
+	
+	\begin{align} 
+		\overset{\underline{\textrm{escalar}}}{Rango}:	R^{*}&=Max(S_{K}^{*})-Min(S_{K}^{*})\\
+		\overset{\underline{\textrm{Serie temporal}}}{Diferencia}:	\Delta^{*}&=S_{K}^{*}-S_{D}^{*}\\
+		\overset{\underline{\textrm{escalar}}}{\textrm{Error medio porcentual}}:	Error^{*}&=\left( \frac{\sum_{i=1}^{n}|\Delta^{*}|}{n} \right)*\frac{100}{R^{*}} \\
+		\overset{\underline{\textrm{escalar}}}{\textrm{Mínima diferencia porcentual}}:	Min\Delta^{*}&=Min(\Delta^{*})*\frac{100}{R^{*}}\\
+		\overset{\underline{\textrm{escalar}}}{\textrm{Máxima diferencia porcentual}}:	Max\Delta^{*}&=Max(\Delta^{*})*\frac{100}{R^{*}}
+	\end{align}	
+\end{tcolorbox}
+
+
+
+
 \begin{table}[H]
 	\label{table:resultadosPruebas}
 	\centering
@@ -956,15 +985,15 @@ El paciente tenía una estatura de 1.78 cm, por lo cual el dispositivo en todas 
 		\cline{2-7}
 		& A.P & M.L & A.P  & M.L & A.P & M.L \\
 		\hline
-		\shortstack{Coeficiente\\Correlación} & 0.98682 & 0.88232 & 0.95932 & 0.77737 & 0.95065 & 0.95926 \\
+		\shortstack{Coeficiente\\Correlación} & 0.98790 &0.90179 & 0.94307 & 0.81876 & 0.94733 & 0.96013 \\
 		\hline
-		\shortstack{Valor Medio \\ (Diferencia)} & -0.059775 & 0.022444 & 0.29702 & -0.054382 & 0.47144 & 0.11151 \\
+		\shortstack{Rango\\Kistler (cm)} & 18.655 & 4.6465 & 17.679 & 4.9096 & 19.085 & 19.105 \\
 		\hline
-		\shortstack{Mínima\\Diferencia (cm)} & 1.3128$e^{-4}$ & 1.9897$e^{-4}$ & 7.4105$e^{-6}$ & 4.4392$e^{-4}$ & 5.1245$e^{-5}$ & 5.8009$e^{-4}$ \\
+		\shortstack{Error Medio\\Porcentual} & 3.9034\% & 5.7586\% & 8.9823\% & 8.1358\% & 9.2246\% & 4.6773\% \\
 		\hline
-		\shortstack{Máxima\\Diferencia (cm)} & 3.1274 & 1.2254 & 5.7394 & 3.7113 & 5.6831 & 5.3845 \\
+		\shortstack{Mínimo Error\\Porcentual} & 5.3548$e^{-4}\%$ & 0.0024053\% & 0.0030168\% & 0.0031829\% & 0.0063938\% & 0.0016166\% \\
 		\hline
-		\shortstack{Porcentaje\\Semejanza} & 34.633\% & 80.700\% & 24.598\% & 61.092\% &19.356\% & 32.157\% \\
+		\shortstack{Máximo Error\\Porcentual} & 14.952\% & 22.976\% & 35.381\% & 30.957\% & 32.014\% & 28.542\% \\
 		\hline
 	\end{tabular}
 	\caption{Tabla resultados pruebas}

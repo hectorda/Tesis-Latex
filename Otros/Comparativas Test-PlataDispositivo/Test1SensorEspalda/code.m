@@ -9,7 +9,7 @@ muestrasPlataforma=length(Plataforma(:,1));
 muestrasDispositivo=length(DispositivoRecorridoCurvo(:,2));
 
 tiempoInicioPlat=10;
-tiempoInicioDisp=13.3;
+tiempoInicioDisp=13.26;
 
 tiempoMedicion=40-tiempoInicioPlat;
 
@@ -26,6 +26,7 @@ ML_Proy=DispositivoProyeccion(inicioTDis : finTDis,4);
 AP_ReCur=DispositivoRecorridoCurvo(inicioTDis:finTDis,6);
 ML_ReCur=DispositivoRecorridoCurvo(inicioTDis:finTDis,4);
 
+
 %Translaciones AP y ML 
 traAPPro=mean(AP_Proy);
 traMLPro=mean(ML_Proy);
@@ -39,42 +40,37 @@ plot(tiempoPlat,AP_Plat-traAPPlat,'r',tiempoDispositivo,AP_Proy-traAPPro,'g')
 ylabel("Desplazamiento COP(centimetros)")
 xlabel("Tiempo (seg)")
 title('Antero-Posterior')
-legend('Plataforma Kirstler','Dispositivo')
+legend('Plataforma Kistler','Dispositivo')
 
 figure(2);
 plot(tiempoPlat,ML_Plat-traMLPlat,'r',tiempoDispositivo,ML_Proy-traMLPro,'g');
 ylabel("Desplazamiento COP(centimetros)")
 xlabel("Tiempo (seg)")
 title('Medio-Lateral')
-legend('Plataforma Kirstler','Dispositivo')
+legend('Plataforma Kistler','Dispositivo')
 
-figure(3);
-plot(tiempoPlat,AP_Plat-traAPPlat,'r',tiempoDispositivo,AP_ReCur-traAPReCurv,'g');
-ylabel("Desplazamiento COP(centimetros)")
-xlabel("Tiempo (seg)")
-title('Antero-Posterior')
-legend('Plataforma Kirstler','Dispositivo RecorridoCurvo')
-
-figure(4);
-plot(tiempoPlat,ML_Plat-traMLPlat,'r',tiempoDispositivo,ML_ReCur-traMLReCurv,'g');
-ylabel("Desplazamiento COP(centimetros)")
-xlabel("Tiempo (seg)")
-title('Medio-Lateral')
-legend('Plataforma Kirstler','Dispositivo RecorridoCurvo')
 %----------COMPARACION ENTRE PLATAFORMA Y DISPOSITIVO----------%
 
 pkg load signal
 
-figure(5);
+figure(3);
 %plot(tiempoPlat,(AP_Plat-(decimate(AP_Proy,2)+traAP)),'g',tiempoPlat,(AP_Plat-(decimate(AP_ReCur,2)+traAP)),'r');
 plot(tiempoPlat,((AP_Plat-traAPPlat)-(decimate(AP_Proy,2)-traAPPro)))
 ylabel("Diferencia Desplazamiento COP(centimetros)")
 xlabel("Tiempo (seg)")
 title('Diferencia desplazamiento Antero Posterior')
 
-figure(6);
+figure(4);
 %plot(tiempoPlat,(ML_Plat-(decimate(ML_Proy,2)+traML)),'g',tiempoPlat,(ML_Plat-(decimate(ML_ReCur,2)+traML)),'r');
 plot(tiempoPlat,((ML_Plat-traMLPlat)-(decimate(ML_Proy,2)-traMLPro)))
 ylabel("Diferencia Desplazamiento COP(centimetros)")
 xlabel("Tiempo (seg)")
 title('Diferencia desplazamiento Medio-Lateral')
+
+[acorAP,lagAP] = xcorr(AP_Plat,decimate(AP_Proy,2));
+[~,IAP] = max(abs(acorAP));
+lagDiffAP = lagAP(IAP)
+
+[acorML,lagML] = xcorr(ML_Plat,decimate(ML_Proy,2));
+[~,IML] = max(abs(acorML));
+lagDiffML = lagML(IML)
