@@ -285,7 +285,7 @@ Los sistemas han sido diseñados utilizando acelerómetros en un cinturón de ca
 \section{Marco Teórico}
 
 \subsection{Protocolo de Comunicación $\mathbf{\mathrm{I^2C}}$}
-Para la comunicación entre el Arduino y los Sensores, y debido a la limitante del tipo de protocolo usados por el MPU6050, se debe utilizar protocolo de comunicación $I^2C$.
+Restringido por el MPU6050 para la comunicación entre el Arduino y los Sensores será utilizado protocolo de comunicación $I^2C$.
 
 El protocolo $I^2C$ fue desarrollado en 1982 por Philips Semiconductors (hoy NXP Semiconductors) para la comunicación interna entre circuitos integrados como por ejemplo juegos de CD y televisiones.
 
@@ -309,6 +309,7 @@ Las principales características del protocolo de Comunicación $\mathrm{I^2C}$ 
 	\end{figure}
 \end{itemize}
 
+\newpage
 \subsection{Sistemas Coordenados}
 Toda la información obtenida debe estar asociado según un sistema específico de coordenadas, que sirva de referencia clara para la interpretación y comprensión de la información.
 
@@ -327,10 +328,11 @@ Para ello fueron considerados los principales sistemas utilizados para referenci
 		\label{fig:sagital}
 	\end{figure}
 
-	\item \textbf{Ejes del sensor:} Los ejes contenidos en el sensor son expresados en coordenadas X, Y ,Z, en donde según la orientación del sensor cualquiera de sus ejes puede ser paralelo a la gravedad de la tierra, que apunta hacia el centro de esta.
+	\item \textbf{Ejes del sensor:} Los ejes contenidos en el sensor son expresados en coordenadas X, Y ,Z, en donde según la orientación del sensor cualquiera de sus ejes puede ser paralelo a la gravedad de la tierra, que apunta en sentido positivo hacia el centro de esta.
 \end{itemize}
 
 \newpage
+
 \subsection{Sistema microelectromecánico (MPU6050)}
 El sistema Microelectromecánico (MEMS) MPU6050\cite{MPU6050}, es un dispositivo capaz de medir la velocidad angular y fuerza de gravedad gracias a estar compuesto por Giroscópico y Acelerómetro ambos de 3 ejes, el hecho de poseer estos 2 sensores de movimiento indica que existen al menos 6 grados de libertad para utilizar al momento de obtener las mediciones provenientes de éste.
 
@@ -361,7 +363,6 @@ El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\r
 	
 	\begin{table}[H]
 		\centering
-		\label{table:caracteristicasSensor}
 		\begin{tabular}{|c|c|c|c|}
 			\hline
 			\multicolumn{2}{|c|}{Acelerómetro} &\multicolumn{2}{|c|}{Giroscopio}   \\
@@ -374,6 +375,7 @@ El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\r
 			\hline
 		\end{tabular}
 		\caption{Características de los sensores LSB: Bit Menos Significativo}
+		\label{table:caracteristicasSensor}
 	\end{table}
 	
 	\item \textbf{Variables:} Las variables entregadas por el Acelerómetro consiste en la aceleración lineal percibida en cada eje expresada en veces de g, y en el Giroscopio corresponde  a la velocidad angular dada por la variación de los grados en un instante de tiempo al girar sobre cada eje.
@@ -389,7 +391,7 @@ El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\r
 				\hline
 				\multicolumn{2}{|c|}{Acelerómetro} &\multicolumn{2}{|c|}{Giroscopio}   \\
 				\hline
-				Rango (g)        & Resolución ($\Delta$LSB/g)  & Rango (\grad/seg)     &  Resolución ($\Delta$LSB/(\grad/seg))\\ \hline
+				Rango (g)        & Resolución (LSB/g)  & Rango (\grad/seg)     &  Resolución (LSB/(\grad/seg))\\ \hline
 				$\pm 2$     &  $6.10351562e^{-5}$   &$\pm 250 $ 	& 	$7.633587786e^{-3}$ 	\\ 
 				$\pm 4$     &  $1.22070313e^{-4}$  	&$\pm 500 $ 	& 	$1.526717557e^{-2}$    	\\
 				$\pm 8$     &  $2.44140625e^{-4}$ 	& $\pm 1000$  	& 	$3.048780488e^{-2}$		\\
@@ -541,11 +543,12 @@ El Filtro consiste en 2 estados Predicción y Actualización.
 \section{Desarrollo}
 \subsection{Introducción}
 
-A partir de la noción general que intrínsecamente cada uno posee acerca de estudio del balance y complementado con las ideas de herramientas o técnicas ya existentes que intentan solventar mediante diversos puntos de vista la problemática.
+A partir de la noción general que intrínsecamente se posee sobre el estudio del balance y complementado con las ideas de herramientas o técnicas ya existentes que intentan solventar mediante diversos puntos de vista la problemática.
 
-Usando de referencia principalmente los equipamientos disponibles en el Laboratorio de Bio-mecánica que sirvieron de base para el desarrollo de la solución Hardware-Software fueron la plataforma de fuerza Kistler 9286b \cite{KISTLER} y balance SD, que en ambos casos dan una representación del movimiento del centro de masa/presión y utilizando la representación entregada se ideó una solución que opera de forma análoga a los dispositivos que ya son utilizados en el laboratorio con un software que permita entregar información de manera similar a lo que entregan estos sistemas, para aprovechar los conocimientos de los usuarios con el fin de disminuir la curva de aprendizaje del sistema implementado para que estos comprendan el software sin demasiado entrenamiento y a su vez la transición sea más satisfactoria para estos.
+La principal referencia a tomar en consideración consiste en los equipamientos disponibles en el Laboratorio de Bio-mecánica que sirvieron de base para el planteamiento del desarrollo de la solución Hardware-Software.
+La plataforma de fuerza Kistler 9286b \cite{KISTLER} y balance SD, utilizados para representación del movimiento del centro de masa/presión (COM/COP) y a partir de los resultados que exponen cada uno de estos instrumentos se ideó una solución que opera de forma análoga a los dispositivos que ya son utilizados en el laboratorio, es decir con un software que permita entregar información de manera similar a estos sistemas, para aprovechar los conocimientos de los usuarios con el fin de disminuir la curva de aprendizaje del sistema implementado para que estos comprendan el software sin demasiado entrenamiento y a su vez la transición sea más satisfactoria.
 
-En lo referente a Hardware se utilizó un sensor inercial MPU6050, el cual será puesto en el sujeto de prueba en una posición aproximada al centro de masa (55\% de la Altura) que éste a su vez captura la información del movimiento generado por el sujeto y lo trasmite al microcontrolador Arduino en donde se recibe y traduce la información obtenida del sensor además de transmitir al ordenador los datos obtenidos utilizando variables físicas, tanto aceleración y velocidad angular en donde finalmente el software del ordenador recibe la información y realiza el procesamiento para obtener el ángulo y desplazamiento junto con brindar la opción de efectuar análisis específicos de la información utilizando interfaces gráficas sencillas.
+En lo referente a Hardware se utilizó un sensor inercial MPU6050, el cual será puesto en el sujeto de prueba en una posición aproximada al centro de masa (aprox. 55\% de la Altura), este sensor es el encargado de capturar el movimiento generado por el sujeto y transmitir dicha información al microcontrolador Arduino en donde es procesada y traducida a variables físicas (aceleración y velocidad angular), en donde finalmente el software dentro del ordenador recibe la información y realiza el procesamiento para obtener el ángulo y desplazamiento junto con brindar la opción de efectuar análisis específicos de la información utilizando interfaces gráficas sencillas.
 
 
 \begin{figure}[H]
@@ -556,9 +559,10 @@ En lo referente a Hardware se utilizó un sensor inercial MPU6050, el cual será
 \end{figure}
 
 \subsection{Programación en Arduino}
-Uno de los primeros pasos en el desarrollo de la solución consiste en utilizar el IDE de Arduino para realizar la programación inicial del microcontrolador, en donde se debe configurar las direcciones de los registros internos del MPU6050 usados, junto con la configuración inicial, además de definir el formato de envío para desplegar los datos por el puerto serial, que consta de una línea, con los 6 datos separados por espacio.
+Uno de los primeros pasos en el desarrollo de la solución consiste en utilizar el IDE de Arduino para realizar la programación inicial del microcontrolador, luego de conectar correctamente el sensor MPU6050 con el fin de configurar el comportamiento del sensor es necesario definir ciertos valores en registros, además de precisar el formato de envío para desplegar los datos por el puerto serial, en este caso consta de una línea con los 6 datos separados por espacio.
 
-En el Loop de ejecución de Arduino es requerida la configuración del MPU6050, mediante la escritura de comandos en el puerto serial, para ajustar las configuraciones de los sensores a conforme las necesidades del usuario ver Figura (\ref{fig:arduinocode}), para dar comienzo a la lectura de los registros y envío de la información sensorial.
+La programación del microcontrolador fue de la siguiente forma ver Figura(\ref{fig:arduinocode}).
+En el Loop de ejecución de Arduino es requerida la configuración del MPU6050, mediante la escritura de comandos en el puerto serial, específicamente 4 parámetros han de ser configurados obligadamente: Frecuencia de Muestreo, Filtro pasa bajo, rango Acelerómetro, rango Giroscopio, luego de realizada la configuración se comienza a enviar la información sensorial.
 
 \begin{figure}[H]
 	\centering
@@ -567,12 +571,9 @@ En el Loop de ejecución de Arduino es requerida la configuración del MPU6050, 
 	\label{fig:arduinocode}
 \end{figure}
 
-Existen 4 parámetros a ser configurados de forma obligatoria Frecuencia de Muestreo, Filtro pasa bajo, rango Acelerómetro y rango Giroscopio, antes de comenzar con la lectura de las de la información registros.
-Para configurar los 4 parámetros requeridos debe ser recibida una cadena por el puerto serial en donde se analiza e interpretan los valores a utilizar para cada configuración. 
+Una vez se completa la configuración se procede a la lectura de los registros para obtener los valores RAW, tanto acelerómetro como giroscopio, para finalmente enviar mediante comunicación serial el valor resultante expresado en su unidad física correspondiente al ser dividido acorde a la sensibilidad según el rango previamente configurado ver Tabla (\ref{table:caracteristicasSensor}).
 
-Una vez se completa la configuración se procede a la lectura de los registros para obtener los valores RAW tanto acelerómetro como giroscopio para finalmente enviar mediante comunicación serial el valor resultante expresado en su unidad física correspondiente al ser dividido por la sensibilidad según el rango previamente configurado.
-
-\subsection{Requisitos Funcionales}
+\subsection{Requisitos Funcionales Software}
 \begin{itemize}
 	\item El sistema debe ser capaz de describir mediante el estudio de variables cinemáticas (aceleración y velocidad angular), procesarlas y realizar análisis kinesiólogos (desplazamiento del Centro de Masa).
 	\item El sistema debe ser capaz de representar en Tiempo Real el desplazamiento del centro de masa.
@@ -592,21 +593,21 @@ Una vez se completa la configuración se procede a la lectura de los registros p
 \newpage
 \subsection{Resumen de Características}
 \begin{itemize}
-	\item \textbf{Configurable:} El software permite configurar la gran mayoría de opciones tanto velocidades de muestreo, Puerto Serial a utilizar, los rangos para la captura de información del movimiento, así como cantidad de datos que se representaran en pantalla, tamaños de los elementos a graficar, tiempos de prueba, limitar geométricamente el gráfico, entre otros.
+	\item \textbf{Configurable:} El software permite configurar la gran mayoría de opciones tanto velocidades de muestreo, puerto serial a utilizar, rangos para captura de información del movimiento, así como cantidad de datos que se representaran en pantalla, tamaños de los elementos a graficar, tiempos de prueba, limitar geométricamente el gráfico, entre otros.
+	\item \textbf{Reportes:} Cada uno de los gráficos despliegan las medidas tomadas o presentan los resultados del ejercicio, estos pueden ser exportados, tanto como un conjunto de datos, o también generar una imagen de estos.
+	\item \textbf{Herramientas de Análisis Gráficas:} Ventanas desplegables acompañadas a un gráfico que permiten de forma interactiva seleccionar partes del gráfico, para analizar intervalos según se estime conveniente y a su vez obtener de él datos como, los valores máximos y mínimos, la media, desviación estándar de los datos, y en el caso del desplazamiento obtener la velocidad media del intervalo analizado.
+	\item \textbf{Persistencia de datos:} Usando un pequeño almacén de datos en SQlite, es posible mantener un registro con la información de los pacientes, con el fin de tenerlos almacenados para el momento en que sea realizada cada una de las pruebas seleccionarlos sin la necesidad de re-ingresarlos en cada momento.
 	\item \textbf{Geometría Analítica} Se usó bastante la geometría analítica, para la generación y representación gráfica tanto de los objetivos en las pruebas, como para la intersección del movimiento realizado con cada uno de estos. De igual manera se utiliza la trigonometría para limitar el área del movimiento según el radio que sea definido para el examen.
-	\item \textbf{Reportes:} Cada uno de los gráficos, los que despliegan las medidas tomadas o los que representan los resultados del ejercicio, pueden ser almacenados en muestras de cada uno de los gráficos, o también generar una imagen de estos.
-	\item \textbf{Herramientas de Análisis Gráficas:} Ventanas desplegables acompañadas a un gráfico que permiten de forma interactiva seleccionar partes del gráfico, para analizar intervalos según se estime conveniente y a su vez obtener de este datos como, los valores máximos y mínimos, la media, desviación estándar de los datos, y en el caso del desplazamiento obtener la velocidad media del intervalo analizado.
-	\item \textbf{Persistencia de datos:} usando un pequeño almacén de datos en SQlite, es posible mantener un registro con la información de los pacientes, con el fin de tenerlos almacenados para el momento en que sea realizada cada una de las pruebas seleccionarlos sin la necesidad de re-ingresarlos en cada momento.
 \end{itemize}
 
 \newpage
 \subsection{Cálculo Ángulo} 
-Para efectos de análisis o representación final, a partir de las variaciones de aceleración y velocidad angular detectadas por los sensores existe la opción de calcular el ángulo, que es un indicador equivalente a la inclinación que ha realizado el sujeto.
+Para efectos de análisis o representación final, a partir de las variaciones de aceleración lineal y velocidad angular detectadas por los sensores se realiza el cálculo del ángulo, que para efectos de pruebas es un indicador equivalente a la inclinación que ha realizado el sujeto.
 
-Para ello existen distintos métodos usando la información obtenida, tales como:
+A partir de esta información existen distintos métodos para calcular el ángulo, tales como:
 
 
-\subsubsection{Cálculo Ángulo con Acelerómetro} Si es utilizado acelerómetro como inclinómetro este nos entrega el ángulo con gran exactitud pero al ser producida cualquier variación en la aceleración en cualquiera de sus 3 ejes de medición que no sea producto tan solo de la fuerza gravitacional será interpretada como un cambio de aceleración, lo cual genera medida erráticas debido a los cambios de aceleración constantes que son generados al girar/mover la IMU.
+\subsubsection{Cálculo Ángulo con Acelerómetro} Es posible usar solo acelerómetro como inclinómetro, este nos entrega el ángulo con gran exactitud espacial, pero es demasiado sensible a cualquier variación en la aceleración en cualquiera de sus 3 ejes, estas variaciones pueden no ser producto tan solo de la fuerza gravitacional, por ende ser generan medidas erráticas debido a los cambios de aceleración constantes que son generados al girar/mover la IMU.
 Para los cálculos del ángulo como se muestra en el ejemplo para el cálculo de los ángulos Medio-Lateral ver ecuación (\ref{eq:calculoanguloXsensorvertical}) e Antero-Posterior ver ecuación (\ref{eq:calculoanguloYsensorvertical}) usando el sensor en posición vertical con la referencia hacia atrás.
 
 \begin{figure}[H]
@@ -621,7 +622,7 @@ Para los cálculos del ángulo como se muestra en el ejemplo para el cálculo de
 \end{figure}
 
 \subsubsection{Cálculo ángulo con giroscopio} 
-En cambio, si utilizamos sólo el giroscopio a diferencia del acelerómetro, podemos realizar los cálculos del ángulo con mayor precisión pero al no tener una referencia clara del origen de la mediciones, es difícil de contrastar la información con el movimiento de un sujeto y dificulta enormemente la  interpretación esta información, además con el tiempo los datos capturados comienzan a acumular un pequeño error, a estos errores acumulados se les conoce como drift o deriva.
+A partir de la variación de la velocidad angular se puede obtener una aproximación del ángulo, utilizando sólo el giroscopio a diferencia del acelerómetro, podemos realizar los cálculos del ángulo con mayor precisión, pero al no tener una referencia clara del origen de la mediciones es difícil de contrastar la información con el movimiento realizad, esto dificulta enormemente la interpretación, además con el tiempo los datos capturados comienzan a acumular un pequeño error, a estos errores acumulados se les conoce como drift o deriva.
 
 \newpage
 \subsection{Métodos implementados para obtención del Ángulo}
@@ -939,66 +940,14 @@ Con respecto a la comparación entre los paradigmas usados para el análisis del
 
 El mejor método para verificar la fidelidad con la que la representación obtenida mediante el uso de acelerometría junto con los cálculos realizados para obtener la variación del centro de masa, es compararlo frente a un Gold Standard en términos de análisis de balance y/o desplazamiento del COM.
 
-Para ello se realizaron diversas pruebas posicionando el dispositivo en el sujeto de prueba, para realizar las mediciones tanto en la plataforma Kistler, como en el dispositivo de BioFeedBack desarrollado para esta Tesis.
-El objetivo en las pruebas era medir principalmente la variación Antero-Posterior, ya que en términos de balance es la que mayor variación percibe.
-El paciente tenía una estatura de 1.78 cm, por lo cual el dispositivo en todas las pruebas intento ser ubicado a una altura de 97.6 cm, el aproximado del 55\%, los resultados expuestos en cada prueba fueron sincronizados temporalmente, ya que al iniciar las mediciones en ambos dispositivos existen tiempos de calibración/configuración distintos para cada una.
+Para ello se realizaron tres pruebas, ubicando el dispositivo en las siguientes zonas: espalda, costado, frente del sujeto.
+El objetivo en las pruebas era medir principalmente la variación Antero-Posterior, ya que, en términos de balance es donde una mayor variación es percibida.
 
-\subsubsection{Resumen de Resultados}
+El paciente tenía una estatura de 1.78 cm, el dispositivo en todas las pruebas fue ubicado a una altura de 97.6 cm, el aproximado del 55\%.
+Los registros en la plataforma Kistler fueron tomados a una frecuencia de 100hz y para el dispositivo a 200hz. 
+Para la sincronización temporal fue utilizada la correlación cruzada, con la cual se obtiene el retraso(lag) entre las señales, y para ello fue necesario sub-muestrear los datos del dispositivo (decimate en octave)  a 100hz.
 
-
-\begin{tcolorbox}[colframe=black,title=Definición de ecuaciones,center title]	
-		
-	\begin{align}
-		\overset{\underline{\textrm{serie temportal}}}{Kistler}:S_{K} &= \left\lbrace \begin{array}{lcl}
-		AP_{K} & : & \scalebox{0.6}{\textrm{Serie temporal Antero-Posterior de Kistler}}\\
-		ML_{K} & : & \scalebox{0.6}{\textrm{Serie temporal Medio-Lateral}}\\
-		\end{array} \right. \label{eq:seriesKistler} \\
-		\overset{\underline{\textrm{serie temportal}}}{Dispositivo}:S_{D} &= \left\lbrace \begin{array}{lcl}
-		AP_{D} & : & \scalebox{0.6}{\textrm{Serie temporal Antero-Posterior \nombreDispositivo}}\\
-		ML_{D} & : & \scalebox{0.6}{\textrm{Serie temporal Medio-Lateral \nombreDispositivo}}
-		\end{array} \right. \label{eq:seriesDisposito}
-	\end{align}
-	
-	En las siguientes definiciones $*$ equivale a Antero-Posterior o Medio Lateral.
-	
-	\begin{align} 
-		\overset{\underline{\textrm{escalar}}}{Rango}:	R^{*}&=Max(S_{K}^{*})-Min(S_{K}^{*})\\
-		\overset{\underline{\textrm{Serie temporal}}}{Diferencia}:	\Delta^{*}&=S_{K}^{*}-S_{D}^{*}\\
-		\overset{\underline{\textrm{escalar}}}{\textrm{Error medio porcentual}}:	Error^{*}&=\left( \frac{\sum_{i=1}^{n}|\Delta^{*}|}{n} \right)*\frac{100}{R^{*}} \\
-		\overset{\underline{\textrm{escalar}}}{\textrm{Mínima diferencia porcentual}}:	Min\Delta^{*}&=Min(\Delta^{*})*\frac{100}{R^{*}}\\
-		\overset{\underline{\textrm{escalar}}}{\textrm{Máxima diferencia porcentual}}:	Max\Delta^{*}&=Max(\Delta^{*})*\frac{100}{R^{*}}
-	\end{align}	
-\end{tcolorbox}
-
-
-
-
-\begin{table}[H]
-	\label{table:resultadosPruebas}
-	\centering
-	\begin{tabular}{|c|c|c|c|c|c|c|}
-		\hline
-		\multirow{2}{*}{Pruebas} &
-		\multicolumn{2}{c|}{Espalda} &
-		\multicolumn{2}{c|}{Izquierda} &
-		\multicolumn{2}{c|}{Frontal} \\
-		\cline{2-7}
-		& A.P & M.L & A.P  & M.L & A.P & M.L \\
-		\hline
-		\shortstack{Coeficiente\\Correlación} & 0.98790 &0.90179 & 0.94307 & 0.81876 & 0.94733 & 0.96013 \\
-		\hline
-		\shortstack{Rango\\Kistler (cm)} & 18.655 & 4.6465 & 17.679 & 4.9096 & 19.085 & 19.105 \\
-		\hline
-		\shortstack{Error Medio\\Porcentual} & 3.9034\% & 5.7586\% & 8.9823\% & 8.1358\% & 9.2246\% & 4.6773\% \\
-		\hline
-		\shortstack{Mínimo Error\\Porcentual} & 5.3548$e^{-4}\%$ & 0.0024053\% & 0.0030168\% & 0.0031829\% & 0.0063938\% & 0.0016166\% \\
-		\hline
-		\shortstack{Máximo Error\\Porcentual} & 14.952\% & 22.976\% & 35.381\% & 30.957\% & 32.014\% & 28.542\% \\
-		\hline
-	\end{tabular}
-	\caption{Tabla resultados pruebas}
-\end{table}	
-  
+\newpage
 \subsubsection{Prueba Dispositivo Espalda} En la siguiente prueba el dispositivo fue ubicado en la espalda, en zona las vértebras lumbares del sujeto. Se realiza la medición en la Plataforma Kistler en conjunto con el \nombreDispositivo creado con objetivo de Tesis.
 		
 	
@@ -1102,9 +1051,67 @@ Los resultados obtenidos son los siguientes:
 		\label{fig:pruebaLateralFrontal}
 	\end{figure}
 	
-Los datos tanto en el sentido Antero-Posterior, como en el medio lateral sufrieron de translación, con lo cual debieron ser ajustados para realizar una comparación mas directa.
+Los datos tanto en el sentido Antero-Posterior, como en el medio lateral sufrieron de traslación, con lo cual debieron ser ajustados para realizar una comparación mas directa.
+
+\newpage
+\subsubsection{Resumen de Resultados}
+
+Para comparar los resultados se definieron métodos para la batería de comparaciones a realizar, en donde la principal motivación consiste en demostrar el comportamiento de las series temporales utilizando valores representativos, con el fin de representar los resultados obtenidos de la forma mas científica posible. 
+
+Sin mas que acotar a continuación se encuentra la definición de todas las ecuaciones utilizadas para obtener los cálculos  en tabla de Resultados.
 
 
+\begin{tcolorbox}[colframe=black,title=Definición de ecuaciones,center title]	
+	
+	\begin{align}
+	\overset{\underline{\textrm{serie temportal}}}{Kistler}:S_{K} &= \left\lbrace \begin{array}{lcl}
+	AP_{K} & : & \scalebox{0.6}{\textrm{Serie temporal Antero-Posterior de Kistler}}\\
+	ML_{K} & : & \scalebox{0.6}{\textrm{Serie temporal Medio-Lateral}}\\
+	\end{array} \right. \label{eq:seriesKistler} \\
+	\overset{\underline{\textrm{serie temportal}}}{Dispositivo}:S_{D} &= \left\lbrace \begin{array}{lcl}
+	AP_{D} & : & \scalebox{0.6}{\textrm{Serie temporal Antero-Posterior \nombreDispositivo}}\\
+	ML_{D} & : & \scalebox{0.6}{\textrm{Serie temporal Medio-Lateral \nombreDispositivo}}
+	\end{array} \right. \label{eq:seriesDisposito}
+	\end{align}
+	
+	En las siguientes definiciones $*$ equivale a Antero-Posterior o Medio Lateral.
+	
+	\begin{align} 
+	\overset{\underline{\textrm{escalar}}}{Rango}:	R^{*}&=Max(S_{K}^{*})-Min(S_{K}^{*})\\
+	\overset{\underline{\textrm{Serie temporal}}}{Diferencia}:	\Delta^{*}&=S_{K}^{*}-S_{D}^{*}\\
+	\overset{\underline{\textrm{escalar}}}{\textrm{Error medio porcentual}}:	Error^{*}&=\left( \frac{\sum\limits_{i=1}^{n}|\Delta^{*}|}{n} \right)*\frac{100}{R^{*}} \\
+	\overset{\underline{\textrm{escalar}}}{\textrm{Mínima diferencia porcentual}}:	Min\Delta^{*}&=Min(\Delta^{*})*\frac{100}{R^{*}}\\
+	\overset{\underline{\textrm{escalar}}}{\textrm{Máxima diferencia porcentual}}:	Max\Delta^{*}&=Max(\Delta^{*})*\frac{100}{R^{*}}
+	\end{align}	
+\end{tcolorbox}
+
+\begin{table}[H]
+	\label{table:resultadosPruebas}
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+		\hline
+		\multirow{2}{*}{Pruebas} &
+		\multicolumn{2}{c|}{Espalda} &
+		\multicolumn{2}{c|}{Izquierda} &
+		\multicolumn{2}{c|}{Frontal} \\
+		\cline{2-7}
+		& A.P & M.L & A.P  & M.L & A.P & M.L \\
+		\hline
+		\shortstack{Coeficiente\\Correlación} & 0.98790 &0.90179 & 0.94307 & 0.81876 & 0.94733 & 0.96013 \\
+		\hline
+		\shortstack{Rango\\Kistler (cm)} & 18.655 & 4.6465 & 17.679 & 4.9096 & 19.085 & 19.105 \\
+		\hline
+		\shortstack{Error Medio\\Porcentual} & 3.9034 & 5.7586 & 8.9823 & 8.1358 & 9.2246 & 4.6773 \\
+		\hline
+		\shortstack{Mínimo Error\\Porcentual} & 5.3548$e^{-4}$ & 0.0024053 & 0.0030168 & 0.0031829 & 0.0063938 & 0.0016166 \\
+		\hline
+		\shortstack{Máximo Error\\Porcentual} & 14.952 & 22.976 & 35.381& 30.957 & 32.014 & 28.542 \\
+		\hline
+	\end{tabular}
+	\caption{Tabla resultados pruebas}
+\end{table}	
+
+\subsubsection{Discusión}
 
 \newpage
 \subsection{Principales Desafíos}
