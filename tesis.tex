@@ -215,7 +215,11 @@ El costo del sistema, respecto a las soluciones de mercado (Biodex- Balance SD),
 Desde el punto de vista disciplinar (Ciencias de la Ingeniería), este proyecto materializa trabajos de investigación y colaboración transdisciplinario entre la Facultad de Ingeniería y la Facultad de Salud de la UCM. Además posiciona a los Ingenieros Informáticos como profesionales capaces de adecuarse a diferentes contextos mediante soluciones tecnológicas.
 
 \subsection{Organizaci\'on de la Tesis}
-\textcolor{red}{falta}
+Esta Tesis fue organizada buscando el hacer su lectura lo más fluida posible, por lo cual se define por adelantado los fundamentos teóricos y técnicos involucrados en cada una de las secciones.
+
+Comenzando por la descripción de la situación actual del estudio de los principales avances en el desarrollo de soluciones para el estudio del Balance. Seguidamente son descritos cada uno de los elementos técnicos relacionados para dar solución al problema, es decir,  protocolos, sensores, algoritmos, etc. y como estos fueron implementados.
+
+Finalmente son expuestos los resultados, junto con las conclusiones mas relevantes, ademas de presentar trabajos futuros con el objetivo para mejorar aun mas la propuesta.
 
 
 \section{Estado del Arte}
@@ -751,8 +755,8 @@ Pese a primera vista que la gráfica ver Figura (\ref{fig:AnguloXvsFiltros}) dem
 
 
 \subsection{Cálculo del Desplazamiento}
-Basándonos en que la posición bípeda-quieta puede ser representada como un péndulo invertido, por lo tanto considerando la variación angular del movimiento pendular de un sujeto en las coordenadas antero-posterior y medio-lateral es aplicable la trigonometría para la obtención del desplazamiento.
-Para el cálculo del desplazamiento usando la variación angular se consideraron los siguientes métodos. 
+Basado en la premisa que la posición bípeda-quieta puede ser representada como un péndulo invertido, por lo tanto considerando la variación angular del movimiento pendular de un sujeto en las coordenadas antero-posterior y medio-lateral es aplicable la trigonometría para obtener el desplazamiento.
+Usando esta variación angular se consideraron para el cálculo del desplazamiento los siguientes métodos. 
 
 \subsubsection{Proyección del angulo}
 Para obtener la distancia proyectada en el eje horizontal, usando trigonometría tomando la altura $h$ como la distancia desde el suelo hasta donde fue puesto el sensor como el equivalente a la hipotenusa de un triángulo rectángulo, como se muestra en la Figura (\ref{fig:proyeccion}), se puede calcular usando la Ecuación (\ref{eq:proyeccion}), aplicando la función $\sin$ del ángulo $\alpha$ en grados obtenido mediante el filtro aplicado, junto con ponderar el valor obtenido por la altura $h$ (hipotenusa del triángulo), el valor resultante equivale a la distancia $d$ correspondiente al desplazamiento del centro de masa estimado, en la cual su unidad de medida es la misma usada para describir la altura $h$ en general centímetros.
@@ -771,7 +775,7 @@ Para obtener la distancia proyectada en el eje horizontal, usando trigonometría
 
 
 \subsubsection{Recorrido curvo del ángulo}
-La longitud del arco generado por el ángulo puede ser considerado un tipo de desplazamiento, por ello existe la opción de estudiarlo.
+La longitud del arco generado por el ángulo puede ser considerado un tipo de desplazamiento, por ello fue implementado.
 
 Calculando la longitud del arco formado desde donde comienza la medición hasta el ángulo $\alpha$ ver Figura (\ref{fig:recorridocurvo}) en grados a radianes y ponderando el valor obtenido por la altura $h$, tal como se muestra en la Ecuación (\ref{eq:recorridocurvo}).
 
@@ -784,21 +788,21 @@ Calculando la longitud del arco formado desde donde comienza la medición hasta 
 
 \begin{equation}
 	\label{eq:recorridocurvo}
-	d=\left(\frac{\alpha*2\pi}{360}\right)*h
+	arco=\left(\frac{\alpha*2\pi}{360}\right)*h
 \end{equation}
 
 \newpage
 \subsubsection{Comparación métodos Cálculo Desplazamiento}
-Para comparar la aproximación que generan ambos métodos fueron analizados utilizando una altura de 100 centímetros.
+Para comparar la aproximación que generan ambos métodos, estos fueron analizados utilizando una altura de 100 centímetros.
 
-A continuación se presenta una tabla con valores de ejemplo para comparar el comportamiento de las dos fórmulas para el cálculo del desplazamiento, y además un gráfico para comparar la diferencia entre ellos y ver el comportamiento.
+A continuación se presenta una tabla con valores de ejemplo para comparar el comportamiento de las dos fórmulas para el cálculo del desplazamiento, y además un gráfico para comparar la diferencia entre ellos.
 
 \begin{figure}[H]
 	\begin{subfigure}{.5\textwidth}
 		\scalebox{0.75}{
 		\begin{tabular}{|c|c|c|c|}
 			\hline 
-			\textbf{Angulo} & \textbf{Recorrido Curvo} & \textbf{Proyección} & \textbf{Diferencia}\\ 
+			\textbf{Ángulo} & \shortstack{\textbf{Recorrido}\\\textbf{ (arco)}} & \textbf{Proyección (d)} & \textbf{Diferencia}\\ 
 			\hline 
 			0 & 0.00000 & 0.00000 & 0.00000 \\
 			\hline 
@@ -835,7 +839,8 @@ A continuación se presenta una tabla con valores de ejemplo para comparar el co
 
 Al comparar los métodos anteriormente mencionados para el cálculo del desplazamiento Recorrido Curvo y Proyección, estos se comportan de forma similar en ángulos pequeños, pero a medida que el valor del ángulo comienza a incrementar la diferencia generar una curva exponencial el desplazamiento, debido a que la distancia calculada mediante el recorrido curvo es mayor frente a la obtenido por proyección, lo que nos da a concluir que ambos métodos entregan en ángulos pequeños desplazamientos similares, pero al aumentar el ángulo se comportan diferente.
 
-Por lo tanto se debe tener en consideración al momento de escoger con que método se realizará el cálculo, ya que con ambos se puede interpretar el desplazamiento, pero a su vez debido a los límites del balance que en general su dominio consiste en tan solo ángulos pequeños ($\pm 3$\grad), con cual según los análisis expuestos anteriormente.
+Por lo tanto se debe tener en consideración al momento de escoger con que método se realizará el cálculo, ya que con ambos se puede interpretar el desplazamiento, pero a su vez debido a los límites del balance que en general su dominio consiste en tan solo ángulos entre ($\pm 3$\grad), con lo cual según los análisis expuestos anteriormente ambos métodos se comportan de forma similar en ese rango.
+Dicho esto de ahora en adelante cuando sea realizado el cálculo del desplazamiento se utilizará el método de la proyección.
 
 
 \newpage
@@ -938,14 +943,14 @@ Con respecto a la comparación entre los paradigmas usados para el análisis del
 
 \subsubsection{Contraste Dispositivo vs Plataforma de Fuerza Kistler}
 
-El mejor método para verificar la fidelidad con la que la representación obtenida mediante el uso de acelerometría junto con los cálculos realizados para obtener la variación del centro de masa, es compararlo frente a un Gold Standard en términos de análisis de balance y/o desplazamiento del COM.
+El método empleado para verificar la fidelidad con que representa la información obtenida mediante el uso de acelerometría junto con los cálculos realizados para obtener la variación del centro de masa, es compararlo frente a un Gold Standard en términos de análisis de balance y/o desplazamiento del COM.
 
 Para ello se realizaron tres pruebas, ubicando el dispositivo en las siguientes zonas: espalda, costado, frente del sujeto.
 El objetivo en las pruebas era medir principalmente la variación Antero-Posterior, ya que, en términos de balance es donde una mayor variación es percibida.
 
 El paciente tenía una estatura de 1.78 cm, el dispositivo en todas las pruebas fue ubicado a una altura de 97.6 cm, el aproximado del 55\%.
 Los registros en la plataforma Kistler fueron tomados a una frecuencia de 100hz y para el dispositivo a 200hz. 
-Para la sincronización temporal fue utilizada la correlación cruzada, con la cual se obtiene el retraso(lag) entre las señales, y para ello fue necesario sub-muestrear los datos del dispositivo (decimate en octave)  a 100hz.
+Para la sincronización temporal fue utilizada la correlación cruzada, con la cual se obtiene el retraso(lag) entre las señales, para posteriormente sincronizarlas, y para ello fue necesario sub-muestrear los datos del dispositivo (decimate en octave) a 100hz.
 
 \newpage
 \subsubsection{Prueba Dispositivo Espalda} En la siguiente prueba el dispositivo fue ubicado en la espalda, en zona las vértebras lumbares del sujeto. Se realiza la medición en la Plataforma Kistler en conjunto con el \nombreDispositivo creado con objetivo de Tesis.
@@ -1058,7 +1063,7 @@ Los datos tanto en el sentido Antero-Posterior, como en el medio lateral sufrier
 
 Para comparar los resultados se definieron métodos para la batería de comparaciones a realizar, en donde la principal motivación consiste en demostrar el comportamiento de las series temporales utilizando valores representativos, con el fin de representar los resultados obtenidos de la forma mas científica posible. 
 
-Sin mas que acotar a continuación se encuentra la definición de todas las ecuaciones utilizadas para obtener los cálculos  en tabla de Resultados.
+Sin más que acotar a continuación se encuentra la definición de todas las ecuaciones utilizadas para obtener los cálculos  en tabla de Resultados.
 
 
 \begin{tcolorbox}[colframe=black,title=Definición de ecuaciones,center title]	
@@ -1086,7 +1091,6 @@ Sin mas que acotar a continuación se encuentra la definición de todas las ecua
 \end{tcolorbox}
 
 \begin{table}[H]
-	\label{table:resultadosPruebas}
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|c|}
 		\hline
@@ -1109,9 +1113,14 @@ Sin mas que acotar a continuación se encuentra la definición de todas las ecua
 		\hline
 	\end{tabular}
 	\caption{Tabla resultados pruebas}
+	\label{table:resultadosPruebas}
 \end{table}	
 
 \subsubsection{Discusión}
+Al tener el conjunto de resultados resumidos en una tabla con datos concretos, es posible realizar la comparación, para determinar la precisión para representar el dezplazamiento del COM por el dispositivo frente a la plataforma Kistler, y además como afecta la ubicación del dispositivo.
+
+Si es considerada la correlación entre los datos de las 3 pruebas, la que presenta una mayor correlación en términos de Antero-Posterior y Medio-Lateral consiste en las pruebas con el dispositivo Frontal y Espalda, 
+
 
 \newpage
 \subsection{Principales Desafíos}
