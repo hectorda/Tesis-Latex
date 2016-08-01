@@ -409,7 +409,7 @@ El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\r
 
 \subsubsection{Configuración de MPU6050}
 Por defecto el MPU6050 viene configurada con los parámetros básicos para realizar la captura de información, lo cual puede ser perfectamente útil según sea el caso de estudio, pero si se desea que los sensores operen en rangos específicos y/o los datos sean obtenidos a frecuencias específicas se debe comprender como llevar a cabo la configuración en cada uno de los registros internos encargados de cada configuración, el mapa de los registros \cite{MAPREGISTER} proporcionado  en el sitio de InverSense es buena guía para entender cómo se realiza esta labor.
-\newline En el interior del MPU6050 se encuentran más de 70 registros cada uno de 8 Bit, para la configuraciones listadas a continuación se deben ser usados solo algunos pocos.
+\newline En el interior del MPU6050 se encuentran más de 70 registros cada uno de 8 Bit, para la configuraciones listadas a continuación se deben usar solo algunos pocos.
 \begin{itemize}
 	\item \textbf{Configurar frecuencia muestreo:} Para obtener la cantidad de muestras que se obtendrán finalmente ``En Teoría'' se calcula usando la ecuación: 
 	
@@ -1172,12 +1172,25 @@ La solución fue a partir de la información de configuración FTDI\cite{FTDI} p
 
 \section{Conclusiones y Trabajos Futuros}
 \subsection{Conclusiones}
-A partir de los resultados obtenidos, y sus posteriores analisis e interpretación de los mismos, se pueden enunciar las siguientes como conclusiones mas relevantes.
+A partir de los resultados obtenidos, y sus posteriores análisis e interpretación de los mismos, se pueden enunciar las siguientes como conclusiones mas relevantes.
 \begin{itemize}
-	\item ASDSAD
+	\item El principal objetivo de esta Tesis era generar un solución usando Acelerometría para el estudio del Balance, dicho esto, el principal aporte de este trabajo es demostrar como a partir de sensores inerciales, montados en una placa Arduino y controlados por el Ordenador, es posible replicar con un grado de similitud el estudio del Balance Clínico.
+	
+	Unos de los objetivos era diseñar una solución de bajo coste comparado con el alto precio de los dispositivos actualmente utilizados principalmente en el Laboratorio, dicho esto si comparamos tan solo en concepto de materiales utilizados para el desarrollo del Dispositivo frente a por ejemplo la Plataforma de Fuerza Kistler, el costo del dispositivo implementado bordea el 0.1\% del valor de la plataforma, lo que supone una diferencia considerable.
+	
+	La similitud en la información aunque de por si es alta de acuerdo los resultados de las pruebas realizadas, no es correcto dar por concluido el trabajo, esta Tesis el punto de partida y/o complemente a las investigaciones y avances en materia de la Biomecánica Humana.
+	
+	
+	
+
+	\item Todos los sistemas diseñados implementeados en C++, tienen un tiempo de procesado muy corto, junto con una utilización de la maquina bajo en comparación a otros Lenguajes de programacion, fue probado satisfactoriamente en los equipos del Laboratorio de Biomecánica.
 \end{itemize} 
 
+
+
 \subsection{Trabajos Futuros}
+
+
 
 \section{Bibliografía}
 \printbibliography[heading=none]
