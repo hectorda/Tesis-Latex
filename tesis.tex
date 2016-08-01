@@ -219,7 +219,7 @@ Esta Tesis fue organizada buscando el hacer su lectura lo más fluida posible, p
 
 Comenzando por la descripción de la situación actual del estudio de los principales avances en el desarrollo de soluciones para el estudio del Balance. Seguidamente son descritos cada uno de los elementos técnicos relacionados para dar solución al problema, es decir,  protocolos, sensores, algoritmos, etc. y como estos fueron implementados.
 
-Finalmente son expuestos los resultados, junto con las conclusiones mas relevantes, ademas de presentar trabajos futuros con el objetivo para mejorar aun mas la propuesta.
+Finalmente son expuestos los resultados, junto con las conclusiones más relevantes, ademas de presentar trabajos futuros con el objetivo para mejorar aún más la propuesta.
 
 
 \section{Estado del Arte}
@@ -299,7 +299,7 @@ Las principales características del protocolo de Comunicación $\mathrm{I^2C}$ 
 	
 	\item Cada dispositivo conectado al bus es direccionado por software por un ID único y usando relación Esclavo/Maestro todo el tiempo.
 	
-	\item Posee un sistema de detección de colisiones lo que permite usar el modo multi-maestro previniendo la corrupción de los datos si dos o mas maestros comienzan a transferir datos de forma simultánea.
+	\item Posee un sistema de detección de colisiones lo que permite usar el modo multi-maestro previniendo la corrupción de los datos si dos o más maestros comienzan a transferir datos de forma simultánea.
 	
 	\item Orientado a transferencias de datos en 8-bit de forma bi-direccional pueden ser realizadas hasta los 100 kbit/s en el modo Estándar, hasta 400 kbit/s en el modo Rápido, hasta 1 Mbit/s en el modo Mas Rápido, o hasta 3.4 Mbit/s en el modo de Alta-Velocidad.
 	
@@ -411,16 +411,16 @@ El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\r
 Por defecto el MPU6050 viene configurada con los parámetros básicos para realizar la captura de información, lo cual puede ser perfectamente útil según sea el caso de estudio, pero si se desea que los sensores operen en rangos específicos y/o los datos sean obtenidos a frecuencias específicas se debe comprender como llevar a cabo la configuración en cada uno de los registros internos encargados de cada configuración, el mapa de los registros \cite{MAPREGISTER} proporcionado  en el sitio de InverSense es buena guía para entender cómo se realiza esta labor.
 \newline En el interior del MPU6050 se encuentran más de 70 registros cada uno de 8 Bit, para la configuraciones listadas a continuación se deben usar solo algunos pocos.
 \begin{itemize}
-	\item \textbf{Configurar frecuencia muestreo:} Para obtener la cantidad de muestras que se obtendrán finalmente ``En Teoría'' se calcula usando la ecuación: 
+	\item \textbf{Configurar frecuencia muestreo:} Para definir la cantidad de muestras que se obtendrán ``En Teoría'' se calcula usando la ecuación: 
 	
 	\begin{equation} 
 		\label{eq:sampleratediv}
 		Sample Rate = \frac{Gyroscope Output Rate}{(1 + SMPLRT\_DIV) }
 	\end{equation}
 	
-	En la ecuación (\ref{eq:sampleratediv}) factores, tales como la velocidad del puerto serial pueden influir en el resultado, pero cambiando los datos almacenados en el registro \textbf{SMPRT\_DIV}, con valores entre 0 y 255, el valor de $Gyroscope Output Rate$ depende directamente del estado del filtro pasa-bajo, en caso de estar desactivado, el valor de $Gyroscope Output Rate$ sería 8Khz, en cambio sí está activado el $Gyroscope Output Rate$ tomaría el valor de 1Khz con lo cual haciendo los cálculos necesarios al estar desactivado el filtro pasa-bajo la frecuencia de muestreo variará entre las 8000 y 31 muestras/seg de forma teórica, al contrario en caso de estar activado el filtro, la fórmula para el cálculo de la frecuencia de muestreo fluctuaría entre las 1000 y 3.9 muestras/seg, por cada uno de los 6 datos obtenibles.
+	En la ecuación (\ref{eq:sampleratediv}) factores, tales como la velocidad del puerto serial pueden influir en el resultado, el registro \textbf{SMPRT\_DIV} es de 8 Bit entonces adminte valores entre 0 y 255, el valor de $Gyroscope Output Rate$ depende directamente del estado del filtro pasa-bajo, en caso de estar desactivado, el valor de $Gyroscope Output Rate$ sería 8Khz, en cambio sí está activado el $Gyroscope Output Rate$ tomaría el valor de 1Khz con lo cual haciendo los cálculos necesarios al estar desactivado el filtro pasa-bajo la frecuencia de muestreo variará entre las 8000 y 31 muestras/seg de forma teórica, al contrario en caso de estar activado el filtro, la fórmula para el cálculo de la frecuencia de muestreo fluctuaría entre las 1000 y 3.9 muestras/seg, por cada uno de los 6 datos obtenibles.
 	
-	Nota: Hay que tener en consideración que el valor obtenido para la frecuencia de muestreo es válido principalmente para el giroscopio, ya que para el acelerómetro se maneja con su propia frecuencia de que es siempre de 1Khz por ende si la frecuencia de muestreo es mayor a 1Khz se pueden repetir valores en la salida del acelerómetro.
+	Nota: Hay que tener en consideración que el valor obtenido para la frecuencia de muestreo es válido principalmente para el giroscopio, ya que para el acelerómetro es de a lo más un 1Khz por ende si la frecuencia de muestreo es mayor a 1Khz se pueden repetir valores en la salida del acelerómetro.
 	
 	\item \textbf{Configurar Giroscopio:} El registro GYRO\_CONFIG permite el cambio de los rangos para la obtención de la velocidad angular, con lo cual aumentamos o disminuimos de forma inversa la sensibilidad del Giroscopio. En el interior de este registro específicamente en los bits 3 y 4 del registro deben ser ingresados los valores en binario de los números 0, 1, 2 o 3 para configurar los cuatro rangos disponibles 250\grad/seg, 500\grad/seg, 1000\grad/seg y 2000\grad/seg. respectivamente.
 	
@@ -552,7 +552,7 @@ A partir de la noción general que intrínsecamente se posee sobre el estudio de
 La principal referencia a tomar en consideración consiste en los equipamientos disponibles en el Laboratorio de Bio-mecánica que sirvieron de base para el planteamiento del desarrollo de la solución Hardware-Software.
 La plataforma de fuerza Kistler 9286b \cite{KISTLER} y balance SD, utilizados para representación del movimiento del centro de masa/presión (COM/COP) y a partir de los resultados que exponen cada uno de estos instrumentos se ideó una solución que opera de forma análoga a los dispositivos que ya son utilizados en el laboratorio, es decir con un software que permita entregar información de manera similar a estos sistemas, para aprovechar los conocimientos de los usuarios con el fin de disminuir la curva de aprendizaje del sistema implementado para que estos comprendan el software sin demasiado entrenamiento y a su vez la transición sea más satisfactoria.
 
-En lo referente a Hardware se utilizó un sensor inercial MPU6050, el cual será puesto en el sujeto de prueba en una posición aproximada al centro de masa (aprox. 55\% de la Altura), este sensor es el encargado de capturar el movimiento generado por el sujeto y transmitir dicha información al microcontrolador Arduino en donde es procesada y traducida a variables físicas (aceleración y velocidad angular), en donde finalmente el software dentro del ordenador recibe la información y realiza el procesamiento para obtener el ángulo y desplazamiento junto con brindar la opción de efectuar análisis específicos de la información utilizando interfaces gráficas sencillas.
+En lo referente a Hardware se utilizó un sensor inercial MPU6050, el cual será puesto en el sujeto de prueba en una posición aproximada al centro de masa (aprox. 55\% de la Altura), este sensor es el encargado de capturar el movimiento generado por el sujeto y transmitir dicha información al microcontrolador Arduino en donde es procesada y traducida a variables físicas (aceleración y velocidad angular), donde posteriormente es trasmitida mediante conexión serial al ordenador y el software dentro del éste recibe la información junto con realizar el procesamiento para obtener el ángulo y desplazamiento, permitiendo la opción de efectuar análisis específicos de la información utilizando interfaces gráficas sencillas.
 
 
 \begin{figure}[H]
@@ -666,11 +666,11 @@ A partir de la fórmula de la tangente, según la orientación escogida son conj
 	\label{table:calculoAnguloSinFiltro}
 \end{table}
 
-Como el ángulo resultante a partir de sólo acelerómetro, existe la opción de agregar mas información para corregir/mejorar la aproximación.
+Como el ángulo resultante a partir de sólo acelerómetro, existe la opción de agregar más información para corregir/mejorar la aproximación.
 
 La Fusión de Datos es un método para integrar señales provenientes de múltiples fuentes. Permite extraer información de varias fuentes diferentes para integrarlos en una sola señal o información.
 
-Para el análisis del desplazamiento del centro de masa se requiere que el ángulo obtenido sea lo en su medida lo mas preciso, para ello se estudiaron e implementaron 2 filtros que permiten una correcta integración de los datos de aceleración lineal con velocidad angular.
+Para el análisis del desplazamiento del centro de masa se requiere que el ángulo obtenido sea lo en su medida lo más preciso, para ello se estudiaron e implementaron 2 filtros que permiten una correcta integración de los datos de aceleración lineal con velocidad angular.
 
 \subsubsection{Filtro Complementario}
 Se posee un acelerómetro que entrega ángulos con referencia en la posición del sensor, pero muy susceptible a la variación de cambios de aceleración del éste y en cambio un giroscopio nos permite calcular el ángulo de manera exacta, pero si tener una clara referencia de la posición donde está el sensor. 
@@ -711,7 +711,9 @@ Nota: el $dt$ es obtenido a partir de la diferencia entre la muestra actual y la
 A partir de la información proveniente de las mediciones del Proceso de captura de información cinemática, se intenta obtener el ángulo, con la premisa que el filtro retornará el mínimo error por las fluctuaciones entrantes del ruido en las mediciones obtenidas.
 
 En base a la explicación de como implementarla por Kristian Sloth Lauszus
-\cite{kalmanTKJ}, junto con las librerías en C++ propuestas, la implementación del filtro de Kalman se realiza de manera sencilla, y los parámetros necesarios son exactamente los mismos utilizados por el filtro complementario con distinta nomenclatura, por ende solo serán nombrados, al igual que los casos anteriores es de gran importancia la orientación elegida, utilizando las mismas descritas en las tablas (\ref{table:calculoAnguloSinFiltro}) y (\ref{table:calculoAnguloFiltroKalman}).
+\cite{kalmanTKJ}, junto con las librerías en C++ propuestas, la implementación del filtro de Kalman se realiza de manera sencilla, y los parámetros necesarios son exactamente los mismos utilizados por el filtro complementario con distinta nomenclatura.
+
+Al igual que los casos anteriores es de gran importancia la orientación elegida, utilizando las mismas descritas en las tablas (\ref{table:calculoAnguloSinFiltro}) y (\ref{table:calculoAnguloFiltroKalman}).
 Debe ser considerado el \textit{nuevoAngulo} entregado mediante el acelerómetro y además la \textit{nuevaVelocidadAngular} obtenida por el giroscopio, junto con la diferencia de tiempo \textit{dt}, que corresponden a exactamente los mismos datos usados por el filtro complementario.
 \begin{table}[H]
 	\centering
@@ -749,7 +751,8 @@ Luego de la integración de los filtros en el Software es posible utilizar el de
 Pese a primera vista que la gráfica ver Figura (\ref{fig:AnguloXvsFiltros}) demuestra la gran corrección que realizan los filtros frente a el cálculo sin estos, los análisis que pueden ser concluidos respecto al cálculo del ángulo:
 \begin{itemize}
 	\item \textbf{Cálculo del ángulo sin usar filtros:} la diferencia entre los filtros vs el Cálculo sin el uso de estos es significativa, en especial respecto al ruido apreciable que es reducido en gran medida por la incorporación de algún filtro.
-	\item \textbf{Aplicando filtros:} el uso del filtro mejora considerablemente el ruido obtenido, pero a su vez si son comparados ambos filtros disponibles, estos tienen un comportamiento similar, sin entrar en estudios complejos acerca de cual es mas óptimo, es completamente a criterio del usuario el filtro que aplicará.
+	\item \textbf{Aplicando filtros:} el uso del filtro mejora considerablemente el ruido obtenido, pero a su vez si son comparados ambos filtros disponibles, estos tienen un comportamiento similar, sin entrar en estudios complejos acerca de cual es más óptimo, es completamente a criterio del usuario el filtro que aplicará.
+	Para efectos de análisis posteriores se utilizará el filtro de Kalman.
 \end{itemize}
 
 
@@ -937,13 +940,15 @@ Finalmente para el análisis de la información se dispone de herramientas intui
 	\label{fig:analsisGraficos}
 \end{figure}
 
+Cabe destacar que cualquier cambio sobre los intervalos a estudiar calcula los datos en tiempo real, esto pruebas de duración de segundos no es problema, pero si dura varios minutos, 20 por ejemplo, el cálculo se demora un tanto más.
+
 \newpage
 \subsection{Resultados y Análisis}
 Con respecto a la comparación entre los paradigmas usados para el análisis del desplazamiento del centro de Masa, la utilización de sensores piezo-eléctricos para la presión ejercida por el sujeto, en contraste por el estudiado en esta Tesis, utilizando acelerometría para obtener la variación espacial del centro de masa, los resultados y análisis de las pruebas realizadas serán descritos a continuación.
 
 \subsubsection{Contraste Dispositivo vs Plataforma de Fuerza Kistler}
 
-El método empleado para verificar la fidelidad con que representa la información obtenida mediante el uso de acelerometría junto con los cálculos realizados para obtener la variación del centro de masa, es compararlo frente a un Gold Standard en términos de análisis de balance y/o desplazamiento del COM.
+El método que fue empleado para verificar la fidelidad con que es representada la información obtenida mediante el uso de acelerometría junto con los cálculos realizados para obtener la variación del centro de masa, es compararlo frente a un Gold Standard en términos de análisis de balance y/o desplazamiento del COM.
 
 Para ello se realizaron tres pruebas, ubicando el dispositivo en las siguientes zonas: espalda, costado, frente del sujeto.
 El objetivo en las pruebas era medir principalmente la variación Antero-Posterior, ya que, en términos de balance es donde una mayor variación es percibida.
@@ -974,37 +979,10 @@ Para la sincronización temporal fue utilizada la correlación cruzada, con la c
 		\label{fig:pruebaEspalda}
 	\end{figure}
 	
-	Los resultados obtenidos de la prueba se puede apreciar la gran similitud del comportamiento de ambas curvas.
-	Para los gráficos obtenidos anteriormente tan solo debió realizarse un ajuste temporal, para coincidir los tiempos donde se realizaban las mediciones, por ende se puede entender que la correlación entre ellos es cercana a 1, indicando el grado de igualdad que poseen ambas curvas.
+	En los resultados obtenidos de la prueba se puede apreciar la gran similitud del comportamiento de ambas curvas.
 	
-	\begin{comment}
-		\begin{table}[H]
-			\label{table:resultadosPruebaEspalda}
-			\centering
-			\begin{tabular}{|c|c|c|}
-				\hline
-				  &A.P & M.L \\
-				\hline
-				\shortstack{Coeficiente\\Correlación} & 0.98682 & 0.88232 \\
-				\hline
-				\shortstack{Valor Medio \\ (Diferencia)} & -0.059775 & 0.022444 \\
-				\hline
-				\shortstack{Mínima\\Diferencia (cm)} & 1.3128$e^{-4}$ & 1.9897$e^{-4}$ \\
-				\hline
-				\shortstack{Máxima\\Diferencia (cm)} & 3.1274 & 1.2254 \\
-				\hline
-				\shortstack{Porcentaje\\Semejanza} & 34.633\% & 80.700\% \\
-				\hline
-			\end{tabular}
-			\caption{Tabla resultados pruebas}
-		\end{table}
+	Para los gráficos obtenidos anteriormente tan solo debió realizarse un ajuste temporal, para coincidir los tiempos donde se realizaban las mediciones, el hecho de realizar solo ajuste temporal es un gran indicador, le añade más relevancia a la ubicación para los análisis del desplazamiento COM.
 
-	
-	\begin{figure}[H]
-		\centering
-		\includegraphics[scale=1]{images/pruebas/Espalda/diferenciaAntero-Posterior}
-	\end{figure}
-	\end{comment}	
 
 
 \newpage
@@ -1030,7 +1008,7 @@ Para la sincronización temporal fue utilizada la correlación cruzada, con la c
 	\end{figure}
 	
 	Los resultados obtenidos inicialmente se encontraban desplazados, es decir, las curvas no coincidían, pero al centrar los datos, las curvas del desplazamiento coinciden en gran porcentaje en cuanto a la tendencia, altos y bajos.
-	Esta traslación se debe principalmente a que el dispositivo fue instalado en una distancia mas lejana al centro de masa de sujeto, pero pese a esa distancia extra es posible analizar el comportamiento del desplazamiento de éste.
+	Esta traslación se debe principalmente a que el dispositivo fue instalado en una distancia más lejana al centro de masa de sujeto, pero pese a esa distancia extra es posible analizar el comportamiento del desplazamiento de éste.
 	
 \newpage
 \subsubsection{Prueba Frontal}
@@ -1056,12 +1034,12 @@ Los resultados obtenidos son los siguientes:
 		\label{fig:pruebaLateralFrontal}
 	\end{figure}
 	
-Los datos tanto en el sentido Antero-Posterior, como en el medio lateral sufrieron de traslación, con lo cual debieron ser ajustados para realizar una comparación mas directa.
+Los datos tanto en el sentido Antero-Posterior, como en el medio lateral sufrieron de traslación, con lo cual debieron ser ajustados para realizar una comparación más directa.
 
 \newpage
 \subsubsection{Resumen de Resultados}
 
-Para comparar los resultados se definieron métodos para la batería de comparaciones a realizar, en donde la principal motivación consiste en demostrar el comportamiento de las series temporales utilizando valores representativos, con el fin de representar los resultados obtenidos de la forma mas científica posible. 
+Para comparar los resultados se definieron métodos para la batería de comparaciones a realizar, en donde la principal motivación consiste en demostrar el comportamiento de las series temporales utilizando valores representativos, con el fin de representar los resultados obtenidos de la forma más científica posible. 
 
 Sin más que acotar a continuación se encuentra la definición de todas las ecuaciones utilizadas para obtener los cálculos  en tabla de Resultados.
 \newline
@@ -1122,8 +1100,9 @@ Al tener el conjunto de resultados resumidos en una tabla con datos concretos, e
 
 Si es considerada la correlación entre los datos de las 3 pruebas, la que presenta una mayor correlación en términos de Antero-Posterior y Medio-Lateral consiste en las pruebas con el dispositivo Frontal y Espalda, al estar el centro de masa aproximadamente cerca de esa posición, era un resultado esperable, en cambio si son analizadas por separado, la prueba que representa mejor la variación Antero-Posterior, consiste en la prueba con el sensor en la Espalda, y para el medio lateral, el dispositivo al Frente del sujeto.
 
-La prueba que arrojo menores cantidades de error en comparación con la plataforma Kistler, fue con el dispositivo en la Espalda del sujeto, por contra-parte la que ofrece mas diferencias(error) es con el dispositivo en la parte Lateral Izquierda fue la que entrega un error mayor.
+La prueba que arrojo menores cantidades de error en comparación con la plataforma Kistler, fue con el dispositivo en la Espalda del sujeto, por contra-parte la que ofrece más diferencias(error) es con el dispositivo en la parte Lateral Izquierda fue la que entrega un error mayor.
 
+El hecho que en la prueba con el dispositivo en la Espalda no necesitara un gran ajuste en los datos,tan solo sincronización temporal, nos da a entender que consiste en una de las mejores ubicaciones para contrastar directamente con la plataforma y además nos intenta demostrar que aproximadamente el centro de masa se encuentra cerca de esa ubicación.
 
 
 \newpage
@@ -1157,8 +1136,6 @@ Para una correcta complementación y a la vez explicación el aprender y/o compr
 
 El estudio para la obtención del ángulo con sus distintos métodos, acelerómetro, giroscopio, filtro complementario y filtro de Kalman, y de los principios involucrados en cada uno de estos, además de la asociación de los elementos utilizados para cada uno.
 
-
-
 \subsubsection{Data Terminal Ready}
 Según el tipo de semiconductor del puerto USB de Arduino puede venir por defecto el Pin DTR (Data Terminal Ready) la función Reset de Arduino puede venir activada o desactivada. 
 La función Reset de Arduino permite al microcontrolador reiniciar las variables internas según las configuraciones encontradas en el Setup del código de programación, para así eliminar cualquier cambio realizado en la ejecución del Loop,lo que es complicación al usar modelos de Arduino que tengan o no esta característica.
@@ -1168,29 +1145,46 @@ Para solucionar este problema se realiza una estandarización activando por Soft
 \subsubsection{Latencia en Controlador FTDI}
 Por defecto el controlador del puerto USB FTDI para el Sistema Operativo Windows, en su configuración contenía una Latencia de 10 ms pre-configurada, lo que afecta considerablemente la captura de información sobre 100hz. El principal inconveniente que genero este error es la detección propia de éste, ya que al ser un error completamente aislado de los elementos que comúnmente son manipulados Arduino y Software, y a su vez es relativo a un modelo concreto de controlador de sistema y a su vez sistema operativo lo cual era de partida complejo de percibir y/o predecir.
 
-La solución fue a partir de la información de configuración FTDI\cite{FTDI} para configurar directamente  en el registro de Windows (regedit) en la dirección asociada al controlador el parámetro de latencia deseado, para que éste sea lo más bajo posible.
+La solución fue a partir de la información de configuración FTDI\cite{FTDI} para configurar directamente  en el registro de Windows (regedit) en la dirección asociada al controlador el parámetro de latencia deseado (idealmente 0), para que éste sea lo más bajo posible.
+
+\subsubsection{Despliegue de Resultados}
+Una de las características del Software es entregar reportes para todas las variables obtenidas, véase datos de Desplazamiento, Ángulo, Aceleración y Velocidad Angular, por ende es una gran cantidad de información, junto con los gráficos asociados a esta, por ende existió un inconveniente inicial al intentar desplegar la información, el software tardaba provocando la sensación de no responder, siendo que se encontraba procesando.
+
+La solución a este inconveniente fue enviar cada nuevo dato a medida que era leído, esto permitió que al terminar la prueba ya se encontraran disponibles las tablas y gráficos de datos.
 
 \section{Conclusiones y Trabajos Futuros}
 \subsection{Conclusiones}
-A partir de los resultados obtenidos, y sus posteriores análisis e interpretación de los mismos, se pueden enunciar las siguientes como conclusiones mas relevantes.
+Durante este trabajo de Tesis y partir de los resultados obtenidos, sus posteriores análisis e interpretación de los mismos, se pueden enunciar las siguientes como conclusiones más relevantes.
 \begin{itemize}
 	\item El principal objetivo de esta Tesis era generar un solución usando Acelerometría para el estudio del Balance, dicho esto, el principal aporte de este trabajo es demostrar como a partir de sensores inerciales, montados en una placa Arduino y controlados por el Ordenador, es posible replicar con un grado de similitud el estudio del Balance Clínico.
 	
-	Unos de los objetivos era diseñar una solución de bajo coste comparado con el alto precio de los dispositivos actualmente utilizados principalmente en el Laboratorio, dicho esto si comparamos tan solo en concepto de materiales utilizados para el desarrollo del Dispositivo frente a por ejemplo la Plataforma de Fuerza Kistler, el costo del dispositivo implementado bordea el 0.1\% del valor de la plataforma, lo que supone una diferencia considerable.
+	\item Unos de los objetivos era diseñar una solución de bajo coste comparado con el alto precio de los dispositivos actualmente utilizados principalmente en el Laboratorio, dicho esto si comparamos tan solo en concepto de materiales utilizados para el desarrollo del Dispositivo frente a por ejemplo la Plataforma de Fuerza Kistler, el costo del dispositivo implementado bordea el 0.1\% del valor de la plataforma, lo que supone una diferencia considerable.
+			
+	\item La similitud en la información aunque de por si es alta de acuerdo los resultados de las pruebas realizadas, no es correcto dar por concluido el trabajo, esta Tesis es el punto de partida y/o complementa a las investigaciones y avances en materia de la Biomecánica Humana.
 	
-	La similitud en la información aunque de por si es alta de acuerdo los resultados de las pruebas realizadas, no es correcto dar por concluido el trabajo, esta Tesis el punto de partida y/o complemente a las investigaciones y avances en materia de la Biomecánica Humana.
+	\item Los instrumentos encontrados en el laboratorio de Biomecánica en la Facultad de Kinesiología disponen de softwares con opciones bastantes limitadas, el desarrollar un software que permite una amplia gama de opciones abre un abanico de posibilidades para tanto estudiantes como investigadores.
 	
-	
-	
-
-	\item Todos los sistemas diseñados implementeados en C++, tienen un tiempo de procesado muy corto, junto con una utilización de la maquina bajo en comparación a otros Lenguajes de programacion, fue probado satisfactoriamente en los equipos del Laboratorio de Biomecánica.
+	\item Todos los sistemas diseñados fueron implementados en C++, tienen un tiempo de procesado muy corto, junto con una utilización de la maquina bajo en comparación a otros Lenguajes de programación, fue probado satisfactoriamente en los equipos del Laboratorio de Biomecánica.
 \end{itemize} 
 
-
-
+\newpage
 \subsection{Trabajos Futuros}
+El trabajo futuro principalmente es la correcta implementación para que sea de gran utilidad para que continúe el desarrollo e investigación utilizando esta nueva propuesta.
 
+Este trabajo es tan solo una base y puede ser mejorado de las siguientes formas.
 
+\begin{itemize}
+	\item Uno de los principales trabajos futuros consiste en la validación de la solución como un instrumento para el estudio del Balance, ante el organismo encargado, es decir, demostrar que cumple al 100\% con los estándares exigidos, lo cual no es un tema menor, falta más refinamiento con el objetivo de aumentar la confiabilidad tanto en el algoritmos, como diseño del empaquetado de la propuesta para que pueda convertirse en un producto comercializable.
+	
+	\item La ubicación de dispositivo no era lo más sencillo, pese que existía gran versatilidad, el automatizar la orientación del sensor para facilitar la ubicación del dispositivo, y este se ajuste automáticamente, puede ser mediante la inclusión de sensores con orientación magnética y/o algoritmos con las referencias según la gravedad o inclinación detectada en cada eje.
+	
+	\item Eliminar la necesidad de utilizar cables, añadir una interfaz de comunicación inalámbrica, junto a una batería para la alimentación, junto con esto podría existir la opción de migrar el Software a plataformas móviles, para la utilización desde Smartphones o Tablets.
+	
+	\item Mejorar los algoritmos con puestas a puntos más precisas y estudios aun más detallados para asegurar la eficiencia de estos, a su vez mejorar el hardware, sensores para aumentar la precisión en la obtención de información.
+	
+	\item Arduino al ser una de las soluciones de Microcontroladores de más bajo coste es una buena opción, pero como la tecnología se encuentra siempre en evolución entregando propuestas cada vez más atractivas, el desplegar la idea en un sistema que incluya tanto los sensores como el procesamiento y Sofware de análisis en un dispositivo de pequeño tamaño, listo para conectar y extraer la información, sería un gran valor agregado.
+	
+\end{itemize}
 
 \section{Bibliografía}
 \printbibliography[heading=none]
