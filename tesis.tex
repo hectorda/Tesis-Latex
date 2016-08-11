@@ -188,9 +188,9 @@
 \section{Introducción}
 La comprensión de las dinámicas y patrones de movimiento humano, se facilitan enormemente con el apoyo de tecnologías adecuadas, que permitan medir, registrar y analizar variables cinemáticas. Particularmente, el estudio del movimiento humano (Kinesiología) depende hoy en día de las facilidades tecnológicas que ofrece la electrónica (sensores, microcontroladores, sistema de adquisición de señales) y las ciencias de la computación (procesamiento, análisis y posterior reporte adecuado de  variables cinemáticas y cinéticas).  
 
-Las soluciones tecnológicas que hoy existen, no solo permiten realizar el seguimiento (‘tracking’) y representación gráfica, sino que además facilitan la representación en tiempo real de las variables de interés, conformando con esto los denominados sistemas de Bio-feedback (retroalimentación de señales biológicas). Aunque existen alternativas adecuadas para estos fines, poseen el inconveniente en lo prohibitivo de su valor comercial junto con ser soluciones cerradas tanto en hardware como software, limita las funciones según las características propuestas por fabricante, hace prácticamente imposible la adición de nuevas funcionalidades y el uso para otros fines u obtención de la información capturada por los sensores incorporados.
+Las soluciones tecnológicas que hoy existen, no solo permiten realizar el seguimiento (‘tracking’) y representación gráfica, sino que además facilitan la representación en tiempo real de las variables de interés, conformando con esto los denominados sistemas de Bio-feedback (retroalimentación de señales biológicas). Aunque existen alternativas adecuadas para estos fines, poseen el inconveniente en lo prohibitivo de su valor comercial, junto con ser soluciones cerradas tanto en hardware como software, lo que limita las funciones según las características propuestas por fabricante, hace prácticamente imposible la adición de nuevas funcionalidades y obtención de la información capturada por los sensores (datos crudos).
 
-Frente a este desafío, está la posibilidad de integrar tecnología para conseguir soluciones de menores costos, que permitan realizar investigación y al mismo tiempo explorar posibilidades de innovación tecnológica que den paso al desarrollo de tecnología generadora de impacto no tan sólo en el ámbito nacional probablemente de carácter global.
+Frente a este desafío, está la posibilidad de integrar tecnología para conseguir soluciones de menores costos, que permitan realizar investigación y al mismo tiempo explorar posibilidades de innovación tecnológica que den paso al desarrollo de tecnología generadora de impacto no tan sólo en el ámbito de la investigación sino que también en la salud.
 
 Particularmente, este proyecto propone desarrollar un sistema de integración hardware-software que permita el registro del comportamiento pendular de la posición bípeda quieta (variables de posición y velocidad angular en el tiempo), habilitando funciones de bio-feedback que permitan replicar evaluaciones de balance postural.
 
@@ -215,9 +215,7 @@ El costo del sistema, respecto a las soluciones de mercado (Biodex- Balance SD),
 Desde el punto de vista disciplinar (Ciencias de la Ingeniería), este proyecto materializa trabajos de investigación y colaboración transdisciplinario entre la Facultad de Ingeniería y la Facultad de Salud de la UCM. Además posiciona a los Ingenieros Informáticos como profesionales capaces de adecuarse a diferentes contextos mediante soluciones tecnológicas.
 
 \subsection{Organizaci\'on de la Tesis}
-Esta Tesis fue organizada buscando el hacer su lectura lo más fluida posible, por lo cual se define por adelantado los fundamentos teóricos y técnicos involucrados en cada una de las secciones.
-
-Comenzando por la descripción de la situación actual del estudio de los principales avances en el desarrollo de soluciones para el estudio del Balance. Seguidamente son descritos cada uno de los elementos técnicos relacionados para dar solución al problema, es decir,  protocolos, sensores, algoritmos, etc. y como estos fueron implementados.
+La organización del documento comienza con describir la situación actual del estudio de los principales avances en el desarrollo de soluciones para el estudio del Balance. Seguidamente son descritos cada uno de los elementos técnicos relacionados para dar solución al problema, es decir,  protocolos, sensores, algoritmos, etc. y como estos fueron implementados.
 
 Finalmente son expuestos los resultados, junto con las conclusiones más relevantes, ademas de presentar trabajos futuros con el objetivo para mejorar aún más la propuesta.
 
@@ -228,17 +226,17 @@ El control del equilibrio es complejo e implica el mantenimiento de posturas \ci
 
 La mayoría de las escalas de valoración del equilibrio funcional evalúan el riesgo de caída y la necesidad de rehabilitación, pero no es diferenciado cada uno de los tipos de déficits del balance. Un enfoque de sistema para la evaluación clínica puede diferenciar diferentes tipos de trastornos del equilibrio y un enfoque fisiológico puede determinar los mecanismos subyacentes sensoriomotoras asociados al trastorno del equilibrio. Las medidas objetivas de equilibrio valiéndose de medios informáticos y sensores inerciales portátiles pueden traer más precisión, exactitud y sensibilidad que las pruebas de equilibrio clínicas.
 
-\subsection{Estándares Estabilometría Clínica}
-La estabilometría corresponde al estudio del Centro de Presión (COP) para determinar deficiencias posturales que perjudican el Balance.
+\subsection{Estudio y evaluación de Balance}
+Corresponde al estudio del Centro de Presión (COP) para determinar deficiencias posturales que perjudican el Balance.
 
-\subsubsection{Mediciones} Existen estándares respecto a las características necesarias para la medición del COP \cite{scoppa_clinical_2013}.
+Existen estándares respecto a las características necesarias para la medición del COP \cite{scoppa_clinical_2013}.
 
 Varias declaraciones sobre la cuestión sigue siendo objeto de debate de la normalización estabilometría fueron acordados por el ISPGR (International Society for Posture and Gait Research).
 Se definió un conjunto de características metrológicas para las plataformas estabilométricas.
 Basándose tanto en la práctica y verificación experimental se acordó que, para obtener una apropiada precisión y sensibilidad:
 \begin{itemize}
 	\item El intervalo de adquisición no debe ser inferior a 25s.
-	\item La frecuencia de muestreo debe ser de al menos 50 Hz.
+	\item La frecuencia de muestreo debe ser de al menos 50 Hz (fs=100Hz óptima).
 	\item Estándares Técnicos:
 	\begin{table}[H]
 		\centering
@@ -255,10 +253,10 @@ Basándose tanto en la práctica y verificación experimental se acordó que, pa
 	\end{table}	  
 \end{itemize}
 
-\subsubsection{Instrumentos} Entre instrumentos de medición utilizados para el estudio del Balance están incluidos:
+\subsection{Equipamientos para estudio del balance} Algunos de los principales instrumentos utilizados para el estudio del Balance son:
 
-\begin{itemize}
-	\item \textbf{Kistler:} Es un Gold Standard  en lo referente a estabilometría\cite{donath_testing_2012}, es una plataforma de fuerza de dimensiones
+
+\subsubsection{Plataforma de Fuerza Kistler} Es un Gold Standard  en lo referente a estabilometría\cite{donath_testing_2012}, es una plataforma de fuerza de dimensiones
 	0,4m por 0,6m que consta de cuatro 	transductores piezoeléctricos, situados en las esquinas. Estos transductores son capaces de medir las fuerzas de reacción del suelo en los planos verticales medio-lateral (x), antero-posterior (y) tal como muestra la Figura (\ref{fig:Kistler}).
 
 \begin{figure}[H]
@@ -268,9 +266,9 @@ Basándose tanto en la práctica y verificación experimental se acordó que, pa
 	\label{fig:Kistler}
 \end{figure}
 
-\item \textbf{Balance SD:} Un instrumento desarrollado por Biodex \cite{Biodex} utilizado para la medicina física, especialmente para cualquiera que desee mejorar su equilibrio, aumentar la agilidad, desarrollar el tono muscular y tratar una amplia variedad de patologías asociadas a la perdida de balance.
+\subsubsection{Balance SD} Un instrumento desarrollado por Biodex \cite{Biodex} utilizado para la medicina física, especialmente para cualquiera que desee mejorar su equilibrio, aumentar la agilidad, desarrollar el tono muscular y tratar una amplia variedad de patologías asociadas a la perdida de balance.
 Es un equipo que cuenta con biofeed-back principalmente visual, pero en nuevas versiones incluye soporte para biofeed-back vibratorio.
-\end{itemize}
+
 
 \subsection{Estudio del Balance usando Sensores}
 Recientemente, los sensores de movimiento ``weareables'' se han desarrollado para la robótica, industria aeroespacial y en las mediciones biomédicas se han utilizado para medir el control del balance\cite{mancini_relevance_2010}. Estos sensores, con transferencia inalámbrica de datos , tienen el potencial de superar los principales inconvenientes de coste, tamaño y ubicación limitado de las pruebas computarizadas , así como permitir la medición objetiva de la oscilación postural y movimientos durante la ejecución de tareas.
@@ -288,8 +286,10 @@ Los sistemas han sido diseñados utilizando acelerómetros en un cinturón de ca
 
 \section{Marco Teórico}
 
+\subsection{Introducción}
+
 \subsection{Protocolo de Comunicación $\mathbf{\mathrm{I^2C}}$}
-Restringido por el MPU6050 para la comunicación entre el Arduino y los Sensores será utilizado protocolo de comunicación $I^2C$.
+La comunicación entre el sensor MPU6050 y Arduino se entabla mediante el protocolo $I^2C$.
 
 El protocolo $I^2C$ fue desarrollado en 1982 por Philips Semiconductors (hoy NXP Semiconductors) para la comunicación interna entre circuitos integrados como por ejemplo juegos de CD y televisiones.
 
@@ -314,10 +314,10 @@ Las principales características del protocolo de Comunicación $\mathrm{I^2C}$ 
 \end{itemize}
 
 \newpage
-\subsection{Sistemas Coordenados}
-Toda la información obtenida debe estar asociado según un sistema específico de coordenadas, que sirva de referencia clara para la interpretación y comprensión de la información.
+\subsection{Estudio del Balance Postural}
+Toda la información obtenida debe estar asociado según un sistema específico de coordenadas, que sirva de referencia para la interpretación y comprensión de la información.
 
-Para ello fueron considerados los principales sistemas utilizados para referenciar los ejes coordenados según los distintas situaciones:
+Para ello fueron considerados los principales sistemas utilizados para referenciar los ejes coordenados en el estudio postural:
 \begin{itemize}
 	
 	\item \textbf{Planos anatómicos} 
@@ -546,27 +546,26 @@ El Filtro consiste en 2 estados Predicción y Actualización.
 
 \section{Desarrollo}
 \subsection{Introducción}
-
-A partir de la noción general que intrínsecamente se posee sobre el estudio del balance y complementado con las ideas de herramientas o técnicas ya existentes que intentan solventar mediante diversos puntos de vista la problemática.
-
-La principal referencia a tomar en consideración consiste en los equipamientos disponibles en el Laboratorio de Bio-mecánica que sirvieron de base para el planteamiento del desarrollo de la solución Hardware-Software.
-La plataforma de fuerza Kistler 9286b \cite{KISTLER} y balance SD, utilizados para representación del movimiento del centro de masa/presión (COM/COP) y a partir de los resultados que exponen cada uno de estos instrumentos se ideó una solución que opera de forma análoga a los dispositivos que ya son utilizados en el laboratorio, es decir con un software que permita entregar información de manera similar a estos sistemas, para aprovechar los conocimientos de los usuarios con el fin de disminuir la curva de aprendizaje del sistema implementado para que estos comprendan el software sin demasiado entrenamiento y a su vez la transición sea más satisfactoria.
-
-En lo referente a Hardware se utilizó un sensor inercial MPU6050, el cual será puesto en el sujeto de prueba en una posición aproximada al centro de masa (aprox. 55\% de la Altura), este sensor es el encargado de capturar el movimiento generado por el sujeto y transmitir dicha información al microcontrolador Arduino en donde es procesada y traducida a variables físicas (aceleración y velocidad angular), donde posteriormente es trasmitida mediante conexión serial al ordenador y el software dentro del éste recibe la información junto con realizar el procesamiento para obtener el ángulo y desplazamiento, permitiendo la opción de efectuar análisis específicos de la información utilizando interfaces gráficas sencillas.
-
+En este capítulo se describe la solucion y su respectivo desarrollo.
+El sistema consta principalmente en un microcontrolador Arduino, un sensor inercial y un software que permite el registro de variables cinemáticas y Bio-realimentación (registro en tiempo real y representación visual) de la posición Ver Figura (\ref{fig:diagramasistema}).
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.15]{images/diagrama_sistema}
+	\includegraphics[scale=0.25]{images/diagrama_sistema}
 	\caption{Diagrama Sistema}
 	\label{fig:diagramasistema}
 \end{figure}
+
+El sistema es definido y contrastado a partir del equipamiento existente en el Departamento de Kinesiologia. Para evaluación y realimentación de Balance, es decir, plataforma de fuerza Kistler y Sistema Balance SD.
+
+En lo referente a hardware se utilizó un sensor inercial MPU6050, el cual es ubicado en el sujeto de prueba en una posición aproximada al centro de masa (aprox. 55\% de la altura). Este sensor es el encargado de capturar el movimiento generado por el sujeto la cual es  enviadada a través del microcontrolador Arduino al software (PC) mediante conexión serial (USB). El software procesa la información(velocidad angular y aceleración lineal) para obtener el ángulo y desplazamiento, permitiendo la opción de efectuar análisis específicos de la información utilizando interfaces gráficas.
+
 
 \subsection{Programación en Arduino}
 Uno de los primeros pasos en el desarrollo de la solución consiste en utilizar el IDE de Arduino para realizar la programación inicial del microcontrolador, luego de conectar correctamente el sensor MPU6050 con el fin de configurar el comportamiento del sensor es necesario definir ciertos valores en registros, además de precisar el formato de envío para desplegar los datos por el puerto serial, en este caso consta de una línea con los 6 datos separados por espacio.
 
 La programación del microcontrolador fue de la siguiente forma ver Figura(\ref{fig:arduinocode}).
-En el Loop de ejecución de Arduino es requerida la configuración del MPU6050, mediante la escritura de comandos en el puerto serial, específicamente 4 parámetros han de ser configurados obligadamente: Frecuencia de Muestreo, Filtro pasa bajo, rango Acelerómetro, rango Giroscopio, luego de realizada la configuración se comienza a enviar la información sensorial.
+En el ciclo de ejecución de Arduino es requerida la configuración del MPU6050, mediante la escritura de comandos en el puerto serial, específicamente 4 parámetros han de ser configurados obligadamente: Frecuencia de Muestreo, Filtro pasa bajo, rango Acelerómetro, rango Giroscopio, luego de realizada la configuración se comienza a enviar la información sensorial.
 
 \begin{figure}[H]
 	\centering
