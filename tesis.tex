@@ -363,7 +363,7 @@ El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\r
 	
 	\item \textbf{Rango:} Poseen un rango configurable ambos sensores incluidos, tanto acelerómetro como giroscopio, el rango nos indica el dominio sobre el cual son adquiridos los datos, más concretamente los valores máximos y mínimos donde fluctúan la información obtenida.
 	
-	\item \textbf{Sensibilidad:} La sensibilidad describe la mínima variación medible, es decir la razón de cambio entre una variable entrante y el resultado de la variable saliente.
+	\item \textbf{Sensibilidad:} La sensibilidad describe la mínima variación medible, es decir la razón de cambio entre una variable entrante y el resultado de la variable saliente (ver Tabla (\ref{table:caracteristicasSensor})).
 	
 	\begin{table}[H]
 		\centering
@@ -492,57 +492,6 @@ Qt\cite{QT} es un Framework basado en C++, tiene disponibilidad multiplataforma-
 Posee las bibliotecas bases de C++  junto a librerías y herramientas de desarrollo propias de Qt, en donde se incluye IDE Qt Creator, y herramientas de productividad .
 El entorno de desarrollo (IDE) del framework de C++ Qt  es Qt Creator en donde se incluyen las herramientas para la administración de los ficheros .h y .cpp usados en C++ junto con las opciones de compilación, ejecución y depuración del software.
 
-
-\subsection{Filtro Complementario}
-El Filtro complementario es ampliamente usado en unidades inerciales y sistemas de visión. Este filtro es en sí es un filtro de Kalman de estado estacionario para una cierta clase de problemas de filtrado \cite{TesisUSM}.
-
-Está compuesto por la una unión de dos filtros diferentes:
-\begin{itemize}
-	\item \textbf{Filtro Pasa-Bajo:} Se usa para eliminar las frecuencias altas del acelerómetro, por lo cual dejamos pasar bajo ciertas frecuencias, para eliminar el ruido detectado por el cambio de aceleración (vibración principalmente) en los ejes del acelerómetro.
-	\item \textbf{Filtro Pasa-Alto:} Se aplica en las mediciones obtenidas por el giroscopio, para eliminar el drift acumulado en el tiempo, dejando pasar solo las de una frecuencia más alta.
-	\end{itemize}
-	
-	\begin{figure}[H]
-		\centering
-		\includegraphics[scale=0.5]{images/FiltroComplementario}
-		\caption{Diagrama Filtro Complementario}
-		\label{fig:diagramafiltrocomplementario}
-		\end{figure}
-		
-		Todo lo anterior queda descrito usando la siguiente Ecuación (\ref{eq:ecuacionFiltroComplementario}):
-		
-		\begin{equation}
-		\label{eq:ecuacionFiltroComplementario}
-		anguloActual = (1-\alpha)*(anguloAnterior+\omega*dt)+(\alpha)*anguloAcelerometro
-		\end{equation}
-		
-		En donde cada uno de las variables representa lo siguiente:
-		\begin{itemize}
-			\item \textit{anguloAcelerometro:} El ángulo calculado mediante la aceleración obtenida por el Acelerómetro.
-			\item $\omega$: Es la velocidad angular obtenida por el Giroscopio que hemos calculado previamente.
-			\item \textit{dt:} Corresponde a la variación en segundos desde la última vez que se aplicó el filtro para calcular el ángulo.
-			\item $\alpha$: Representa la contribución realizada por cada ángulo, Si $\alpha$ es igual 0 el cálculo del ángulo se realiza con el giroscopio en caso contrario $\alpha$ igual a 1 corresponde al ángulo del acelerómetro.
-			\end{itemize}
-
-\subsection{Filtro de Kalman discreto}
-El filtro de Kalman es un estimador lineal, insesgado y óptimo del estado de un proceso. En él se ha impuesto la condición de que el proceso a ser estimado es regido por una dinámica lineal y que el ruido que lo perturba es blanco y gaussiano. Aun cuando la condición del comportamiento probabilístico gaussiano del ruido se omite, el filtro de Kalman sigue siendo el mejor filtro recursivo lineal (error de menor varianza) e insesgado.
-
-Su propósito es emplear las mediciones obtenidas en un período de tiempo que a su vez son afectadas por variaciones  aleatorias (ruido) junto con el conocimiento del comportamiento del sistema, para producir estimaciones que tiendan a estar más cerca del valor real del proceso en cuestión. Todas las mediciones y cálculos basados en modelos son aproximaciones en cierto grado, datos ruidosos provenientes de los sensores \cite[Capítulo 3, p.~45]{TesisUSM}. 
-
-EL filtro de Kalman posee flexibilidad para ser utilizado tanto en tiempo continuo o en tiempos discretos. El modelo del filtro permite la flexibilidad para ser utilizado en éstos casos.
-
-La principal diferencia es la notación que utilizada en cada uno de los casos.
-Debido a que en la actualidad la mayoría de las aplicaciones de filtros es realizada en plataformas de tipo digital, y considerando el uso del filtro para la fusión de los sensores en este proyecto.
-
-Filtro usado en Fusión de Datos \cite{mau_how_2005} 
-El Filtro consiste en 2 estados Predicción y Actualización.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.5]{images/kalman-filter.png} 
-	\caption{Diagrama estados Filtro Kalman}
-	\label{fig:diagramakalman}
-\end{figure}
 
 \section{Desarrollo}
 \subsection{Introducción}
@@ -677,6 +626,49 @@ La Fusión de Datos es un método para integrar señales provenientes de múltip
 
 Para el análisis del desplazamiento del centro de masa se requiere que el ángulo obtenido sea lo en su medida lo más preciso, para ello se estudiaron e implementaron 2 filtros que permiten una correcta integración de los datos de aceleración lineal con velocidad angular.
 
+
+
+\subsection{Filtro Complementario}
+El Filtro complementario es ampliamente usado en unidades inerciales y sistemas de visión. Este filtro es en sí es un filtro de Kalman de estado estacionario para una cierta clase de problemas de filtrado \cite{TesisUSM}.
+
+Está compuesto por la una unión de dos filtros diferentes:
+\begin{itemize}
+	\item \textbf{Filtro Pasa-Bajo:} Se usa para eliminar las frecuencias altas del acelerómetro, por lo cual dejamos pasar bajo ciertas frecuencias, para eliminar el ruido detectado por el cambio de aceleración (vibración principalmente) en los ejes del acelerómetro.
+	\item \textbf{Filtro Pasa-Alto:} Se aplica en las mediciones obtenidas por el giroscopio, para eliminar el drift acumulado en el tiempo, dejando pasar solo las de una frecuencia más alta.
+\end{itemize}
+
+Todo lo anterior queda descrito usando la siguiente Ecuación (\ref{eq:ecuacionFiltroComplementario}):
+
+\begin{equation}
+\label{eq:ecuacionFiltroComplementario}
+anguloActual = (1-\alpha)*(anguloAnterior+\omega*dt)+(\alpha)*anguloAcelerometro
+\end{equation}
+
+En donde cada uno de las variables representa lo siguiente:
+\begin{itemize}
+	\item \textit{anguloAcelerometro:} El ángulo calculado mediante la aceleración obtenida por el Acelerómetro.
+	\item $\omega$: Es la velocidad angular obtenida por el Giroscopio que hemos calculado previamente.
+	\item \textit{dt:} Corresponde a la variación en segundos desde la última vez que se aplicó el filtro para calcular el ángulo.
+	\item $\alpha$: Representa la contribución realizada por cada ángulo, Si $\alpha$ es igual 0 el cálculo del ángulo se realiza con el giroscopio en caso contrario $\alpha$ igual a 1 corresponde al ángulo del acelerómetro.
+\end{itemize}
+
+\subsection{Filtro de Kalman discreto}
+El filtro de Kalman es un estimador lineal, insesgado y óptimo del estado de un proceso. En él se ha impuesto la condición de que el proceso a ser estimado es regido por una dinámica lineal y que el ruido que lo perturba es blanco y gaussiano. Aun cuando la condición del comportamiento probabilístico gaussiano del ruido se omite, el filtro de Kalman sigue siendo el mejor filtro recursivo lineal (error de menor varianza) e insesgado\cite{TesisUSM}.
+
+Su propósito es emplear las mediciones obtenidas en un período de tiempo que a su vez son afectadas por variaciones  aleatorias (ruido) junto con el conocimiento del comportamiento del sistema, para producir estimaciones que tiendan a estar más cerca del valor real del proceso en cuestión. Todas las mediciones y cálculos basados en modelos son aproximaciones en cierto grado obtenidas a partir de datos ruidosos provenientes de los sensores.
+
+EL filtro de Kalman posee flexibilidad para ser utilizado tanto en tiempo continuo o en tiempos discretos.
+
+El Filtro consiste en 2 estados Predicción y Actualización.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{images/kalman-filter.png} 
+	\caption{Diagrama estados Filtro Kalman}
+	\label{fig:diagramakalman}
+\end{figure}
+
+
 \subsubsection{Filtro Complementario}
 Se posee un acelerómetro que entrega ángulos con referencia en la posición del sensor, pero muy susceptible a la variación de cambios de aceleración del éste y en cambio un giroscopio nos permite calcular el ángulo de manera exacta, pero si tener una clara referencia de la posición donde está el sensor. 
 
@@ -761,13 +753,11 @@ Pese a primera vista que la gráfica ver Figura (\ref{fig:AnguloXvsFiltros}) dem
 \end{itemize}
 
 
-
-\subsection{Cálculo del Desplazamiento}
-Basado en la premisa que la posición bípeda-quieta puede ser representada como un péndulo invertido, por lo tanto considerando la variación angular del movimiento pendular de un sujeto en las coordenadas antero-posterior y medio-lateral es aplicable la trigonometría para obtener el desplazamiento.
-Usando esta variación angular se consideraron para el cálculo del desplazamiento los siguientes métodos. 
+\subsection{Cálculo del Desplazamiento del Centro de Masa en el plano}
+Basado en la premisa que la posición bípeda-quieta puede ser representada como un péndulo invertido, entonces el movimiento pendular de un sujeto en las coordenadas antero-posterior y medio-lateral puede ser obtenida a partir de relaciones geométricas(trigonometría), con ello obtener el desplazamiento.
 
 \subsubsection{Proyección del angulo}
-Para obtener la distancia proyectada en el eje horizontal, usando trigonometría tomando la altura $h$ como la distancia desde el suelo hasta donde fue puesto el sensor como el equivalente a la hipotenusa de un triángulo rectángulo, como se muestra en la Figura (\ref{fig:proyeccion}), se puede calcular usando la Ecuación (\ref{eq:proyeccion}), aplicando la función $\sin$ del ángulo $\alpha$ en grados obtenido mediante el filtro aplicado, junto con ponderar el valor obtenido por la altura $h$ (hipotenusa del triángulo), el valor resultante equivale a la distancia $d$ correspondiente al desplazamiento del centro de masa estimado, en la cual su unidad de medida es la misma usada para describir la altura $h$ en general centímetros.
+Para obtener la distancia proyectada en el eje horizontal (proyección del COM en el plano), la altura $h$ consiste en la distancia desde el suelo hasta donde fue puesto el sensor. Esta altura es equivalente a la hipotenusa de un triángulo rectángulo, como se muestra en la Figura (\ref{fig:proyeccion}). Mediante la ecuación (\ref{eq:proyeccion}) obtenemos la proyección en el plano horizontal (d). La distancia $d$ corresponde al desplazamiento del centro de masa estimado.
 
 \begin{figure}[H]
 	\centering
@@ -781,11 +771,10 @@ Para obtener la distancia proyectada en el eje horizontal, usando trigonometría
 	d=\sin(\alpha)*h
 \end{equation}
 
-
+\newpage
 \subsubsection{Recorrido curvo del ángulo}
-La longitud del arco generado por el ángulo puede ser considerado un tipo de desplazamiento, por ello fue implementado.
-
-Calculando la longitud del arco formado desde donde comienza la medición hasta el ángulo $\alpha$ ver Figura (\ref{fig:recorridocurvo}) en grados a radianes y ponderando el valor obtenido por la altura $h$, tal como se muestra en la Ecuación (\ref{eq:recorridocurvo}).
+La longitud del arco generado por el ángulo puede ser considerado el desplazamiento, por ello fue implementado.
+El arco correponde a la proporción del perímetro de la circunferencia en términos del ango $\alpha$ (ver Ecuación \ref{eq:recorridocurvo}).
 
 \begin{figure}[H]
 	\centering
@@ -801,7 +790,7 @@ Calculando la longitud del arco formado desde donde comienza la medición hasta 
 
 \newpage
 \subsubsection{Comparación métodos Cálculo Desplazamiento}
-Para comparar la aproximación que generan ambos métodos, estos fueron analizados utilizando una altura de 100 centímetros.
+Para comparar el desplazamiento real del COM y el desplazamiento proyectado en el plano se realiza un ejemplo para un COM ubicado a 1m. del suelo.
 
 A continuación se presenta una tabla con valores de ejemplo para comparar el comportamiento de las dos fórmulas para el cálculo del desplazamiento, y además un gráfico para comparar la diferencia entre ellos.
 
@@ -845,9 +834,9 @@ A continuación se presenta una tabla con valores de ejemplo para comparar el co
 		\caption{Comparación Recorrido Curvo - Proyección}
 \end{figure}
 
-Al comparar los métodos anteriormente mencionados para el cálculo del desplazamiento Recorrido Curvo y Proyección, estos se comportan de forma similar en ángulos pequeños, pero a medida que el valor del ángulo comienza a incrementar la diferencia generar una curva exponencial el desplazamiento, debido a que la distancia calculada mediante el recorrido curvo es mayor frente a la obtenido por proyección, lo que nos da a concluir que ambos métodos entregan en ángulos pequeños desplazamientos similares, pero al aumentar el ángulo se comportan diferente.
+Al comparar los métodos anteriormente mencionados para el cálculo del desplazamiento Recorrido Curvo y Proyección, estos se comportan de forma similar en ángulos pequeños (d$\approx\sin\alpha$). Pero a medida que el valor del ángulo comienza a crecer se incrementa la diferencia, debido a que la distancia calculada mediante el recorrido curvo es mayor frente a la obtenido por proyección.
 
-Por lo tanto se debe tener en consideración al momento de escoger con que método se realizará el cálculo, ya que con ambos se puede interpretar el desplazamiento, pero a su vez debido a los límites del balance que en general su dominio consiste en tan solo ángulos entre ($\pm 3$\grad), con lo cual según los análisis expuestos anteriormente ambos métodos se comportan de forma similar en ese rango.
+Por lo tanto se debe tener en consideración al momento de escoger con que método se realizará el cálculo, ya que con ambos se puede interpretar el desplazamiento. Para el estudio del balance los ángulos varían entre ($\pm 3$\grad), con lo cual según los análisis expuestos anteriormente ambos métodos se comportan de forma similar en ese rango.
 Dicho esto de ahora en adelante cuando sea realizado el cálculo del desplazamiento se utilizará el método de la proyección.
 
 
