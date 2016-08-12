@@ -562,10 +562,11 @@ En lo referente a hardware se utilizó un sensor inercial MPU6050, el cual es ub
 
 
 \subsection{Programación en Arduino}
-Uno de los primeros pasos en el desarrollo de la solución consiste en utilizar el IDE de Arduino para realizar la programación inicial del microcontrolador, luego de conectar correctamente el sensor MPU6050 con el fin de configurar el comportamiento del sensor es necesario definir ciertos valores en registros, además de precisar el formato de envío para desplegar los datos por el puerto serial, en este caso consta de una línea con los 6 datos separados por espacio.
+Uno de los primeros pasos en el desarrollo de la solución consiste en utilizar el IDE de Arduino para realizar la programación inicial del microcontrolador. La conexión del sensor MPU6050 permite la configuración y uso del sensor.
+En la configuración se definen ciertos registros, además de precisar el formato de envío para despliegue de la informacion proveniente del sensor, consta de una línea con 6 datos separados por espacios.
 
-La programación del microcontrolador fue de la siguiente forma ver Figura(\ref{fig:arduinocode}).
-En el ciclo de ejecución de Arduino es requerida la configuración del MPU6050, mediante la escritura de comandos en el puerto serial, específicamente 4 parámetros han de ser configurados obligadamente: Frecuencia de Muestreo, Filtro pasa bajo, rango Acelerómetro, rango Giroscopio, luego de realizada la configuración se comienza a enviar la información sensorial.
+La programación del microcontrolador se describe en la figura(\ref{fig:arduinocode}).
+En el ciclo de ejecución de Arduino se requiere la configuración del sensor MPU6050. La configuración consta de 4 parámetros fundatemtanes: Frecuencia de Muestreo, Filtro pasa bajo, rango Acelerómetro, rango Giroscopio. Posteriormente comienza el envío de la información al software (PC) via Serial.
 
 \begin{figure}[H]
 	\centering
@@ -574,15 +575,15 @@ En el ciclo de ejecución de Arduino es requerida la configuración del MPU6050,
 	\label{fig:arduinocode}
 \end{figure}
 
-Una vez se completa la configuración se procede a la lectura de los registros para obtener los valores RAW, tanto acelerómetro como giroscopio, para finalmente enviar mediante comunicación serial el valor resultante expresado en su unidad física correspondiente al ser dividido acorde a la sensibilidad según el rango previamente configurado ver Tabla (\ref{table:caracteristicasSensor}).
+Finalizada la configuración se procede a la lectura de los registros para obtener los valores crudos RAW, tanto del acelerómetro como giroscopio. Finalmente se envía mediante comunicación serial el valor expresado en su unidad física correspondiente.
 
 \subsection{Requisitos Funcionales Software}
 \begin{itemize}
-	\item El sistema debe ser capaz de describir mediante el estudio de variables cinemáticas (aceleración y velocidad angular), procesarlas y realizar análisis kinesiólogos (desplazamiento del Centro de Masa).
+	\item El sistema debe ser capaz de registrar (aceleración lineal, velocidad angular, posición angular). Procesarlas y realizar análisis Biomecánico. Además debe procesar los registros para obtener una proyección del Centro de Masa.
 	\item El sistema debe ser capaz de representar en Tiempo Real el desplazamiento del centro de masa.
-	\item El sistema debe permitir la generación de reportes, con todas las variables estudiadas y analizadas durante la prueba.
-	\item El sistema debe permitir la configuración de los Sensores, ajustar su sensibilidad rango.
-	\item Se debe permitir la configuración de las variables involucradas en cada pruebas a realizar, partiendo por la altura desde la que fue puesta el sensor, la orientación de éste, tiempo de prueba, etc.
+	\item El sistema debe permitir la generación de reportes, con todas las variables estudiadas y analizadas durante la prueba, exportar datos crudos, gráficos, informes.
+	\item El sistema debe permitir la configuración de los sensores, ajustar su sensibilidad rango.
+	\item Se debe permitir la configuración de parámetros propios del uso del sistema. Por ejemplo: orientación del sensor, altura, tiempo de prueba, etc.
 	\item En lo referente a análisis de los gráficos de resultados, debe ser posible calcular estadísticos, como media, desviación estándar y junto con los valores máximos y mínimos.
 \end{itemize} 
 
@@ -591,12 +592,13 @@ Una vez se completa la configuración se procede a la lectura de los registros p
 	\item El sistema debe presentar una interfaz clara y sencilla, tanto en el manejo, como para la presentación de resultados.
 	\item El sistema debe tener un nombre representativo.
 	\item El sistema debe permitir análisis usando los gráficos y mostrando los cambios (recortes o ajustes) en tiempo real.
+	\item El sistema debe ser flexibe, permitiendo su uso en otras aplicaciones.
 \end{itemize}
 
 \newpage
 \subsection{Resumen de Características}
 \begin{itemize}
-	\item \textbf{Configurable:} El software permite configurar la gran mayoría de opciones tanto velocidades de muestreo, puerto serial a utilizar, rangos para captura de información del movimiento, así como cantidad de datos que se representaran en pantalla, tamaños de los elementos a graficar, tiempos de prueba, limitar geométricamente el gráfico, entre otros.
+	\item \textbf{Configurable:} El software permite configurar la mayoría de opciones que poseer el sensor MPU6050, puerto serial a utilizar, rangos para captura de información del movimiento, así como cantidad de datos que se representaran en pantalla, tamaños de los elementos a graficar, tiempos de prueba, limitar geométricamente el gráfico, entre otros.
 	\item \textbf{Reportes:} Cada uno de los gráficos despliegan las medidas tomadas o presentan los resultados del ejercicio, estos pueden ser exportados, tanto como un conjunto de datos, o también generar una imagen de estos.
 	\item \textbf{Herramientas de Análisis Gráficas:} Ventanas desplegables acompañadas a un gráfico que permiten de forma interactiva seleccionar partes del gráfico, para analizar intervalos según se estime conveniente y a su vez obtener de él datos como, los valores máximos y mínimos, la media, desviación estándar de los datos, y en el caso del desplazamiento obtener la velocidad media del intervalo analizado.
 	\item \textbf{Persistencia de datos:} Usando un pequeño almacén de datos en SQlite, es posible mantener un registro con la información de los pacientes, con el fin de tenerlos almacenados para el momento en que sea realizada cada una de las pruebas seleccionarlos sin la necesidad de re-ingresarlos en cada momento.
@@ -604,13 +606,17 @@ Una vez se completa la configuración se procede a la lectura de los registros p
 \end{itemize}
 
 \newpage
-\subsection{Cálculo Ángulo} 
+\subsection{Registro de variables cinemáticas}
+El ángulo de inclinación modelo pendulo invertido es la variable fundamental de este sistema.
 Para efectos de análisis o representación final, a partir de las variaciones de aceleración lineal y velocidad angular detectadas por los sensores se realiza el cálculo del ángulo, que para efectos de pruebas es un indicador equivalente a la inclinación que ha realizado el sujeto.
 
-A partir de esta información existen distintos métodos para calcular el ángulo, tales como:
+Antes de describir los métodos a empleados, es necesario explicar como es orientado el sensor:
+
+\subsection{Instalación del Sensor}
 
 
-\subsubsection{Cálculo Ángulo con Acelerómetro} Es posible usar solo acelerómetro como inclinómetro, este nos entrega el ángulo con gran exactitud espacial, pero es demasiado sensible a cualquier variación en la aceleración en cualquiera de sus 3 ejes, estas variaciones pueden no ser producto tan solo de la fuerza gravitacional, por ende ser generan medidas erráticas debido a los cambios de aceleración constantes que son generados al girar/mover la IMU.
+\subsubsection{Cálculo Ángulo con Acelerómetro} Es posible usar el acelerómetro como inclinómetro. Este nos entrega el ángulo con gran exactitud espacial, pero es demasiado sensible a cualquier variación en la aceleración en cualquiera de sus 3 ejes y estas variaciones pueden no ser producto tan solo de la fuerza gravitacional, por ende ser generan medidas erráticas debido a los cambios de aceleración constantes que son generados al girar/mover la IMU.
+
 Para los cálculos del ángulo como se muestra en el ejemplo para el cálculo de los ángulos Medio-Lateral ver ecuación (\ref{eq:calculoanguloXsensorvertical}) e Antero-Posterior ver ecuación (\ref{eq:calculoanguloYsensorvertical}) usando el sensor en posición vertical con la referencia hacia atrás.
 
 \begin{figure}[H]
