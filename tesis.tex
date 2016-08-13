@@ -555,13 +555,24 @@ Finalizada la configuración se procede a la lectura de los registros para obten
 \end{itemize}
 
 \newpage
+
+\subsection{Referencia Dispositivo y Sensor}
+El dispositivo cuenta con una referencia para indicar hacia donde se encuentran cada uno de sus ejes. La idea presentada a continuación fue con el objetivo de simplificar y permitir la mayor versatilidad al momento de instalar el sensor para realizar mediciones.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.2]{images/referenciaDispositivo}
+	\caption{Diagrama Referencia Dispositivo}
+	\label{fig:referenciaDisp}
+\end{figure}
+
+Tal como se aprecia en la figura (\ref{fig:referenciaDisp}), la flecha roja de referencia apunta paralelamente, en el sentido positivo del eje y (MPU6050).
+Esta referencia se debe considerar al momento de realizar la instalación en el sujeto y en análisis posteriores de los datos entregados por el sensor (acelerómetro y giroscopio).
+
+
 \subsection{Registro de variables cinemáticas}
 El ángulo de inclinación modelo pendulo invertido es la variable fundamental de este sistema.
 Para efectos de análisis o representación final, a partir de las variaciones de aceleración lineal y velocidad angular detectadas por los sensores se realiza el cálculo del ángulo, que para efectos de pruebas es un indicador equivalente a la inclinación que ha realizado el sujeto.
-
-Antes de describir los métodos a empleados, es necesario explicar como es orientado el sensor:
-
-\subsection{Instalación del Sensor}
 
 
 \subsubsection{Cálculo Ángulo con Acelerómetro} Es posible usar el acelerómetro como inclinómetro. Este nos entrega el ángulo con gran exactitud espacial, pero es demasiado sensible a cualquier variación en la aceleración en cualquiera de sus 3 ejes y estas variaciones pueden no ser producto tan solo de la fuerza gravitacional, por ende ser generan medidas erráticas debido a los cambios de aceleración constantes que son generados al girar/mover la IMU.
@@ -628,7 +639,7 @@ Para el análisis del desplazamiento del centro de masa se requiere que el ángu
 
 
 
-\subsection{Filtro Complementario}
+\subsubsection{Filtro Complementario}
 El Filtro complementario es ampliamente usado en unidades inerciales y sistemas de visión. Este filtro es en sí es un filtro de Kalman de estado estacionario para una cierta clase de problemas de filtrado \cite{TesisUSM}.
 
 Está compuesto por la una unión de dos filtros diferentes:
@@ -652,24 +663,6 @@ En donde cada uno de las variables representa lo siguiente:
 	\item $\alpha$: Representa la contribución realizada por cada ángulo, Si $\alpha$ es igual 0 el cálculo del ángulo se realiza con el giroscopio en caso contrario $\alpha$ igual a 1 corresponde al ángulo del acelerómetro.
 \end{itemize}
 
-\subsection{Filtro de Kalman discreto}
-El filtro de Kalman es un estimador lineal, insesgado y óptimo del estado de un proceso. En él se ha impuesto la condición de que el proceso a ser estimado es regido por una dinámica lineal y que el ruido que lo perturba es blanco y gaussiano. Aun cuando la condición del comportamiento probabilístico gaussiano del ruido se omite, el filtro de Kalman sigue siendo el mejor filtro recursivo lineal (error de menor varianza) e insesgado\cite{TesisUSM}.
-
-Su propósito es emplear las mediciones obtenidas en un período de tiempo que a su vez son afectadas por variaciones  aleatorias (ruido) junto con el conocimiento del comportamiento del sistema, para producir estimaciones que tiendan a estar más cerca del valor real del proceso en cuestión. Todas las mediciones y cálculos basados en modelos son aproximaciones en cierto grado obtenidas a partir de datos ruidosos provenientes de los sensores.
-
-EL filtro de Kalman posee flexibilidad para ser utilizado tanto en tiempo continuo o en tiempos discretos.
-
-El Filtro consiste en 2 estados Predicción y Actualización.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.8]{images/kalman-filter.png} 
-	\caption{Diagrama estados Filtro Kalman}
-	\label{fig:diagramakalman}
-\end{figure}
-
-
-\subsubsection{Filtro Complementario}
 Se posee un acelerómetro que entrega ángulos con referencia en la posición del sensor, pero muy susceptible a la variación de cambios de aceleración del éste y en cambio un giroscopio nos permite calcular el ángulo de manera exacta, pero si tener una clara referencia de la posición donde está el sensor. 
 
 Para unificar la información proveniente de ambos sensores existe un filtro, que nació principalmente de la práctica, conocido como el Filtro Complementario \cite{TesisUSM}.
@@ -704,7 +697,22 @@ Entonces el parámetro nuevo a considerar es la velocidad angular $\omega$ que d
 
 Nota: el $dt$ es obtenido a partir de la diferencia entre la muestra actual y la anterior, por ende para el ángulo de inicio es considerado sólo el obtenido por el acelerómetro.
 
-\subsubsection{Filtro Kalman}
+\subsubsection{Filtro de Kalman discreto}
+El filtro de Kalman es un estimador lineal, insesgado y óptimo del estado de un proceso. En él se ha impuesto la condición de que el proceso a ser estimado es regido por una dinámica lineal y que el ruido que lo perturba es blanco y gaussiano. Aun cuando la condición del comportamiento probabilístico gaussiano del ruido se omite, el filtro de Kalman sigue siendo el mejor filtro recursivo lineal (error de menor varianza) e insesgado\cite{TesisUSM}.
+
+Su propósito es emplear las mediciones obtenidas en un período de tiempo que a su vez son afectadas por variaciones  aleatorias (ruido) junto con el conocimiento del comportamiento del sistema, para producir estimaciones que tiendan a estar más cerca del valor real del proceso en cuestión. Todas las mediciones y cálculos basados en modelos son aproximaciones en cierto grado obtenidas a partir de datos ruidosos provenientes de los sensores.
+
+EL filtro de Kalman posee flexibilidad para ser utilizado tanto en tiempo continuo o en tiempos discretos.
+
+El Filtro consiste en 2 estados Predicción y Actualización.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{images/kalman-filter.png} 
+	\caption{Diagrama estados Filtro Kalman}
+	\label{fig:diagramakalman}
+\end{figure}
+
 A partir de la información proveniente de las mediciones del Proceso de captura de información cinemática, se intenta obtener el ángulo, con la premisa que el filtro retornará el mínimo error por las fluctuaciones entrantes del ruido en las mediciones obtenidas.
 
 En base a la explicación de como implementarla por Kristian Sloth Lauszus
