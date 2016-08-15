@@ -226,7 +226,90 @@ El control del equilibrio es complejo e implica el mantenimiento de posturas \ci
 
 La mayoría de las escalas de valoración del equilibrio funcional evalúan el riesgo de caída y la necesidad de rehabilitación, pero no es diferenciado cada uno de los tipos de déficits del balance. Un enfoque de sistema para la evaluación clínica puede diferenciar diferentes tipos de trastornos del equilibrio y un enfoque fisiológico puede determinar los mecanismos subyacentes sensoriomotoras asociados al trastorno del equilibrio. Las medidas objetivas de equilibrio valiéndose de medios informáticos y sensores inerciales portátiles pueden traer más precisión, exactitud y sensibilidad que las pruebas de equilibrio clínicas.
 
+\subsection{Equipamientos para estudio del balance} Algunos de los principales instrumentos utilizados para el estudio del Balance son:
+
+
+\subsubsection{Plataforma de Fuerza Kistler} Es un Gold Standard  en lo referente a estabilometría\cite{donath_testing_2012}, es una plataforma de fuerza de dimensiones
+	0,4m por 0,6m que consta de cuatro 	transductores piezoeléctricos, situados en las esquinas. Estos transductores son capaces de medir las fuerzas de reacción del suelo en los planos verticales medio-lateral (x), antero-posterior (y) ver Figura (\ref{fig:KistlerFP}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{images/KistlerFP}
+	\caption{Plataforma de Fuerza Kistler}
+	\label{fig:KistlerFP}
+\end{figure}
+
+
+\subsubsection{Balance SD} Un instrumento desarrollado por Biodex \cite{Biodex} utilizado para la medicina física, especialmente para cualquiera que desee mejorar su equilibrio, aumentar la agilidad, desarrollar el tono muscular y tratar una amplia variedad de patologías asociadas a la perdida de balance.
+Es un equipo que cuenta con biofeed-back principalmente visual, pero en nuevas versiones incluye soporte para biofeed-back vibratorio.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.65\linewidth]{images/BalanceSD}
+	\caption{Calculo COP Kistler}
+	\label{fig:balanceSD}
+\end{figure}
+
+\subsection{Estudio del Balance usando Sensores}
+Recientemente, los sensores de movimiento ``weareables'' se han desarrollado para la robótica, industria aeroespacial y en las mediciones biomédicas se han utilizado para medir el control del balance\cite{mancini_relevance_2010}. Estos sensores, con transferencia inalámbrica de datos , tienen el potencial de superar los principales inconvenientes de coste, tamaño y ubicación limitado de las pruebas computarizadas , así como permitir la medición objetiva de la oscilación postural y movimientos durante la ejecución de tareas.
+
+Desde que se inicio la experimentación de sistemas de biofeedback para el control postural, los sistemas de tipo táctil y audio han recibido mucha menos atención que la retro-alimentación visual.
+Sin embargo, en los últimos años, el interés en sistemas táctiles y de audio para el control de la postura ha sido renovada, en parte debido a los avances en la tecnologías de procesamiento y detección de movimiento en tiempo real junto con las nuevas tendencias en dispositivos portátiles inalambricos que pueden ser usados durante todos los días \cite{giansanti_energetic_2009}.
+
+Los acelerómetros y/o giroscopios han sido exitosamente utilizados \cite{mancini_relevance_2010} para el seguimiento de movimiento,  detección de caídas, y para la medición de control de balance sólo recientemente se han utilizado también para la activación dispositivos de Biofeed-back vibro-táctil o ABF. Además en el ámbito de dispositivos ``Weareables" se han usado para medir los movimientos tanto de pierna, brazo y torso. \cite{mancini_relevance_2010}. Por ejemplo, análisis de la marcha.
+Los sistemas han sido diseñados utilizando acelerómetros en un cinturón ubicado en la cadera o con giroscopios ubicado en las piernas.
+
+
+\section{Marco Teórico}
+
+\subsection{Introducción}
+El marco teórico, que se desarrolla a continuación, permite conocer los conceptos básicos para el entendimiento del desarrollo de este proyecto de Tesis.
+Partiendo por la definición de los estándares aplicados en los estudios del Balance, junto con definición de términos que comúnmente serán utilizados.
+
+
+Luego la descripción de los elementos de hardware utilizados, características de sensores, protocolos de comunicación y microcontrolador.
+
+Finalmente se describe el marco de trabajo para el desarrollo del software.
+
+Con este marco teórico se podrá comprender el desarrollo que se detalla mas adelante.
+
 \subsection{Estudio y evaluación de Balance}
+
+En el estudio del balance postural, los registros representados por los sensores, generalmente se desagregan en el plano Frontal y Sagital denominándolos Antero-Posterior y Medio-Lateral respectivamente. 
+
+\subsubsection{Sistemas Coordenados}
+
+Toda la información obtenida debe estar asociado según un sistema específico de coordenadas, que sirva de referencia para la interpretación y comprensión de la información.
+
+\begin{itemize}
+	
+	\item \textbf{Planos anatómicos} 
+	\subitem \textbf{Plano Sagital:}
+	Se toma de referencia el cuerpo humano trazando línea una  vertical de referencia que teóricamente cruza el cuerpo por la parte media y central, a modo de plomada imaginaria, esta línea ayuda en la distinción de miembros o elementos en el «lado izquierdo» o «lado derecho».
+	\subitem \textbf{Plano Frontal:} Forma un ángulo recto con los planos sagitales. En un ser humano, el plano medio coronal divide el cuerpo en posición de pie en dos mitades (frontal y dorsal, o anterior y posterior) mediante una línea imaginaria que corta ambos hombros.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\textwidth]{images/planosAnatomicos}
+		\caption{Planos Anatómicos}
+		\label{fig:sagital}
+	\end{figure}
+	
+	\item \textbf{Ejes del sensor:} Los ejes contenidos en el sensor son expresados en coordenadas X, Y, Z.
+	Según la orientación del sensor cualquiera de sus ejes puede ser paralelo a la gravedad de la tierra, que apunta en sentido positivo hacia el centro de esta.
+\end{itemize}
+
+\subsubsection{Cálculo del COP}
+El COP en las plataformas de fuerza en general es el promedio de las fuerzas aplicadas en cada uno de los piezoeléctricos (sensores de presión/fuerza) tal como lo demuestra la Figura (\ref{fig:calculoCOP}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.65\linewidth]{images/calculoCOP}
+	\caption{Cálculo COP Plataforma de Fuerza}
+	\label{fig:calculoCOP}
+	\end{figure}
+
+\subsubsection{Estabilometría}
 Corresponde al estudio del Centro de Presión (COP) para determinar deficiencias posturales que perjudican el Balance.
 
 Existen estándares respecto a las características necesarias para la medición del COP \cite{scoppa_clinical_2013}.
@@ -237,10 +320,10 @@ Basándose tanto en la práctica y verificación experimental se acordó que, pa
 \begin{itemize}
 	\item El intervalo de adquisición no debe ser inferior a 25s.
 	\item La frecuencia de muestreo debe ser de al menos 50 Hz (fs=100Hz óptima).
-	\item Estándares Técnicos:
+	\item Estándares Técnicos Tabla (\ref{table:mediciones}):
 	\begin{table}[H]
 		\centering
-		\label{table:mediciones}
+		
 		\begin{tabular}{|c|c|}			
 			\hline \textbf{Variable} & \textbf{Valor} 	\\ 
 			\hline Exactitud 	& $>$ 0.1 mm 		\\ 
@@ -250,44 +333,13 @@ Basándose tanto en la práctica y verificación experimental se acordó que, pa
 			\hline 			
 		\end{tabular}
 		\caption{Estándares Técnicos Mediciones}
+		\label{table:mediciones}
 	\end{table}	  
 \end{itemize}
 
-\subsection{Equipamientos para estudio del balance} Algunos de los principales instrumentos utilizados para el estudio del Balance son:
 
 
-\subsubsection{Plataforma de Fuerza Kistler} Es un Gold Standard  en lo referente a estabilometría\cite{donath_testing_2012}, es una plataforma de fuerza de dimensiones
-	0,4m por 0,6m que consta de cuatro 	transductores piezoeléctricos, situados en las esquinas. Estos transductores son capaces de medir las fuerzas de reacción del suelo en los planos verticales medio-lateral (x), antero-posterior (y) tal como muestra la Figura (\ref{fig:Kistler}).
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.65\linewidth]{images/Kistler}
-	\caption{Calculo COP Kistler}
-	\label{fig:Kistler}
-\end{figure}
-
-\subsubsection{Balance SD} Un instrumento desarrollado por Biodex \cite{Biodex} utilizado para la medicina física, especialmente para cualquiera que desee mejorar su equilibrio, aumentar la agilidad, desarrollar el tono muscular y tratar una amplia variedad de patologías asociadas a la perdida de balance.
-Es un equipo que cuenta con biofeed-back principalmente visual, pero en nuevas versiones incluye soporte para biofeed-back vibratorio.
-
-
-\subsection{Estudio del Balance usando Sensores}
-Recientemente, los sensores de movimiento ``weareables'' se han desarrollado para la robótica, industria aeroespacial y en las mediciones biomédicas se han utilizado para medir el control del balance\cite{mancini_relevance_2010}. Estos sensores, con transferencia inalámbrica de datos , tienen el potencial de superar los principales inconvenientes de coste, tamaño y ubicación limitado de las pruebas computarizadas , así como permitir la medición objetiva de la oscilación postural y movimientos durante la ejecución de tareas.
-
-Desde que se inicio la experimentación de sistemas de biofeedback para el control postural, los sistemas de tipo táctil y audio han recibido mucha menos atención que la retro-alimentación visual.
-Sin embargo, en los últimos años, el interés en sistemas táctiles y de audio para el control de la postura ha sido renovada, en parte debido a los avances en la tecnologías de procesamiento y detección de movimiento en tiempo real junto con las nuevas tendencias en dispositivos portátiles inalambricos que pueden ser usados durante todos los días. 
-En 2001, Wall et al. \cite{giansanti_energetic_2009} 
-
-En particular, Chiari et al. mostró, utilizando una plataforma de fuerza, que los sujetos mejoraron el equilibrio aprovechando el ABF (Audio Biofeed-back) y que ésta mejora fue mayor cuanto más grave era el desorden sensorial del sujeto. Otros estudios demostraron cómo este ABF \cite{giansanti_energetic_2009} mejora la estabilidad de la postura de los participantes con pérdida vestibular bilateral permitiendo gran cantidad de correcciones posturales.
-
-Los acelerómetros y/o giroscopios han sido exitosamente utilizados \cite{mancini_relevance_2010} para el seguimiento de movimiento,  detección de caídas, y para la medición de control de balance sólo recientemente se han utilizado también para la activación dispositivos de Biofeed-back vibro-táctil o ABF. Además en el ámbito de dispositivos ``Weareables" se han usado para medir los movimientos tanto de pierna, brazo y torso mientras las personas realizan pruebas clínicas o ir haciendo sus actividades diarias \cite{mancini_relevance_2010}. Por ejemplo, análisis de la marcha.
-Los sistemas han sido diseñados utilizando acelerómetros en un cinturón de cadera o giroscopios en las piernas.
-
-
-
-\section{Marco Teórico}
-
-\subsection{Introducción}
-
+\newpage
 \subsection{Protocolo de Comunicación $\mathbf{\mathrm{I^2C}}$}
 La comunicación entre el sensor MPU6050 y Arduino se entabla mediante el protocolo $I^2C$.
 
@@ -311,28 +363,6 @@ Las principales características del protocolo de Comunicación $\mathrm{I^2C}$ 
 		\caption{Diagrama $\mathrm{I^2C.}$}
 		\label{fig:diagramaI2C}
 	\end{figure}
-\end{itemize}
-
-\newpage
-\subsection{Estudio del Balance Postural}
-Toda la información obtenida debe estar asociado según un sistema específico de coordenadas, que sirva de referencia para la interpretación y comprensión de la información.
-
-Para ello fueron considerados los principales sistemas utilizados para referenciar los ejes coordenados en el estudio postural:
-\begin{itemize}
-	
-	\item \textbf{Planos anatómicos} 
-		\subitem \textbf{Plano Sagital:}
-		 Se toma de referencia el cuerpo humano trazando línea una  vertical de referencia que teóricamente cruza el cuerpo por la parte media y central, a modo de plomada imaginaria, esta línea ayuda en la distinción de miembros o elementos en el «lado izquierdo» o «lado derecho».
-		 \subitem \textbf{Plano Frontal:} Forma un ángulo recto con los planos sagitales. En un ser humano, el plano medio coronal divide el cuerpo en posición de pie en dos mitades (frontal y dorsal, o anterior y posterior) mediante una línea imaginaria que corta ambos hombros.
-
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=0.5\textwidth]{images/planosAnatomicos}
-		\caption{Planos Anatómicos}
-		\label{fig:sagital}
-	\end{figure}
-
-	\item \textbf{Ejes del sensor:} Los ejes contenidos en el sensor son expresados en coordenadas X, Y ,Z, en donde según la orientación del sensor cualquiera de sus ejes puede ser paralelo a la gravedad de la tierra, que apunta en sentido positivo hacia el centro de esta.
 \end{itemize}
 
 \newpage
@@ -555,8 +585,11 @@ Finalizada la configuración se procede a la lectura de los registros para obten
 \end{itemize}
 
 \newpage
+\subsection{Registro de variables cinemáticas}
+El ángulo de inclinación modelo pendulo invertido\cite{gage_kinematic_2004} es la variable fundamental de este sistema.
+Para efectos de análisis o representación final, a partir de las variaciones de aceleración lineal y velocidad angular detectadas por los sensores se realiza el cálculo del ángulo, que para efectos de pruebas es un indicador equivalente a la inclinación que ha realizado el sujeto.
 
-\subsection{Referencia Dispositivo y Sensor}
+\subsubsection{Referencia Dispositivo y Sensor}
 El dispositivo cuenta con una referencia para indicar hacia donde se encuentran cada uno de sus ejes. La idea presentada a continuación fue con el objetivo de simplificar y permitir la mayor versatilidad al momento de instalar el sensor para realizar mediciones.
 
 \begin{figure}[H]
@@ -566,48 +599,44 @@ El dispositivo cuenta con una referencia para indicar hacia donde se encuentran 
 	\label{fig:referenciaDisp}
 \end{figure}
 
-Tal como se aprecia en la figura (\ref{fig:referenciaDisp}), la flecha roja de referencia apunta paralelamente, en el sentido positivo del eje y (MPU6050).
+Tal como se muestra en la Figura (\ref{fig:referenciaDisp}), la flecha roja de referencia apunta paralelamente, en el sentido positivo del eje y (MPU6050).
 Esta referencia se debe considerar al momento de realizar la instalación en el sujeto y en análisis posteriores de los datos entregados por el sensor (acelerómetro y giroscopio).
 
+\newpage
 
-\subsection{Registro de variables cinemáticas}
-El ángulo de inclinación modelo pendulo invertido es la variable fundamental de este sistema.
-Para efectos de análisis o representación final, a partir de las variaciones de aceleración lineal y velocidad angular detectadas por los sensores se realiza el cálculo del ángulo, que para efectos de pruebas es un indicador equivalente a la inclinación que ha realizado el sujeto.
+El listado de orientaciones predefinidas para referencia del sensor, junto con su diagrama de orientación esta listado en la tabla siguiente.
 
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|}
+		\hline 
+		\textbf{Orientación} & \textbf{Diagrama} \\ 
+		\hline 
+		Vertical Atrás &  \includegraphics[scale=0.2]{images/IMU/verticalatras}\\ 
+		\hline 
+		Vertical Frente  &  \includegraphics[scale=0.2]{images/IMU/verticalfrente} \\ 
+		\hline 
+		Vertical Derecha  &  \includegraphics[scale=0.2]{images/IMU/verticalderecha}  \\ 
+		\hline 
+		Vertical Izquieda & \includegraphics[scale=0.2]{images/IMU/verticalizquierda}   \\ 
+		\hline 
+		Horizontal Arriba &  \includegraphics[scale=0.2]{images/IMU/horizontalarriba}   \\ 
+		\hline 
+		Horizontal Abajo &  \includegraphics[scale=0.2]{images/IMU/horizontalabajo}   \\ 
+		\hline 
+	\end{tabular}
+	\caption{Tabla listado de orientaciones pre-configuradas}
+	\label{table:listadoOrientaciones}
+\end{table}
 
-\subsubsection{Cálculo Ángulo con Acelerómetro} Es posible usar el acelerómetro como inclinómetro. Este nos entrega el ángulo con gran exactitud espacial, pero es demasiado sensible a cualquier variación en la aceleración en cualquiera de sus 3 ejes y estas variaciones pueden no ser producto tan solo de la fuerza gravitacional, por ende ser generan medidas erráticas debido a los cambios de aceleración constantes que son generados al girar/mover la IMU.
-
-Para los cálculos del ángulo como se muestra en el ejemplo para el cálculo de los ángulos Medio-Lateral ver ecuación (\ref{eq:calculoanguloXsensorvertical}) e Antero-Posterior ver ecuación (\ref{eq:calculoanguloYsensorvertical}) usando el sensor en posición vertical con la referencia hacia atrás.
-
-\begin{figure}[H]
-	\begin{equation}
-	anguloML = \tan{\left(\frac{aceleracionX}{\sqrt{aceleracionZ^{2}+aceleracionY^{2}}}\right)}
-	\label{eq:calculoanguloXsensorvertical}
-	\end{equation}
-	\begin{equation}
-	anguloAP = \tan{\left(\frac{aceleracionZ}{\sqrt{aceleracionX^{2}+aceleracionY^{2}}}\right)}
-	\label{eq:calculoanguloYsensorvertical}
-	\end{equation}
-\end{figure}
-
-\subsubsection{Cálculo ángulo con giroscopio} 
-A partir de la variación de la velocidad angular se puede obtener una aproximación del ángulo, utilizando sólo el giroscopio a diferencia del acelerómetro, podemos realizar los cálculos del ángulo con mayor precisión, pero al no tener una referencia clara del origen de la mediciones es difícil de contrastar la información con el movimiento realizad, esto dificulta enormemente la interpretación, además con el tiempo los datos capturados comienzan a acumular un pequeño error, a estos errores acumulados se les conoce como drift o deriva.
+En el software se encuentra un listado de orientaciones presentados en la Tabla \ref{table:listadoOrientaciones}.
+Al momento de realizar alguna prueba la orientación debe estar acorde en el Antero-Posterior/Medio-Lateral que se registrará en el sujeto.
 
 \newpage
-\subsection{Métodos implementados para obtención del Ángulo}
-En el software fueron incluidos los 3 algoritmos descritos, para ser usados según el usuario lo requiera, para ello se implemento una interfaz sencilla ver Figura (\ref{fig:selectorFiltros}) en donde configurar tan solo algunos parámetros, los cuales con la configuración por defecto deberían funcionar sin mayores problemas.
+\subsubsection{Cálculo Ángulo con Acelerómetro} Es posible usar el acelerómetro como inclinómetro. Este nos entrega el ángulo con gran exactitud espacial.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.9]{images/implementacionFiltros}
-	\caption{Selector de filtros en Software}
-	\label{fig:selectorFiltros}
-\end{figure}
+Para la obtención del ángulo se debe tener en consideración la orientación del dispositivo. Las orientaciones inicialmente disponibles (ver Tabla \ref{table:listadoOrientaciones}) y la ecuación que describe las variables a utilizar en cada una de ellas se listan a continuación (ver Tabla\ref{table:calculoAnguloAcelerometro}).
 
-
-\subsubsection{Sin Filtro} El punto de partida para el cálculo del ángulo consiste en la implementación tan solo usando el acelerómetro, ya que este es utilizado como base y a la vez en cada iteración para los cálculos en cada uno de los filtros.
-
-A partir de la fórmula de la tangente, según la orientación escogida son conjugados los ejes leídos directamente de los sensores, con el fin de aplicar la formula en el sentido que corresponda.
 \begin{table}[H]
 	\centering
 	\begin{tabular}{|c|c|c|}
@@ -628,18 +657,72 @@ A partir de la fórmula de la tangente, según la orientación escogida son conj
 		\hline 
 	\end{tabular}
 	\caption{Tabla cálculo ángulo usando Acelerómetro}
-	\label{table:calculoAnguloSinFiltro}
+	\label{table:calculoAnguloAcelerometro}
 \end{table}
 
-Como el ángulo resultante a partir de sólo acelerómetro, existe la opción de agregar más información para corregir/mejorar la aproximación.
 
-La Fusión de Datos es un método para integrar señales provenientes de múltiples fuentes. Permite extraer información de varias fuentes diferentes para integrarlos en una sola señal o información.
+
+\subsubsection{Cálculo Ángulo con Giroscopio}
+Para el cálculo del ángulo de inclinacion a partir de las variables entregadas por el Giroscopio (velocidad angular). Utilizando integración numérica a partir de las diferencias temporales de la velocidad angular se obtiene la posición angular (ángulo de inclinación).
+
+La velocidad angular para describir el ángulo Antero-Posterior/Medio-Lateral es relacionado directamente con la orientacion del dispositivo, por ende en la Tabla (\ref{table:calculoAnguloGiroscopio}) se lista la velocidad angular utilizada para cada caso.
+
+
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline 
+		\textbf{Orientación} & \textbf{Medio-Lateral} & \textbf{Antero-Posterior} \\ 
+		\hline 
+		Vertical Atrás & $\omega= -GiroscopioZ$ &  $\omega= -GiroscopioX$ \\ 
+		\hline 
+		Vertical Frente & $\omega= GiroscopioZ$ &  $\omega= GiroscopioX$ \\
+		\hline 
+		Vertical Derecha & $\omega= GiroscopioX$ &  $\omega= -GiroscopioZ$ \\ 
+		\hline 
+		Vertical Izquieda & $\omega= -GiroscopioX$ &  $\omega= GiroscopioZ$ \\ 
+		\hline 
+		Horizontal Arriba & $\omega= GiroscopioX$ &  $\omega= GiroscopioY$ \\ 
+		\hline 
+		Horizontal Abajo & $\omega= -GiroscopioX$ &  $\omega= GiroscopioY$ \\ 
+		\hline 
+	\end{tabular}
+	\caption{Tabla cálculo ángulo usando Giroscopio} 
+	\label{table:calculoAnguloGiroscopio}
+\end{table}
+
+
+
+\subsubsection{Ventajas y desventajas}
+
+El Acelerómetro es demasiado sensible a variaciones en la aceleración en cualquiera de sus 3 ejes. Estas variaciones pueden no ser producto tan solo de la fuerza gravitacional, por ende son generadas medidas erráticas debido a los cambios de aceleración constantes al girar/mover la IMU.
+
+A partir de la variación de velocidad angular se puede obtener una aproximación bastante precisa de la diferencia de ángulos en cada instante.
+El Giroscopio no posee una referencia del origen de la mediciones(ángulo inicial), por lo tanto es difícil de contrastar la información con el movimiento realizado.
+La falta de una referencia inicial dificulta enormemente la interpretación. Con el tiempo los datos capturados por el Giroscopio comienzan a acumular un pequeño error, a estos errores acumulados se les conoce como drift o deriva.
+
+\subsection{Métodos implementados para obtención del Ángulo}
+En el software se implementaron 3 algoritmos: (a) Sin filtro, (b) Filtro de Kalman y (c) Filtro Complementario (ver Figura \ref{fig:selectorFiltros}), los cuales serán descritos y explicados a continuación.
+	
+\begin{figure}[H]
+\centering
+	\includegraphics[scale=0.9]{images/implementacionFiltros}
+	\caption{Selector de filtros en Software}
+\label{fig:selectorFiltros}
+\end{figure}
+
+\subsubsection{Sin Filtro} El punto de partida para el cálculo del ángulo consiste en la implementación tan solo usando el acelerómetro. Esta implementación es la base para cada uno de los filtros.
+
+A partir de la fórmula de la tangente, según la orientación escogida son conjugados los ejes leídos directamente de los sensores, con el fin de aplicar la formula en el sentido que corresponda ver Tabla \ref{table:calculoAnguloAcelerometro}.
+
 
 Para el análisis del desplazamiento del centro de masa se requiere que el ángulo obtenido sea lo en su medida lo más preciso, para ello se estudiaron e implementaron 2 filtros que permiten una correcta integración de los datos de aceleración lineal con velocidad angular.
 
+Con el ángulo obtenido a partir del acelerómetro, existe la opción de agregar más información para corregir/mejorar la aproximación.
 
 
-\subsubsection{Filtro Complementario}
+\subsubsection{Descripción Filtro Complementario}
 El Filtro complementario es ampliamente usado en unidades inerciales y sistemas de visión. Este filtro es en sí es un filtro de Kalman de estado estacionario para una cierta clase de problemas de filtrado \cite{TesisUSM}.
 
 Está compuesto por la una unión de dos filtros diferentes:
@@ -663,37 +746,16 @@ En donde cada uno de las variables representa lo siguiente:
 	\item $\alpha$: Representa la contribución realizada por cada ángulo, Si $\alpha$ es igual 0 el cálculo del ángulo se realiza con el giroscopio en caso contrario $\alpha$ igual a 1 corresponde al ángulo del acelerómetro.
 \end{itemize}
 
-Se posee un acelerómetro que entrega ángulos con referencia en la posición del sensor, pero muy susceptible a la variación de cambios de aceleración del éste y en cambio un giroscopio nos permite calcular el ángulo de manera exacta, pero si tener una clara referencia de la posición donde está el sensor. 
+\subsubsection{Implementación Filtro Complementario}
+Se posee un acelerómetro que entrega ángulos con referencia en la posición del sensor, pero muy susceptible a la variación de cambios de aceleración del éste y en cambio un giroscopio que permite calcular la variación de ángulo (usando integración numérica), pero sin tener una clara referencia de la posición donde está el sensor (ángulo inicial).
 
 Para unificar la información proveniente de ambos sensores existe un filtro, que nació principalmente de la práctica, conocido como el Filtro Complementario \cite{TesisUSM}.
-El filtro requiere un ángulo de punto de partida y para esto se utiliza el acelerómetro para recoger el ángulo inicial, ya que, al poseer la referencia de la gravedad, es obtenida una mejor estimación inicial para las posteriores iteraciones del filtro.
+El filtro requiere un ángulo de punto de partida y para esto se utiliza el acelerómetro para recoger el ángulo inicial, ya que, al poseer la referencia de la gravedad, se obtiene el ángulo inicial para las posteriores iteraciones del filtro.
 
 
-A partir de la ecuación del Filtro complementario (\ref{eq:ecuacionFiltroComplementario}), los parámetros necesarios para el cálculo del ángulo usando este filtro, corresponden a los Ángulos Previamente Calculados Usando este mismo filtro y a su vez el Ángulo del acelerómetro que se calcula según la orientación ver Tabla (\ref{table:calculoAnguloSinFiltro}).
-Entonces el parámetro nuevo a considerar es la velocidad angular $\omega$ que debe ser utilizada según la orientación del dispositivo tal como se muestra en la siguiente tabla.
+A partir de la ecuación del Filtro complementario (\ref{eq:ecuacionFiltroComplementario}), los parámetros necesarios para el cálculo del ángulo usando este filtro, corresponden a los Ángulos Previamente Calculados usando este mismo filtro y a su vez el Ángulo del acelerómetro que se calcula según la orientación ver Tabla (\ref{table:calculoAnguloAcelerometro}).
+Entonces el parámetro nuevo a considerar es la velocidad angular $\omega$ que debe ser utilizada según la orientación del dispositivo, de igual forma como es utilizada al calcular el ángulo con el Giroscopio (ver Tabla \ref{table:calculoAnguloGiroscopio}).
 
-\begin{table}[H]
-	\centering
-	\begin{tabular}{|c|c|c|}
-		\hline 
-		\textbf{Orientación} & \textbf{Ángulo Medio-Lateral} & \textbf{Ángulo Antero-Posterior} \\ 
-		\hline 
-		Vertical Atrás & $\omega= -GiroscopioZ$ &  $\omega= -GiroscopioX$ \\ 
-		\hline 
-		Vertical Frente & $\omega= GiroscopioZ$ &  $\omega= GiroscopioX$ \\
-		\hline 
-		Vertical Derecha & $\omega= GiroscopioX$ &  $\omega= -GiroscopioZ$ \\ 
-		\hline 
-		Vertical Izquieda & $\omega= -GiroscopioX$ &  $\omega= GiroscopioZ$ \\ 
-		\hline 
-		Horizontal Arriba & $\omega= GiroscopioX$ &  $\omega= GiroscopioY$ \\ 
-		\hline 
-		Horizontal Abajo & $\omega= -GiroscopioX$ &  $\omega= GiroscopioY$ \\ 
-		\hline 
-	\end{tabular}
-	\caption{Tabla cálculo ángulo usando Filtro Complementario} 
-	\label{table:calculoAnguloFiltroComplementario}
-\end{table}
 
 Nota: el $dt$ es obtenido a partir de la diferencia entre la muestra actual y la anterior, por ende para el ángulo de inicio es considerado sólo el obtenido por el acelerómetro.
 
@@ -720,28 +782,7 @@ En base a la explicación de como implementarla por Kristian Sloth Lauszus
 
 Al igual que los casos anteriores es de gran importancia la orientación elegida, utilizando las mismas descritas en las tablas (\ref{table:calculoAnguloSinFiltro}) y (\ref{table:calculoAnguloFiltroKalman}).
 Debe ser considerado el \textit{nuevoAngulo} entregado mediante el acelerómetro y además la \textit{nuevaVelocidadAngular} obtenida por el giroscopio, junto con la diferencia de tiempo \textit{dt}, que corresponden a exactamente los mismos datos usados por el filtro complementario.
-\begin{table}[H]
-	\centering
-	\begin{tabular}{|c|c|c|}
-		\hline 
-		\textbf{Orientación} & \textbf{Ángulo Medio-Lateral} & \textbf{Ángulo Antero-Posterior} \\ 
-		\hline 
-		Vertical Atrás & $\omega= -GiroscopioZ$ &  $\omega= -GiroscopioX$ \\ 
-		\hline 
-		Vertical Frente & $\omega= GiroscopioZ$ &  $\omega= GiroscopioX$ \\
-		\hline 
-		Vertical Derecha & $\omega= GiroscopioX$ &  $\omega= -GiroscopioZ$ \\ 
-		\hline 
-		Vertical Izquieda & $\omega= -GiroscopioX$ &  $\omega= GiroscopioZ$ \\ 
-		\hline 
-		Horizontal Arriba & $\omega= GiroscopioX$ &  $\omega= GiroscopioY$ \\ 
-		\hline 
-		Horizontal Abajo & $\omega= -GiroscopioX$ &  $\omega= GiroscopioY$ \\ 
-		\hline 
-	\end{tabular}
-	\caption{Tabla cálculo ángulo usando Filtro de Kalman} 
-	\label{table:calculoAnguloFiltroKalman}
-\end{table}
+
 
 \subsubsection{Comparativa de Métodos}
 Luego de la integración de los filtros en el Software es posible utilizar el deseado para la prueba, pero se deben tener en consideración las ventajas de usar o no el filtro razón por la cual se realizó una breve comparativa para ver el comportamiento entre el cálculo del ángulo sin utilizar filtros, usando filtro complementario y Kalman para la obtención durante la misma prueba.
@@ -762,7 +803,9 @@ Pese a primera vista que la gráfica ver Figura (\ref{fig:AnguloXvsFiltros}) dem
 
 
 \subsection{Cálculo del Desplazamiento del Centro de Masa en el plano}
-Basado en la premisa que la posición bípeda-quieta puede ser representada como un péndulo invertido, entonces el movimiento pendular de un sujeto en las coordenadas antero-posterior y medio-lateral puede ser obtenida a partir de relaciones geométricas(trigonometría), con ello obtener el desplazamiento.
+
+Basado en la premisa que la posición bípeda-quieta puede ser representada como un péndulo invertido\cite{gage_kinematic_2004}, entonces el movimiento pendular de un sujeto en las coordenadas antero-posterior y medio-lateral puede ser obtenida a partir de relaciones geométricas(trigonometría), con ello obtener el desplazamiento.
+
 
 \subsubsection{Proyección del angulo}
 Para obtener la distancia proyectada en el eje horizontal (proyección del COM en el plano), la altura $h$ consiste en la distancia desde el suelo hasta donde fue puesto el sensor. Esta altura es equivalente a la hipotenusa de un triángulo rectángulo, como se muestra en la Figura (\ref{fig:proyeccion}). Mediante la ecuación (\ref{eq:proyeccion}) obtenemos la proyección en el plano horizontal (d). La distancia $d$ corresponde al desplazamiento del centro de masa estimado.
