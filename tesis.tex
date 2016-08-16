@@ -221,10 +221,18 @@ Finalmente son expuestos los resultados, junto con las conclusiones más relevan
 
 
 \section{Estado del Arte}
+
+\subsection{Contexto de la problemática}
 Más de un tercio de la población mayor de 65 años presenta algunos problemas con el balance o deambulación. Los pacientes con trastornos neurológicos o musculo-esqueléticos son aún más propensos a tener problemas de equilibrio que afectan a su movilidad. La complejidad del control del equilibrio es resultado  de muchos tipos de problemas diferentes con evaluaciones clínicas sistemática específicas para prescribir un tratamiento eficaz.
 El control del equilibrio es complejo e implica el mantenimiento de posturas \cite{mancini_relevance_2010}, mantener el movimiento y recuperar el equilibrio. El control de balance consiste en controlar el centro de masa del cuerpo entre los límites de estabilidad. Las evaluaciones clínicas del equilibrio pueden ayudar a evaluar el riesgo de caídas y/o determinar las causas de los trastornos del equilibrio subyacente.
 
-La mayoría de las escalas de valoración del equilibrio funcional evalúan el riesgo de caída y la necesidad de rehabilitación, pero no es diferenciado cada uno de los tipos de déficits del balance. Un enfoque de sistema para la evaluación clínica puede diferenciar diferentes tipos de trastornos del equilibrio y un enfoque fisiológico puede determinar los mecanismos subyacentes sensoriomotoras asociados al trastorno del equilibrio. Las medidas objetivas de equilibrio valiéndose de medios informáticos y sensores inerciales portátiles pueden traer más precisión, exactitud y sensibilidad que las pruebas de equilibrio clínicas.
+La mayoría de las escalas de valoración del equilibrio funcional evalúan el riesgo de caída y la necesidad de rehabilitación, pero no es diferenciado cada uno de los tipos de déficits del balance. Un enfoque de sistema para la evaluación clínica puede diferenciar diferentes tipos de trastornos del equilibrio y un enfoque fisiológico puede determinar los mecanismos subyacentes sensoriomotoras asociados al trastorno del equilibrio. Las medidas objetivas de equilibrio valiéndose de medios informáticos y sensores inercialess pueden traer más precisión, exactitud y sensibilidad que las pruebas de equilibrio clínicas\cite{chaudhry_measurement_2011}.
+
+\subsection{Estudio del Balance usando Sensores}
+Recientemente, los sensores de movimiento ``weareables'' se han desarrollado para la robótica, industria aeroespacial y en las mediciones biomédicas se han utilizado para medir el control del balance\cite{mancini_relevance_2010}. Estos sensores, con transferencia inalámbrica de datos , tienen el potencial de superar los principales inconvenientes de coste, tamaño y ubicación limitado de las pruebas computarizadas , así como permitir la medición objetiva de la oscilación postural y movimientos durante la ejecución de tareas.
+
+Los acelerómetros y/o giroscopios han sido exitosamente utilizados \cite{mancini_relevance_2010} para el seguimiento de movimiento,  detección de caídas, y para la medición de control del balance. En el ámbito de dispositivos ``Weareables" se han usado para medir los movimientos tanto de pierna, brazo y torso.
+
 
 \subsection{Equipamientos para estudio del balance} Algunos de los principales instrumentos utilizados para el estudio del Balance son:
 
@@ -245,19 +253,10 @@ Es un equipo que cuenta con biofeed-back principalmente visual, pero en nuevas v
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.65\linewidth]{images/BalanceSD}
-	\caption{Calculo COP Kistler}
+	\includegraphics[width=0.25\linewidth]{images/BalanceSD}
+	\caption{Sistema Balance SD}
 	\label{fig:balanceSD}
 \end{figure}
-
-\subsection{Estudio del Balance usando Sensores}
-Recientemente, los sensores de movimiento ``weareables'' se han desarrollado para la robótica, industria aeroespacial y en las mediciones biomédicas se han utilizado para medir el control del balance\cite{mancini_relevance_2010}. Estos sensores, con transferencia inalámbrica de datos , tienen el potencial de superar los principales inconvenientes de coste, tamaño y ubicación limitado de las pruebas computarizadas , así como permitir la medición objetiva de la oscilación postural y movimientos durante la ejecución de tareas.
-
-Desde que se inicio la experimentación de sistemas de biofeedback para el control postural, los sistemas de tipo táctil y audio han recibido mucha menos atención que la retro-alimentación visual.
-Sin embargo, en los últimos años, el interés en sistemas táctiles y de audio para el control de la postura ha sido renovada, en parte debido a los avances en la tecnologías de procesamiento y detección de movimiento en tiempo real junto con las nuevas tendencias en dispositivos portátiles inalambricos que pueden ser usados durante todos los días \cite{giansanti_energetic_2009}.
-
-Los acelerómetros y/o giroscopios han sido exitosamente utilizados \cite{mancini_relevance_2010} para el seguimiento de movimiento,  detección de caídas, y para la medición de control de balance sólo recientemente se han utilizado también para la activación dispositivos de Biofeed-back vibro-táctil o ABF. Además en el ámbito de dispositivos ``Weareables" se han usado para medir los movimientos tanto de pierna, brazo y torso. \cite{mancini_relevance_2010}. Por ejemplo, análisis de la marcha.
-Los sistemas han sido diseñados utilizando acelerómetros en un cinturón ubicado en la cadera o con giroscopios ubicado en las piernas.
 
 
 \section{Marco Teórico}
@@ -272,6 +271,7 @@ Luego la descripción de los elementos de hardware utilizados, características 
 Finalmente se describe el marco de trabajo para el desarrollo del software.
 
 Con este marco teórico se podrá comprender el desarrollo que se detalla mas adelante.
+
 
 \subsection{Estudio y evaluación de Balance}
 
@@ -299,15 +299,16 @@ Toda la información obtenida debe estar asociado según un sistema específico 
 	Según la orientación del sensor cualquiera de sus ejes puede ser paralelo a la gravedad de la tierra, que apunta en sentido positivo hacia el centro de esta.
 \end{itemize}
 
-\subsubsection{Cálculo del COP}
-El COP en las plataformas de fuerza en general es el promedio de las fuerzas aplicadas en cada uno de los piezoeléctricos (sensores de presión/fuerza) tal como lo demuestra la Figura (\ref{fig:calculoCOP}).
+
+\subsubsection{Cálculo del Centro de Presión (COP)}
+El COP en las plataformas de fuerza en general es el promedio de las fuerzas aplicadas en cada uno de los sensores piezoeléctricos (sensores de presión/fuerza) tal como lo demuestra la Figura (\ref{fig:calculoCOP}).
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.65\linewidth]{images/calculoCOP}
 	\caption{Cálculo COP Plataforma de Fuerza}
 	\label{fig:calculoCOP}
-	\end{figure}
+\end{figure}
 
 \subsubsection{Estabilometría}
 Corresponde al estudio del Centro de Presión (COP) para determinar deficiencias posturales que perjudican el Balance.
@@ -340,33 +341,18 @@ Basándose tanto en la práctica y verificación experimental se acordó que, pa
 
 
 \newpage
-\subsection{Protocolo de Comunicación $\mathbf{\mathrm{I^2C}}$}
-La comunicación entre el sensor MPU6050 y Arduino se entabla mediante el protocolo $I^2C$.
-
-El protocolo $I^2C$ fue desarrollado en 1982 por Philips Semiconductors (hoy NXP Semiconductors) para la comunicación interna entre circuitos integrados como por ejemplo juegos de CD y televisiones.
-
-Las principales características del protocolo de Comunicación $\mathrm{I^2C}$ \cite{I2C} son:
+\subsection{Microcontroladores Arduino}
+Arduino\cite{ARDUINO} es una plataforma de hardware de código abierto, basada en una sencilla placa con entradas y salidas, analógicas y digitales, con un entorno de desarrollo basado en el lenguaje de programación C++, donde sus principales características son:
 \begin{itemize}
-	\item Solo dos líneas para la comunicación son necesarias; una línea para la información serial (SDA) y otra para el reloj serial (SCL).
+	\item \textbf{Bajo Coste:} Las placas Arduino son relativamente de bajo coste comparadas con otras plataformas microcontroladoras Handy Board, Basic Stamp\textregistered. La versión menos cara del módulo Arduino puede ser ensamblada a mano, e incluso los módulos de Arduino preensamblados cuestan menos de 50\$.
+	\item \textbf{Multiplataforma:} El software de Arduino se ejecuta en sistemas operativos Windows, Macintosh OSX y GNU/Linux. La mayoría de los sistemas microcontroladores están limitados a Windows.
+	\item \textbf{Entorno de programación simple y claro:} El entorno de programación de Arduino es fácil de usar para principiantes, pero suficientemente flexible para que usuarios avanzados puedan aprovecharlo también. Para profesores, está convenientemente basado en el entorno de programación Processing, de manera que estudiantes aprendiendo a programar en ese entorno estarán familiarizados con el aspecto y la imagen de Arduino.
+	\item \textbf{Código abierto y software extensible:} El software Arduino está publicado como herramientas de código abierto, disponible para extensión por programadores experimentados. El lenguaje puede ser expandido mediante librerías C++, y la gente que quiera entender los detalles técnicos pueden hacer el salto desde Arduino a la programación en lenguaje AVR C en el cual está basado. De forma similar, puedes añadir código AVR-C directamente en tus programas Arduino si quieres.
+	\item \textbf{Código abierto y hardware extensible:} El Arduino está basado en microcontroladores ATMEGA8 y ATMEGA168 de Atmel. Los planos para los módulos están publicados bajo licencia Creative Commons, por lo que diseñadores experimentados de circuitos pueden hacer su propia versión del módulo, extendiéndolo y mejorándolo. Incluso usuarios relativamente inexpertos pueden construir la versión de la placa del módulo para entender cómo funciona y ahorrar dinero.
 	
-	\item Cada dispositivo conectado al bus es direccionado por software por un ID único y usando relación Esclavo/Maestro todo el tiempo.
-	
-	\item Posee un sistema de detección de colisiones lo que permite usar el modo multi-maestro previniendo la corrupción de los datos si dos o más maestros comienzan a transferir datos de forma simultánea.
-	
-	\item Orientado a transferencias de datos en 8-bit de forma bi-direccional pueden ser realizadas hasta los 100 kbit/s en el modo Estándar, hasta 400 kbit/s en el modo Rápido, hasta 1 Mbit/s en el modo Mas Rápido, o hasta 3.4 Mbit/s en el modo de Alta-Velocidad.
-	
-	\item En el chip de filtrado se rechazan los picos en la línea de datos del bus de preservar la integridad de datos.
-	
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=0.9\textwidth]{images/Diagrama_I2C}
-		\caption{Diagrama $\mathrm{I^2C.}$}
-		\label{fig:diagramaI2C}
-	\end{figure}
 \end{itemize}
 
 \newpage
-
 \subsection{Sistema microelectromecánico (MPU6050)}
 El sistema Microelectromecánico (MEMS) MPU6050\cite{MPU6050}, es un dispositivo capaz de medir la velocidad angular y fuerza de gravedad gracias a estar compuesto por Giroscópico y Acelerómetro ambos de 3 ejes, el hecho de poseer estos 2 sensores de movimiento indica que existen al menos 6 grados de libertad para utilizar al momento de obtener las mediciones provenientes de éste.
 
@@ -418,22 +404,22 @@ El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\r
 	
 	\item \textbf{Resolución:} Consiste en la mínima variación generada en la variable medida y la cual los sensores son capaces de informar.
 	
-		\begin{table}[H]
-			\centering
-			\label{table:resolucionSensor}
-			\begin{tabular}{|c|c|c|c|}
-				\hline
-				\multicolumn{2}{|c|}{Acelerómetro} &\multicolumn{2}{|c|}{Giroscopio}   \\
-				\hline
-				Rango (g)        & Resolución (LSB/g)  & Rango (\grad/seg)     &  Resolución (LSB/(\grad/seg))\\ \hline
-				$\pm 2$     &  $6.10351562e^{-5}$   &$\pm 250 $ 	& 	$7.633587786e^{-3}$ 	\\ 
-				$\pm 4$     &  $1.22070313e^{-4}$  	&$\pm 500 $ 	& 	$1.526717557e^{-2}$    	\\
-				$\pm 8$     &  $2.44140625e^{-4}$ 	& $\pm 1000$  	& 	$3.048780488e^{-2}$		\\
-				$\pm 16$    &  $4.88828125e^{-4}$   & $\pm 2000$    & 	$6.097560976e^{-2}$     \\ 
-				\hline
-			\end{tabular}
-			\caption{Resolución de los sensores}
-		\end{table}
+	\begin{table}[H]
+		\centering
+		\label{table:resolucionSensor}
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			\multicolumn{2}{|c|}{Acelerómetro} &\multicolumn{2}{|c|}{Giroscopio}   \\
+			\hline
+			Rango (g)        & Resolución (LSB/g)  & Rango (\grad/seg)     &  Resolución (LSB/(\grad/seg))\\ \hline
+			$\pm 2$     &  $6.10351562e^{-5}$   &$\pm 250 $ 	& 	$7.633587786e^{-3}$ 	\\ 
+			$\pm 4$     &  $1.22070313e^{-4}$  	&$\pm 500 $ 	& 	$1.526717557e^{-2}$    	\\
+			$\pm 8$     &  $2.44140625e^{-4}$ 	& $\pm 1000$  	& 	$3.048780488e^{-2}$		\\
+			$\pm 16$    &  $4.88828125e^{-4}$   & $\pm 2000$    & 	$6.097560976e^{-2}$     \\ 
+			\hline
+		\end{tabular}
+		\caption{Resolución de los sensores}
+	\end{table}
 	
 \end{itemize}
 
@@ -444,8 +430,8 @@ Por defecto el MPU6050 viene configurada con los parámetros básicos para reali
 	\item \textbf{Configurar frecuencia muestreo:} Para definir la cantidad de muestras que se obtendrán ``En Teoría'' se calcula usando la ecuación: 
 	
 	\begin{equation} 
-		\label{eq:sampleratediv}
-		Sample Rate = \frac{Gyroscope Output Rate}{(1 + SMPLRT\_DIV) }
+	\label{eq:sampleratediv}
+	Sample Rate = \frac{Gyroscope Output Rate}{(1 + SMPLRT\_DIV) }
 	\end{equation}
 	
 	En la ecuación (\ref{eq:sampleratediv}) factores, tales como la velocidad del puerto serial pueden influir en el resultado, el registro \textbf{SMPRT\_DIV} es de 8 Bit entonces adminte valores entre 0 y 255, el valor de $Gyroscope Output Rate$ depende directamente del estado del filtro pasa-bajo, en caso de estar desactivado, el valor de $Gyroscope Output Rate$ sería 8Khz, en cambio sí está activado el $Gyroscope Output Rate$ tomaría el valor de 1Khz con lo cual haciendo los cálculos necesarios al estar desactivado el filtro pasa-bajo la frecuencia de muestreo variará entre las 8000 y 31 muestras/seg de forma teórica, al contrario en caso de estar activado el filtro, la fórmula para el cálculo de la frecuencia de muestreo fluctuaría entre las 1000 y 3.9 muestras/seg, por cada uno de los 6 datos obtenibles.
@@ -480,7 +466,7 @@ Luego de realizar la configuración de los registros del MPU6050, se deben leer 
 	Posteriormente de ser leídos ambos registros de cada eje estos deben ser sumados usando aritmética binaria en donde el valor obtenido del primer registro leído le es aplicado un corrimiento de 8 bit para luego sumar el segundo obtenido, además se utiliza el complemento a 2 para la obtención de valores negativos, que genera como dato resultante un valor de entre aproximadamente $\pm 2^{15}$, este valor resultante debe ser dividido según la sensibilidad asociada a el rango escogido del giroscopio, para transformar el dato RAW del giroscopio y obtener la información física en (\grad/seg).
 	
 	\item \textbf{Obtención de la Aceleración:} Para obtener la información del acelerómetro al igual que en Giroscopio deben ser leídos los 6 pertenecientes a las mediciones:
-
+	
 	\begin{table}[H]
 		\centering
 		\label{table:registrosaccel}
@@ -493,7 +479,7 @@ Luego de realizar la configuración de los registros del MPU6050, se deben leer 
 		\end{tabular}
 		\caption{Registros mediciones Acelerómetro}					
 	\end{table}				
-					
+	
 	Para luego unir los registros y usar el complemento a 2 acorde a cada eje, cada uno de estos valores deben ser divididos según el rango escogido, que determina la sensibilidad a usar para obtener la información física de la aceleración.
 	
 	\begin{figure}[H]
@@ -505,15 +491,31 @@ Luego de realizar la configuración de los registros del MPU6050, se deben leer 
 	
 \end{itemize}
 
-\subsection{Microcontroladores Arduino}
-Arduino\cite{ARDUINO} es una plataforma de hardware de código abierto, basada en una sencilla placa con entradas y salidas, analógicas y digitales, con un entorno de desarrollo basado en el lenguaje de programación C++, donde sus principales características son:
-\begin{itemize}
-	\item \textbf{Bajo Coste:} Las placas Arduino son relativamente de bajo coste comparadas con otras plataformas microcontroladoras Handy Board, Basic Stamp\textregistered. La versión menos cara del módulo Arduino puede ser ensamblada a mano, e incluso los módulos de Arduino preensamblados cuestan menos de 50\$.
-	\item \textbf{Multiplataforma:} El software de Arduino se ejecuta en sistemas operativos Windows, Macintosh OSX y GNU/Linux. La mayoría de los sistemas microcontroladores están limitados a Windows.
-	\item \textbf{Entorno de programación simple y claro:} El entorno de programación de Arduino es fácil de usar para principiantes, pero suficientemente flexible para que usuarios avanzados puedan aprovecharlo también. Para profesores, está convenientemente basado en el entorno de programación Processing, de manera que estudiantes aprendiendo a programar en ese entorno estarán familiarizados con el aspecto y la imagen de Arduino.
-	\item \textbf{Código abierto y software extensible:} El software Arduino está publicado como herramientas de código abierto, disponible para extensión por programadores experimentados. El lenguaje puede ser expandido mediante librerías C++, y la gente que quiera entender los detalles técnicos pueden hacer el salto desde Arduino a la programación en lenguaje AVR C en el cual está basado. De forma similar, puedes añadir código AVR-C directamente en tus programas Arduino si quieres.
-	\item \textbf{Código abierto y hardware extensible:} El Arduino está basado en microcontroladores ATMEGA8 y ATMEGA168 de Atmel. Los planos para los módulos están publicados bajo licencia Creative Commons, por lo que diseñadores experimentados de circuitos pueden hacer su propia versión del módulo, extendiéndolo y mejorándolo. Incluso usuarios relativamente inexpertos pueden construir la versión de la placa del módulo para entender cómo funciona y ahorrar dinero.
 
+
+\subsection{Protocolo de Comunicación $\mathbf{\mathrm{I^2C}}$}
+La comunicación entre el sensor MPU6050 y Arduino se entabla mediante el protocolo $I^2C$.
+
+El protocolo $I^2C$ fue desarrollado en 1982 por Philips Semiconductors (hoy NXP Semiconductors) para la comunicación interna entre circuitos integrados como por ejemplo juegos de CD y televisiones.
+
+Las principales características del protocolo de Comunicación $\mathrm{I^2C}$ \cite{I2C} son:
+\begin{itemize}
+	\item Solo dos líneas para la comunicación son necesarias; una línea para la información serial (SDA) y otra para el reloj serial (SCL).
+	
+	\item Cada dispositivo conectado al bus es direccionado por software por un ID único y usando relación Esclavo/Maestro todo el tiempo.
+	
+	\item Posee un sistema de detección de colisiones lo que permite usar el modo multi-maestro previniendo la corrupción de los datos si dos o más maestros comienzan a transferir datos de forma simultánea.
+	
+	\item Orientado a transferencias de datos en 8-bit de forma bi-direccional pueden ser realizadas hasta los 100 kbit/s en el modo Estándar, hasta 400 kbit/s en el modo Rápido, hasta 1 Mbit/s en el modo Mas Rápido, o hasta 3.4 Mbit/s en el modo de Alta-Velocidad.
+	
+	\item En el chip de filtrado se rechazan los picos en la línea de datos del bus de preservar la integridad de datos.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\textwidth]{images/Diagrama_I2C}
+		\caption{Diagrama $\mathrm{I^2C.}$}
+		\label{fig:diagramaI2C}
+	\end{figure}
 \end{itemize}
 
 
@@ -759,7 +761,7 @@ Entonces el parámetro nuevo a considerar es la velocidad angular $\omega$ que d
 
 Nota: el $dt$ es obtenido a partir de la diferencia entre la muestra actual y la anterior, por ende para el ángulo de inicio es considerado sólo el obtenido por el acelerómetro.
 
-\subsubsection{Filtro de Kalman discreto}
+\subsubsection{Descripción Filtro de Kalman discreto}
 El filtro de Kalman es un estimador lineal, insesgado y óptimo del estado de un proceso. En él se ha impuesto la condición de que el proceso a ser estimado es regido por una dinámica lineal y que el ruido que lo perturba es blanco y gaussiano. Aun cuando la condición del comportamiento probabilístico gaussiano del ruido se omite, el filtro de Kalman sigue siendo el mejor filtro recursivo lineal (error de menor varianza) e insesgado\cite{TesisUSM}.
 
 Su propósito es emplear las mediciones obtenidas en un período de tiempo que a su vez son afectadas por variaciones  aleatorias (ruido) junto con el conocimiento del comportamiento del sistema, para producir estimaciones que tiendan a estar más cerca del valor real del proceso en cuestión. Todas las mediciones y cálculos basados en modelos son aproximaciones en cierto grado obtenidas a partir de datos ruidosos provenientes de los sensores.
@@ -770,22 +772,22 @@ El Filtro consiste en 2 estados Predicción y Actualización.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.8]{images/kalman-filter.png} 
+	\includegraphics[scale=0.65]{images/kalman-filter.png} 
 	\caption{Diagrama estados Filtro Kalman}
 	\label{fig:diagramakalman}
 \end{figure}
 
+\subsubsection{Implementacion FIltro de Kalman discreto}
 A partir de la información proveniente de las mediciones del Proceso de captura de información cinemática, se intenta obtener el ángulo, con la premisa que el filtro retornará el mínimo error por las fluctuaciones entrantes del ruido en las mediciones obtenidas.
 
-En base a la explicación de como implementarla por Kristian Sloth Lauszus
-\cite{kalmanTKJ}, junto con las librerías en C++ propuestas, la implementación del filtro de Kalman se realiza de manera sencilla, y los parámetros necesarios son exactamente los mismos utilizados por el filtro complementario con distinta nomenclatura.
+La implementación realizada se basa en el uso de las libredias de C++ propuesta en [\cite{kalmanTKJ}]. Su implementación es sencilla, y los parámetros necesarios son exactamente los mismos utilizados por el filtro complementario.
 
-Al igual que los casos anteriores es de gran importancia la orientación elegida, utilizando las mismas descritas en las tablas (\ref{table:calculoAnguloSinFiltro}) y (\ref{table:calculoAnguloFiltroKalman}).
+Los parámetros de entradas para la utilización del filtro sin los mismos descritos en las tablas (\ref{table:calculoAnguloAcelerometro}) y (\ref{table:calculoAnguloGiroscopio}).
 Debe ser considerado el \textit{nuevoAngulo} entregado mediante el acelerómetro y además la \textit{nuevaVelocidadAngular} obtenida por el giroscopio, junto con la diferencia de tiempo \textit{dt}, que corresponden a exactamente los mismos datos usados por el filtro complementario.
 
 
 \subsubsection{Comparativa de Métodos}
-Luego de la integración de los filtros en el Software es posible utilizar el deseado para la prueba, pero se deben tener en consideración las ventajas de usar o no el filtro razón por la cual se realizó una breve comparativa para ver el comportamiento entre el cálculo del ángulo sin utilizar filtros, usando filtro complementario y Kalman para la obtención durante la misma prueba.
+Luego de la integración de los filtros en el Software es posible utilizar el deseado para la prueba, pero se deben tener en consideración las ventajas de usar los filtros implementados. A continuación se realizó una breve comparativa para ver el comportamiento entre el cálculo del ángulo sin utilizar filtros, usando filtro complementario y Kalman para la obtención durante la misma prueba.
 
 \begin{figure}[H]
 	\centering
