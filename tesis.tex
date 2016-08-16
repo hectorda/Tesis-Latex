@@ -539,10 +539,10 @@ El sistema consta principalmente en un microcontrolador Arduino, un sensor inerc
 
 El sistema es definido y contrastado a partir del equipamiento existente en el Departamento de Kinesiologia. Para evaluación y realimentación de Balance, es decir, plataforma de fuerza Kistler y Sistema Balance SD.
 
-En lo referente a hardware se utilizó un sensor inercial MPU6050, el cual es ubicado en el sujeto de prueba en una posición aproximada al centro de masa (aprox. 55\% de la altura). Este sensor es el encargado de capturar el movimiento generado por el sujeto la cual es  enviadada a través del microcontrolador Arduino al software (PC) mediante conexión serial (USB). El software procesa la información(velocidad angular y aceleración lineal) para obtener el ángulo y desplazamiento, permitiendo la opción de efectuar análisis específicos de la información utilizando interfaces gráficas.
+En lo referente a hardware se utilizó un sensor inercial MPU6050, el cual es ubicado en el sujeto de prueba en una posición aproximada al centro de masa (aprox. 55\% de la altura). Este sensor es el encargado de capturar el movimiento generado por el sujeto la cual es  enviada a través del microcontrolador Arduino al software (PC) mediante conexión serial (USB). El software procesa la información(velocidad angular y aceleración lineal) para obtener el ángulo y desplazamiento, posteriormente permite efectuar análisis específicos de la información utilizando interfaces gráficas.
 
 
-\subsection{Programación en Arduino}
+\subsection{Programación del Microcontrolador}
 Uno de los primeros pasos en el desarrollo de la solución consiste en utilizar el IDE de Arduino para realizar la programación inicial del microcontrolador. La conexión del sensor MPU6050 permite la configuración y uso del sensor.
 En la configuración se definen ciertos registros, además de precisar el formato de envío para despliegue de la informacion proveniente del sensor, consta de una línea con 6 datos separados por espacios.
 
