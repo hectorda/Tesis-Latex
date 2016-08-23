@@ -174,6 +174,7 @@
 \thispagestyle{empty}
 \listoffigures
 \thispagestyle{empty}
+\newpage
 \listoftables
 
 \thispagestyle{empty}
@@ -894,18 +895,21 @@ Dicho esto de ahora en adelante cuando sea realizado el cálculo del desplazamie
 
 
 \newpage
-\subsection{Codificación del Software}
-Un parte importante del sistema es la interfaz que permite al usuario interactuar con el micro-controlador sin conocer más a fondo su funcionamiento,
-con este propósito fue implementado utilizando en Framework QT(C++)\cite{QT} en su versión Open-Source, al estar basado en C++ en cuanto a estabilidad y rendimiento se refiere es una de las mejores opciones a tener en consideración.
-
-El software permite la captura y procesamiento de información proveniente de la comunicación serial entre el micro-controlador Arduino y el ordenador,
+\subsection{Desarrollo de Software}
+Un parte importante del sistema es la interfaz que permite al usuario interactuar con el micro-controlador-sensor, tomar registros, almacenarlos, etc.
+Se implementó utilizando en Framework QT(C++)\cite{QT} en su versión Open-Source.
+Al estar basado en C++ en estabilidad y rendimiento es una de las mejores opciones a tener en consideración.
 El usar un framework como Qt facilita en gran parte la creación de interfaces gráficas, capa de funcionalidad que C++ no contiene por defecto, esto posibilita una rápida integración entre la parte lógica y visual del software a desarrollar.
+
+El software permite la captura y procesamiento de información proveniente del sensor mediante comunicación serial entre el micro-controlador Arduino y el ordenador.
+
 Debido a el tipo de proyecto a implementar la metodología usada para el desarrollo fue el método ágil, al ser una solución de software con requisitos funcionales poco definidos, más que nada pautas del resultado esperado en donde el programador pasa a ser es el principal diseñador definiendo por sí mismo la distribución y comportamiento de los componentes del software.
 
-En etapas tempranas del desarrollo se implementó una interfaz que se tan solo se comunicara con el puerto serial, pudiendo conectarse a este, y obtener la información que se encontrara disponible.
-Durante el desarrollo se incluyeron más opciones para una visualización más agradable, junto con la parametrización de todos los elementos mostrados, permitiendo al usuario activar y desactivar opciones según sea el caso.
+En etapas tempranas del desarrollo se implementó una interfaz de comunicación con el puerto serial, pudiendo conectarse a este, y obtener la información disponible.
+Durante el desarrollo se incluyeron más opciones para una visualización más adecuada, junto con la parametrización de todos los elementos mostrados, permitiendo al usuario activar y desactivar opciones según sea el caso.
 
-La comunicación serial entre el dispositivo-ordenador no solo es usada para leer los datos en el puerto, también es posible enviar parámetros para realizar la configuración del sensor, esto es realizado con el fin de establecer el valor de opciones consideradas más relevantes tales como: la frecuencia de muestreo, el uso del filtro Pasa-Bajo y los rangos tanto Acelerómetro como Giroscopio, a través de una interfaz sencilla e intuitiva ver Figura (\ref{fig:ajustessensores}).
+La comunicación serial entre el dispositivo-ordenador permite leer los datos en el puerto y enviar parámetros para realizar la configuración del sensor.
+Esto es realizado con el fin de establecer el valor de opciones consideradas más relevantes tales como: la frecuencia de muestreo, el uso del filtro Pasa-Bajo y los rangos del Acelerómetro y Giroscopio, a través de una interfaz sencilla e intuitiva ver Figura (\ref{fig:ajustessensores}).
 
 \begin{figure}[H]
 	\centering
@@ -914,7 +918,8 @@ La comunicación serial entre el dispositivo-ordenador no solo es usada para lee
 	\label{fig:ajustessensores}
 \end{figure}
 
-Al momento de iniciar la aplicación si es que son detectados dispositivos en el puerto Serial se lanza la interfaz principal ver Figura (\ref{fig:mainwindow}), en donde se elige un paciente y la prueba a realizar.
+\newpage
+Al momento de iniciar la aplicación si es que son detectados dispositivos en el puerto Serial se lanza la interfaz principal (ver Figura \ref{fig:mainwindow}), en donde se elige un paciente y la prueba a realizar.
 
 \begin{figure}[H]
 	\centering
@@ -923,8 +928,14 @@ Al momento de iniciar la aplicación si es que son detectados dispositivos en el
 	\label{fig:mainwindow}
 \end{figure}
 
-Luego de seleccionada la prueba, según el tipo de prueba se permite configurar ciertos elementos, la interfaz fue pensada en ajustar la mayor cantidad de opciones sin sobrecargar demasiado ver Figura (\ref{fig:configurarPrueba}).
-
+Luego de seleccionada la prueba, según el tipo elegida se permite configurar ciertos elementos.
+Las pruebas incluidas son las siguientes:
+\begin{itemize}
+	\item \textbf{Romberg Modificado:} 
+	\item \textbf{Prueba Base:}
+	\item \textbf{Modo Libre:}
+	\item \textbf{Análisis en Tiempo A-P M-L:}
+\end{itemize}
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.6]{images/configurarPrueba}
@@ -932,7 +943,7 @@ Luego de seleccionada la prueba, según el tipo de prueba se permite configurar 
 	\label{fig:configurarPrueba}
 \end{figure}
 
-De entre los elementos configurables existen los siguientes
+La ventada de configuración (Figura \ref{fig:configurarPrueba}) considera los siguientes parámetros.
 
 \begin{itemize}
 	\item \textbf{Orientación Sensores:} Es una de las principales configuraciones a tener en consideración, debido a que define como está siendo situado el equipo, y a su vez como será analizada la información.
@@ -945,12 +956,13 @@ De entre los elementos configurables existen los siguientes
 	\item \textbf{Ajustes Objetivos:} En el gráfico principal se pueden desplegar objetivos para ser seguidos.
 	\begin{itemize}
 		\item \textbf{Cantidad de Objetivos:} Permite definir cuantos objetivos van a ser dibujados en pantalla, se debe tener en consideración los radios tanto de los objetivos, como del gráfico circular donde serán puestos, dado que si la cantidad de objetivos no es posible de dibujar, serán agregados la cantidad máxima posible sin que se intersecten.
-		\item \textbf{Generar en orden Aleatorio:} Los objetivos pueden ser puestos en posiciones al azar dentro del gráfico o seguir una trayectoria circular.
-		\item \textbf{Marcables en orden:} Define como se interacciona con los objetivos, si esta esta opción activada los objetivos parpadearán según el orden que fueron agregados permitiendo marcar solo uno, sino no parpadearán indicando que es posible marcar cualquier objetivo.
-		\item \textbf{Detener prueba al marcar todos:} Como su nombre lo indica es definido si al pasar por todos los objetivos es finalizada la prueba o continua.
+		\item \textbf{Generar en orden Aleatorio:} Esta opción permite que objetivos pueden ser puestos en posiciones al azar dentro del gráfico o seguir una trayectoria circular.
+		\item \textbf{Marcables en orden:} Esta opcion permite definir la interacción con los objetivos.
+		Si esta activada los objetivos parpadearán según el orden que fueron agregados permitiendo marcar solo uno, sino no parpadearán indicando que es posible marcar cualquier objetivo.
+		\item \textbf{Detener prueba al marcar todos:} Esta opción permite definir si al pasar por todos los objetivos es finalizada la prueba o continua .
 	\end{itemize}
 	
-	\item \textbf{Ajustes Finales} Son los ajustes referentes a si contara con un tiempo especifico para la prueba, a  y la opción de  para la representación.
+	\item \textbf{Ajustes Finales} Las otras opciones y parámetros del software son:
 	\begin{itemize}
 		\item \textbf{Altura dispositivo:} La altura donde está puesto el dispositivo, que servirá para los cálculos de desplazamientos realizados.
 		\item \textbf{Limitar el borde al gráfico:} Permite que la curva dibujada sobre el gráfico pueda salir o no del Radio Exterior de este.
@@ -965,11 +977,12 @@ Luego de realizar la configuración y presionando el botón Iniciar Prueba, se p
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.8]{images/graficoPrincipal}
+	\includegraphics[scale=0.76]{images/graficoPrincipal}
 	\caption{Gráfico de Prueba}
 	\label{fig:graficoPrincipal}
 \end{figure}
 
+El sistema permite el registro y visualización de los datos crudos (sin procesar) provenientes de los sensores, los cuales pueden ser visualizados y exportados.
 
 \begin{figure}[H]
 	\centering
@@ -977,6 +990,7 @@ Luego de realizar la configuración y presionando el botón Iniciar Prueba, se p
 	\caption{Gráficos de los sensores}
 	\label{fig:Graficosensores}
 \end{figure}
+
 
 Finalmente para el análisis de la información se dispone de herramientas intuitivas que permiten seleccionar intervalos, para el cálculo de estadísticos de la prueba, media, máximos, mínimos, etc. ver Figura (\ref{fig:analsisGraficos}).
 
@@ -987,11 +1001,11 @@ Finalmente para el análisis de la información se dispone de herramientas intui
 	\label{fig:analsisGraficos}
 \end{figure}
 
-Cabe destacar que cualquier cambio sobre los intervalos a estudiar calcula los datos en tiempo real, esto pruebas de duración de segundos no es problema, pero si dura varios minutos, 20 por ejemplo, el cálculo se demora un tanto más.
+Cabe destacar que cualquier cambio sobre los intervalos a estudiar calcula los datos en tiempo real.
 
 \newpage
 \subsection{Resultados y Análisis}
-Con respecto a la comparación entre los paradigmas usados para el análisis del desplazamiento del centro de Masa, la utilización de sensores piezo-eléctricos para la presión ejercida por el sujeto, en contraste por el estudiado en esta Tesis, utilizando acelerometría para obtener la variación espacial del centro de masa, los resultados y análisis de las pruebas realizadas serán descritos a continuación.
+Con respecto a la comparación entre los paradigmas usados para el análisis del desplazamiento del centro de Masa, la utilización de sensores piezo-eléctricos para la presión ejercida por el sujeto (COP), en contraste por el estudiado en esta Tesis, utilizando acelerometría para obtener la variación espacial del centro de masa (COM), los resultados y análisis de las pruebas realizadas serán descritos a continuación.
 
 \subsubsection{Contraste Dispositivo vs Plataforma de Fuerza Kistler}
 
@@ -1004,8 +1018,15 @@ El paciente tenía una estatura de 1.78 cm, el dispositivo en todas las pruebas 
 Los registros en la plataforma Kistler fueron tomados a una frecuencia de 100hz y para el dispositivo a 200hz. 
 Para la sincronización temporal fue utilizada la correlación cruzada, con la cual se obtiene el retraso(lag) entre las señales, para posteriormente sincronizarlas, y para ello fue necesario sub-muestrear los datos del dispositivo (decimate en octave) a 100hz.
 
+El dispositivo fue evaluado en 3 posiciones:
+\begin{enumerate}
+	\item \textbf{Espalda} 
+	\item \textbf{Lateral Izquierdo}
+	\item \textbf{Espalda}
+\end{enumerate}
+
 \newpage
-\subsubsection{Prueba Dispositivo Espalda} En la siguiente prueba el dispositivo fue ubicado en la espalda, en zona las vértebras lumbares del sujeto. Se realiza la medición en la Plataforma Kistler en conjunto con el \nombreDispositivo creado con objetivo de Tesis.
+\subsubsection{Prueba Espalda} En la siguiente prueba el dispositivo fue ubicado en la espalda, en zona las vértebras lumbares del sujeto. Se realiza la medición en la Plataforma Kistler en conjunto con el \nombreDispositivo creado con objetivo de Tesis.
 		
 	
 	\begin{figure}[H]
@@ -1028,12 +1049,12 @@ Para la sincronización temporal fue utilizada la correlación cruzada, con la c
 	
 	En los resultados obtenidos de la prueba se puede apreciar la gran similitud del comportamiento de ambas curvas.
 	
-	Para los gráficos obtenidos anteriormente tan solo debió realizarse un ajuste temporal, para coincidir los tiempos donde se realizaban las mediciones, el hecho de realizar solo ajuste temporal es un gran indicador, le añade más relevancia a la ubicación para los análisis del desplazamiento COM.
+	Para los gráficos obtenidos anteriormente tan solo debió realizarse un ajuste temporal de las series temporales.
 
 
 
 \newpage
-\subsubsection{Prueba \nombreDispositivo ubicado Lateral Izquierdo}
+\subsubsection{Prueba Lateral Izquierdo}
 	Para esta prueba el \nombreDispositivo fue ubicado en el lateral izquierdo del sujeto a altura de la cadera.
 		
 	\begin{figure}[H]
@@ -1055,7 +1076,7 @@ Para la sincronización temporal fue utilizada la correlación cruzada, con la c
 	\end{figure}
 	
 	Los resultados obtenidos inicialmente se encontraban desplazados, es decir, las curvas no coincidían, pero al centrar los datos, las curvas del desplazamiento coinciden en gran porcentaje en cuanto a la tendencia, altos y bajos.
-	Esta traslación se debe principalmente a que el dispositivo fue instalado en una distancia más lejana al centro de masa de sujeto, pero pese a esa distancia extra es posible analizar el comportamiento del desplazamiento de éste.
+	Esta traslación se debe principalmente a que el dispositivo fue instalado en una distancia más lejana al centro de masa del sujeto, pero pese a esa distancia adicional es posible analizar el comportamiento del desplazamiento de éste.
 	
 \newpage
 \subsubsection{Prueba Frontal}
@@ -1086,35 +1107,39 @@ Los datos tanto en el sentido Antero-Posterior, como en el medio lateral sufrier
 \newpage
 \subsubsection{Resumen de Resultados}
 
-Para comparar los resultados se definieron métodos para la batería de comparaciones a realizar, en donde la principal motivación consiste en demostrar el comportamiento de las series temporales utilizando valores representativos, con el fin de representar los resultados obtenidos de la forma más científica posible. 
+Para comparar los resultados se definieron medidas de diferencia y error para comparar el comportamiento de las series temporales utilizando estos dos sistemas (dispositivo v/s Kistler). 
 
 Sin más que acotar a continuación se encuentra la definición de todas las ecuaciones utilizadas para obtener los cálculos  en tabla de Resultados.
 \newline
 
-
-\begin{tcolorbox}[colframe=black,title=Definición de ecuaciones,center title]	
-	
-	\begin{align}
-	\overset{\underline{\textrm{serie temportal}}}{Kistler}:S_{K} &= \left\lbrace \begin{array}{lcl}
-	AP_{K} & : & \scalebox{0.6}{\textrm{Serie temporal Antero-Posterior de Kistler}}\\
-	ML_{K} & : & \scalebox{0.6}{\textrm{Serie temporal Medio-Lateral}}\\
-	\end{array} \right. \label{eq:seriesKistler} \\
-	\overset{\underline{\textrm{serie temportal}}}{Dispositivo}:S_{D} &= \left\lbrace \begin{array}{lcl}
-	AP_{D} & : & \scalebox{0.6}{\textrm{Serie temporal Antero-Posterior \nombreDispositivo}}\\
-	ML_{D} & : & \scalebox{0.6}{\textrm{Serie temporal Medio-Lateral \nombreDispositivo}}
-	\end{array} \right. \label{eq:seriesDisposito}
-	\end{align}
-	
-	En las siguientes definiciones $*$ equivale a Antero-Posterior o Medio Lateral.
-	
-	\begin{align} 
-	\overset{\underline{\textrm{escalar}}}{Rango}:	R^{*}&=Max(S_{K}^{*})-Min(S_{K}^{*})\\
-	\overset{\underline{\textrm{Serie temporal}}}{Diferencia}:	\Delta^{*}&=S_{K}^{*}-S_{D}^{*}\\
-	\overset{\underline{\textrm{escalar}}}{\textrm{Error medio porcentual}}:	Error^{*}&=\left( \frac{\sum\limits_{i=1}^{n}|\Delta^{*}|}{n} \right)*\frac{100}{R^{*}} \\
-	\overset{\underline{\textrm{escalar}}}{\textrm{Mínima diferencia porcentual}}:	Min\Delta^{*}&=Min(\Delta^{*})*\frac{100}{R^{*}}\\
-	\overset{\underline{\textrm{escalar}}}{\textrm{Máxima diferencia porcentual}}:	Max\Delta^{*}&=Max(\Delta^{*})*\frac{100}{R^{*}}
-	\end{align}	
-\end{tcolorbox}
+\begin{table}[H]
+	\begin{tcolorbox}[colframe=black,title=Definición de ecuaciones,center title]	
+		
+		\begin{align}
+		{Kistler}:S_{K} &= \left\lbrace \begin{array}{lcl}
+		AP_{K} & : & \scalebox{0.6}{\textrm{Serie temporal Antero-Posterior de Kistler}}\\
+		ML_{K} & : & \scalebox{0.6}{\textrm{Serie temporal Medio-Lateral}}\\
+		\end{array} \right. \label{eq:seriesKistler} \\
+		{Dispositivo}:S_{D} &= \left\lbrace \begin{array}{lcl}
+		AP_{D} & : & \scalebox{0.6}{\textrm{Serie temporal Antero-Posterior \nombreDispositivo}}\\
+		ML_{D} & : & \scalebox{0.6}{\textrm{Serie temporal Medio-Lateral \nombreDispositivo}}
+		\end{array} \right. \label{eq:seriesDisposito}
+		\end{align}
+		
+		En las siguientes definiciones $*$ equivale a Antero-Posterior o Medio Lateral.
+		
+		\begin{align} 
+		Rango:	R^{*}&=Max(S_{K}^{*})-Min(S_{K}^{*})\\
+		Diferencia:	\Delta^{*}&=S_{K}^{*}-S_{D}^{*}\\
+		\textrm{Coeficiente Correlacion}: r&=Cov\\
+		\textrm{Error medio porcentual}:	Error^{*}&=\left( \frac{\sum\limits_{i=1}^{n}|\Delta^{*}|}{n} \right)*\frac{100}{R^{*}} \\
+		\textrm{Mínima diferencia porcentual}:	Min\Delta^{*}&=Min(\Delta^{*})*\frac{100}{R^{*}}\\
+		\textrm{Máxima diferencia porcentual}:	Max\Delta^{*}&=Max(\Delta^{*})*\frac{100}{R^{*}}
+		\end{align}	
+	\end{tcolorbox}
+	\caption{Definición de ecuaciones}
+	\label{table:definicionEcuaciones}
+\end{table}
 
 \begin{table}[H]
 	\centering
@@ -1155,9 +1180,10 @@ El hecho que en la prueba con el dispositivo en la Espalda no necesitara un gran
 \newpage
 \subsection{Principales Desafíos}
 \subsubsection{Representación en Tiempo Real}
-La interfaz gráfica es una parte integral del sistema, pasando a ser la principal fuente de información para la retroalimentación, junto con el lugar donde mayormente interviene el usuario del sistema, entonces el no poder desplegar la información a tiempo, o que esta sea poco representativa es un gran problema. Se planteó inicialmente en graficar cada una de las salidas tanto del acelerómetro como el giroscopio en donde se representarían 6 variables según la frecuencia de muestreo, lo que en la práctica no resulta demasiado bien. Al representar en gráficos a frecuencias muy altas es decir 100hz o superior, multiplicado por la cantidad de datos que se estén representando, junto con el procesamiento interno para mostrar esos datos, se genera una sobrecarga en la parte gráfica, lo que conlleva a ralentizar el proceso, generando pérdidas de información y fidelidad al desplegar en tiempo real.
+El principal desafio fue el despliegue en tiempo real de la posicion del COM en la interfaz gráfica del biofeed-back. Se planteó inicialmente en graficar cada una de las salidas tanto del acelerómetro como el giroscopio en donde se representarían 6 variables según la frecuencia de muestreo, lo que en la práctica no es útil. Al representar en gráficos a frecuencias muy altas es decir 100hz o superior, multiplicado por la cantidad de datos que se estén representando, junto con el procesamiento interno para mostrar esos datos, se genera una sobrecarga en la parte gráfica, lo que conlleva a ralentizar el proceso, generando pérdidas de información y fidelidad al desplegar en tiempo real.
 
-Para dar solución al problema, se implementó la opción de graficar un porcentaje de la información recibida en base a la frecuencia de muestreo seleccionada para la captura de información, con esto se asegura que la representación gráfica en tiempo real no sea un problema. Para ello a partir de la frecuencia de muestreo escogida para la prueba se calcula cada cuantas muestras debe ser enviado al gráfico principal, con el fin de no entorpecer la prueba ver Ecuación (\ref{eq:divisorFPS}), después de realizar el cálculo, del total de muestras obtenidas aplicando módulo del $DivisorFPS$, si el resultado del módulo es 0 se envía el dato.
+Para dar solución al problema, se implementó la opción de graficar un porcentaje de la información recibida en base a la frecuencia de muestreo seleccionada para la captura de información, con esto se asegura que la representación gráfica en tiempo real sea adecuado. Para ello a partir de la frecuencia de muestreo escogida para la prueba se calcula cada cuantas muestras debe ser enviado al gráfico principal, con el fin de no entorpecer la prueba (ver Ecuación \ref{eq:divisorFPS}). 
+Luego de realizar el cálculo, a partir del total de muestras se aplica el módulo del $DivisorFPS$, si el resultado es 0 se envía el dato. Es decir, se envían los múltiplos del $DivisorFPS$.
 
 Nota: Si la frecuencia de muestreo es menor a los FPS escogidos se enviarán todas las muestras considerando el resultado de la Ecuación (\ref{eq:divisorFPS}) = 1.
 
@@ -1166,36 +1192,69 @@ Nota: Si la frecuencia de muestreo es menor a los FPS escogidos se enviarán tod
 DivisorFPS=(int)\left(\frac{frecuenciaMuestreo}{FPS}\right)
 \end{equation}
 
+A continuación ejemplos del \textit{Divisor FPS} para 100Hz y 200Hz (Tabla \ref{table:divisorFPS100Hz} y Tabla \ref{table:divisorFPS200Hz} respectivamente).
+
+\begin{table}[!htb]
+	\begin{minipage}{.5\linewidth}
+		\centering
+			\begin{tabular}{|c|c|}
+				\hline
+				\textbf{FPS} & \multicolumn{1}{l|}{\textbf{Divisor FPS}} \\ \hline
+				12           & 100 / 12 = 8                                         \\ \hline
+				24           & 100 / 24 = 4                                         \\ \hline
+				36           & 100 / 36 = 2                                         \\ \hline
+				48           & 100 / 48 = 2                                         \\ \hline
+				60           & 100 / 60 = 1                                         \\ \hline
+			\end{tabular}
+			\caption{Divisor FPS Frecuencia 100Hz}
+			\label{table:divisorFPS100Hz}
+	\end{minipage}%
+	\begin{minipage}{.5\linewidth}
+		\centering
+		\begin{tabular}{|c|c|}
+			\hline
+			\textbf{FPS} & \multicolumn{1}{l|}{\textbf{Divisor FPS}} \\ \hline
+				12           & 200 / 12 = 16                             \\ \hline
+				24           & 200 / 24 = 8                              \\ \hline
+				36           & 200 / 36 = 5                              \\ \hline
+				48           & 200 / 48 = 4                              \\ \hline
+				60           & 200 / 60 = 3                              \\ \hline
+		\end{tabular}
+		\caption{Divisor FPS Frecuencia 200Hz}
+		\label{table:divisorFPS200Hz}
+	\end{minipage}
+\end{table}
+
+\newpage
 \subsubsection{Orientación Sensores}
-Al momento de realizar la captura de información sensorial, junto con la obtención del ángulo de inclinación deben ser consideradas referenciado tales como:
+Al momento de realizar la captura de información sensorial, junto con la obtención del ángulo de inclinación deben ser consideradas los siguientes aspectos:
 \begin{itemize}
 	
 	\item \textbf{Referencia ejes del Sensores:} La obtención de información de aceleración y velocidad angular debe estar correctamente alineada con la referencia presente en los ejes del sensor, junto con la posición respecto al eje de gravedad de la tierra, para la correcta obtención de la información en base al movimiento ejercido por los sensores, y que estos sean descritos por los ejes que correspondan, para su posterior análisis o uso.
 	
-	\item \textbf{Posición en el Sujeto:} Junto con la referencia del sensor, se debe tomar en consideración en la posición que el prototipo o sistema final será puesta en el sujeto de estudio, ya que al cambiar la posición, las referencias internas del sensor dependen directamente de la posición, sino todo lo resultante va a cambiar, y con ello la información entregada comenzaría a describir el movimiento desde una perspectiva distinta a la planteada para los cálculos y estudio posterior.
+	\item \textbf{Posición en el Sujeto:} Junto con la referencia del sensor, se debe tomar en consideración  la posición que el prototipo fue ubicado en el sujeto de estudio.
 \end{itemize}
 
-Para dar solución a este inconveniente se incorporó en el software la opción de describir mediante la interfaz como será puesto el prototipo al momento de realizar las mediciones, usando un indicador de referencia clara, con el fin de no generar problemas para conocer la posición del sensor y facilitar al usuario final la tarea.
-Según la orientación del sensor se generan distintas conjugaciones de los ejes a utilizar tanto para el cálculo del ángulo, como en el uso de la velocidad angular para la aplicación del filtro (en caso de ser utilizado), éstos se configuraron estudiando los ejes que debían ser usados según la orientación junto con el sentido en que varía la información de Acelerómetro y giroscopio, para así realizar el cálculo final.
+Para dar solución a este inconveniente se incorporó en el software la opción de describir mediante la interfaz como será puesto el prototipo al momento de realizar las mediciones, usando un indicador de referencia clara, con el fin de no generar problemas para conocer la posición del sensor (ver Figura \ref{fig:referenciaDisp}) y facilitar al usuario final la tarea.
+Según la orientación del sensor se generan distintas conjugaciones de los ejes a utilizar tanto para el cálculo del ángulo, como en el uso de la velocidad angular para la aplicación del filtro (en caso de ser utilizado).
 
-\subsubsection{Comprensión de los algoritmos matemáticos involucrados}
-Para una correcta complementación y a la vez explicación el aprender y/o comprender el funcionamiento junto a las variables requeridas para una adecuada implementación, en este caso, principalmente en el Software.
+\subsubsection{Comunicación Arduino-PC}
+\begin{itemize}
+	\item \textbf{Data Terminal Ready:} Según el tipo de semiconductor del puerto USB de Arduino puede venir por defecto el Pin DTR (Data Terminal Ready) la función Reset de Arduino puede venir activada o desactivada. 
+	La función Reset de Arduino permite al microcontrolador reiniciar las variables internas según las configuraciones encontradas en el Setup del código de programación, para así eliminar cualquier cambio realizado en la ejecución del Loop,lo que es complicación al usar modelos de Arduino que tengan o no esta característica.
+	
+	Para solucionar este problema se realiza una estandarización activando por Software el Pin DTR para que sin importar el modelo de semiconductor operen todos de forma igual en el software, para así no preocuparse de configuraciones o errores producidos debido al PIN DTR.
 
-El estudio para la obtención del ángulo con sus distintos métodos, acelerómetro, giroscopio, filtro complementario y filtro de Kalman, y de los principios involucrados en cada uno de estos, además de la asociación de los elementos utilizados para cada uno.
-
-\subsubsection{Data Terminal Ready}
-Según el tipo de semiconductor del puerto USB de Arduino puede venir por defecto el Pin DTR (Data Terminal Ready) la función Reset de Arduino puede venir activada o desactivada. 
-La función Reset de Arduino permite al microcontrolador reiniciar las variables internas según las configuraciones encontradas en el Setup del código de programación, para así eliminar cualquier cambio realizado en la ejecución del Loop,lo que es complicación al usar modelos de Arduino que tengan o no esta característica.
-
-Para solucionar este problema se realiza una estandarización activando por Software el Pin DTR para que sin importar el modelo de semiconductor operen todos de forma igual en el software, para así no preocuparse de configuraciones o errores producidos debido al PIN DTR.
-
-\subsubsection{Latencia en Controlador FTDI}
-Por defecto el controlador del puerto USB FTDI para el Sistema Operativo Windows, en su configuración contenía una Latencia de 10 ms pre-configurada, lo que afecta considerablemente la captura de información sobre 100hz. El principal inconveniente que genero este error es la detección propia de éste, ya que al ser un error completamente aislado de los elementos que comúnmente son manipulados Arduino y Software, y a su vez es relativo a un modelo concreto de controlador de sistema y a su vez sistema operativo lo cual era de partida complejo de percibir y/o predecir.
-
-La solución fue a partir de la información de configuración FTDI\cite{FTDI} para configurar directamente  en el registro de Windows (regedit) en la dirección asociada al controlador el parámetro de latencia deseado (idealmente 0), para que éste sea lo más bajo posible.
+	\newpage
+	\item \textbf{Latencia en Controlador FTDI:} Por defecto el controlador del puerto USB FTDI para el Sistema Operativo Windows, en su configuración contenía una Latencia de 10 ms pre-configurada, lo que afecta considerablemente la captura de información sobre 100hz. 
+	
+	El principal inconveniente fue detectarlo, ya que al ser un problema completamente aislado de los elementos que comúnmente son manipulados Arduino y Software, y a su vez es relativo a un modelo concreto de controlador junto a un sistema operativo específico.
+	
+	La solución a partir de la información para configuración de FTDI\cite{FTDI}. Consistió en modificar directamente el registro de Windows (regedit) en la dirección asociada al controlador(driver) el parámetro de latencia (idealmente 0).
+\end{itemize}
 
 \subsubsection{Despliegue de Resultados}
-Una de las características del Software es entregar reportes para todas las variables obtenidas, véase datos de Desplazamiento, Ángulo, Aceleración y Velocidad Angular, por ende es una gran cantidad de información, junto con los gráficos asociados a esta, por ende existió un inconveniente inicial al intentar desplegar la información, el software tardaba provocando la sensación de no responder, siendo que se encontraba procesando.
+Una de las características del Software es entregar reportes para todas las variables obtenidas, (Desplazamiento, Ángulo, Aceleración y Velocidad Angular, Posición Angular). Esto representa una gran cantidad de información, junto con los gráficos asociados a esta. Un inconveniente inicial al intentar desplegar la información fue que el software tardaba en el desligue entorpeciendo la experiencia de usuario, mientras la información se procesaba.
 
 La solución a este inconveniente fue enviar cada nuevo dato a medida que era leído, esto permitió que al terminar la prueba ya se encontraran disponibles las tablas y gráficos de datos.
 
@@ -1203,33 +1262,31 @@ La solución a este inconveniente fue enviar cada nuevo dato a medida que era le
 \subsection{Conclusiones}
 Durante este trabajo de Tesis y partir de los resultados obtenidos, sus posteriores análisis e interpretación de los mismos, se pueden enunciar las siguientes como conclusiones más relevantes.
 \begin{itemize}
-	\item El principal objetivo de esta Tesis era generar un solución usando Acelerometría para el estudio del Balance, dicho esto, el principal aporte de este trabajo es demostrar como a partir de sensores inerciales, montados en una placa Arduino y controlados por el Ordenador, es posible replicar con un grado de similitud el estudio del Balance Clínico.
+	\item El principal objetivo de esta Tesis era generar un solución usando Sensor IMU para el estudio del Balance. El principal aporte de este trabajo es demostrar como a partir de sensores inerciales, montados en una placa Arduino y controlados por el Ordenador, es posible replicar con un grado de similitud el estudio del Balance Clínico.
 	
-	\item Unos de los objetivos era diseñar una solución de bajo coste comparado con el alto precio de los dispositivos actualmente utilizados principalmente en el Laboratorio, dicho esto si comparamos tan solo en concepto de materiales utilizados para el desarrollo del Dispositivo frente a por ejemplo la Plataforma de Fuerza Kistler, el costo del dispositivo implementado bordea el 0.1\% del valor de la plataforma, lo que supone una diferencia considerable.
+	\item Unos de los objetivos era diseñar una solución de bajo coste comparado con el alto precio de los dispositivos actualmente utilizados en el Laboratorio de Bio-mecánica. Si comparamos tan solo en concepto de materiales utilizados para el desarrollo del Dispositivo frente a por ejemplo la Plataforma de Fuerza Kistler, el costo del dispositivo implementado (Arduino+Cable+Sensor+Caja) bordea los 30 mil pesos, frente al valor de la plataforma que cuesta varios millones de pesos.
 			
-	\item La similitud en la información aunque de por si es alta de acuerdo los resultados de las pruebas realizadas, no es correcto dar por concluido el trabajo, esta Tesis es el punto de partida y/o complementa a las investigaciones y avances en materia de la Biomecánica Humana.
+	\item La similitud en la información entregada por nuestra solución respecto de la plataforma es alta, de acuerdo a las pruebas realizadas. Esta Tesis es el punto de partida y/o complementa a las investigaciones y avances en materia de la Biomecánica Humana, donde se hace necesario una adecuada estandarización en el estudio de Balance mediante IMU.
 	
-	\item Los instrumentos encontrados en el laboratorio de Biomecánica en la Facultad de Kinesiología disponen de softwares con opciones bastantes limitadas, el desarrollar un software que permite una amplia gama de opciones abre un abanico de posibilidades para tanto estudiantes como investigadores.
+	\item Los instrumentos encontrados en el laboratorio de Biomecánica en la Facultad de Salud disponen de softwares con opciones bastantes limitadas. Al desarrollar un software que permite una amplia gama de opciones abre un abanico de posibilidades tanto para estudiantes como investigadores.
 	
-	\item Todos los sistemas diseñados fueron implementados en C++, tienen un tiempo de procesado muy corto, junto con una utilización de la maquina bajo en comparación a otros Lenguajes de programación, fue probado satisfactoriamente en los equipos del Laboratorio de Biomecánica.
+	\item Todos los sistemas diseñados fueron implementados en C++, lo que garantiza un tiempo de procesado muy corto, junto con una utilización de la máquina bajo en comparación a otros Lenguajes de programación de más alto nivel (Python, Octave), fue probado satisfactoriamente en los equipos del Laboratorio de Biomecánica.
 \end{itemize} 
 
 \newpage
 \subsection{Trabajos Futuros}
-El trabajo futuro principalmente es la correcta implementación para que sea de gran utilidad para que continúe el desarrollo e investigación utilizando esta nueva propuesta.
-
 Este trabajo es tan solo una base y puede ser mejorado de las siguientes formas.
 
 \begin{itemize}
-	\item Uno de los principales trabajos futuros consiste en la validación de la solución como un instrumento para el estudio del Balance, ante el organismo encargado, es decir, demostrar que cumple al 100\% con los estándares exigidos, lo cual no es un tema menor, falta más refinamiento con el objetivo de aumentar la confiabilidad tanto en el algoritmos, como diseño del empaquetado de la propuesta para que pueda convertirse en un producto comercializable.
+	\item Uno de los principales trabajos futuros consiste en la validación de la solución como un instrumento para el estudio del Balance. Además generar diseño de empaquetado de la propuesta para que pueda convertirse en un producto comercializable.
 	
 	\item La ubicación de dispositivo no era lo más sencillo, pese que existía gran versatilidad, el automatizar la orientación del sensor para facilitar la ubicación del dispositivo, y este se ajuste automáticamente, puede ser mediante la inclusión de sensores con orientación magnética y/o algoritmos con las referencias según la gravedad o inclinación detectada en cada eje.
 	
 	\item Eliminar la necesidad de utilizar cables, añadir una interfaz de comunicación inalámbrica, junto a una batería para la alimentación, junto con esto podría existir la opción de migrar el Software a plataformas móviles, para la utilización desde Smartphones o Tablets.
 	
-	\item Mejorar los algoritmos con puestas a puntos más precisas y estudios aun más detallados para asegurar la eficiencia de estos, a su vez mejorar el hardware, sensores para aumentar la precisión en la obtención de información.
+	\item Mejorar los algoritmos con puestas a puntos más precisas (calibraciones, mejoras, etc) y estudios aun más detallados para asegurar la eficiencia de estos, a su vez mejorar el hardware, sensores para aumentar la precisión en la obtención de información.
 	
-	\item Arduino al ser una de las soluciones de Microcontroladores de más bajo coste es una buena opción, pero como la tecnología se encuentra siempre en evolución entregando propuestas cada vez más atractivas, el desplegar la idea en un sistema que incluya tanto los sensores como el procesamiento y Sofware de análisis en un dispositivo de pequeño tamaño, listo para conectar y extraer la información, sería un gran valor agregado.
+	\item Arduino es una solución de Microcontroladora de más bajo coste, pero como la tecnología se encuentra siempre en evolución entregando propuestas cada vez más atractivas, considerar desplegar el sistema tanto sensores como el procesamiento y Sofware de análisis en un dispositivo de pequeño tamaño y de bajo coste, listo para conectar y extraer la información, sería de gran valor agregado.
 	
 \end{itemize}
 
