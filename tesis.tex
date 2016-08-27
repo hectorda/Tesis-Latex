@@ -316,8 +316,8 @@ Corresponde al estudio del Centro de Presión (COP) para determinar deficiencias
 
 Existen estándares respecto a las características necesarias para la medición del COP \cite{scoppa_clinical_2013}.
 
-Varias declaraciones sobre la cuestión sigue siendo objeto de debate de la normalización estabilometría fueron acordados por el ISPGR (International Society for Posture and Gait Research).
-Se definió un conjunto de características metrológicas para las plataformas estabilométricas.
+Las declaraciones son objeto de debate sobre la normalización de estabilometría acordados por el ISPGR (International Society for Posture and Gait Research).
+Fueron definidas un conjunto de características metrológicas para las plataformas estabilométricas.
 Basándose tanto en la práctica y verificación experimental se acordó que, para obtener una apropiada precisión y sensibilidad:
 \begin{itemize}
 	\item El intervalo de adquisición no debe ser inferior a 25s.
@@ -919,6 +919,7 @@ Esto es realizado con el fin de establecer el valor de opciones consideradas má
 \end{figure}
 
 \newpage
+\subsubsection{Selección de Tipos de Pruebas}
 Al momento de iniciar la aplicación si es que son detectados dispositivos en el puerto Serial se lanza la interfaz principal (ver Figura \ref{fig:mainwindow}), en donde se elige un paciente y la prueba a realizar.
 
 \begin{figure}[H]
@@ -931,11 +932,17 @@ Al momento de iniciar la aplicación si es que son detectados dispositivos en el
 Luego de seleccionada la prueba, según el tipo elegida se permite configurar ciertos elementos.
 Las pruebas incluidas son las siguientes:
 \begin{itemize}
-	\item \textbf{Romberg Modificado:} 
-	\item \textbf{Prueba Base:}
-	\item \textbf{Modo Libre:}
-	\item \textbf{Análisis en Tiempo A-P M-L:}
+	\item \textbf{Romberg Modificado:} La prueba consiste en 8 objetivos ubicados en una circunferencia junto con uno ubicado en el centro.
+	La forma de completar esta prueba es marcando un objetivo de la circunferencia y volviendo al centro.
+	\item \textbf{Prueba Base:} La prueba consiste en 4 objetivos ubicados en una circunferencia junto con uno ubicado en el centro.
+	Para completar esta prueba se deben marcar todos los objetivos de la circunferencia y volviendo al centro luego de marcar cada uno.
+	\item \textbf{Modo Libre:} Se permite configurar todos los parámetros para realizar pruebas personalizadas (ver Figura \ref{fig:configurarPrueba}), tales como: ubicación objetivos(aleatorio y circunferencia), forma de marcado, etc.
+	\item \textbf{Análisis en Tiempo A-P M-L:} Permite representar en un gráfico tiempo vs una de las 2 variables utilizadas, con el fin que se estime conveniente.
 \end{itemize}
+
+\subsubsection{Ventana de Configuración Prueba}
+Antes de comenzar a registrar la información proveniente de los sensores, se ajustan los parámetros de la prueba a realizar.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.6]{images/configurarPrueba}
@@ -1016,7 +1023,7 @@ El objetivo en las pruebas era medir principalmente la variación Antero-Posteri
 
 El paciente tenía una estatura de 1.78 cm, el dispositivo en todas las pruebas fue ubicado a una altura de 97.6 cm, el aproximado del 55\%.
 Los registros en la plataforma Kistler fueron tomados a una frecuencia de 100hz y para el dispositivo a 200hz. 
-Para la sincronización temporal fue utilizada la correlación cruzada, con la cual se obtiene el retraso(lag) entre las señales, para posteriormente sincronizarlas, y para ello fue necesario sub-muestrear los datos del dispositivo (decimate en octave) a 100hz.
+Para la sincronización temporal fue utilizada la correlación cruzada \cite{correlacionCruzada}, con la cual se obtiene el retraso(lag) entre las señales, para posteriormente sincronizarlas, y para ello fue necesario sub-muestrear los datos del dispositivo (decimate en octave) a 100hz.
 
 El dispositivo fue evaluado en 3 posiciones:
 \begin{enumerate}
@@ -1131,7 +1138,7 @@ Sin más que acotar a continuación se encuentra la definición de todas las ecu
 		\begin{align} 
 		Rango:	R^{*}&=Max(S_{K}^{*})-Min(S_{K}^{*})\\
 		Diferencia:	\Delta^{*}&=S_{K}^{*}-S_{D}^{*}\\
-		\textrm{Coeficiente Correlacion}: r&=Cov\\
+		\textrm{Coeficiente Correlacion}: \rho_{K^{*},D^{*}}&=\frac{\sigma_{K^{*}D^{*}}}{\sigma_{K^{*}}\sigma_{D^{*}}}\\
 		\textrm{Error medio porcentual}:	Error^{*}&=\left( \frac{\sum\limits_{i=1}^{n}|\Delta^{*}|}{n} \right)*\frac{100}{R^{*}} \\
 		\textrm{Mínima diferencia porcentual}:	Min\Delta^{*}&=Min(\Delta^{*})*\frac{100}{R^{*}}\\
 		\textrm{Máxima diferencia porcentual}:	Max\Delta^{*}&=Max(\Delta^{*})*\frac{100}{R^{*}}
