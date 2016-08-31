@@ -790,21 +790,51 @@ Debe ser considerado el \textit{nuevoAngulo} entregado mediante el acelerómetro
 \subsubsection{Comparativa de Métodos}
 Luego de la integración de los filtros en el Software es posible utilizar el deseado para la prueba, pero se deben tener en consideración las ventajas de usar los filtros implementados. A continuación se realizó una breve comparativa para ver el comportamiento entre el cálculo del ángulo sin utilizar filtros, usando filtro complementario y Kalman para la obtención durante la misma prueba.
 
+\newpage 
+Para comparar la precisión de los métodos, se realizo una prueba controlada, midiendo el angulo con un inclinómetro analógico. La prueba consistió en mantener un ángulo determinados segundos, para luego cambiar a otro.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.75]{images/angKalCom}
+	\includegraphics[scale=0.4]{images/angKalCom}
 	\caption{Comparativa Angulo Acelerómetro vs Filtro Kalman vs Filtro Complementario}
 	\label{fig:AnguloXvsFiltros}
 \end{figure}
 
-Pese a primera vista que la gráfica ver Figura (\ref{fig:AnguloXvsFiltros}) demuestra la gran corrección que realizan los filtros frente a el cálculo sin estos, los análisis que pueden ser concluidos respecto al cálculo del ángulo:
+La Figura \ref{fig:AnguloXvsFiltros} demuestra la gran corrección que realizan los filtros, eliminando el ruido producido de los pequeños cambios de aceleración.
 \begin{itemize}
-	\item \textbf{Cálculo del ángulo sin usar filtros:} la diferencia entre los filtros vs el Cálculo sin el uso de estos es significativa, en especial respecto al ruido apreciable que es reducido en gran medida por la incorporación de algún filtro.
-	\item \textbf{Aplicando filtros:} el uso del filtro mejora considerablemente el ruido obtenido, pero a su vez si son comparados ambos filtros disponibles, estos tienen un comportamiento similar, sin entrar en estudios complejos acerca de cual es más óptimo, es completamente a criterio del usuario el filtro que aplicará.
-	Para efectos de análisis posteriores se utilizará el filtro de Kalman.
+	\item \textbf{Cálculo del ángulo sin usar filtros:} En el gráfico (Figura \ref{fig:AnguloXvsFiltros}) se aprecia el nivel de ruido al usar solo el acelerómetro para calculo del ángulo. Al mantener un ángulo específico este se encuentra en constante variación.
+	\item \textbf{Aplicando filtros:} El uso del filtro mejora considerablemente el nivel de ruido, pero a su vez si son comparados ambos filtros disponibles (Kalman y Complementario), estos tienen un comportamiento similar, sin entrar en estudios complejos acerca de cual es más óptimo, es completamente a criterio del usuario el filtro aplicado.
 \end{itemize}
+Nota: Para efectos de análisis posteriores se utilizará el filtro de Kalman.
 
+\newpage
+\subsubsection{Ángulo Calculado vs Ángulo Esperado}
+El ángulo entregado por el dispositivo es afectado por cualquier tipo de inclinación, el propio IMU o la caja contenedora pueden estar inclinados un par de grados en algún sentido. Realizando una prueba con un inclinómetro analógico es posible comparar cuan fiable es el ángulo entregado por el dispositivo.
+Para propósitos de prueba se ubicara el dispositivo en  4 ángulos distintos, midiendo con ambos instrumentos, para luego contrastarlos.
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{images/inclinometroVsDispositivo}
+	\caption{Comparativa Ángulo Dispositivo vs Inclinómetro Analógico}
+	\label{fig:inclinometroVsDispositivo}
+\end{figure}
 
+\begin{table}[H]
+	\centering
+		\begin{tabular}{|c|c|c|}
+			\hline
+			\textbf{Inclinómetro Análogo (Ángulo)} & \multicolumn{1}{l|}{\textbf{Dispositivo (Ángulo Promedio)}} & Ángulo Diferencia(Disp-Inc) \\ \hline
+			1                                      & 4.8362                                                      & 3.8362                     \\ \hline
+			3                                      & 6.8912                                                      & 3.8912                     \\ \hline
+			5                                      & 8.5621                                                      & 3.5621                     \\ \hline
+			7                                      & 10.618                                                      & 3.618                      \\ \hline
+			5                                      & 8.3565                                                      & 3.3565                     \\ \hline
+			3                                      & 6.3586                                                      & 3.3586                     \\ \hline
+			1                                      & 4.3499                                                      & 3.3499                     \\ \hline
+		\end{tabular}
+		\caption{Comparativa Diferencias}
+		\label{table:inclinometroVsDispositivo}
+\end{table}
+Como muestran la Figura \ref{fig:inclinometroVsDispositivo} y la Tabla \ref{table:inclinometroVsDispositivo} el dispositivo se encuentra con unos grados mas que el incinómetro, que a la vez son en su mayoría constantes.
+\newpage
 \subsection{Cálculo del Desplazamiento del Centro de Masa en el plano}
 
 Basado en la premisa que la posición bípeda-quieta puede ser representada como un péndulo invertido\cite{gage_kinematic_2004}, entonces el movimiento pendular de un sujeto en las coordenadas antero-posterior y medio-lateral puede ser obtenida a partir de relaciones geométricas(trigonometría), con ello obtener el desplazamiento.
