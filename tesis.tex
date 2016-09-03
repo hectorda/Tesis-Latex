@@ -184,8 +184,6 @@
 \let\stdsection\section
 \renewcommand\section{\newpage\stdsection}
 
-
-
 \section{Introducción}
 La comprensión de las dinámicas y patrones de movimiento humano, se facilitan enormemente con el apoyo de tecnologías adecuadas, que permitan medir, registrar y analizar variables cinemáticas. Particularmente, el estudio del movimiento humano (Kinesiología) depende hoy en día de las facilidades tecnológicas que ofrece la electrónica (sensores, microcontroladores, sistema de adquisición de señales) y las ciencias de la computación (procesamiento, análisis y posterior reporte adecuado de  variables cinemáticas y cinéticas).  
 
@@ -227,10 +225,10 @@ Finalmente son expuestos los resultados, junto con las conclusiones más relevan
 Más de un tercio de la población mayor de 65 años presenta algunos problemas con el balance o deambulación. Los pacientes con trastornos neurológicos o musculo-esqueléticos son aún más propensos a tener problemas de equilibrio que afectan a su movilidad. La complejidad del control del equilibrio es resultado  de muchos tipos de problemas diferentes con evaluaciones clínicas sistemática específicas para prescribir un tratamiento eficaz.
 El control del equilibrio es complejo e implica el mantenimiento de posturas \cite{mancini_relevance_2010}, mantener el movimiento y recuperar el equilibrio. El control de balance consiste en controlar el centro de masa del cuerpo entre los límites de estabilidad. Las evaluaciones clínicas del equilibrio pueden ayudar a evaluar el riesgo de caídas y/o determinar las causas de los trastornos del equilibrio subyacente.
 
-La mayoría de las escalas de valoración del equilibrio funcional evalúan el riesgo de caída y la necesidad de rehabilitación, pero no es diferenciado cada uno de los tipos de déficits del balance. Un enfoque de sistema para la evaluación clínica puede diferenciar diferentes tipos de trastornos del equilibrio y un enfoque fisiológico puede determinar los mecanismos subyacentes sensoriomotoras asociados al trastorno del equilibrio. Las medidas objetivas de equilibrio valiéndose de medios informáticos y sensores inercialess pueden traer más precisión, exactitud y sensibilidad que las pruebas de equilibrio clínicas\cite{chaudhry_measurement_2011}.
+La mayoría de las escalas de valoración del equilibrio funcional evalúan el riesgo de caída y la necesidad de rehabilitación, pero no es diferenciado cada uno de los tipos de déficits del balance. Un enfoque de sistema para la evaluación clínica puede diferenciar diferentes tipos de trastornos del equilibrio y un enfoque fisiológico puede determinar los mecanismos subyacentes sensorio-motoras asociados al trastorno del equilibrio. Las medidas objetivas de equilibrio valiéndose de medios informáticos y sensores inerciales pueden traer más precisión, exactitud y sensibilidad que las pruebas de equilibrio clínicas\cite{chaudhry_measurement_2011}.
 
 \subsection{Estudio del Balance usando Sensores}
-Recientemente, los sensores de movimiento ``weareables'' se han desarrollado para la robótica, industria aeroespacial y en las mediciones biomédicas se han utilizado para medir el control del balance\cite{mancini_relevance_2010}. Estos sensores, con transferencia inalámbrica de datos , tienen el potencial de superar los principales inconvenientes de coste, tamaño y ubicación limitado de las pruebas computarizadas , así como permitir la medición objetiva de la oscilación postural y movimientos durante la ejecución de tareas.
+Recientemente, los sensores de movimiento ``weareables'' se han desarrollado para la robótica, industria aeroespacial y en las mediciones biomédicas se han utilizado para medir el control del balance\cite{mancini_relevance_2010}. Estos sensores, con transferencia inalámbrica de datos, tienen el potencial de superar los principales inconvenientes de coste, tamaño y ubicación limitado de las pruebas computarizadas , así como permitir la medición objetiva de la oscilación postural y movimientos durante la ejecución de tareas.
 
 Los acelerómetros y/o giroscopios han sido exitosamente utilizados \cite{mancini_relevance_2010} para el seguimiento de movimiento,  detección de caídas, y para la medición de control del balance. En el ámbito de dispositivos ``Weareables" se han usado para medir los movimientos tanto de pierna, brazo y torso.
 
@@ -401,7 +399,7 @@ El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\r
 	
 	\item \textbf{Variables:} Las variables entregadas por el Acelerómetro consiste en la aceleración lineal percibida en cada eje expresada en veces de g, y en el Giroscopio corresponde  a la velocidad angular dada por la variación de los grados en un instante de tiempo al girar sobre cada eje.
 	
-	\item \textbf{Frecuencia de Muestreo:} Nos describe la cantidad de datos que pueden ser obtenidos en un intervalo de tiempo, a su vez nos describe la diferencia de tiempo entre cada dato obtenido.
+	\item \textbf{Frecuencia de Muestreo:} Nos describe la cantidad de datos que pueden ser obtenidos en un intervalo de tiempo, a su vez nos describe la diferencia entre cada dato obtenido.
 	
 	\item \textbf{Resolución:} Consiste en la mínima variación generada en la variable medida y la cual los sensores son capaces de informar.
 	
@@ -528,7 +526,7 @@ El entorno de desarrollo (IDE) del framework de C++ Qt  es Qt Creator en donde s
 
 \section{Desarrollo}
 \subsection{Introducción}
-En este capítulo se describe la solucion y su respectivo desarrollo.
+En este capítulo se describe la solución y su respectivo desarrollo.
 El sistema consta principalmente en un microcontrolador Arduino, un sensor inercial y un software que permite el registro de variables cinemáticas y Bio-realimentación (registro en tiempo real y representación visual) de la posición Ver Figura (\ref{fig:diagramasistema}).
 
 \begin{figure}[H]
@@ -545,10 +543,10 @@ En lo referente a hardware se utilizó un sensor inercial MPU6050, el cual es ub
 
 \subsection{Programación del Microcontrolador}
 Uno de los primeros pasos en el desarrollo de la solución consiste en utilizar el IDE de Arduino para realizar la programación inicial del microcontrolador. La conexión del sensor MPU6050 permite la configuración y uso del sensor.
-En la configuración se definen ciertos registros, además de precisar el formato de envío para despliegue de la informacion proveniente del sensor, consta de una línea con 6 datos separados por espacios.
+En la configuración se definen ciertos registros, además de precisar el formato de envío para despliegue de la información proveniente del sensor, consta de una línea con 6 datos separados por espacios.
 
 La programación del microcontrolador se describe en la figura(\ref{fig:arduinocode}).
-En el ciclo de ejecución de Arduino se requiere la configuración del sensor MPU6050. La configuración consta de 4 parámetros fundatemtanes: Frecuencia de Muestreo, Filtro pasa bajo, rango Acelerómetro, rango Giroscopio. Posteriormente comienza el envío de la información al software (PC) via Serial.
+En el ciclo de ejecución de Arduino se requiere la configuración del sensor MPU6050. La configuración consta de 4 parámetros fundamentales: Frecuencia de Muestreo, Filtro pasa bajo, rango Acelerómetro, rango Giroscopio. Posteriormente comienza el envío de la información al software (PC) via Serial.
 
 \begin{figure}[H]
 	\centering
@@ -578,18 +576,8 @@ Finalizada la configuración se procede a la lectura de los registros para obten
 \end{itemize}
 
 \newpage
-\subsection{Resumen de Características}
-\begin{itemize}
-	\item \textbf{Configurable:} El software permite configurar la mayoría de opciones que poseer el sensor MPU6050, puerto serial a utilizar, rangos para captura de información del movimiento, así como cantidad de datos que se representaran en pantalla, tamaños de los elementos a graficar, tiempos de prueba, limitar geométricamente el gráfico, entre otros.
-	\item \textbf{Reportes:} Cada uno de los gráficos despliegan las medidas tomadas o presentan los resultados del ejercicio, estos pueden ser exportados, tanto como un conjunto de datos, o también generar una imagen de estos.
-	\item \textbf{Herramientas de Análisis Gráficas:} Ventanas desplegables acompañadas a un gráfico que permiten de forma interactiva seleccionar partes del gráfico, para analizar intervalos según se estime conveniente y a su vez obtener de él datos como, los valores máximos y mínimos, la media, desviación estándar de los datos, y en el caso del desplazamiento obtener la velocidad media del intervalo analizado.
-	\item \textbf{Persistencia de datos:} Usando un pequeño almacén de datos en SQlite, es posible mantener un registro con la información de los pacientes, con el fin de tenerlos almacenados para el momento en que sea realizada cada una de las pruebas seleccionarlos sin la necesidad de re-ingresarlos en cada momento.
-	\item \textbf{Geometría Analítica} Se usó bastante la geometría analítica, para la generación y representación gráfica tanto de los objetivos en las pruebas, como para la intersección del movimiento realizado con cada uno de estos. De igual manera se utiliza la trigonometría para limitar el área del movimiento según el radio que sea definido para el examen.
-\end{itemize}
-
-\newpage
 \subsection{Registro de variables cinemáticas}
-El ángulo de inclinación modelo pendulo invertido\cite{gage_kinematic_2004} es la variable fundamental de este sistema.
+El ángulo de inclinación modelo péndulo invertido\cite{gage_kinematic_2004} es la variable fundamental de este sistema.
 Para efectos de análisis o representación final, a partir de las variaciones de aceleración lineal y velocidad angular detectadas por los sensores se realiza el cálculo del ángulo, que para efectos de pruebas es un indicador equivalente a la inclinación que ha realizado el sujeto.
 
 \subsubsection{Referencia Dispositivo y Sensor}
@@ -808,32 +796,116 @@ Nota: Para efectos de análisis posteriores se utilizará el filtro de Kalman.
 
 \newpage
 \subsubsection{Ángulo Calculado vs Ángulo Esperado}
-El ángulo entregado por el dispositivo es afectado por cualquier tipo de inclinación, el propio IMU o la caja contenedora pueden estar inclinados un par de grados en algún sentido. Realizando una prueba con un inclinómetro analógico es posible comparar cuan fiable es el ángulo entregado por el dispositivo.
-Para propósitos de prueba se ubicara el dispositivo en  4 ángulos distintos, midiendo con ambos instrumentos, para luego contrastarlos.
+El ángulo entregado por el dispositivo puede ser afectado por cualquier tipo de inclinación. Esta inclinación puede ser propia del IMU o la caja contenedora.  Por ello es importante utilizar algún método para contrastar.
+
+
+La metodología de prueba consistirá en ubicar el dispositivo en 4 ángulos distintos, midiendo con ambos instrumentos (Dispositivo y Inclinómetro Analógico).
+
+
+Para contraste se realizaron 2 tipos de pruebas, en ambos tipos de pruebas se comenzará desde el angulo mas pequeño hasta llegar al mayor, para luego retroceder hasta el ángulo mas pequeño. El objetivo además de comparar la exactitud del ángulo escogido es analizar si existe una diferencia significativa al volver a los ángulos iniciales.
+
+\begin{itemize}
+	\item \textbf{Ángulos pequeños: }1, 3, 5, 7.
+	\item \textbf{Ángulos grandes: }1, 20, 40, 45.
+\end{itemize}
+
+
+
+\subsubsection{Ángulo Calculado vs Ángulo Esperado Antero-Posterior}
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.3]{images/inclinometroVsDispositivo}
-	\caption{Comparativa Ángulo Dispositivo vs Inclinómetro Analógico}
-	\label{fig:inclinometroVsDispositivo}
+	\includegraphics[scale=0.4]{images/pruebas/Inclinometro/AnteroPosteriorB}
+	\caption{Comparativa diferencia ángulos pequeños Antero-Posterior}
+	\label{fig:inclinometroVsDispositivoAP}
+\end{figure}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{Inclinómetro Análogo (Ángulo)} & \multicolumn{1}{l|}{\textbf{Dispositivo (Ángulo Promedio)}} & Diferencia 				\\ \hline
+		1                                      & 7.8585                                                      & 6.8585                     \\ \hline
+		3                                      & 9.9950                                                      & 6.9950                    \\ \hline
+		5                                      & 11.918                                                      & 6.918                     \\ \hline
+		7                                      & 13.970                                                      & 6.970                     \\ \hline
+		5                                      & 11.826                                                      & 6.826                      \\ \hline
+		3                                      & 9.6687                                                      & 6.6687                     \\ \hline
+		1                                      & 7.2764                                                      & 6.2764                     \\ \hline
+	\end{tabular}
+	\caption{Comparativa diferencia ángulos pequeños Antero-Posterior}
+	\label{table:inclinometroVsDispositivoAP}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{Inclinómetro Análogo (Ángulo)} & \multicolumn{1}{l|}{\textbf{Dispositivo (Ángulo Promedio)}} & Diferencia 				\\ \hline
+		1                                      & 7.9199                                                      & 6.9199                     \\ \hline
+		20                                      & 26.092                                                      & 6.092                    \\ \hline
+		40                                      & 42.296                                                      & 2.296                     \\ \hline
+		45                                      & 46.731                                                      & 1.731                     \\ \hline
+		40                                      & 42.694                                                      & 2.694                      \\ \hline
+		20                                      & 25.042                                                      & 5.042                     \\ \hline
+		1                                      & 6.8771                                                      & 5.8771                     \\ \hline
+	\end{tabular}
+	\caption{Comparativa diferencia ángulos grandes Antero-Posterior}
+	\label{table:inclinometroVsDispositivoAPD}
+\end{table}
+
+Como muestran la Figura \ref{fig:inclinometroVsDispositivoAP} y la Tabla \ref{table:inclinometroVsDispositivoAP} para los ángulos pequeños existe una diferencia de 6 grados para todos los casos.
+Lo que nos da a entender que el dispositivo se encuentra inclinado en 6 grados.
+
+Si analizamos los angulos grandes y las diferencias expuestas en la Tabla \ref{table:inclinometroVsDispositivoAPD} para estos ángulos la diferencia disminuye al aumentar el ángulo medido.
+
+\subsubsection{Ángulo Calculado vs Ángulo Esperado Medio-Lateral}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.4]{images/pruebas/Inclinometro/medioLateralB}
+	\caption{Comparativa diferencia ángulos pequeños Medio-Lateral}
+	\label{fig:inclinometroVsDispositivoML}
 \end{figure}
 
 \begin{table}[H]
 	\centering
 		\begin{tabular}{|c|c|c|}
 			\hline
-			\textbf{Inclinómetro Análogo (Ángulo)} & \multicolumn{1}{l|}{\textbf{Dispositivo (Ángulo Promedio)}} & Ángulo Diferencia(Disp-Inc) \\ \hline
-			1                                      & 4.8362                                                      & 3.8362                     \\ \hline
+			\textbf{Inclinómetro Análogo (Ángulo)} & \multicolumn{1}{l|}{\textbf{Dispositivo (Ángulo Promedio)}} & Diferencia				 \\ \hline
+			1                                      & 4.8264                                                      & 3.8264                     \\ \hline
 			3                                      & 6.8912                                                      & 3.8912                     \\ \hline
 			5                                      & 8.5621                                                      & 3.5621                     \\ \hline
 			7                                      & 10.618                                                      & 3.618                      \\ \hline
 			5                                      & 8.3565                                                      & 3.3565                     \\ \hline
 			3                                      & 6.3586                                                      & 3.3586                     \\ \hline
-			1                                      & 4.3499                                                      & 3.3499                     \\ \hline
+			1                                      & 4.3344                                                      & 3.3344                     \\ \hline
 		\end{tabular}
-		\caption{Comparativa Diferencias}
-		\label{table:inclinometroVsDispositivo}
+		\caption{Comparativa diferencia ángulos pequeños Medio-Lateral}
+		\label{table:inclinometroVsDispositivoML}
 \end{table}
-Como muestran la Figura \ref{fig:inclinometroVsDispositivo} y la Tabla \ref{table:inclinometroVsDispositivo} el dispositivo se encuentra con unos grados mas que el incinómetro, que a la vez son en su mayoría constantes.
+
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{Inclinómetro Análogo (Ángulo)} & \multicolumn{1}{l|}{\textbf{Dispositivo (Ángulo Promedio)}} & Diferencia				 \\ \hline
+		1                                      & 3.5983                                                      & 2.5983                     \\ \hline
+		20                                     & 22.313                                                      & 2.313                     \\ \hline
+		40                                     & 40.628                                                      & 0.628                    \\ \hline
+		45                                     & 46.034                                                      & 1.034                      \\ \hline
+		40                                     & 40.589                                                      & 0.589                     \\ \hline
+		20                                     & 21.933                                                      & 1.933                      \\ \hline
+		1                                      & 2.5951                                                      & 1.5951                    \\ \hline
+	\end{tabular}
+	\caption{Comparativa diferencia ángulos grandes Medio-Lateral}
+	\label{table:inclinometroVsDispositivoMLD}
+\end{table}
+
+En la Figura \ref{fig:inclinometroVsDispositivoML} y la Tabla \ref{table:inclinometroVsDispositivoML} el dispositivo se encuentra con unos grados mas que el inclinómetro, que a la vez son en su mayoría constantes dentro del rango de entre 3 y 4 grados de diferencia entre ambos instrumentos.
+
+Para la Tabla \ref{table:inclinometroVsDispositivoMLD} de ángulos grandes, la diferencia mayor es de almenos 2.5 grados.
+ 
 \newpage
 \subsection{Cálculo del Desplazamiento del Centro de Masa en el plano}
 
@@ -926,6 +998,18 @@ Dicho esto de ahora en adelante cuando sea realizado el cálculo del desplazamie
 
 \newpage
 \subsection{Desarrollo de Software}
+\subsubsection{Resumen de Funcionalidades}
+\begin{itemize}
+	\item \textbf{Representación en Tiempo Real:} El software permite representar el tanto el desplazamiento como el ángulo aproximado del COM.
+	Junto con representar se permite la interacción con objetivos a marcar, situados según el tipo de prueba escogida o configurada.
+	\item \textbf{Configurable:} El software permite configurar la mayoría de opciones que poseer el sensor MPU6050, puerto serial a utilizar, rangos para captura de información del movimiento, así como cantidad de datos que se representaran en pantalla, tamaños de los elementos a graficar, tiempos de prueba, limitar geométricamente el gráfico, etc.
+	\item \textbf{Reportes:} Cada uno de los gráficos despliegan las medidas tomadas o presentan los resultados del ejercicio, estos pueden ser exportados, tanto como un conjunto de datos, o también generar una imagen de estos.
+	\item \textbf{Herramientas de Análisis Gráficas:} Ventanas desplegables acompañadas a un gráfico que permiten de forma interactiva seleccionar partes del gráfico, para analizar intervalos según se estime conveniente y a su vez obtener de él datos como, los valores máximos y mínimos, la media, desviación estándar de los datos, y en el caso del desplazamiento obtener la velocidad media del intervalo analizado.
+	\item \textbf{Persistencia de datos:} Usando un pequeño almacén de datos en SQlite, es posible mantener un registro con la información de los pacientes, con el fin de tenerlos almacenados para el momento en que sea realizada cada una de las pruebas seleccionarlos sin la necesidad de re-ingresarlos en cada momento.
+	\item \textbf{Geometría Analítica} Se usó bastante la geometría analítica, para la generación y representación gráfica tanto de los objetivos en las pruebas, como para la intersección del movimiento realizado con cada uno de estos. De igual manera se utiliza la trigonometría para limitar el área del movimiento según el radio que sea definido para el examen.
+\end{itemize}
+\newpage
+\subsubsection{Interacción Software-Microcontrolador}
 Un parte importante del sistema es la interfaz que permite al usuario interactuar con el micro-controlador-sensor, tomar registros, almacenarlos, etc.
 Se implementó utilizando en Framework QT(C++)\cite{QT} en su versión Open-Source.
 Al estar basado en C++ en estabilidad y rendimiento es una de las mejores opciones a tener en consideración.
@@ -1010,20 +1094,28 @@ La ventada de configuración (Figura \ref{fig:configurarPrueba}) considera los s
 Nota: Algunos ajustes pueden interferir en el funcionamiento de otros, por ejemplo si es seleccionada la opción de Detener al marcar todos, pese a que el tiempo sea infinito la prueba terminará si se cumple la condición.
 
 \newpage
+\subsubsection{Gráficos y Reportes}
 Luego de realizar la configuración y presionando el botón Iniciar Prueba, se procede a desplegar la información obtenida, en forma de gráficos.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.76]{images/graficoPrincipal}
-	\caption{Gráfico de Prueba}
+	\includegraphics[scale=0.76]{images/graficosyreportes/graficoPrincipal}
+	\caption{Gráfico de ejecución Prueba}
 	\label{fig:graficoPrincipal}
 \end{figure}
 
+El sistema permite escoger y exportar tanto los gráficos o series de datos obtenidos durante la prueba. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{images/graficosyreportes/graficos}
+	\caption{Interfaz Principal Exportar y Seleccionar Gráfico}
+	\label{fig:exportargrafico}
+\end{figure}
 El sistema permite el registro y visualización de los datos crudos (sin procesar) provenientes de los sensores, los cuales pueden ser visualizados y exportados.
 
 \begin{figure}[H]
 	\centering
-	\frame{\includegraphics[scale=0.3]{images/graficosensores}}
+	\frame{\includegraphics[scale=0.3]{images/graficosyreportes/graficosensores}}
 	\caption{Gráficos de los sensores}
 	\label{fig:Graficosensores}
 \end{figure}
@@ -1033,7 +1125,7 @@ Finalmente para el análisis de la información se dispone de herramientas intui
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.3]{images/analisisGraficos}
+	\includegraphics[scale=0.3]{images/graficosyreportes/analisisGraficos}
 	\caption{Ejemplo Herramienta de Análisis}
 	\label{fig:analsisGraficos}
 \end{figure}
@@ -1117,7 +1209,7 @@ El dispositivo fue evaluado en 3 posiciones:
 	
 \newpage
 \subsubsection{Prueba Frontal}
-El procedimiento fue similar a las anteriores descritas, tan solo que en la mitad de la prueba se comenzo a generar variaciones medio-laterales por el sujeto de pruebas, con el fin de registrar una mayor variación en los registros.
+El procedimiento fue similar a las anteriores descritas, tan solo que en la mitad del ensayo el sujeto comenzó a generar además variaciones medio-laterales, con el fin de registrar una mayor variación en los registros.
 
 Los resultados obtenidos son los siguientes:
 	
@@ -1205,19 +1297,16 @@ Sin más que acotar a continuación se encuentra la definición de todas las ecu
 \end{table}	
 
 \subsubsection{Discusión de Resultados}
-Al tener el conjunto de resultados resumidos en una tabla con datos concretos, es posible realizar la comparación, para determinar la precisión para representar el dezplazamiento del COM por el dispositivo frente a la plataforma Kistler, y además como afecta la ubicación del dispositivo.
+Al tener el conjunto de resultados resumidos en una tabla con datos concretos, es posible realizar la comparación, para determinar la precisión para representar el desplazamiento del COM por el dispositivo frente al COP de la plataforma Kistler, y además como afecta la ubicación del dispositivo.
 
-Si es considerada la correlación entre los datos de las 3 pruebas, la que presenta una mayor correlación en términos de Antero-Posterior y Medio-Lateral consiste en las pruebas con el dispositivo Frontal y Espalda, al estar el centro de masa aproximadamente cerca de esa posición, era un resultado esperable, en cambio si son analizadas por separado, la prueba que representa mejor la variación Antero-Posterior, consiste en la prueba con el sensor en la Espalda, y para el medio lateral, el dispositivo al Frente del sujeto.
-
-La prueba que arrojo menores cantidades de error en comparación con la plataforma Kistler, fue con el dispositivo en la Espalda del sujeto, por contra-parte la que ofrece más diferencias(error) es con el dispositivo en la parte Lateral Izquierda fue la que entrega un error mayor.
+Si es considerada la correlación entre los datos de las 3 pruebas, la que presenta una mayor correlación en términos de Antero-Posterior y Medio-Lateral consiste en las pruebas con el dispositivo Frontal y Espalda. Al estar el centro de masa teóricamente más cerca de esa posición, era un resultado esperable. La prueba que representa mejor la variación Antero-Posterior, consiste en la prueba con el sensor en la Espalda, y para la variación Medio-lateral, el dispositivo en el Frontal del sujeto.
 
 El hecho que en la prueba con el dispositivo en la Espalda no necesitara un gran ajuste en los datos,tan solo sincronización temporal, nos da a entender que consiste en una de las mejores ubicaciones para contrastar directamente con la plataforma y además nos intenta demostrar que aproximadamente el centro de masa se encuentra cerca de esa ubicación.
-
 
 \newpage
 \subsection{Principales Desafíos}
 \subsubsection{Representación en Tiempo Real}
-El principal desafio fue el despliegue en tiempo real de la posicion del COM en la interfaz gráfica del biofeed-back. Se planteó inicialmente en graficar cada una de las salidas tanto del acelerómetro como el giroscopio en donde se representarían 6 variables según la frecuencia de muestreo, lo que en la práctica no es útil. Al representar en gráficos a frecuencias muy altas es decir 100hz o superior, multiplicado por la cantidad de datos que se estén representando, junto con el procesamiento interno para mostrar esos datos, se genera una sobrecarga en la parte gráfica, lo que conlleva a ralentizar el proceso, generando pérdidas de información y fidelidad al desplegar en tiempo real.
+El principal desafío fue el despliegue en tiempo real de la posición del COM en la interfaz gráfica del biofeed-back. Se planteó inicialmente en graficar cada una de las salidas tanto del acelerómetro como el giroscopio en donde se representarían 6 variables según la frecuencia de muestreo, lo que en la práctica no es útil. Al representar en gráficos a frecuencias muy altas es decir 100hz o superior, multiplicado por la cantidad de datos que se estén representando, junto con el procesamiento interno para mostrar esos datos, se genera una sobrecarga en la parte gráfica, lo que conlleva a ralentizar el proceso, generando pérdidas de información y fidelidad al desplegar en tiempo real.
 
 Para dar solución al problema, se implementó la opción de graficar un porcentaje de la información recibida en base a la frecuencia de muestreo seleccionada para la captura de información, con esto se asegura que la representación gráfica en tiempo real sea adecuado. Para ello a partir de la frecuencia de muestreo escogida para la prueba se calcula cada cuantas muestras debe ser enviado al gráfico principal, con el fin de no entorpecer la prueba (ver Ecuación \ref{eq:divisorFPS}). 
 Luego de realizar el cálculo, a partir del total de muestras se aplica el módulo del $DivisorFPS$, si el resultado es 0 se envía el dato. Es decir, se envían los múltiplos del $DivisorFPS$.
