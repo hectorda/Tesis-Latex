@@ -187,7 +187,7 @@
 \section{Introducción}
 La comprensión de las dinámicas y patrones de movimiento humano, se facilitan enormemente con el apoyo de tecnologías adecuadas, que permitan medir, registrar y analizar variables cinemáticas. Particularmente, el estudio del movimiento humano (Kinesiología) depende hoy en día de las facilidades tecnológicas que ofrece la electrónica (sensores, microcontroladores, sistema de adquisición de señales) y las ciencias de la computación (procesamiento, análisis y posterior reporte adecuado de  variables cinemáticas y cinéticas).  
 
-Las soluciones tecnológicas que hoy existen, no solo permiten realizar el seguimiento (‘tracking’) y representación gráfica, sino que además facilitan la representación en tiempo real de las variables de interés, conformando con esto los denominados sistemas de Bio-feedback (retroalimentación de señales biológicas). Aunque existen alternativas adecuadas para estos fines, poseen el inconveniente en lo prohibitivo de su valor comercial, junto con ser soluciones cerradas tanto en hardware como software, lo que limita las funciones según las características propuestas por fabricante, hace prácticamente imposible la adición de nuevas funcionalidades y obtención de la información capturada por los sensores (datos crudos).
+Las soluciones tecnológicas que hoy existen, no solo permiten realizar el seguimiento (‘tracking’) y representación gráfica, sino que además facilitan la representación en tiempo real de las variables de interés, conformando con esto los denominados sistemas de Bio-feedback (retroalimentación de señales biológicas). Aunque existen alternativas adecuadas para estos fines, poseen el inconveniente en lo prohibitivo de su valor comercial, junto con ser soluciones cerradas tanto en hardware como software, lo que limita las funciones según las características propuestas por el fabricante y hace prácticamente imposible la adición de nuevas funcionalidades y obtención de la información capturada por los sensores (datos crudos).
 
 Frente a este desafío, está la posibilidad de integrar tecnología para conseguir soluciones de menores costos, que permitan realizar investigación y al mismo tiempo explorar posibilidades de innovación tecnológica que den paso al desarrollo de tecnología generadora de impacto no tan sólo en el ámbito de la investigación sino que también en la salud.
 
@@ -205,7 +205,7 @@ Diseñar e implementar un prototipo de software-hardware basado en un microcontr
 
 \subsection{Contribución Esperada}
 
-El desarrollo del sistema permitirá medir y registrar el comportamiento del centro de masa y su respectiva proyección (centro de presión) durante la posición bípeda quieta, al mismo tiempo que realimentará la señal como mecanismo de evaluación de balance postural e implementación de biofeedback.
+El desarrollo del sistema permitirá medir y registrar el comportamiento del centro de masa y su respectiva proyección en el plano durante la posición bípeda quieta, al mismo tiempo que realimentará la señal como mecanismo de evaluación de balance postural e implementación de biofeedback.
 
 El principal alcance de la propuesta es la posibilidad de contar con una solución abierta, que facilita la importación de todos los registros además del procesamiento de las señales recogidas de las evaluaciones, permitiendo además integrar la solución a otros sistemas.
 
@@ -214,30 +214,22 @@ El costo del sistema, respecto a las soluciones de mercado (Biodex- Balance SD),
 Desde el punto de vista disciplinar (Ciencias de la Ingeniería), este proyecto materializa trabajos de investigación y colaboración transdisciplinario entre la Facultad de Ingeniería y la Facultad de Salud de la UCM. Además posiciona a los Ingenieros Informáticos como profesionales capaces de adecuarse a diferentes contextos mediante soluciones tecnológicas.
 
 \subsection{Organizaci\'on de la Tesis}
-La organización del documento comienza con describir la situación actual del estudio de los principales avances en el desarrollo de soluciones para el estudio del Balance. Seguidamente son descritos cada uno de los elementos técnicos relacionados para dar solución al problema, es decir,  protocolos, sensores, algoritmos, etc. y como estos fueron implementados.
+La organización del documento comienza con describir la situación actual del estudio de los principales avances en el desarrollo de soluciones para el estudio del Balance. Seguidamente son descritos cada uno de los elementos técnicos relacionados para dar solución al problema, es decir,  protocolos, sensores, algoritmos, entre otros y como estos fueron implementados.
 
-Finalmente son expuestos los resultados, junto con las conclusiones más relevantes, ademas de presentar trabajos futuros con el objetivo para mejorar aún más la propuesta.
+Finalmente son expuestos los resultados, junto con las conclusiones más relevantes, ademas de proponer trabajos futuros que proyecten este desarrollo en otros ámbitos.
 
 
 \section{Estado del Arte}
 
 \subsection{Contexto de la problemática}
-Más de un tercio de la población mayor de 65 años presenta algunos problemas con el balance o deambulación. Los pacientes con trastornos neurológicos o musculo-esqueléticos son aún más propensos a tener problemas de equilibrio que afectan a su movilidad. La complejidad del control del equilibrio es resultado  de muchos tipos de problemas diferentes con evaluaciones clínicas sistemática específicas para prescribir un tratamiento eficaz.
+Más de un tercio de la población mayor de 65 años presenta algunos problemas con el balance o deambulación. Los pacientes con trastornos neurológicos o musculo-esqueléticos son aún más propensos a tener problemas de equilibrio que afectan a su movilidad.
 El control del equilibrio es complejo e implica el mantenimiento de posturas \cite{mancini_relevance_2010}, mantener el movimiento y recuperar el equilibrio. El control de balance consiste en controlar el centro de masa del cuerpo entre los límites de estabilidad. Las evaluaciones clínicas del equilibrio pueden ayudar a evaluar el riesgo de caídas y/o determinar las causas de los trastornos del equilibrio subyacente.
 
-La mayoría de las escalas de valoración del equilibrio funcional evalúan el riesgo de caída y la necesidad de rehabilitación, pero no es diferenciado cada uno de los tipos de déficits del balance. Un enfoque de sistema para la evaluación clínica puede diferenciar diferentes tipos de trastornos del equilibrio y un enfoque fisiológico puede determinar los mecanismos subyacentes sensorio-motoras asociados al trastorno del equilibrio. Las medidas objetivas de equilibrio valiéndose de medios informáticos y sensores inerciales pueden traer más precisión, exactitud y sensibilidad que las pruebas de equilibrio clínicas\cite{chaudhry_measurement_2011}.
-
-\subsection{Estudio del Balance usando Sensores}
-Recientemente, los sensores de movimiento ``weareables'' se han desarrollado para la robótica, industria aeroespacial y en las mediciones biomédicas se han utilizado para medir el control del balance\cite{mancini_relevance_2010}. Estos sensores, con transferencia inalámbrica de datos, tienen el potencial de superar los principales inconvenientes de coste, tamaño y ubicación limitado de las pruebas computarizadas , así como permitir la medición objetiva de la oscilación postural y movimientos durante la ejecución de tareas.
-
-Los acelerómetros y/o giroscopios han sido exitosamente utilizados \cite{mancini_relevance_2010} para el seguimiento de movimiento,  detección de caídas, y para la medición de control del balance. En el ámbito de dispositivos ``Weareables" se han usado para medir los movimientos tanto de pierna, brazo y torso.
-
+La mayoría de las escalas de valoración del equilibrio funcional evalúan el riesgo de caída y la necesidad de rehabilitación, pero no es diferenciado cada uno de los tipos de déficits del balance. Un enfoque de sistema para la evaluación clínica puede diferenciar varios tipos de trastornos del equilibrio y un enfoque fisiológico puede determinar los mecanismos subyacentes sensorio-motoras asociados al trastorno del equilibrio. Las medidas objetivas de equilibrio valiéndose de medios informáticos y sensores inerciales pueden traer más precisión, exactitud y sensibilidad que las pruebas de equilibrio clínicas\cite{chaudhry_measurement_2011}.
 
 \subsection{Equipamientos para estudio del balance} Algunos de los principales instrumentos utilizados para el estudio del Balance son:
 
-
-\subsubsection{Plataforma de Fuerza Kistler} Es un Gold Standard  en lo referente a estabilometría\cite{donath_testing_2012}, es una plataforma de fuerza de dimensiones
-	0,4m por 0,6m que consta de cuatro 	transductores piezoeléctricos, situados en las esquinas. Estos transductores son capaces de medir las fuerzas de reacción del suelo en los planos verticales medio-lateral (x), antero-posterior (y) ver Figura (\ref{fig:KistlerFP}).
+\subsubsection{Plataforma de Fuerza Kistler} Es una plataforma de fuerza Gold Standard en lo referente a estabilometría\cite{donath_testing_2012}. Sus dimensiones son 0,4m por 0,6m y consta de cuatro transductores piezoeléctricos situados en las esquinas. Los transductores son capaces de medir las fuerzas de reacción del suelo en los tres ejes, x, y, z. ver Figura (\ref{fig:KistlerFP}).
 
 \begin{figure}[H]
 	\centering
@@ -246,8 +238,9 @@ Los acelerómetros y/o giroscopios han sido exitosamente utilizados \cite{mancin
 	\label{fig:KistlerFP}
 \end{figure}
 
+Muchos estudios de balance se realizan mediante el registro del comportamiento del centro de presión utilizando plataformas de fuerza. Estos registros se denominan estabilometría \cite{scoppa_clinical_2013}.
 
-\subsubsection{Balance SD} Un instrumento desarrollado por Biodex \cite{Biodex} utilizado para la medicina física, especialmente para cualquiera que desee mejorar su equilibrio, aumentar la agilidad, desarrollar el tono muscular y tratar una amplia variedad de patologías asociadas a la perdida de balance.
+\subsubsection{Balance SD} El Balance SD es un instrumento desarrollado por Biodex \cite{Biodex} utilizado para la medicina física, especialmente para cualquiera que desee mejorar su equilibrio, aumentar la agilidad, desarrollar el tono muscular y tratar una amplia variedad de patologías asociadas a la perdida de balance.
 Es un equipo que cuenta con biofeed-back principalmente visual, pero en nuevas versiones incluye soporte para biofeed-back vibratorio.
 
 \begin{figure}[H]
@@ -257,17 +250,27 @@ Es un equipo que cuenta con biofeed-back principalmente visual, pero en nuevas v
 	\label{fig:balanceSD}
 \end{figure}
 
+\subsection{Estudio del Balance usando Sensores}
+Recientemente, los sensores de movimiento se han desarrollado para la robótica, industria aeroespacial y en las mediciones biomédicas se han utilizado para medir el control del balance\cite{mancini_relevance_2010}.
+\begin{comment}
+	Estos sensores, con transferencia inalámbrica de datos, tienen el potencial de superar los principales inconvenientes de coste, tamaño y ubicación limitado de las pruebas computarizadas , así como permitir la medición objetiva de la oscilación postural y movimientos durante la ejecución de tareas.
+\end{comment} 
+
+Los acelerómetros y/o giroscopios han sido exitosamente utilizados \cite{mancini_relevance_2010} para el seguimiento de movimiento,  detección de caídas, y para la medición de control del balance.
+\begin{comment}
+	En el ámbito de dispositivos "wereables" (usables, o transportables) se han usado para medir los movimientos principalmente de pierna, brazo y torso.
+\end{comment}
+
+
+\subsection{Revisión de Patentes}
 
 \section{Marco Teórico}
 
-\subsection{Introducción}
 El marco teórico, que se desarrolla a continuación, permite conocer los conceptos básicos para el entendimiento del desarrollo de este proyecto de Tesis.
 Partiendo por la definición de los estándares aplicados en los estudios del Balance, junto con definición de términos que comúnmente serán utilizados.
 
 
 Luego la descripción de los elementos de hardware utilizados, características de sensores, protocolos de comunicación y microcontrolador.
-
-Finalmente se describe el marco de trabajo para el desarrollo del software.
 
 Con este marco teórico se podrá comprender el desarrollo que se detalla mas adelante.
 
@@ -284,8 +287,8 @@ Toda la información obtenida debe estar asociado según un sistema específico 
 	
 	\item \textbf{Planos anatómicos} 
 	\subitem \textbf{Plano Sagital:}
-	Se toma de referencia el cuerpo humano trazando línea una  vertical de referencia que teóricamente cruza el cuerpo por la parte media y central, a modo de plomada imaginaria, esta línea ayuda en la distinción de miembros o elementos en el «lado izquierdo» o «lado derecho».
-	\subitem \textbf{Plano Frontal:} Forma un ángulo recto con los planos sagitales. En un ser humano, el plano medio coronal divide el cuerpo en posición de pie en dos mitades (frontal y dorsal, o anterior y posterior) mediante una línea imaginaria que corta ambos hombros.
+	Se toma de referencia el cuerpo humano trazando línea una  vertical de referencia que teóricamente cruza el cuerpo por la parte media y central, a modo de plomada imaginaria, esta línea ayuda en la distinción de miembros o elementos en el «lado izquierdo» o «lado derecho» ver Figura \ref{fig:sagital}.
+	\subitem \textbf{Plano Frontal:} Forma un ángulo recto con los planos sagitales. En un ser humano, el plano medio coronal divide el cuerpo en posición de pie en dos mitades (frontal y dorsal, o anterior y posterior) mediante una línea imaginaria que corta ambos hombros ver Figura \ref{fig:sagital}.
 	
 	\begin{figure}[H]
 		\centering
@@ -300,7 +303,7 @@ Toda la información obtenida debe estar asociado según un sistema específico 
 
 
 \subsubsection{Cálculo del Centro de Presión (COP)}
-El COP en las plataformas de fuerza en general es el promedio de las fuerzas aplicadas en cada uno de los sensores piezoeléctricos (sensores de presión/fuerza) tal como lo demuestra la Figura (\ref{fig:calculoCOP}).
+El COP en las plataformas de fuerza en general correponde a la suma de los momentos causados por las cuatro fuerzas es igual al momento causado por la fuerza de reacción del suelo obtenida a partir de los sensores piezoeléctricos (sensores de presión/fuerza) tal como lo demuestra la Figura (\ref{fig:calculoCOP}).
 
 \begin{figure}[H]
 	\centering
@@ -314,7 +317,7 @@ Corresponde al estudio del Centro de Presión (COP) para determinar deficiencias
 
 Existen estándares respecto a las características necesarias para la medición del COP \cite{scoppa_clinical_2013}.
 
-Las declaraciones son objeto de debate sobre la normalización de estabilometría acordados por el ISPGR (International Society for Posture and Gait Research).
+La normalización de estabilometría acordados por el ISPGR (International Society for Posture and Gait Research).
 Fueron definidas un conjunto de características metrológicas para las plataformas estabilométricas.
 Basándose tanto en la práctica y verificación experimental se acordó que, para obtener una apropiada precisión y sensibilidad:
 \begin{itemize}
@@ -343,21 +346,25 @@ Basándose tanto en la práctica y verificación experimental se acordó que, pa
 \subsection{Microcontroladores Arduino}
 Arduino\cite{ARDUINO} es una plataforma de hardware de código abierto, basada en una sencilla placa con entradas y salidas, analógicas y digitales, con un entorno de desarrollo basado en el lenguaje de programación C++, donde sus principales características son:
 \begin{itemize}
-	\item \textbf{Bajo Coste:} Las placas Arduino son relativamente de bajo coste comparadas con otras plataformas microcontroladoras Handy Board, Basic Stamp\textregistered. La versión menos cara del módulo Arduino puede ser ensamblada a mano, e incluso los módulos de Arduino preensamblados cuestan menos de 50\$.
+	\item \textbf{Bajo Coste:} Las placas Arduino son relativamente de bajo coste comparadas con otras plataformas microcontroladoras Handy Board, Basic Stamp\textregistered. La versión menos cara del módulo Arduino puede ser ensamblada a mano.
 	\item \textbf{Multiplataforma:} El software de Arduino se ejecuta en sistemas operativos Windows, Macintosh OSX y GNU/Linux. La mayoría de los sistemas microcontroladores están limitados a Windows.
-	\item \textbf{Entorno de programación simple y claro:} El entorno de programación de Arduino es fácil de usar para principiantes, pero suficientemente flexible para que usuarios avanzados puedan aprovecharlo también. Para profesores, está convenientemente basado en el entorno de programación Processing, de manera que estudiantes aprendiendo a programar en ese entorno estarán familiarizados con el aspecto y la imagen de Arduino.
-	\item \textbf{Código abierto y software extensible:} El software Arduino está publicado como herramientas de código abierto, disponible para extensión por programadores experimentados. El lenguaje puede ser expandido mediante librerías C++, y la gente que quiera entender los detalles técnicos pueden hacer el salto desde Arduino a la programación en lenguaje AVR C en el cual está basado. De forma similar, puedes añadir código AVR-C directamente en tus programas Arduino si quieres.
-	\item \textbf{Código abierto y hardware extensible:} El Arduino está basado en microcontroladores ATMEGA8 y ATMEGA168 de Atmel. Los planos para los módulos están publicados bajo licencia Creative Commons, por lo que diseñadores experimentados de circuitos pueden hacer su propia versión del módulo, extendiéndolo y mejorándolo. Incluso usuarios relativamente inexpertos pueden construir la versión de la placa del módulo para entender cómo funciona y ahorrar dinero.
+	\item \textbf{Entorno de programación simple y claro:} El entorno de programación de Arduino es fácil de usar para principiantes, pero suficientemente flexible para que usuarios avanzados puedan aprovecharlo también. Está convenientemente basado en el entorno de programación Processing, de manera que estudiantes aprendiendo a programar en ese entorno estarán familiarizados con el aspecto y la imagen de Arduino.
+	\item \textbf{Código abierto y software extensible:} El software Arduino está publicado como herramientas de código abierto, disponible para extensión por programadores experimentados. El lenguaje puede ser expandido mediante librerías C++, y se puede hacer el salto desde Arduino a la programación en lenguaje AVR C en el cual está basado. De forma similar, puedes añadir código AVR-C directamente en tus programas Arduino si quieres.
+	\item \textbf{Hardware extensible:} El Arduino está basado en microcontroladores ATMEGA8 y ATMEGA168 de Atmel. Los planos para los módulos están publicados bajo licencia Creative Commons, por lo que diseñadores experimentados de circuitos pueden hacer su propia versión del módulo, extendiéndolo y mejorándolo. Incluso usuarios relativamente inexpertos pueden construir la versión de la placa del módulo para entender cómo funciona y ahorrar dinero.
 	
 \end{itemize}
 
 \newpage
 \subsection{Sistema microelectromecánico (MPU6050)}
-El sistema Microelectromecánico (MEMS) MPU6050\cite{MPU6050}, es un dispositivo capaz de medir la velocidad angular y fuerza de gravedad gracias a estar compuesto por Giroscópico y Acelerómetro ambos de 3 ejes, el hecho de poseer estos 2 sensores de movimiento indica que existen al menos 6 grados de libertad para utilizar al momento de obtener las mediciones provenientes de éste.
+\begin{comment}
+	
+	
+	La tecnología utilizada MEMS patentada por InverSense, en el caso del giroscopio consiste en masas vibratorias verticalmente alineadas las cuales son usadas para crear un chip de bajo costo
+\end{comment}
 
-La tecnología utilizada MEMS patentada por InverSense, en el caso del giroscopio consiste en masas vibratorias verticalmente alineadas las cuales son usadas para crear un chip de bajo costo.
+El sistema Microelectromecánico MPU6050\cite{MPU6050}, es un dispositivo capaz de medir la velocidad angular y fuerza de gravedad gracias a estar compuesto por Giroscópico y Acelerómetro ambos de 3 ejes, el hecho de poseer estos 2 sensores de movimiento indica que existen al menos 6 grados de libertad para utilizar al momento de obtener las mediciones provenientes de éste.
 
-El MPU6050 está diseñado para realizar seguimiento (Tracking) gracias a que posee un bajo consumo, es de bajo costo, y cumple con los requisitos de los teléfonos inteligentes, tabletas y sensores portátiles \cite{MPU6050}.
+El MPU6050 está diseñado para realizar seguimiento (Tracking) además a que posee un bajo consumo, es de bajo costo, y cumple con los requisitos de los teléfonos inteligentes, tabletas y sensores portátiles \cite{MPU6050}.
 La transmisión de datos con el microcontrolador es realizada únicamente mediante el protocolo I2C, el cual requiere de 2 líneas de conexión una para el envío de datos (SDA) y otra para el clock (SCL), las cuales varían dependiendo del modelo de microcontrolador, junto con la alimentación que consiste en la línea de voltaje (VCC) y conexión a tierra (GND).
 
 El acelerómetro incluido mide el movimiento lineal respecto a cada uno de sus tres ejes ver Figura (\ref{fig:MPU6050}), es decir la aceleración percibida por el movimiento y esta es expresada en proporción a la fuerza de gravedad (veces de g).
