@@ -273,8 +273,35 @@ Los acelerómetros y/o giroscopios han sido exitosamente utilizados \cite{mancin
 	En el ámbito de dispositivos "wereables" (usables, o transportables) se han usado para medir los movimientos principalmente de pierna, brazo y torso.
 \end{comment}
 
-
+\newpage
 \subsection{Revisión de Patentes}
+EL objetivo de este trabajo es un desarrollo tecnológico, por lo tanto es relevante investigar el panorama en términos de patentes para las invenciones con alcances similares.
+
+Se revisaron los principales sitios de búsqueda de patentes:
+\begin{itemize}
+	\item Sitio USA \url{https://www.uspto.gov/}
+	\item Sitio Europeo \url{http://www.epo.org/}
+	\item Google Patents  \url{https://patents.google.com/}
+\end{itemize}
+La búsqueda se realizo mediante el siguiente código IPC/CPC  A65B \cite{patentes}, además se consideraron las palabras claves: balance, IMU, Inertial sensor, Biofeed-back. 
+La búsqueda nos arrojo lo siguiente : 
+
+\subsubsection{Sitio USA}
+\begin{itemize}
+	\item \textbf{Balance Augmentation Sensors (20150018724) :} Dispositivo para estudiar el balance consiste en una IMU pero con retroalimentación táctil y encapsulado en un dispositivo Weareable (inalámbrico).
+	\item \textbf{Angular displacement measuring apparatus (3,950,859): } Referencia a temas como: balance, inclinómetro, péndulo invertido, desplazamiento en el plano.
+	\item \textbf{Fall-risk Evaluation and Balance Stability Enhancement System and method \\(20110251520):} 
+	Consiste en un sistema para evaluar el riesgo de caída y tratar el sentido del balance. Todo esto midiendo el COP del sujeto utilizando plataforma de fuerza.
+\end{itemize}
+
+\subsubsection{Sitio Europeo}
+\begin{itemize}
+	\item \textbf{Enhanced system and method for assessment of disequilibrium, balance and motion disorders (9149222):} Sistema para medición combinando plataforma de fuerza, cámaras y sensores inerciales para medición del balance.
+\end{itemize}
+
+Los desarrollos que han sido descritos se asemejan principalmente en los conceptos involucrados, la mayoría recoge alguna de las características de la propuesta de solución que será posteriormente descrita en esta Tesis.
+
+Lo más relevante de esta búsqueda es el hecho de no existir una patente que englobe la idea del cálculo del COM usando sensores inerciales.
 
 \section{Marco Teórico}
 
@@ -284,8 +311,6 @@ Partiendo por la definición de los estándares aplicados en los estudios del Ba
 
 Luego la descripción de los elementos de hardware utilizados, características de sensores, protocolos de comunicación y microcontrolador.
 
-Con este marco teórico se podrá comprender el desarrollo que se detalla mas adelante.
-
 
 \subsection{Estudio y evaluación de Balance}
 
@@ -293,7 +318,7 @@ En el estudio del balance postural, los registros representados por los sensores
 
 \subsubsection{Sistemas Coordenados}
 
-Toda la información obtenida debe estar asociado según un sistema específico de coordenadas, que sirva de referencia para la interpretación y comprensión de la información.
+Toda la información obtenida debe estar asociado según un sistema específico de coordenadas, que sirva de referencia para la interpretación y comprensión de la información proveniente de las variables cinemáticas asociadas al movimiento humano.
 
 \begin{itemize}
 	
@@ -315,7 +340,7 @@ Toda la información obtenida debe estar asociado según un sistema específico 
 
 
 \subsubsection{Cálculo del Centro de Presión (COP)}
-El COP en las plataformas de fuerza en general correponde a la suma de los momentos causados por las cuatro fuerzas es igual al momento causado por la fuerza de reacción del suelo obtenida a partir de los sensores piezoeléctricos (sensores de presión/fuerza) tal como lo demuestra la Figura (\ref{fig:calculoCOP}).
+El COP en las plataformas de fuerza en general correponde a la suma de los momentos causados por las cuatro fuerzas de reacción del suelo obtenidas a partir de los sensores piezoeléctricos (sensores de presión/fuerza) tal como lo demuestra la Figura (\ref{fig:calculoCOP}).
 
 \begin{figure}[H]
 	\centering
@@ -329,8 +354,7 @@ Corresponde al estudio del Centro de Presión (COP) para determinar deficiencias
 
 Existen estándares respecto a las características necesarias para la medición del COP \cite{scoppa_clinical_2013}.
 
-La normalización de estabilometría acordados por el ISPGR (International Society for Posture and Gait Research).
-Fueron definidas un conjunto de características metrológicas para las plataformas estabilométricas.
+La normalización de estabilometría acordados por el ISPGR (International Society for Posture and Gait Research) fueron definidas segun un conjunto de características metrológicas para las plataformas estabilométricas.
 Basándose tanto en la práctica y verificación experimental se acordó que, para obtener una apropiada precisión y sensibilidad:
 \begin{itemize}
 	\item El intervalo de adquisición no debe ser inferior a 25s.
@@ -361,7 +385,7 @@ Arduino\cite{ARDUINO} es una plataforma de hardware de código abierto, basada e
 	\item \textbf{Bajo Coste:} Las placas Arduino son relativamente de bajo coste comparadas con otras plataformas microcontroladoras Handy Board, Basic Stamp\textregistered. La versión menos cara del módulo Arduino puede ser ensamblada a mano.
 	\item \textbf{Multiplataforma:} El software de Arduino se ejecuta en sistemas operativos Windows, Macintosh OSX y GNU/Linux. La mayoría de los sistemas microcontroladores están limitados a Windows.
 	\item \textbf{Entorno de programación simple y claro:} El entorno de programación de Arduino es fácil de usar para principiantes, pero suficientemente flexible para que usuarios avanzados puedan aprovecharlo también. Está convenientemente basado en el entorno de programación Processing, de manera que estudiantes aprendiendo a programar en ese entorno estarán familiarizados con el aspecto y la imagen de Arduino.
-	\item \textbf{Código abierto y software extensible:} El software Arduino está publicado como herramientas de código abierto, disponible para extensión por programadores experimentados. El lenguaje puede ser expandido mediante librerías C++, y se puede hacer el salto desde Arduino a la programación en lenguaje AVR C en el cual está basado. De forma similar, puedes añadir código AVR-C directamente en tus programas Arduino si quieres.
+	\item \textbf{Código abierto y software extensible:} El software Arduino está publicado como herramientas de código abierto, disponible para extensión por programadores experimentados. El lenguaje puede ser expandido mediante librerías C++, y se puede hacer el salto desde Arduino a la programación en lenguaje AVR C en el cual está basado. De forma similar, se puede añadir código AVR-C directamente en los  programas Arduino si es deseado.
 	\item \textbf{Hardware extensible:} El Arduino está basado en microcontroladores ATMEGA8 y ATMEGA168 de Atmel. Los planos para los módulos están publicados bajo licencia Creative Commons, por lo que diseñadores experimentados de circuitos pueden hacer su propia versión del módulo, extendiéndolo y mejorándolo. Incluso usuarios relativamente inexpertos pueden construir la versión de la placa del módulo para entender cómo funciona y ahorrar dinero.
 	
 \end{itemize}
@@ -374,9 +398,9 @@ Arduino\cite{ARDUINO} es una plataforma de hardware de código abierto, basada e
 	La tecnología utilizada MEMS patentada por InverSense, en el caso del giroscopio consiste en masas vibratorias verticalmente alineadas las cuales son usadas para crear un chip de bajo costo
 \end{comment}
 
-El sistema Microelectromecánico MPU6050\cite{MPU6050}, es un dispositivo capaz de medir la velocidad angular y fuerza de gravedad gracias a estar compuesto por Giroscópico y Acelerómetro ambos de 3 ejes, el hecho de poseer estos 2 sensores de movimiento indica que existen al menos 6 grados de libertad para utilizar al momento de obtener las mediciones provenientes de éste.
+El sistema Microelectromecánico MPU6050\cite{MPU6050}, es un dispositivo capaz de medir la velocidad angular y fuerza de gravedad gracias a estar compuesto por Giroscópico y Acelerómetro ambos de 3 ejes. El hecho de poseer estos 2 sensores de movimiento indica que existen al menos 6 grados de libertad para utilizar al momento de obtener las mediciones provenientes de éste.
 
-El MPU6050 está diseñado para realizar seguimiento (Tracking) además a que posee un bajo consumo, es de bajo costo, y cumple con los requisitos de los teléfonos inteligentes, tabletas y sensores portátiles \cite{MPU6050}.
+El MPU6050 está diseñado para realizar seguimiento (Tracking) además posee un bajo consumo, es de bajo costo, y cumple con los requisitos de los teléfonos inteligentes, tabletas y sensores portátiles \cite{MPU6050}.
 La transmisión de datos con el microcontrolador es realizada únicamente mediante el protocolo I2C, el cual requiere de 2 líneas de conexión una para el envío de datos (SDA) y otra para el clock (SCL), las cuales varían dependiendo del modelo de microcontrolador, junto con la alimentación que consiste en la línea de voltaje (VCC) y conexión a tierra (GND).
 
 El acelerómetro incluido mide el movimiento lineal respecto a cada uno de sus tres ejes ver Figura (\ref{fig:MPU6050}), es decir la aceleración percibida por el movimiento y esta es expresada en proporción a la fuerza de gravedad (veces de g).
@@ -418,7 +442,7 @@ El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\r
 	
 	\item \textbf{Variables:} Las variables entregadas por el Acelerómetro consiste en la aceleración lineal percibida en cada eje expresada en veces de g, y en el Giroscopio corresponde  a la velocidad angular dada por la variación de los grados en un instante de tiempo al girar sobre cada eje.
 	
-	\item \textbf{Frecuencia de Muestreo:} Nos describe la cantidad de datos que pueden ser obtenidos en un intervalo de tiempo, a su vez nos describe la diferencia entre cada dato obtenido.
+	\item \textbf{Frecuencia de Muestreo:} Nos describe la cantidad de datos que pueden ser obtenidos en un intervalo de tiempo, a su vez nos describe la diferencia temporal entre cada dato.
 	
 	\item \textbf{Resolución:} Consiste en la mínima variación generada en la variable medida y la cual los sensores son capaces de informar.
 	
@@ -442,19 +466,19 @@ El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\r
 \end{itemize}
 
 \subsubsection{Configuración de MPU6050}
-Por defecto el MPU6050 viene configurada con los parámetros básicos para realizar la captura de información, lo cual puede ser perfectamente útil según sea el caso de estudio, pero si se desea que los sensores operen en rangos específicos y/o los datos sean obtenidos a frecuencias específicas se debe comprender como llevar a cabo la configuración en cada uno de los registros internos encargados de cada configuración, el mapa de los registros \cite{MAPREGISTER} proporcionado  en el sitio de InverSense es buena guía para entender cómo se realiza esta labor.
+Por defecto el MPU6050 viene configurada con los parámetros básicos para realizar la captura de información, lo cual puede ser perfectamente útil según sea el caso de estudio, pero si se desea que los sensores operen en rangos específicos y/o los datos sean obtenidos a frecuencias específicas se debe comprender como llevar a cabo la configuración en cada uno de los registros internos encargados de cada configuración. El mapa de los registros \cite{MAPREGISTER} proporcionado  en el sitio de InverSense es buena guía para entender cómo se realiza esta labor.
 \newline En el interior del MPU6050 se encuentran más de 70 registros cada uno de 8 Bit, para la configuraciones listadas a continuación se deben usar solo algunos pocos.
 \begin{itemize}
-	\item \textbf{Configurar frecuencia muestreo:} Para definir la cantidad de muestras que se obtendrán ``En Teoría'' se calcula usando la ecuación: 
+	\item \textbf{Configurar frecuencia muestreo:} Para definir la cantidad de muestras que se obtendrán se calcula usando la ecuación: 
 	
 	\begin{equation} 
 	\label{eq:sampleratediv}
 	Sample Rate = \frac{Gyroscope Output Rate}{(1 + SMPLRT\_DIV) }
 	\end{equation}
 	
-	En la ecuación (\ref{eq:sampleratediv}) factores, tales como la velocidad del puerto serial pueden influir en el resultado, el registro \textbf{SMPRT\_DIV} es de 8 Bit entonces adminte valores entre 0 y 255, el valor de $Gyroscope Output Rate$ depende directamente del estado del filtro pasa-bajo, en caso de estar desactivado, el valor de $Gyroscope Output Rate$ sería 8Khz, en cambio sí está activado el $Gyroscope Output Rate$ tomaría el valor de 1Khz con lo cual haciendo los cálculos necesarios al estar desactivado el filtro pasa-bajo la frecuencia de muestreo variará entre las 8000 y 31 muestras/seg de forma teórica, al contrario en caso de estar activado el filtro, la fórmula para el cálculo de la frecuencia de muestreo fluctuaría entre las 1000 y 3.9 muestras/seg, por cada uno de los 6 datos obtenibles.
+	En la ecuación (\ref{eq:sampleratediv}) factores, tales como la velocidad del puerto serial pueden influir en el resultado, el registro \textbf{SMPRT\_DIV} es de 8 Bit entonces adminte valores entre 0 y 255, el valor de $Gyroscope Output Rate$ depende directamente del estado del filtro pasa-bajo, en caso de estar desactivado, el valor de $Gyroscope Output Rate$ sería 8Khz, en cambio sí está activado el $Gyroscope Output Rate$ tomaría el valor de 1Khz con lo cual haciendo los cálculos necesarios al estar desactivado el filtro pasa-bajo la frecuencia de muestreo variará entre las 8000 y 31 muestras/seg de forma teórica, al contrario en caso de estar activado el filtro, la fórmula para el cálculo de la frecuencia de muestreo fluctuaría entre las 1000 y 3.9 muestras/seg, por cada una de las 6 variables del sensor.
 	
-	Nota: Hay que tener en consideración que el valor obtenido para la frecuencia de muestreo es válido principalmente para el giroscopio, ya que para el acelerómetro es de a lo más un 1Khz por ende si la frecuencia de muestreo es mayor a 1Khz se pueden repetir valores en la salida del acelerómetro.
+	Nota: Hay que tener en consideración que el valor obtenido para la frecuencia de muestreo es válido principalmente para el giroscopio, ya que para el acelerómetro es como máximo un 1Khz, por ende si la frecuencia de muestreo es mayor a 1Khz se pueden repetir valores en la salida del acelerómetro.
 	
 	\item \textbf{Configurar Giroscopio:} El registro GYRO\_CONFIG permite el cambio de los rangos para la obtención de la velocidad angular, con lo cual aumentamos o disminuimos de forma inversa la sensibilidad del Giroscopio. En el interior de este registro específicamente en los bits 3 y 4 del registro deben ser ingresados los valores en binario de los números 0, 1, 2 o 3 para configurar los cuatro rangos disponibles 250\grad/seg, 500\grad/seg, 1000\grad/seg y 2000\grad/seg. respectivamente.
 	
@@ -551,7 +575,7 @@ El sistema consta principalmente en un microcontrolador Arduino, un sensor inerc
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.25]{images/diagrama_sistema}
-	\caption{Diagrama Sistema}
+	\caption{Esquemático general de la solución propuesta}
 	\label{fig:diagramasistema}
 \end{figure}
 
@@ -727,15 +751,15 @@ En el software se implementaron 3 algoritmos: (a) Sin filtro, (b) Filtro de Kalm
 A partir de la fórmula de la tangente, según la orientación escogida son conjugados los ejes leídos directamente de los sensores, con el fin de aplicar la formula en el sentido que corresponda ver Tabla \ref{table:calculoAnguloAcelerometro}.
 
 
-Para el análisis del desplazamiento del centro de masa se requiere que el ángulo obtenido sea lo en su medida lo más preciso, para ello se estudiaron e implementaron 2 filtros que permiten una correcta integración de los datos de aceleración lineal con velocidad angular.
+Para el análisis del desplazamiento del centro de masa se requiere que el ángulo obtenido sea preciso, para ello se estudiaron e implementaron 2 filtros que permiten una correcta integración de los datos de aceleración lineal con velocidad angular.
 
 Con el ángulo obtenido a partir del acelerómetro, existe la opción de agregar más información para corregir/mejorar la aproximación.
 
 
 \subsubsection{Descripción Filtro Complementario}
-El Filtro complementario es ampliamente usado en unidades inerciales y sistemas de visión. Este filtro es en sí es un filtro de Kalman de estado estacionario para una cierta clase de problemas de filtrado \cite{TesisUSM}.
+El Filtro complementario es ampliamente usado en unidades inerciales y sistemas de visión. Esta basado en Kalman de estado estacionario para una cierta clase de problemas de filtrado \cite{TesisUSM}.
 
-Está compuesto por la una unión de dos filtros diferentes:
+Está compuesto por la unión de dos filtros diferentes:
 \begin{itemize}
 	\item \textbf{Filtro Pasa-Bajo:} Se usa para eliminar las frecuencias altas del acelerómetro, por lo cual dejamos pasar bajo ciertas frecuencias, para eliminar el ruido detectado por el cambio de aceleración (vibración principalmente) en los ejes del acelerómetro.
 	\item \textbf{Filtro Pasa-Alto:} Se aplica en las mediciones obtenidas por el giroscopio, para eliminar el drift acumulado en el tiempo, dejando pasar solo las de una frecuencia más alta.
@@ -748,7 +772,7 @@ Todo lo anterior queda descrito usando la siguiente Ecuación (\ref{eq:ecuacionF
 anguloActual = (1-\alpha)*(anguloAnterior+\omega*dt)+(\alpha)*anguloAcelerometro
 \end{equation}
 
-En donde cada uno de las variables representa lo siguiente:
+En donde cada de las variables representa lo siguiente:
 \begin{itemize}
 	\item \textit{anguloAcelerometro:} El ángulo calculado mediante la aceleración obtenida por el Acelerómetro.
 	\item $\omega$: Es la velocidad angular obtenida por el Giroscopio que hemos calculado previamente.
@@ -798,7 +822,7 @@ Debe ser considerado el \textit{nuevoAngulo} entregado mediante el acelerómetro
 Luego de la integración de los filtros en el Software es posible utilizar el deseado para la prueba, pero se deben tener en consideración las ventajas de usar los filtros implementados. A continuación se realizó una breve comparativa para ver el comportamiento entre el cálculo del ángulo sin utilizar filtros, usando filtro complementario y Kalman para la obtención durante la misma prueba.
 
 \newpage 
-Para comparar la precisión de los métodos, se realizo una prueba controlada, midiendo el angulo con un inclinómetro analógico. La prueba consistió en mantener un ángulo determinados segundos, para luego cambiar a otro.
+Para comparar la precisión de los métodos, se realizó una prueba controlada, midiendo el angulo con un inclinómetro analógico. La prueba consistió en mantener un ángulo determinados segundos, para luego cambiar a otro.
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.4]{images/angKalCom}
@@ -809,7 +833,7 @@ Para comparar la precisión de los métodos, se realizo una prueba controlada, m
 La Figura \ref{fig:AnguloXvsFiltros} demuestra la gran corrección que realizan los filtros, eliminando el ruido producido de los pequeños cambios de aceleración.
 \begin{itemize}
 	\item \textbf{Cálculo del ángulo sin usar filtros:} En el gráfico (Figura \ref{fig:AnguloXvsFiltros}) se aprecia el nivel de ruido al usar solo el acelerómetro para calculo del ángulo. Al mantener un ángulo específico este se encuentra en constante variación.
-	\item \textbf{Aplicando filtros:} El uso del filtro mejora considerablemente el nivel de ruido, pero a su vez si son comparados ambos filtros disponibles (Kalman y Complementario), estos tienen un comportamiento similar, sin entrar en estudios complejos acerca de cual es más óptimo, es completamente a criterio del usuario el filtro aplicado.
+	\item \textbf{Aplicando filtros:} El uso del filtro mejora considerablemente el nivel de ruido, pero a su vez si son comparados ambos filtros disponibles (Kalman y Complementario), estos tienen un comportamiento similar y se dejan ambos implementados para ser seleccionados por el usuario.
 \end{itemize}
 Nota: Para efectos de análisis posteriores se utilizará el filtro de Kalman.
 
@@ -821,7 +845,7 @@ El ángulo entregado por el dispositivo puede ser afectado por cualquier tipo de
 La metodología de prueba consistirá en ubicar el dispositivo en 4 ángulos distintos, midiendo con ambos instrumentos (Dispositivo y Inclinómetro Analógico).
 
 
-Para contraste se realizaron 2 tipos de pruebas, en ambos tipos de pruebas se comenzará desde el angulo mas pequeño hasta llegar al mayor, para luego retroceder hasta el ángulo mas pequeño. El objetivo además de comparar la exactitud del ángulo escogido es analizar si existe una diferencia significativa al volver a los ángulos iniciales.
+Para contraste se realizaron 2 tipos de pruebas, en ambos tipos de pruebas se comenzará desde el angulo más pequeño hasta llegar al mayor, para luego retroceder hasta el ángulo más pequeño. El objetivo además de comparar la exactitud del ángulo escogido es analizar si existe una diferencia significativa al volver a los ángulos iniciales.
 
 \begin{itemize}
 	\item \textbf{Ángulos pequeños: }1, 3, 5, 7.
@@ -921,7 +945,7 @@ Si analizamos los angulos grandes y las diferencias expuestas en la Tabla \ref{t
 	\label{table:inclinometroVsDispositivoMLD}
 \end{table}
 
-En la Figura \ref{fig:inclinometroVsDispositivoML} y la Tabla \ref{table:inclinometroVsDispositivoML} el dispositivo se encuentra con unos grados mas que el inclinómetro, que a la vez son en su mayoría constantes dentro del rango de entre 3 y 4 grados de diferencia entre ambos instrumentos.
+En la Figura \ref{fig:inclinometroVsDispositivoML} y la Tabla \ref{table:inclinometroVsDispositivoML} el dispositivo se encuentra con unos grados más que el inclinómetro, que a la vez son en su mayoría constantes dentro del rango de entre 3 y 4 grados de diferencia entre ambos instrumentos.
 
 Para la Tabla \ref{table:inclinometroVsDispositivoMLD} de ángulos grandes, la diferencia mayor es de almenos 2.5 grados.
  
@@ -1021,11 +1045,11 @@ Dicho esto de ahora en adelante cuando sea realizado el cálculo del desplazamie
 \begin{itemize}
 	\item \textbf{Representación en Tiempo Real:} El software permite representar el tanto el desplazamiento como el ángulo aproximado del COM.
 	Junto con representar se permite la interacción con objetivos a marcar, situados según el tipo de prueba escogida o configurada.
-	\item \textbf{Configurable:} El software permite configurar la mayoría de opciones que poseer el sensor MPU6050, puerto serial a utilizar, rangos para captura de información del movimiento, así como cantidad de datos que se representaran en pantalla, tamaños de los elementos a graficar, tiempos de prueba, limitar geométricamente el gráfico, etc.
+	\item \textbf{Configurable:} El software permite configurar la mayoría de opciones que posee el sensor MPU6050, puerto serial a utilizar, rangos para captura de información del movimiento, así como cantidad de datos que se representaran en pantalla, tamaños de los elementos a graficar, tiempos de prueba, limitar geométricamente el gráfico, etc.
 	\item \textbf{Reportes:} Cada uno de los gráficos despliegan las medidas tomadas o presentan los resultados del ejercicio, estos pueden ser exportados, tanto como un conjunto de datos, o también generar una imagen de estos.
 	\item \textbf{Herramientas de Análisis Gráficas:} Ventanas desplegables acompañadas a un gráfico que permiten de forma interactiva seleccionar partes del gráfico, para analizar intervalos según se estime conveniente y a su vez obtener de él datos como, los valores máximos y mínimos, la media, desviación estándar de los datos, y en el caso del desplazamiento obtener la velocidad media del intervalo analizado.
-	\item \textbf{Persistencia de datos:} Usando un pequeño almacén de datos en SQlite, es posible mantener un registro con la información de los pacientes, con el fin de tenerlos almacenados para el momento en que sea realizada cada una de las pruebas seleccionarlos sin la necesidad de re-ingresarlos en cada momento.
-	\item \textbf{Geometría Analítica} Se usó bastante la geometría analítica, para la generación y representación gráfica tanto de los objetivos en las pruebas, como para la intersección del movimiento realizado con cada uno de estos. De igual manera se utiliza la trigonometría para limitar el área del movimiento según el radio que sea definido para el examen.
+	\item \textbf{Persistencia de datos:} Usando un pequeño almacén de datos en SQlite, es posible mantener un registro con la información de los pacientes, con el fin de tenerlos almacenados para el momento en que sea realizada cada una de las pruebas sin la necesidad de re-ingresarlos en cada momento.
+	\item \textbf{Geometría Analítica} Se usó la geometría analítica, para la generación y representación gráfica tanto de los objetivos en las pruebas, como para la intersección del movimiento realizado con cada uno de estos. De igual manera se utiliza la trigonometría para limitar el área del movimiento según el radio que sea definido para el examen.
 \end{itemize}
 \newpage
 \subsubsection{Interacción Software-Microcontrolador}
@@ -1053,7 +1077,7 @@ Esto es realizado con el fin de establecer el valor de opciones consideradas má
 
 \newpage
 \subsubsection{Selección de Tipos de Pruebas}
-Al momento de iniciar la aplicación si es que son detectados dispositivos en el puerto Serial se lanza la interfaz principal (ver Figura \ref{fig:mainwindow}), en donde se elige un paciente y la prueba a realizar.
+Al momento de iniciar la aplicación son detectados dispositivos en el puerto Serial y se lanza la interfaz principal (ver Figura \ref{fig:mainwindow}), en donde se elige un paciente y la prueba a realizar.
 
 \begin{figure}[H]
 	\centering
@@ -1089,8 +1113,8 @@ La ventada de configuración (Figura \ref{fig:configurarPrueba}) considera los s
 	\item \textbf{Orientación Sensores:} Es una de las principales configuraciones a tener en consideración, debido a que define como está siendo situado el equipo, y a su vez como será analizada la información.
 	Existen 2 categorías de orientación:
 	\begin{itemize}
-		\item \textbf{Horizontal:} En donde se puede definir si la referencia esta hacia adelante, atrás, izquierda o derecha, si esta orientación es seleccionada el cable siempre está conectado en la parte inferior del dispositivo.
-		\item \textbf{Vertical:} Solo fueron considerados 2 modos, ya que de por si la orientación horizontal es poco práctica para los estudios del balance.
+		\item \textbf{Horizontal:} En donde se puede definir si la referencia esta hacia adelante, atrás, izquierda o derecha. Si esta orientación es seleccionada el cable siempre está conectado en la parte inferior del dispositivo.
+		\item \textbf{Vertical:} Solo fueron considerados 2 modos, ya que  la orientación horizontal es poco práctica para los estudios del balance.
 		Los modos disponibles son con la referencia arriba o abajo, considerando que el cable siempre sale hacia la derecha del dispositivo.
 	\end{itemize}
 	\item \textbf{Ajustes Objetivos:} En el gráfico principal se pueden desplegar objetivos para ser seguidos.
@@ -1197,7 +1221,7 @@ El dispositivo fue evaluado en 3 posiciones:
 	
 	En los resultados obtenidos de la prueba se puede apreciar la gran similitud del comportamiento de ambas curvas.
 	
-	Para los gráficos obtenidos anteriormente tan solo debió realizarse un ajuste temporal de las series temporales.
+	Para los gráficos obtenidos anteriormente tan solo debió realizarse un ajuste en el tiempo de las series temporales.
 
 
 
@@ -1257,7 +1281,7 @@ Los datos tanto en el sentido Antero-Posterior, como en el medio lateral sufrier
 
 Para comparar los resultados se definieron medidas de diferencia y error para comparar el comportamiento de las series temporales utilizando estos dos sistemas (dispositivo v/s Kistler). 
 
-Sin más que acotar a continuación se encuentra la definición de todas las ecuaciones utilizadas para obtener los cálculos  en tabla de Resultados.
+A continuación se encuentra la definición de todas las ecuaciones utilizadas para obtener los cálculos  en tabla de Resultados.
 \newline
 
 \begin{table}[H]
@@ -1322,10 +1346,12 @@ Si es considerada la correlación entre los datos de las 3 pruebas, la que prese
 
 El hecho que en la prueba con el dispositivo en la Espalda no necesitara un gran ajuste en los datos,tan solo sincronización temporal, nos da a entender que consiste en una de las mejores ubicaciones para contrastar directamente con la plataforma y además nos intenta demostrar que aproximadamente el centro de masa se encuentra cerca de esa ubicación.
 
+La sincronización temporal que se realizo en todos los casos se justifica por el hecho de no contar con un equipo de sincronismo entre la plataforma y nuestro dispositivo.
+
 \newpage
 \subsection{Principales Desafíos}
 \subsubsection{Representación en Tiempo Real}
-El principal desafío fue el despliegue en tiempo real de la posición del COM en la interfaz gráfica del biofeed-back. Se planteó inicialmente en graficar cada una de las salidas tanto del acelerómetro como el giroscopio en donde se representarían 6 variables según la frecuencia de muestreo, lo que en la práctica no es útil. Al representar en gráficos a frecuencias muy altas es decir 100hz o superior, multiplicado por la cantidad de datos que se estén representando, junto con el procesamiento interno para mostrar esos datos, se genera una sobrecarga en la parte gráfica, lo que conlleva a ralentizar el proceso, generando pérdidas de información y fidelidad al desplegar en tiempo real.
+El principal desafío fue el despliegue en tiempo real de la posición del COM en la interfaz gráfica del biofeed-back. Se planteó inicialmente graficar cada una de las salidas tanto del acelerómetro como el giroscopio en donde se representarían 6 variables según la frecuencia de muestreo, lo que en la práctica no es útil. Al representar en gráficos a frecuencias muy altas es decir 100hz o superior, multiplicado por la cantidad de datos que se estén representando, junto con el procesamiento interno para mostrar esos datos, se genera una sobrecarga en la parte gráfica, lo que conlleva a ralentizar el proceso, generando pérdidas de información y fidelidad al desplegar en tiempo real.
 
 Para dar solución al problema, se implementó la opción de graficar un porcentaje de la información recibida en base a la frecuencia de muestreo seleccionada para la captura de información, con esto se asegura que la representación gráfica en tiempo real sea adecuado. Para ello a partir de la frecuencia de muestreo escogida para la prueba se calcula cada cuantas muestras debe ser enviado al gráfico principal, con el fin de no entorpecer la prueba (ver Ecuación \ref{eq:divisorFPS}). 
 Luego de realizar el cálculo, a partir del total de muestras se aplica el módulo del $DivisorFPS$, si el resultado es 0 se envía el dato. Es decir, se envían los múltiplos del $DivisorFPS$.
@@ -1337,7 +1363,7 @@ Nota: Si la frecuencia de muestreo es menor a los FPS escogidos se enviarán tod
 DivisorFPS=(int)\left(\frac{frecuenciaMuestreo}{FPS}\right)
 \end{equation}
 
-A continuación ejemplos del \textit{Divisor FPS} para 100Hz y 200Hz (Tabla \ref{table:divisorFPS100Hz} y Tabla \ref{table:divisorFPS200Hz} respectivamente).
+A continuación ejemplos del \textit{Divisor FPS} para 100Hz y 200Hz (Tabla \ref{table:divisorFPS100Hz} y Tabla \ref{table:divisorFPS200Hz} respectivamente) donde el resultado de dividir la frecuencia de muestreo en los FPS corresponde a la cantidad de muestras que son utilizadas para graficar.
 
 \begin{table}[!htb]
 	\begin{minipage}{.5\linewidth}
@@ -1385,8 +1411,8 @@ Según la orientación del sensor se generan distintas conjugaciones de los ejes
 
 \subsubsection{Comunicación Arduino-PC}
 \begin{itemize}
-	\item \textbf{Data Terminal Ready:} Según el tipo de semiconductor del puerto USB de Arduino puede venir por defecto el Pin DTR (Data Terminal Ready) la función Reset de Arduino puede venir activada o desactivada. 
-	La función Reset de Arduino permite al microcontrolador reiniciar las variables internas según las configuraciones encontradas en el Setup del código de programación, para así eliminar cualquier cambio realizado en la ejecución del Loop,lo que es complicación al usar modelos de Arduino que tengan o no esta característica.
+	\item \textbf{Data Terminal Ready:} Según el tipo de semiconductor incluido en el microcontrolador Arduino, específicamente del puerto USB. Puede venir por defecto el Pin DTR (Data Terminal Ready) soldado o no lo cual influye directamente en la función Reset de Arduino pudiendo venir activada o desactivada respectivamente. 
+	La función Reset de Arduino permite al microcontrolador reiniciar las variables internas según las configuraciones encontradas en el Setup del código de programación, para así eliminar cualquier cambio realizado en la ejecución del loop, lo que dificulta al usar modelos de Arduino que tengan o no esta característica.
 	
 	Para solucionar este problema se realiza una estandarización activando por Software el Pin DTR para que sin importar el modelo de semiconductor operen todos de forma igual en el software, para así no preocuparse de configuraciones o errores producidos debido al PIN DTR.
 
@@ -1405,7 +1431,7 @@ La solución a este inconveniente fue enviar cada nuevo dato a medida que era le
 
 \section{Conclusiones y Trabajos Futuros}
 \subsection{Conclusiones}
-Durante este trabajo de Tesis y partir de los resultados obtenidos, sus posteriores análisis e interpretación de los mismos, se pueden enunciar las siguientes como conclusiones más relevantes.
+Durante este trabajo de Tesis y partir de los resultados obtenidos, sus posteriores análisis e interpretación de los mismos, se pueden enunciar las siguientes conclusiones más relevantes.
 \begin{itemize}
 	\item El principal objetivo de esta Tesis era generar un solución usando Sensor IMU para el estudio del Balance. El principal aporte de este trabajo es demostrar como a partir de sensores inerciales, montados en una placa Arduino y controlados por el Ordenador, es posible replicar con un grado de similitud el estudio del Balance Clínico.
 	
@@ -1420,7 +1446,7 @@ Durante este trabajo de Tesis y partir de los resultados obtenidos, sus posterio
 
 \newpage
 \subsection{Trabajos Futuros}
-Este trabajo es tan solo una base y puede ser mejorado de las siguientes formas.
+Este desarrollo es un prototipo base con amplias proyecciones en los siguientes aspectos:
 
 \begin{itemize}
 	\item Uno de los principales trabajos futuros consiste en la validación de la solución como un instrumento para el estudio del Balance. Además generar diseño de empaquetado de la propuesta para que pueda convertirse en un producto comercializable.
