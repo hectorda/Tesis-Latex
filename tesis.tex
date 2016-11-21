@@ -31,11 +31,15 @@
 	pdfborder={0 0 0},
 }
 
+\usepackage{url}
+
+%%% --- The following two lines are what needs to be added --- %%%
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
 
 \newcommand{\grad}{$^{\circ}$}
 
 \newcommand{\nombreTesis}{\textsc{sistema de evaluación y bio-feedback para Balance postural}}
-
 \newcommand{\nombreDispositivo}{Dispositivo de BioFeed-Back }
 
 \newdateformat{fecha}{%Método para obtener el mes y el año
@@ -786,10 +790,8 @@ El filtro requiere un ángulo de punto de partida y para esto se utiliza el acel
 
 
 A partir de la ecuación del Filtro Complementario (\ref{eq:ecuacionFiltroComplementario}), los parámetros necesarios para el cálculo del ángulo usando este filtro, corresponden a los ángulos previamente calculados usando este mismo filtro y a su vez el Ángulo del acelerómetro que se calcula según la orientación ver Tabla \ref{table:calculoAnguloAcelerometro}.
-Entonces el parámetro nuevo a considerar es la velocidad angular $\omega$ que debe ser utilizada según la orientación del dispositivo, de igual forma como es utilizada al calcular el ángulo con el Giroscopio ver Tabla \ref{table:calculoAnguloGiroscopio}.
+Entonces el parámetro nuevo a considerar es la velocidad angular $\omega$ que debe ser utilizada según la orientación del dispositivo ver Tabla \ref{table:calculoAnguloGiroscopio}, junto con la nueva diferencia entre las muestras ($dt$).
 
-
- \footnote{El $dt$ es obtenido a partir de la diferencia entre la muestra actual y la anterior, por ende para el ángulo de inicio es considerado sólo el obtenido por el acelerómetro.}
 
 \subsubsection{Descripción Filtro de Kalman discreto}
 El filtro de Kalman es un estimador lineal, insesgado y óptimo del estado de un proceso. En él se ha impuesto la condición de que el proceso a ser estimado es regido por una dinámica lineal y que el ruido que lo perturba es blanco y gaussiano. Aun cuando la condición del comportamiento probabilístico gaussiano del ruido se omite, el filtro de Kalman sigue siendo el mejor filtro recursivo lineal (error de menor varianza) e insesgado \cite{TesisUSM}.
@@ -823,7 +825,7 @@ Luego de la integración de los filtros en el Software es posible utilizar el de
 Para comparar la precisión de los métodos, se realizó una prueba controlada, midiendo el angulo con un inclinómetro analógico. La prueba consistió en mantener un ángulo determinados segundos, para luego cambiar a otro.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{images/angKalCom}
+	\includegraphics[scale=0.9]{images/angKalCom}
 	\caption{Comparativa Angulo Acelerómetro vs Filtro Kalman vs Filtro Complementario.}
 	\label{fig:AnguloXvsFiltros}
 \end{figure}
@@ -856,7 +858,7 @@ Para contraste se realizaron 2 tipos de pruebas, en ambos tipos de pruebas se co
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{images/pruebas/Inclinometro/AnteroPosteriorB}
+	\includegraphics[scale=0.9]{images/pruebas/Inclinometro/AnteroPosteriorB}
 	\caption{Comparativa diferencia ángulos pequeños Antero-Posterior.}
 	\label{fig:inclinometroVsDispositivoAP}
 \end{figure}
@@ -903,7 +905,7 @@ Si analizamos los angulos grandes y las diferencias expuestas en la Tabla \ref{t
 \subsubsection{Ángulo Calculado vs Ángulo Esperado Medio-Lateral}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{images/pruebas/Inclinometro/medioLateralB}
+	\includegraphics[scale=0.89]{images/pruebas/Inclinometro/medioLateralB}
 	\caption{Comparativa diferencia ángulos pequeños Medio-Lateral.}
 	\label{fig:inclinometroVsDispositivoML}
 \end{figure}
@@ -1165,7 +1167,7 @@ Finalmente para el análisis de la información se dispone de herramientas intui
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.3]{images/graficosyreportes/analisisGraficos}
+	\includegraphics[scale=0.33]{images/graficosyreportes/analisisGraficos}
 	\caption{Ejemplo Herramienta de Análisis.}
 	\label{fig:analsisGraficos}
 \end{figure}

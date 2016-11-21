@@ -21,6 +21,7 @@ plot(tiempo,AkY, t1,x1,'r',t2,x2,'r',t3,x3,'r',t4,x4,'r',t5,x5,'r',t6,x6,'r',t7,
 ylabel("Angulos (grados)")
 xlabel("Tiempo (seg)")
 legend('Angulo Dispositivo','Angulo Inclinometro Analogico')
+set (h, 'fontsize', 50);
 media1=mean(AkY(1*fs:4*fs))
 media2=mean(AkY(5*fs:9*fs))
 media3=mean(AkY(11*fs:13*fs))
