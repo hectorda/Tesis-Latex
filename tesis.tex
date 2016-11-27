@@ -30,7 +30,6 @@
 	linkcolor=blue,  %choose some color if you want links to stand out
 	pdfborder={0 0 0},
 }
-
 \usepackage{url}
 
 %%% --- The following two lines are what needs to be added --- %%%
@@ -44,6 +43,8 @@
 
 \newdateformat{fecha}{%Método para obtener el mes y el año
 	\monthname[\THEMONTH] \THEYEAR}
+
+\renewcommand{\theequation}{Eq. \arabic{equation}}
 
 \DeclareLabelalphaTemplate{
 	\labelelement{
@@ -182,7 +183,7 @@ El proyecto en concreto consistió en evaluar las herramientas presentes en el L
 
 Para la construcción del dispositivo se utilizó un microcontrolador Arduino y un sensor IMU con acelerómetro y giroscopio de 3 ejes ambos. El sistema además está compuesto por un software para PC que procesa adecuadamente la información de los sensores en tiempo real, y mediante métodos matemáticos se transforman las variables físicas en variables relevantes para el análisis del balance al mismo tiempo que realimenta, consiguiendo la implementación de un sistema de Bio-feedback.
 
-Los resultados obtenidos muestran una solución tecnológica de bajo costo, sencillo uso y simpleza en la aplicación para el estudio de balance. Los resultados que arroja el sistema en la evaluación de la postura son comparables a las soluciones existentes en el laboratorio (plataformas de fuerza), lo que le otorga una gran potencialidad a esta solución.
+Los resultados obtenidos muestran una solución tecnológica de bajo costo, sencillo uso y aplicación para el estudio de balance. Los resultados que arroja el sistema en la evaluación de la postura son transferibles a las soluciones existentes en el laboratorio (plataformas de fuerza), lo que le otorga una gran potencialidad a esta solución.
 
 \newpage
 
@@ -245,7 +246,7 @@ Finalmente son expuestos los resultados, junto con las conclusiones más relevan
 Más de un tercio de la población mayor de 65 años presenta algunos problemas con el balance o deambulación. Los pacientes con trastornos neurológicos o musculo-esqueléticos son aún más propensos a tener problemas de equilibrio que afectan a su movilidad.
 El control del equilibrio es complejo e implica el mantenimiento de posturas \cite{mancini_relevance_2010}, mantener el movimiento y recuperar el equilibrio. El control de balance consiste en controlar el centro de masa del cuerpo entre los límites de estabilidad. Las evaluaciones clínicas del equilibrio pueden ayudar a evaluar el riesgo de caídas y/o determinar las causas de los trastornos del equilibrio subyacente.
 
-La mayoría de las escalas de valoración del equilibrio funcional evalúan el riesgo de caída y la necesidad de rehabilitación, pero no es diferenciado cada uno de los tipos de déficits del balance. Un enfoque de sistema para la evaluación clínica puede diferenciar varios tipos de trastornos del equilibrio y un enfoque fisiológico puede determinar los mecanismos subyacentes sensorio-motoras asociados al trastorno del equilibrio. Las medidas objetivas de equilibrio valiéndose de medios informáticos y sensores inerciales pueden traer más precisión, exactitud y sensibilidad que las pruebas de equilibrio clínicas \cite{chaudhry_measurement_2011}.
+La mayoría de las escalas de valoración del equilibrio funcional evalúan el riesgo de caída y la necesidad de rehabilitación, pero no es diferenciado cada uno de los tipos de déficits del balance. Un enfoque de sistema para la evaluación clínica puede diferenciar varios tipos de trastornos del equilibrio y un enfoque fisiológico puede determinar los mecanismos subyacentes sensorio-motoras asociados al trastorno del equilibrio. Las medidas objetivas de equilibrio valiéndose de medios informáticos y sensores inerciales pueden traer más precisión, exactitud y sensibilidad que las pruebas funcionales de equilibrio \cite{chaudhry_measurement_2011}.
 
 \subsection{Equipamientos para estudio del balance} Algunos de los principales instrumentos utilizados para el estudio del Balance son:
 
@@ -258,7 +259,7 @@ La mayoría de las escalas de valoración del equilibrio funcional evalúan el r
 	\label{fig:KistlerFP}
 \end{figure}
 
-Muchos estudios de balance se realizan mediante el registro del comportamiento del centro de presión utilizando plataformas de fuerza. Estos registros se denominan estabilometría \cite{scoppa_clinical_2013}.
+Muchos estudios de balance se realizan mediante el registro del comportamiento del centro de presión utilizando plataformas de fuerza. De estos registros se pueden obtener distintos parámetros de estabilometría \cite{scoppa_clinical_2013}.
 
 \subsubsection{Balance SD} El Balance SD es un instrumento desarrollado por Biodex \cite{Biodex} utilizado para la medicina física, especialmente para cualquiera que desee mejorar su equilibrio, aumentar la agilidad, desarrollar el tono muscular y tratar una amplia variedad de patologías asociadas a la perdida de balance.
 Es un equipo que cuenta con biofeed-back principalmente visual, pero en nuevas versiones incluye soporte para biofeed-back vibratorio.
@@ -271,7 +272,7 @@ Es un equipo que cuenta con biofeed-back principalmente visual, pero en nuevas v
 \end{figure}
 
 \subsection{Estudio del Balance usando Sensores}
-Recientemente, los sensores de movimiento se han desarrollado para la robótica, industria aeroespacial y en las mediciones biomédicas se han utilizado para medir el control del balance \cite{mancini_relevance_2010}.
+En las dos últimas décadas, los sensores de movimiento se han desarrollado en la robótica, industria aeroespacial y en mediciones biomédicas se han utilizado para obtener parámetros de balance \cite{mancini_relevance_2010}.
 \begin{comment}
 	Estos sensores, con transferencia inalámbrica de datos, tienen el potencial de superar los principales inconvenientes de coste, tamaño y ubicación limitado de las pruebas computarizadas , así como permitir la medición objetiva de la oscilación postural y movimientos durante la ejecución de tareas.
 \end{comment} 
@@ -309,11 +310,11 @@ La búsqueda nos arrojo lo siguiente :
 
 Los desarrollos que han sido descritos se asemejan principalmente en los conceptos involucrados, la mayoría recoge alguna de las características de la propuesta de solución que será posteriormente descrita en esta Tesis.
 
-Lo más relevante de esta búsqueda es el hecho de no existir una patente que englobe la idea del cálculo del COM usando sensores inerciales y biofeedback.
+Lo más relevante de esta búsqueda es el hecho de no existir una patente que englobe la idea de biofeedback del balance usando sensores inerciales. 
 
 \section{Marco Teórico}
 
-El marco teórico, que se desarrolla a continuación, permite conocer los conceptos básicos para el entendimiento del desarrollo de este proyecto de Tesis.
+El marco teórico a continuación, permite conocer los conceptos básicos para el entendimiento del desarrollo de este proyecto de Tesis.
 Partiendo por la definición de los estándares aplicados en los estudios del Balance, junto con definición de términos que comúnmente serán utilizados.
 
 
@@ -326,13 +327,13 @@ En el estudio del balance postural, los registros representados por los sensores
 
 \subsubsection{Sistemas Coordenados}
 
-Toda la información obtenida debe estar asociado según un sistema específico de coordenadas, que sirva de referencia para la interpretación y comprensión de la información proveniente de las variables cinemáticas asociadas al movimiento humano.
+Toda la información obtenida debe estar asociado según un sistema específico de coordenadas estandarizado, que sirva de referencia para la interpretación y comprensión de la información proveniente de las variables cinemáticas asociadas al movimiento humano.
 
 \begin{itemize}
 	
 	\item \textbf{Planos anatómicos} 
 	\subitem \textbf{Plano Sagital:}
-	Se toma de referencia el cuerpo humano trazando línea una  vertical de referencia que teóricamente cruza el cuerpo por la parte media y central, a modo de plomada imaginaria, esta línea ayuda en la distinción de miembros o elementos en el «lado izquierdo» o «lado derecho» ver Figura \ref{fig:sagital}.
+	Se toma de referencia el cuerpo humano trazando  una línea vertical de referencia que teóricamente cruza el cuerpo por la parte media y central, a modo de plomada imaginaria, esta línea ayuda en la distinción de miembros o elementos en el «lado izquierdo» o «lado derecho» ver Figura \ref{fig:sagital}.
 	\subitem \textbf{Plano Frontal:} Forma un ángulo recto con los planos sagitales. En un ser humano, el plano medio coronal divide el cuerpo en posición de pie en dos mitades (frontal y dorsal, o anterior y posterior) mediante una línea imaginaria que corta ambos hombros ver Figura \ref{fig:sagital}.
 	
 	\begin{figure}[H]
@@ -358,19 +359,22 @@ El cálculo del Centro de Presión (COP) en las plataformas de fuerza en general
 \end{figure}
 
 \subsubsection{Estabilometría}
-Corresponde al estudio COP para determinar deficiencias posturales que perjudican el Balance.
+Corresponde al estudio COP o determinar deficiencias posturales que dificultan la expresión balance corporal.
 
 Existen estándares respecto a las características necesarias para la medición del COP \cite{scoppa_clinical_2013}.
 
 La normalización de estabilometría acordados por el ISPGR (International Society for Posture and Gait Research) fueron definidas segun un conjunto de características metrológicas para las plataformas estabilométricas.
-Basándose tanto en la práctica y verificación experimental se acordó que, para obtener una apropiada precisión y sensibilidad:
+Basándose tanto en la práctica y verificación experimental se acordó que, para obtener una apropiada precisión y sensibilidad.
+
+El registro de variables estabilométricas debe contener:
 \begin{itemize}
 	\item El intervalo de adquisición no debe ser inferior a 25s.
 	\item La frecuencia de muestreo debe ser de al menos 50 Hz (fs=100Hz óptima).
 	\item Estándares Técnicos Tabla (\ref{table:mediciones}):
 	\begin{table}[H]
 		\centering
-		
+		\caption{Estándares Técnicos Mediciones.}
+		\resizebox{0.7\textwidth}{!}{%
 		\begin{tabular}{|c|c|}			
 			\hline \textbf{Variable} & \textbf{Valor} 	\\ 
 			\hline Exactitud 	& $>$ 0.1 mm 		\\ 
@@ -378,8 +382,7 @@ Basándose tanto en la práctica y verificación experimental se acordó que, pa
 			\hline Resolución 	& $>$ 0.05 mm 		\\ 
 			\hline Ancho Frecuencia & 0.01–10 Hz	\\ 
 			\hline 			
-		\end{tabular}
-		\caption{Estándares Técnicos Mediciones.}
+		\end{tabular}}
 		\label{table:mediciones}
 	\end{table}	  
 \end{itemize}
@@ -427,6 +430,7 @@ El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\r
 	
 	\begin{table}[H]
 		\centering
+		\caption{Características de los sensores LSB: Bit Menos Significativo.}
 		\begin{tabular}{|c|c|c|c|}
 			\hline
 			\multicolumn{2}{|c|}{Acelerómetro} &\multicolumn{2}{|c|}{Giroscopio}   \\
@@ -438,7 +442,6 @@ El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\r
 			$\pm 16$    &  2048  & $\pm 2000$   & 	16.4      	\\ 
 			\hline
 		\end{tabular}
-		\caption{Características de los sensores LSB: Bit Menos Significativo.}
 		\label{table:caracteristicasSensor}
 	\end{table}
 	
@@ -451,6 +454,7 @@ El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\r
 	\begin{table}[H]
 		\centering
 		\label{table:resolucionSensor}
+		\caption{Resolución de los sensores}
 		\begin{tabular}{|c|c|c|c|}
 			\hline
 			\multicolumn{2}{|c|}{Acelerómetro} &\multicolumn{2}{|c|}{Giroscopio}   \\
@@ -462,12 +466,11 @@ El giroscopio mide la rotación alrededor de cada uno de los ejes ver Figura (\r
 			$\pm 16$    &  $4.88828125e^{-4}$   & $\pm 2000$    & 	$6.097560976e^{-2}$     \\ 
 			\hline
 		\end{tabular}
-		\caption{Resolución de los sensores}
 	\end{table}
 	
 \end{itemize}
 
-\subsubsection{Configuración de MPU6050}
+\subsubsection{Configuración de MPU6050} \label{config_MPU6050}
 Por defecto el MPU6050 viene configurada con los parámetros básicos para realizar la captura de información, lo cual puede ser perfectamente útil según sea el caso de estudio, pero si se desea que los sensores operen en rangos específicos y/o los datos sean obtenidos a frecuencias específicas se debe comprender como llevar a cabo la configuración en cada uno de los registros internos encargados de cada configuración. El mapa de los registros \cite{MAPREGISTER} proporcionado  en el sitio de InverSense es buena guía para entender cómo se realiza esta labor.
 \newline En el interior del MPU6050 se encuentran más de 70 registros cada uno de 8 Bit, para la configuraciones listadas a continuación se deben usar solo algunos pocos.
 \begin{itemize}
@@ -497,14 +500,14 @@ Luego de realizar la configuración de los registros del MPU6050, se deben leer 
 	\begin{table}[H]
 		\centering
 		\label{table:registrosgyro}
+		\caption{Registros mediciones Giroscopio.}	
 		\begin{tabular}{|l|l|c|l|c|}
 			\hline
 			\textbf{Eje} & \textbf{Registro} & \textbf{Dirección (Hex)} & \textbf{Registro} & \textbf{Dirección (Hex)} \\ \hline
 			X            & GYRO\_XOUT\_H     & 0x43                     & GYRO\_XOUT\_L     & 0x44                     \\ \hline
 			Y            & GYRO\_YOUT\_H     & 0x45                     & GYRO\_YOUT\_L     & 0x46                     \\ \hline
 			Z            & GYRO\_ZOUT\_H     & 0x47                     & GYRO\_ZOUT\_L     & 0x48                     \\ \hline
-		\end{tabular}
-		\caption{Registros mediciones Giroscopio.}					
+		\end{tabular}				
 	\end{table}
 	
 	Posteriormente de ser leídos ambos registros de cada eje estos deben ser sumados usando aritmética binaria en donde el valor obtenido del primer registro leído le es aplicado un corrimiento de 8 bit para luego sumar el segundo obtenido, además se utiliza el complemento a 2 para la obtención de valores negativos, que genera como dato resultante un valor de entre aproximadamente $\pm 2^{15}$, este valor resultante debe ser dividido según la sensibilidad asociada a el rango escogido del giroscopio, para transformar el dato RAW del giroscopio y obtener la información física en (\grad/seg).
@@ -513,6 +516,7 @@ Luego de realizar la configuración de los registros del MPU6050, se deben leer 
 	
 	\begin{table}[H]
 		\centering
+		\caption{Registros mediciones Acelerómetro.}
 		\label{table:registrosaccel}
 		\begin{tabular}{|l|l|c|l|c|}
 			\hline
@@ -520,8 +524,7 @@ Luego de realizar la configuración de los registros del MPU6050, se deben leer 
 			X            & ACCEL\_XOUT\_H     & 0x3B                     & ACCEL\_XOUT\_L     & 0x3C                     \\ \hline
 			Y            & ACCEL\_YOUT\_H     & 0x3D                     & ACCEL\_YOUT\_L     & 0x3E                     \\ \hline
 			Z            & ACCEL\_ZOUT\_H     & 0x3F                     & ACCEL\_ZOUT\_L     & 0x40                     \\ \hline
-		\end{tabular}
-		\caption{Registros mediciones Acelerómetro.}					
+		\end{tabular}				
 	\end{table}				
 	
 	Para luego unir los registros y usar el complemento a 2 acorde a cada eje, cada uno de estos valores deben ser divididos según el rango escogido, que determina la sensibilidad a usar para obtener la información física de la aceleración.
@@ -583,19 +586,19 @@ El sistema consta principalmente de un microcontrolador Arduino, un sensor inerc
 
 El sistema es definido y contrastado a partir del equipamiento existente en el Departamento de Kinesiologia. Para evaluación y realimentación de Balance, es decir, plataforma de fuerza Kistler.
 
-En lo referente a hardware se utilizó un sensor inercial MPU6050, el cual es ubicado en el sujeto de prueba en una posición aproximada al centro de masa (aprox. 55\% de la altura). Este sensor es el encargado de capturar el movimiento generado por el sujeto la cual es  enviada a través del microcontrolador Arduino al software (PC) mediante conexión serial (USB). El software procesa la información(velocidad angular y aceleración lineal) para obtener el ángulo y desplazamiento, posteriormente permite efectuar análisis específicos de la información utilizando interfaces gráficas.
+En lo referente a hardware, se utilizó un sensor inercial MPU6050, el cual es ubicado en el sujeto de prueba en una posición aproximada al centro de masa (aprox. 55\% de la altura). Este sensor es el encargado de capturar el movimiento generado por el sujeto la cual es  enviada a través del microcontrolador Arduino al software (PC) mediante conexión serial (USB). El software procesa la información(velocidad angular y aceleración lineal) para obtener el ángulo y desplazamiento, posteriormente permite el tratamiento de la información utilizando interfaces gráficas.
 
 
 \subsection{Programación del Microcontrolador}
 Uno de los primeros pasos en el desarrollo de la solución consiste en utilizar el IDE de Arduino para realizar la programación inicial del microcontrolador. La conexión del sensor MPU6050 permite la configuración y uso del sensor.
-En la configuración se definen ciertos registros, además de precisar el formato de envío para despliegue de la información proveniente del sensor, consta de una línea con 6 datos separados por espacios.
+Para la configuración del MPU 6050 se definen ciertos registros descritos en la página \pageref{config_MPU6050} apartado \ref{config_MPU6050}, además de precisar el formato de envío para despliegue de la información proveniente del sensor, consta de una línea con 6 datos separados por espacios.
 
 La programación del microcontrolador se describe en la figura(\ref{fig:arduinocode}).
 En el ciclo de ejecución de Arduino se requiere la configuración del sensor MPU6050. La configuración consta de 4 parámetros fundamentales: Frecuencia de Muestreo, Filtro pasa bajo, rango Acelerómetro, rango Giroscopio. Posteriormente comienza el envío de la información al software (PC) via Serial.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.45]{images/diagramacodigoarduino}
+	\includegraphics[scale=0.6]{images/diagramacodigoarduino}
 	\caption{Diagrama Código Arduino.}
 	\label{fig:arduinocode}
 \end{figure}
@@ -606,10 +609,10 @@ Finalizada la configuración se procede a la lectura de los registros para obten
 \begin{itemize}
 	\item El sistema debe ser capaz de registrar (aceleración lineal, velocidad angular, posición angular). Procesarlas y realizar análisis Biomecánico. Además debe procesar los registros para obtener una proyección del Centro de Masa.
 	\item El sistema debe ser capaz de representar en Tiempo Real el desplazamiento del centro de masa.
-	\item El sistema debe permitir la generación de reportes, con todas las variables estudiadas y analizadas durante la prueba, exportar datos crudos, gráficos, informes.
+	\item El sistema debe permitir la generación de reportes, con todas las variables estudiadas y analizadas durante la prueba (aceleración lineal, velocidad angular, posición angular,desplazamiento), exportar datos crudos, generar gráficos e informes.
 	\item El sistema debe permitir la configuración de los sensores, ajustar su sensibilidad rango.
 	\item Se debe permitir la configuración de parámetros propios del uso del sistema. Por ejemplo: orientación del sensor, altura, tiempo de prueba, etc.
-	\item En lo referente a análisis de los gráficos de resultados, debe ser posible calcular estadísticos, como media, desviación estándar y junto con los valores máximos y mínimos.
+	\item En lo referente a presentación de resultados, debe ser posible calcular estadísticos, como media, desviación estándar y junto con los valores máximos y mínimos.
 \end{itemize} 
 
 \subsection{Requisitos No funcionales}
@@ -623,10 +626,10 @@ Finalizada la configuración se procede a la lectura de los registros para obten
 \newpage
 \subsection{Registro de variables cinemáticas}
 El ángulo de inclinación modelo péndulo invertido\cite{gage_kinematic_2004} es la variable fundamental de este sistema.
-Para efectos de análisis o representación final, a partir de las variaciones de aceleración lineal y velocidad angular detectadas por los sensores se realiza el cálculo del ángulo, que para efectos de pruebas es un indicador equivalente a la inclinación que ha realizado el sujeto.
+Para efectos de análisis o representación final, a partir de las variaciones de aceleración lineal y velocidad angular detectadas por los sensores se realiza el cálculo del ángulo, que para efectos de pruebas es un indicador equivalente a la inclinación que ha realizado el sujeto que es proporcional a la inclinación del sensor.
 
 \subsubsection{Referencia Dispositivo y Sensor}
-El dispositivo cuenta con una referencia para indicar hacia donde se encuentran cada uno de sus ejes. La idea presentada a continuación fue con el objetivo de simplificar y permitir la mayor versatilidad al momento de instalar el sensor para realizar mediciones.
+El dispositivo cuenta con una referencia para indicar hacia donde se encuentran cada uno de sus ejes. La idea para referenciar el sensor presentada a continuación fue con el objetivo de simplificar y permitir la mayor versatilidad al momento de instalar el sensor y realizar mediciones.
 
 \begin{figure}[H]
 	\centering
@@ -644,6 +647,7 @@ El listado de orientaciones predefinidas para referencia del sensor, junto con s
 
 \begin{table}[H]
 	\centering
+	\caption{Tabla listado de orientaciones pre-configuradas.}
 	\begin{tabular}{|c|c|}
 		\hline 
 		\textbf{Orientación} & \textbf{Diagrama} \\ 
@@ -661,7 +665,6 @@ El listado de orientaciones predefinidas para referencia del sensor, junto con s
 		Horizontal Abajo &  \includegraphics[scale=0.2]{images/IMU/horizontalabajo}   \\ 
 		\hline 
 	\end{tabular}
-	\caption{Tabla listado de orientaciones pre-configuradas.}
 	\label{table:listadoOrientaciones}
 \end{table}
 
@@ -675,6 +678,7 @@ Para la obtención del ángulo se debe tener en consideración la orientación d
 
 \begin{table}[H]
 	\centering
+	\caption{Tabla cálculo ángulo usando Acelerómetro.}
 	\begin{tabular}{|c|c|c|}
 		\hline 
 		\textbf{Orientación} & \textbf{Ángulo Medio-Lateral} & \textbf{Ángulo Antero-Posterior} \\ 
@@ -692,7 +696,6 @@ Para la obtención del ángulo se debe tener en consideración la orientación d
 		Horizontal Abajo & $\tan{\left(\frac{aceleracionY}{\sqrt{aceleracionX^{2}+aceleracionZ^{2}}}\right)} $ &  $\tan{\left(\frac{aceleracionX}{\sqrt{aceleracionY^{2}+aceleracionZ^{2}}}\right)} $ \\ 
 		\hline 
 	\end{tabular}
-	\caption{Tabla cálculo ángulo usando Acelerómetro.}
 	\label{table:calculoAnguloAcelerometro}
 \end{table}
 
@@ -707,6 +710,7 @@ La velocidad angular para describir el ángulo Antero-Posterior/Medio-Lateral es
 
 \begin{table}[H]
 	\centering
+	\caption{Tabla Velocidad angular según orientación Giroscopio.} 
 	\begin{tabular}{|c|c|c|}
 		\hline 
 		\textbf{Orientación} & \textbf{Medio-Lateral} & \textbf{Antero-Posterior} \\ 
@@ -724,7 +728,6 @@ La velocidad angular para describir el ángulo Antero-Posterior/Medio-Lateral es
 		Horizontal Abajo & $\omega= -GiroscopioX$ &  $\omega= GiroscopioY$ \\ 
 		\hline 
 	\end{tabular}
-	\caption{Tabla Velocidad angular según orientación Giroscopio.} 
 	\label{table:calculoAnguloGiroscopio}
 \end{table}
 
@@ -753,7 +756,7 @@ En el software se implementaron 3 algoritmos: (a) Sin filtro, (b) Filtro de Kalm
 A partir de la fórmula de la tangente, según la orientación escogida son conjugados los ejes leídos directamente de los sensores, con el fin de aplicar la formula en el sentido que corresponda tal como muestra la Tabla \ref{table:calculoAnguloAcelerometro}.
 
 
-Para el análisis del desplazamiento del centro de masa se requiere que el ángulo obtenido sea preciso, para ello se estudiaron e implementaron 2 filtros que permiten una correcta integración de los datos de aceleración lineal con velocidad angular.
+Para el análisis del desplazamiento del centro de masa se requiere que el ángulo obtenido sea preciso, para ello se estudiaron e implementaron 2 filtros que permiten la integración de aceleración lineal con velocidad angular.
 
 Con el ángulo obtenido a partir del acelerómetro, existe la opción de agregar más información para corregir/mejorar la aproximación.
 
@@ -774,7 +777,7 @@ Todo lo anterior queda descrito usando la siguiente Ecuación (\ref{eq:ecuacionF
 anguloActual = (1-\alpha)*(anguloAnterior+\omega*dt)+(\alpha)*anguloAcelerometro
 \end{equation}
 
-En donde cada de las variables representa lo siguiente:
+Donde cada de las variables representa lo siguiente:
 \begin{itemize}
 	\item \textit{anguloAcelerometro:} El ángulo calculado mediante la aceleración obtenida por el Acelerómetro.
 	\item $\omega$: Es la velocidad angular obtenida por el Giroscopio que hemos calculado previamente.
@@ -812,7 +815,7 @@ El Filtro consiste en 2 estados Predicción y Actualización.
 \subsubsection{Implementacion FIltro de Kalman discreto}
 A partir de la información proveniente de las mediciones del Proceso de captura de información cinemática, se intenta obtener el ángulo, con la premisa que el filtro retornará el mínimo error por las fluctuaciones entrantes del ruido en las mediciones obtenidas.
 
-La implementación realizada se basa en el uso de las libredias de C++ propuesta en \cite{kalmanTKJ}. Su implementación es sencilla, y los parámetros necesarios son exactamente los mismos utilizados por el filtro complementario.
+La implementación realizada se basa en el uso de las librerías de C++ propuesta en \cite{kalmanTKJ}. Su implementación es sencilla, y los parámetros necesarios son exactamente los mismos utilizados por el filtro complementario.
 
 Los parámetros de entradas para la utilización del filtro sin los mismos descritos en las tablas \ref{table:calculoAnguloAcelerometro} y \ref{table:calculoAnguloGiroscopio}.
 Debe ser considerado el \textit{nuevoAngulo} entregado mediante el acelerómetro y además la \textit{nuevaVelocidadAngular} obtenida por el giroscopio, junto con la diferencia de tiempo \textit{dt}, que corresponden a exactamente los mismos datos usados por el filtro complementario.
@@ -865,9 +868,10 @@ Para contraste se realizaron 2 tipos de pruebas, en ambos tipos de pruebas se co
 
 \begin{table}[H]
 	\centering
+	\caption{Comparativa diferencia ángulos pequeños Antero-Posterior.}
 	\begin{tabular}{|c|c|c|}
 		\hline
-		\textbf{Inclinómetro Análogo (Ángulo)} & \multicolumn{1}{l|}{\textbf{Dispositivo (Ángulo Promedio)}} & Diferencia 				\\ \hline
+		\textbf{Inclinómetro Análogo (Ángulo (\grad))} & \multicolumn{1}{l|}{\textbf{Dispositivo (Ángulo Promedio (\grad))}} & Diferencia 				\\ \hline
 		1                                      & 7.8585                                                      & 6.8585                     \\ \hline
 		3                                      & 9.9950                                                      & 6.9950                    \\ \hline
 		5                                      & 11.918                                                      & 6.918                     \\ \hline
@@ -875,16 +879,16 @@ Para contraste se realizaron 2 tipos de pruebas, en ambos tipos de pruebas se co
 		5                                      & 11.826                                                      & 6.826                      \\ \hline
 		3                                      & 9.6687                                                      & 6.6687                     \\ \hline
 		1                                      & 7.2764                                                      & 6.2764                     \\ \hline
-	\end{tabular}
-	\caption{Comparativa diferencia ángulos pequeños Antero-Posterior.}
+	\end{tabular}	
 	\label{table:inclinometroVsDispositivoAP}
 \end{table}
 
 \begin{table}[H]
 	\centering
+	\caption{Comparativa diferencia ángulos grandes Antero-Posterior.}
 	\begin{tabular}{|c|c|c|}
 		\hline
-		\textbf{Inclinómetro Análogo (Ángulo)} & \multicolumn{1}{l|}{\textbf{Dispositivo (Ángulo Promedio)}} & Diferencia 				\\ \hline
+		\textbf{Inclinómetro Análogo (Ángulo (\grad))} & \multicolumn{1}{l|}{\textbf{Dispositivo (Ángulo Promedio (\grad))}} & Diferencia 				\\ \hline
 		1                                      & 7.9199                                                      & 6.9199                     \\ \hline
 		20                                      & 26.092                                                      & 6.092                    \\ \hline
 		40                                      & 42.296                                                      & 2.296                     \\ \hline
@@ -892,8 +896,7 @@ Para contraste se realizaron 2 tipos de pruebas, en ambos tipos de pruebas se co
 		40                                      & 42.694                                                      & 2.694                      \\ \hline
 		20                                      & 25.042                                                      & 5.042                     \\ \hline
 		1                                      & 6.8771                                                      & 5.8771                     \\ \hline
-	\end{tabular}
-	\caption{Comparativa diferencia ángulos grandes Antero-Posterior.}
+	\end{tabular}	
 	\label{table:inclinometroVsDispositivoAPD}
 \end{table}
 
@@ -912,27 +915,28 @@ Si analizamos los angulos grandes y las diferencias expuestas en la Tabla \ref{t
 
 \begin{table}[H]
 	\centering
-		\begin{tabular}{|c|c|c|}
-			\hline
-			\textbf{Inclinómetro Análogo (Ángulo)} & \multicolumn{1}{l|}{\textbf{Dispositivo (Ángulo Promedio)}} & Diferencia				 \\ \hline
-			1                                      & 4.8264                                                      & 3.8264                     \\ \hline
-			3                                      & 6.8912                                                      & 3.8912                     \\ \hline
-			5                                      & 8.5621                                                      & 3.5621                     \\ \hline
-			7                                      & 10.618                                                      & 3.618                      \\ \hline
-			5                                      & 8.3565                                                      & 3.3565                     \\ \hline
-			3                                      & 6.3586                                                      & 3.3586                     \\ \hline
-			1                                      & 4.3344                                                      & 3.3344                     \\ \hline
-		\end{tabular}
-		\caption{Comparativa diferencia ángulos pequeños Medio-Lateral.}
-		\label{table:inclinometroVsDispositivoML}
+	\caption{Comparativa diferencia ángulos pequeños Medio-Lateral.}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{Inclinómetro Análogo (Ángulo (\grad))} & \multicolumn{1}{l|}{\textbf{Dispositivo (Ángulo Promedio (\grad))}} & Diferencia				 \\ \hline
+		1                                      & 4.8264                                                      & 3.8264                     \\ \hline
+		3                                      & 6.8912                                                      & 3.8912                     \\ \hline
+		5                                      & 8.5621                                                      & 3.5621                     \\ \hline
+		7                                      & 10.618                                                      & 3.618                      \\ \hline
+		5                                      & 8.3565                                                      & 3.3565                     \\ \hline
+		3                                      & 6.3586                                                      & 3.3586                     \\ \hline
+		1                                      & 4.3344                                                      & 3.3344                     \\ \hline
+	\end{tabular}		
+	\label{table:inclinometroVsDispositivoML}
 \end{table}
 
 
 \begin{table}[H]
 	\centering
+	\caption{Comparativa diferencia ángulos grandes Medio-Lateral.}
 	\begin{tabular}{|c|c|c|}
 		\hline
-		\textbf{Inclinómetro Análogo (Ángulo)} & \multicolumn{1}{l|}{\textbf{Dispositivo (Ángulo Promedio)}} & Diferencia				 \\ \hline
+		\textbf{Inclinómetro Análogo (Ángulo (\grad))} & \multicolumn{1}{l|}{\textbf{Dispositivo (Ángulo Promedio (\grad))}} & Diferencia				 \\ \hline
 		1                                      & 3.5983                                                      & 2.5983                     \\ \hline
 		20                                     & 22.313                                                      & 2.313                     \\ \hline
 		40                                     & 40.628                                                      & 0.628                    \\ \hline
@@ -940,8 +944,7 @@ Si analizamos los angulos grandes y las diferencias expuestas en la Tabla \ref{t
 		40                                     & 40.589                                                      & 0.589                     \\ \hline
 		20                                     & 21.933                                                      & 1.933                      \\ \hline
 		1                                      & 2.5951                                                      & 1.5951                    \\ \hline
-	\end{tabular}
-	\caption{Comparativa diferencia ángulos grandes Medio-Lateral.}
+	\end{tabular}	
 	\label{table:inclinometroVsDispositivoMLD}
 \end{table}
 
@@ -1037,6 +1040,7 @@ Al comparar los métodos anteriormente mencionados para el cálculo del desplaza
 
 Por lo tanto se debe tener en consideración al momento de escoger con que método se realizará el cálculo, ya que con ambos se puede interpretar el desplazamiento. Para el estudio del balance los ángulos varían entre ($\pm 3$\grad), con lo cual según los análisis expuestos anteriormente ambos métodos se comportan de forma similar en ese rango.
 Dicho esto de ahora en adelante cuando sea realizado el cálculo del desplazamiento se utilizará el método de la proyección.
+
 
 
 \newpage
@@ -1139,21 +1143,16 @@ La ventada de configuración (Figura \ref{fig:configurarPrueba}) considera los s
 \subsubsection{Gráficos y Reportes}
 Luego de realizar la configuración y presionando el botón Iniciar Prueba, se procede a desplegar la información obtenida, en forma de gráficos.
 
+El Gráfico principal de la aplicación es generado en tiempo real a partir de la información procesada del movimiento del sujeto obtenida por los sensores y representada según las opciones escogidas en la configuración.
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.76]{images/graficosyreportes/graficoPrincipal}
-	\caption{Gráfico de ejecución Prueba.}
+	\includegraphics[scale=0.84]{images/graficosyreportes/graficoPrincipal}
+	\caption{Ejemplo gráfico de ejecución Prueba.}
 	\label{fig:graficoPrincipal}
 \end{figure}
 
-El sistema permite escoger y exportar tanto los gráficos o series de datos obtenidos durante la prueba. 
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.6]{images/graficosyreportes/graficos}
-	\caption{Interfaz Principal Exportar y Seleccionar Gráfico.}
-	\label{fig:exportargrafico}
-\end{figure}
-El sistema permite el registro y visualización de los datos crudos (sin procesar) provenientes de los sensores, los cuales pueden ser visualizados y exportados.
+\newpage El sistema permite el registro y visualización de los datos crudos (sin procesar) provenientes de los sensores, los cuales pueden ser visualizados y exportados.
 
 \begin{figure}[H]
 	\centering
@@ -1162,12 +1161,20 @@ El sistema permite el registro y visualización de los datos crudos (sin procesa
 	\label{fig:Graficosensores}
 \end{figure}
 
+El sistema permite escoger y exportar tanto los gráficos o series de datos obtenidos durante la prueba. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.53]{images/graficosyreportes/graficos}
+	\caption{Interfaz Principal Exportar y Seleccionar Gráfico.}
+	\label{fig:exportargrafico}
+\end{figure}
 
-Finalmente para el análisis de la información se dispone de herramientas intuitivas que permiten seleccionar intervalos, para el cálculo de estadísticos de la prueba, media, máximos, mínimos, etc. ver Figura \ref{fig:analsisGraficos}.
+Finalmente para el análisis de la información se dispone de herramientas intuitivas para cada uno de los gráficos obtenidos.
+Son accesibles en la parte inferior de cada gráfico mediante un botón que despliega una interfaz flotante que permite seleccionar intervalos, para el cálculo de estadísticos de la prueba, media, máximos, mínimos, etc. ver Figura \ref{fig:analsisGraficos}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.33]{images/graficosyreportes/analisisGraficos}
+	\includegraphics[scale=0.75]{images/graficosyreportes/analisisGraficos}
 	\caption{Ejemplo Herramienta de Análisis.}
 	\label{fig:analsisGraficos}
 \end{figure}
@@ -1176,7 +1183,9 @@ Cabe destacar que cualquier cambio sobre los intervalos a estudiar calcula los d
 
 \newpage
 \subsection{Resultados y Análisis}
-Con respecto a la comparación entre los paradigmas usados para el análisis del desplazamiento del centro de Masa, la utilización de sensores piezo-eléctricos para la presión ejercida por el sujeto (COP), en contraste por el estudiado en esta Tesis, utilizando acelerometría para obtener la variación espacial del centro de masa (COM), los resultados y análisis de las pruebas realizadas serán descritos a continuación.
+Con respecto a la comparación entre los paradigmas usados para el análisis del desplazamiento del centro de Masa, la utilización de sensores piezo-eléctricos para la presión ejercida por el sujeto (COP) en contraste por el estudiado en esta Tesis, utilizando acelerometría para obtener la variación espacial del centro de masa (COM).
+
+Los resultados y análisis de las pruebas realizadas serán descritos a continuación.
 
 \subsubsection{Contraste Dispositivo vs Plataforma de Fuerza Kistler}
 
@@ -1199,24 +1208,20 @@ El dispositivo fue evaluado en 3 posiciones:
 \newpage
 \subsubsection{Prueba Espalda} En la siguiente prueba el dispositivo fue ubicado en la espalda, en zona las vértebras lumbares del sujeto. Se realiza la medición en la Plataforma Kistler en conjunto con el \nombreDispositivo creado con objetivo de Tesis.
 		
-	
-	\begin{figure}[H]
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{images/pruebas/Espalda/Antero-Posterior}
+	\caption{Prueba Espalda - Antero-Posterior.}
+	\label{fig:anteroPosteriorEspalda}
+\end{figure}
+
+\begin{figure}[H]
 		\centering
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=1\linewidth]{images/pruebas/Espalda/Antero-Posterior}
-			\caption{Antero-Posterior}
-			\label{fig:anteroPosteriorEspalda}
-		\end{subfigure}%
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=1\linewidth]{images/pruebas/Espalda/Medio-Lateral}
-			\caption{Medio-Lateral}
-			\label{fig:medioLateralEspalda}
-		\end{subfigure}
-		\caption{Prueba \nombreDispositivo ubicado Espalda.}
-		\label{fig:pruebaEspalda}
-	\end{figure}
+		\includegraphics[width=1\linewidth]{images/pruebas/Espalda/Medio-Lateral}
+		\caption{Prueba Espalda - Medio-Lateral}
+		\label{fig:medioLateralEspalda}
+\end{figure}
 	
 	En los resultados obtenidos de la prueba se puede apreciar la gran similitud del comportamiento de ambas curvas.
 	
@@ -1230,20 +1235,15 @@ El dispositivo fue evaluado en 3 posiciones:
 		
 	\begin{figure}[H]
 		\centering
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=1\linewidth]{images/pruebas/LateralIzquierdo/Antero-Posterior}
-			\caption{Antero-Posterior}
-			\label{fig:anteroPosteriorLateral}
-		\end{subfigure}%
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=1\linewidth]{images/pruebas/LateralIzquierdo/Medio-Lateral}
-			\caption{Medio-Lateral}
-			\label{fig:medioLateralIzquierdo}
-		\end{subfigure}
-		\caption{Prueba \nombreDispositivo ubicado Lateral Izquierdo.}
-		\label{fig:pruebaLateralIzquierdo}
+		\includegraphics[width=1\linewidth]{images/pruebas/LateralIzquierdo/Antero-Posterior}
+		\caption{Prueba Lateral Izquierdo - Antero-Posterior}
+		\label{fig:anteroPosteriorLateral}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\linewidth]{images/pruebas/LateralIzquierdo/Medio-Lateral}
+		\caption{Prueba Lateral Izquierdo - Medio-Lateral}
+		\label{fig:medioLateralIzquierdo}	
 	\end{figure}
 	
 	Los resultados obtenidos inicialmente se encontraban desplazados, es decir, las curvas no coincidían, pero al centrar los datos, las curvas del desplazamiento coinciden en gran porcentaje en cuanto a la tendencia, altos y bajos.
@@ -1257,20 +1257,16 @@ Los resultados obtenidos son los siguientes:
 	
 	\begin{figure}[H]
 		\centering
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=1\linewidth]{images/pruebas/Frontal/Antero-Posterior}
-			\caption{Antero-Posterior}
-			\label{fig:anteroPosterioFrontal}
-		\end{subfigure}%
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=1\linewidth]{images/pruebas/Frontal/Medio-Lateral}
-			\caption{Medio-Lateral}
-			\label{fig:medioLateralFrontal}
-		\end{subfigure}
-		\caption{Prueba \nombreDispositivo ubicado Frontal Sujeto.}
-		\label{fig:pruebaLateralFrontal}
+		\centering
+		\includegraphics[width=1\linewidth]{images/pruebas/Frontal/Antero-Posterior}
+		\caption{Prueba Frontal - Antero-Posterior}
+		\label{fig:anteroPosterioFrontal}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\linewidth]{images/pruebas/Frontal/Medio-Lateral}
+		\caption{Prueba Frontal - Medio-Lateral}
+		\label{fig:medioLateralFrontal}
 	\end{figure}
 	
 Los datos tanto en el sentido Antero-Posterior, como en el medio lateral sufrieron de traslación, con lo cual debieron ser ajustados para realizar una comparación más directa.
@@ -1284,6 +1280,7 @@ A continuación se encuentra la definición de todas las ecuaciones utilizadas p
 \newline
 
 \begin{table}[H]
+		\caption{Definición de ecuaciones.}
 	\begin{tcolorbox}[colframe=black,title=Definición de ecuaciones,center title]	
 		
 		\begin{align}
@@ -1308,12 +1305,12 @@ A continuación se encuentra la definición de todas las ecuaciones utilizadas p
 		\textrm{Máxima diferencia porcentual}:	Max\Delta^{*}&=Max(\Delta^{*})*\frac{100}{R^{*}}
 		\end{align}	
 	\end{tcolorbox}
-	\caption{Definición de ecuaciones.}
 	\label{table:definicionEcuaciones}
 \end{table}
 
 \begin{table}[H]
 	\centering
+	\caption{Tabla resultados pruebas.}
 	\begin{tabular}{|c|c|c|c|c|c|c|}
 		\hline
 		\multirow{2}{*}{Pruebas} &
@@ -1327,14 +1324,17 @@ A continuación se encuentra la definición de todas las ecuaciones utilizadas p
 		\hline
 		\shortstack{Rango\\Kistler (cm)} & 18.655 & 4.6465 & 17.679 & 4.9096 & 19.085 & 19.105 \\
 		\hline
-		\shortstack{Error Medio\\Porcentual} & 3.9034 & 5.7586 & 8.9823 & 8.1358 & 9.2246 & 4.6773 \\
+		\shortstack{Mínima \\Diferencia (cm)} & 9.9893$e^{-5}$ & 1.1176$e^{-4}$ & 5.3333$e^{-4}$ &1.5627$e^{-4}$ & 1.2202$e^{-3}$ & 3.08842$e^{-4}$ \\
 		\hline
-		\shortstack{Mínimo Error\\Porcentual} & 5.3548$e^{-4}$ & 0.0024053 & 0.0030168 & 0.0031829 & 0.0063938 & 0.0016166 \\
+		\shortstack{Máxima \\Diferencia(cm)} & 2.7892 & 1.0676 & 6.2550 & 1.5199 & 6.1098 & 5.4528 \\
 		\hline
-		\shortstack{Máximo Error\\Porcentual} & 14.952 & 22.976 & 35.381& 30.957 & 32.014 & 28.542 \\
+		\shortstack{Error Medio\\Porcentual(\%) } & 3.9034 & 5.7586 & 8.9823 & 8.1358 & 9.2246 & 4.6773 \\
+		\hline
+		\shortstack{Mínimo Error\\Porcentual(\%)} & 5.3548$e^{-4}$ & 0.0024053 & 0.0030168 & 0.0031829 & 0.0063938 & 0.0016166 \\
+		\hline
+		\shortstack{Máximo Error\\Porcentual(\%)} & 14.952 & 22.976 & 35.381& 30.957 & 32.014 & 28.542 \\
 		\hline
 	\end{tabular}
-	\caption{Tabla resultados pruebas.}
 	\label{table:resultadosPruebas}
 \end{table}	
 
@@ -1431,13 +1431,13 @@ La solución a este inconveniente fue enviar cada nuevo dato a medida que era le
 \subsection{Conclusiones}
 Durante este trabajo de Tesis y partir de los resultados obtenidos, sus posteriores análisis e interpretación de los mismos, se pueden enunciar las siguientes conclusiones más relevantes.
 \begin{itemize}
-	\item El principal objetivo de esta Tesis era generar un solución usando Sensor IMU para el estudio del Balance. El principal aporte de este trabajo es demostrar como a partir de sensores inerciales, montados en una placa Arduino y controlados por el Ordenador, es posible replicar con un grado de similitud el estudio del Balance Clínico.
+	\item El propósito de esta Tesis era generar un solución usando Sensor IMU para el estudio del Balance. El principal aporte de este trabajo es demostrar como a partir de sensores inerciales, montados en una placa Arduino y controlados por el Ordenador, es posible representar gráficamente el desplazamiento de la proyección del Centro de Masa, obteniendo indicadores de Balance Corporal de utilidad Clínica.
 	
 	\item Unos de los objetivos era diseñar una solución de bajo coste comparado con el alto precio de los dispositivos actualmente utilizados en el Laboratorio de Biomecánica. Si comparamos tan solo en concepto de materiales utilizados para el desarrollo del Dispositivo frente a por ejemplo la Plataforma de Fuerza Kistler, el costo del dispositivo implementado (Arduino+Cable+Sensor+Caja) bordea los 30 mil pesos, frente al valor de la plataforma que cuesta varios millones de pesos.
 			
 	\item La similitud en la información entregada por nuestra solución respecto de la plataforma es alta, de acuerdo a las pruebas realizadas. Esta Tesis es el punto de partida y/o complementa a las investigaciones y avances en materia de la Biomecánica Humana, donde se hace necesario una adecuada estandarización en el estudio de Balance mediante IMU.
 	
-	\item Los instrumentos encontrados en el laboratorio de Biomecánica en la Facultad de Salud disponen de softwares con opciones bastantes limitadas. Al desarrollar un software que permite una amplia gama de opciones abre un abanico de posibilidades tanto para estudiantes como investigadores.
+	\item Los instrumentos encontrados en el laboratorio de Biomecánica en la Facultad de Salud disponen de softwares con opciones limitadas según el fabricante. Al desarrollar un software que permite una amplia gama de opciones abre un abanico de posibilidades tanto para estudiantes como investigadores.
 	
 	\item Todos los sistemas diseñados fueron implementados en C++, lo que garantiza un tiempo de procesado muy corto, junto con una utilización de la máquina bajo en comparación a otros Lenguajes de programación de más alto nivel (Python, Octave), fue probado satisfactoriamente en los equipos del Laboratorio de Biomecánica.
 \end{itemize} 

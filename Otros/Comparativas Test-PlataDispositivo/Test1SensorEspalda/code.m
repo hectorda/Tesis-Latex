@@ -41,7 +41,7 @@ ylabel("Desplazamiento COP(centimetros)")
 xlabel("Tiempo (seg)")
 title('Antero-Posterior')
 h1=legend('Plataforma Kistler','Dispositivo');
-set(h1,'fontsize', 20);
+
 
 figure(2);
 plot(tiempoPlat,ML_Plat-traMLPlat,'r',tiempoDispositivo,ML_Proy-traMLPro,'g');
