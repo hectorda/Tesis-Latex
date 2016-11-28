@@ -371,7 +371,7 @@ Por ello se propuso modelar el balance postural como un péndulo invertido asumi
 	\caption{Modelo Péndulo Invertido}
 \end{figure}
 
-Este simple modelo es fuente utilizado tanto para el balance postural en estudios de marcha y/o posición bípeda-quieta.
+Este modelo simplificado es fuertemente utilizado tanto para estudios del balance postural de marcha y/o posición bípeda-quieta.
 
 \newpage
 \subsubsection{Estabilometría}
@@ -723,8 +723,6 @@ Para el cálculo del ángulo de inclinacion a partir de las velocidades angulare
 
 La velocidad angular para describir el ángulo Antero-Posterior/Medio-Lateral es relacionado directamente con la orientacion del dispositivo, por ende en la Tabla (\ref{table:calculoAnguloGiroscopio}) se lista la velocidad angular utilizada para cada caso.
 
-
-
 \begin{table}[H]
 	\centering
 	\caption{Tabla Velocidad angular según orientación Giroscopio.} 
@@ -829,7 +827,7 @@ El Filtro consiste en 2 estados Predicción y Actualización.
 	\label{fig:diagramakalman}
 \end{figure}
 
-\subsubsection{Implementacion FIltro de Kalman discreto}
+\subsubsection{Implementación Filtro de Kalman discreto}
 A partir de la información proveniente de las mediciones del Proceso de captura de información cinemática, se intenta obtener el ángulo, con la premisa que el filtro retornará el mínimo error por las fluctuaciones entrantes del ruido en las mediciones obtenidas.
 
 La implementación realizada se basa en el uso de las librerías de C++ propuesta en \cite{kalmanTKJ}. Su implementación es sencilla, y los parámetros necesarios son exactamente los mismos utilizados por el filtro complementario.
