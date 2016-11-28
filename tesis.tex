@@ -347,7 +347,6 @@ Toda la información obtenida debe estar asociado según un sistema específico 
 	Según la orientación del sensor cualquiera de sus ejes puede ser paralelo a la gravedad de la tierra, que apunta en sentido positivo hacia el centro de esta.
 \end{itemize}
 
-
 \subsubsection{Cálculo del Centro de Presión}
 El cálculo del Centro de Presión (COP) en las plataformas de fuerza en general correponde a la suma de los momentos causados por las cuatro fuerzas de reacción del suelo obtenidas a partir de los sensores piezoeléctricos (sensores de presión/fuerza) tal como lo demuestra la Figura (\ref{fig:calculoCOP}).
 
@@ -358,6 +357,23 @@ El cálculo del Centro de Presión (COP) en las plataformas de fuerza en general
 	\label{fig:calculoCOP}
 \end{figure}
 
+\subsubsection{Modelo Teórico Péndulo Invertido}
+
+El centro de masa se define como la posición promedio de todas las partículas de masa que forman un cuerpo.
+Los movimientos del centro de masa del cuerpo humano durante la posición bípeda son estimados a partir de las mediciones de los movimientos de segmentos articulados del cuerpo.
+
+Por ello se propuso modelar el balance postural como un péndulo invertido asumiendo el cuerpo como una estructura rígida por encima de los tobillos \cite{gage_kinematic_2004}.
+
+\begin{figure}[H]
+	\centering
+	\label{inverted-pendulum}
+	\includegraphics[width=0.4\linewidth]{images/inverted-pendulum}
+	\caption{Modelo Péndulo Invertido}
+\end{figure}
+
+Este simple modelo es fuente utilizado tanto para el balance postural en estudios de marcha y/o posición bípeda-quieta.
+
+\newpage
 \subsubsection{Estabilometría}
 Corresponde al estudio COP o determinar deficiencias posturales que dificultan la expresión balance corporal.
 
@@ -570,6 +586,7 @@ Las principales características del protocolo de Comunicación $\mathrm{I^2C}$ 
 Qt es un Framework basado en C++ \cite{QT}, tiene disponibilidad multiplataforma- escritorio, móvil y sistemas embebidos.
 Posee las bibliotecas bases de C++  junto a librerías y herramientas de desarrollo propias de Qt, en donde se incluye IDE Qt Creator, y herramientas de productividad .
 El entorno de desarrollo (IDE) del framework de C++ Qt  es Qt Creator en donde se incluyen las herramientas para la administración de los ficheros .h y .cpp usados en C++ junto con las opciones de compilación, ejecución y depuración del software.
+
 
 
 \section{Desarrollo \nombreDispositivo}
@@ -975,7 +992,10 @@ Para obtener la distancia proyectada en el eje horizontal (proyección del COM e
 
 \newpage
 \subsubsection{Recorrido curvo del ángulo}
-La longitud del arco generado por el ángulo puede ser considerado el desplazamiento, por ello fue implementado.
+La longitud del arco generado por el ángulo puede ser considerado como el desplazamiento del centro de masa, por ello fue implementado como un método de cálculo.
+
+En base al modelo de péndulo invertido \cite{gage_kinematic_2004} el recorrido curvo corresponde al desplazamiento angular del péndulo.
+
 El arco correponde a la proporción del perímetro de la circunferencia en términos del ango $\alpha$ (ver Ecuación \ref{eq:recorridocurvo}).
 
 \begin{figure}[H]
